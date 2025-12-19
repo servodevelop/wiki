@@ -72,7 +72,7 @@ By ensuring a sufficient time interval, communication timeouts or errors can be 
 **Communication Mechanism:**
 The master control sends a command packet to the servo to send control or read requests. After receiving a valid command packet, the servo parses the parameters and returns the corresponding **Response Packet**.
 
-![command package](images_rs485/command package.svg)
+![command package](images_rs485/command_package.png)
 
 
 
@@ -87,13 +87,13 @@ The master control sends a command packet to the servo to send control or read r
 - **content:** Returns the execution result or corresponding data (e.g., current angle, voltage, temperature, version, read-back parameters, etc.), depending on the control command.
 - **checksum:** The result of adding all bytes and taking the modulo 256, used to check data integrity.
 
-![response_package](images_rs485/response_package.svg)
+![response_package](images_rs485/response_package.png)
 
 > [!NOTE]
 >
 > **Response Packet Types**
 >
-> - **Fixed Response:**Response packet is always returned.
+> - **Fixed Response: **Response packet is always returned.
 > - **Optional Response:** Whether a response is returned depends on the PC configuration parameter `Response after action`(default = No).
 > - **Recommendation:** For time-sensitive batch control scenarios (e.g., multi-servo synchronous control), it is recommended to disable configurable responses to reduce bus occupation. However, during debugging and fault diagnosis, enabling them is recommended for quick issue identification.
 
@@ -136,7 +136,7 @@ The master control sends a command packet to the servo to send control or read r
 | `servo_id` |   1    |  uint8_t  | servo ID (range 0 ~ 254)         |
 | `checksum` |   1    |  uint8_t  | checksum = Σ(Byte[0..4]) % 256   |
 
-![command_0x01](images_rs485/command_0x01.svg)
+![command_0x01](images_rs485/command_0x01.png)
 
 ```
 0x12 0x4c 0x01 0x01 0x00 0x60
@@ -158,7 +158,7 @@ The master control sends a command packet to the servo to send control or read r
 | `servo_id` |   1    |  uint8_t  | servo ID (range 0 ~ 254)         |
 | `checksum` |   1    |  uint8_t  | checksum = Σ(Byte[0..4]) % 256   |
 
-![response_0x01](images_rs485/response_0x01.svg)
+![response_0x01](./images_rs485/response_0x01.png)
 
 ```
 0x05 0x1c 0x01 0x01 0x00 0x23
@@ -194,7 +194,7 @@ The master control sends a command packet to the servo to send control or read r
 | `power`    |   2    | uint16_t  | execution power, **unit: mW**<BR/>If `power = 0` or exceeds the `power protection value`, the execution will follow the `power protection value` |
 | `checksum` |   1    |  uint8_t  | checksum = Σ(Byte[0..10]) % 256                              |
 
-![command_0x08](images_rs485/command_0x08.svg)
+![command_0x08](images_rs485/command_0x08.png)
 
 ```
 0x12 0x4c 0x08 0x07 0x00 0x84 0x03 0xf4 0x01 0x00 0x00 0xe9
@@ -219,7 +219,7 @@ The master control sends a command packet to the servo to send control or read r
 | `result`   |   1    |  uint8_t  | **0x01:** Success execution\| **0x00:** Failure |
 | `checksum` |   1    |  uint8_t  | checksum = Σ(Byte[0..5]) % 256                  |
 
-![response_0x08](images_rs485/response_0x08.svg)
+![response_0x08](images_rs485/response_0x08.png)
 
 ```
 0x05 0x1C 0x08 0x02 0x00 0x01 0x2c
@@ -264,7 +264,7 @@ The master control sends a command packet to the servo to send control or read r
 >
 > The acceleration and deceleration time settings **cannot be less than 20 ms**, otherwise they will not take effect.
 
-![command_0x0b](images_rs485/command_0x0b.svg)
+![command_0x0b](images_rs485/command_0x0b.png)
 
 ```
 0x12 0x4c 0x0b 0x0b 0x00 0x84 0x03 0x58 0x02 0x64 0x00 0xc8 0x00 0x00 0x00 0x81
@@ -284,7 +284,7 @@ The master control sends a command packet to the servo to send control or read r
 
 ### 7.3 Response (Optional)
 
-- For details, please refer to Section[6.3. Respond (Optional)](https://wiki.fashionrobo.com/uartbasic/uart_rs485_protocols/#63).
+- For details, please refer to Section [6.3. Respond (Optional)](https://wiki.fashionstar.com.hk/protocols#elementor-toc__heading-anchor-16).
 
 
 
@@ -318,7 +318,7 @@ The master control sends a command packet to the servo to send control or read r
 >
 > The acceleration and deceleration time settings **cannot be less than 20 ms**, otherwise they will not take effect.
 
-![command_0x0b](images_rs485/command_0x0c.svg)
+![command_0x0b](images_rs485/command_0x0c.png)
 
 ```
 0x12 0x4c 0x0c 0x0b 0x00 0x84 0x03 0xd0 0x07 0x64 0x00 0xc8 0x00 0x00 0x00 0xff
@@ -338,7 +338,7 @@ The master control sends a command packet to the servo to send control or read r
 
 ### 8.3 Response (Optional)
 
-- For details, please refer to Section[6.3. Respond (Optional)](https://wiki.fashionrobo.com/uartbasic/uart_rs485_protocols/#63).
+- For details, please refer to Section [6.3. Respond (Optional)](https://wiki.fashionstar.com.hk/protocols#elementor-toc__heading-anchor-16).
 
 
 
@@ -363,7 +363,7 @@ The master control sends a command packet to the servo to send control or read r
 | `servo_id` |   1    |  uint8_t  | servo ID, range 0 ~ 254 (0x00 ~ 0xfc )       |
 | `checksum` |   1    |  uint8_t  | checksum = Σ(Byte[0..4]) % 256               |
 
-![command_0x08](images_rs485/command_0x0a.svg)
+![command_0x08](images_rs485/command_0x0a.png)
 
 ```
 0x12 0x4c 0x0a 0x01 0x00 0x69
@@ -386,7 +386,7 @@ The master control sends a command packet to the servo to send control or read r
 | `position` |   2    |  int16_t  | Target position, **unit: 0.1°**<BR/>range : +1800 ~ -1800 (+CW / −CCW) |
 | `checksum` |   1    |  uint8_t  | checksum = Σ(Byte[0..6]) % 256                               |
 
-![response_0x08](images_rs485/response_0x0a.svg)
+![response_0x08](images_rs485/response_0x0a.png)
 
 ```
 0x05 0x1C 0x0a 0x03 0x00 0x86 0x03 0xb7
@@ -422,7 +422,7 @@ The master control sends a command packet to the servo to send control or read r
 | `power`    |   2    | uint16_t  | execution power, **unit: mW**<BR/>If `power = 0` or exceeds the `power protection value`, the execution will follow the `power protection value` |
 | `checksum` |   1    |  uint8_t  | checksum = Σ(Byte[0..14]) % 256                              |
 
-![command_0x08](images_rs485/command_0x0d.svg)
+![command_0x08](images_rs485/command_0x0d.png)
 
 ```
 0x12 0x4c 0x0d 0x0b 0x00 0xa0 0x0f 0x00 0x00 0x88 0x13 0x00 0x00 0x00 0x00 0xc0
@@ -441,7 +441,7 @@ The master control sends a command packet to the servo to send control or read r
 
 ### 10.3 Response (Optional)
 
-- For details, please refer to Section[6.3. Respond (Optional)](https://wiki.fashionrobo.com/uartbasic/uart_rs485_protocols/#63).
+- For details, please refer to Section [6.3. Respond (Optional)](https://wiki.fashionstar.com.hk/protocols#elementor-toc__heading-anchor-16).
 
 
 
@@ -475,7 +475,7 @@ The master control sends a command packet to the servo to send control or read r
 >
 > The acceleration and deceleration time settings **cannot be less than 20 ms**, otherwise they will not take effect.
 
-![command_0x0b](images_rs485/command_0x0e.svg)
+![command_0x0e](./images_rs485/command_0x0e.png)
 
 ```
 0x12 0x4c 0x0e 0x0f 0x00 0x70 0x17 0x00 0x00 0xb0 0x04 0x00 0x00 0x64 0x00 0x64 0x00 0x00 0x00 0x7e
@@ -492,7 +492,7 @@ The master control sends a command packet to the servo to send control or read r
 
 ### 11.3 Response (Optional)
 
-- For details, please refer to Section[6.3. Respond (Optional)](https://wiki.fashionrobo.com/uartbasic/uart_rs485_protocols/#63).
+- For details, please refer to Section [6.3. Respond (Optional)](https://wiki.fashionstar.com.hk/protocols#elementor-toc__heading-anchor-16).
 
 
 
@@ -525,7 +525,7 @@ The master control sends a command packet to the servo to send control or read r
 >
 > The acceleration and deceleration time settings **cannot be less than 20 ms**, otherwise they will not take effect.
 
-![command_0x0b](images_rs485/command_0x0f.svg)
+![command_0x0b](images_rs485/command_0x0f.PNG)
 
 ```
 0x12 0x4c 0x0f 0x0d 0x00 0x70 0x17 0x00 0x00 0xd0 0x07 0x64 0x00 0x64 0x00 0x00 0x00 0xa0
@@ -542,7 +542,7 @@ The master control sends a command packet to the servo to send control or read r
 
 ### 12.3 Response (Optional)
 
-- For details, please refer to Section[6.3. Respond (Optional)](https://wiki.fashionrobo.com/uartbasic/uart_rs485_protocols/#63).
+- For details, please refer to Section [6.3. Respond (Optional)](https://wiki.fashionstar.com.hk/protocols#elementor-toc__heading-anchor-16).
 
   
 
@@ -566,7 +566,7 @@ The master control sends a command packet to the servo to send control or read r
 | `servo_id` |   1    |  uint8_t  | servo ID, range 0 ~ 254(0x00 ~ 0xfc )      |
 | `checksum` |   1    |  uint8_t  | checksum = Σ(Byte[0..4]) % 256             |
 
-![command_0x08](images_rs485/command_0x10.svg)
+![command_0x08](images_rs485/command_0x10.png)
 
 ```
 0x12 0x4c 0x10 0x01 0x00 0x6f
@@ -590,7 +590,7 @@ The master control sends a command packet to the servo to send control or read r
 | `turns`    |   2    |  int16_t  | Lap information, **unit: turn**<BR/>range : -1024 ~ 1,024    |
 | `checksum` |   1    |  uint8_t  | checksum = Σ(Byte[0..6]) % 256                               |
 
-![response_0x08](images_rs485/response_0x10.svg)
+![response_0x08](images_rs485/response_0x10.png)
 
 ```
 0x05 0x1c 0x10 0x07 0x00 0x23 0x13 0x00 0x00 0x01 0x00 0x6f
@@ -624,7 +624,7 @@ The master control sends a command packet to the servo to send control or read r
 | `power`    |   2    | uint16_t  | execution power, **unit: mW**<BR/>If `power = 0` or exceeds the `power protection value`, the execution will follow the `power protection value` |
 | `checksum` |   1    |  uint8_t  | checksum = Σ(Byte[0..7]) % 256                               |
 
-![command_0x01](images_rs485/command_0x18.svg)
+![command_0x01](images_rs485/command_0x18.png)
 
 ```
 0x12 0x4c 0x18 0x04 0x00 0x11 0x70 0x17 0x12
@@ -639,7 +639,7 @@ The master control sends a command packet to the servo to send control or read r
 
 ### 14.3 Response (Optional)
 
-- For details, please refer to Section[6.3. Respond (Optional)](https://wiki.fashionrobo.com/uartbasic/uart_rs485_protocols/#63).
+- For details, please refer to Section [6.3. Respond (Optional)](https://wiki.fashionstar.com.hk/protocols#elementor-toc__heading-anchor-16).
 
 
 
@@ -666,7 +666,7 @@ The master control sends a command packet to the servo to send control or read r
 >
 > The command to reset loop is only effective when the servo is in the **released state**. To ensure proper execution, it is recommended to first issue a **stop instruction** before performing the resetting loop.
 
-![command_0x01](images_rs485/command_0x11.svg)
+![command_0x01](images_rs485/command_0x11.png)
 
 ```
 0x12 0x4c 0x11 0x01 0x00 0x70
@@ -682,7 +682,7 @@ The master control sends a command packet to the servo to send control or read r
 
 ### 15.3 Response (Optional)
 
-- For details, please refer to Section[6.3. Respond (Optional)](https://wiki.fashionrobo.com/uartbasic/uart_rs485_protocols/#63).
+- For details, please refer to Section [6.3. Respond (Optional)](https://wiki.fashionstar.com.hk/protocols#elementor-toc__heading-anchor-16).
 
 
 
@@ -711,7 +711,7 @@ The master control sends a command packet to the servo to send control or read r
 >
 > The damping control command is only effective when the servo is in the **released state** or **damping state**. To ensure proper execution, it is recommended to first issue a **"Stop Instruction"** before performing damping control operations.
 
-![](images_rs485/command_0x09.svg)
+![](images_rs485/command_0x09.png)
 
 ```
 0x12 0x4c 0x09 0x03 0x00 0xf4 0x01 0x5f
@@ -726,7 +726,7 @@ The master control sends a command packet to the servo to send control or read r
 
 ### 16.3 Response (Optional)
 
-- For details, please refer to Section[6.3. Respond (Optional)](https://wiki.fashionrobo.com/uartbasic/uart_rs485_protocols/#63).
+- For details, please refer to Section [6.3. Respond (Optional)](https://wiki.fashionstar.com.hk/protocols#elementor-toc__heading-anchor-16).
 
 
 
@@ -754,7 +754,7 @@ The master control sends a command packet to the servo to send control or read r
 >
 > The set origin point command is only effective when the servo is in the **released state**. To ensure proper execution, it is recommended to first issue a **"Stop Instruction"** before performing setting origin point operations.
 
-![command_0x03](images_rs485/command_0x17.svg)
+![command_0x03](images_rs485/command_0x17.png)
 
 ```
 0x12 0x4c 0x17 0x02 0x00 0x00 0x77
@@ -768,7 +768,7 @@ The master control sends a command packet to the servo to send control or read r
 
 ### 17.3 Response (Optional)
 
-- For details, please refer to Section[6.3. Respond (Optional)](https://wiki.fashionrobo.com/uartbasic/uart_rs485_protocols/#63).
+- For details, please refer to Section [6.3. Respond (Optional)](https://wiki.fashionstar.com.hk/protocols#elementor-toc__heading-anchor-16).
 
   
 
@@ -788,17 +788,17 @@ The master control sends a command packet to the servo to send control or read r
 | `header`   |   2    | uint16_t  | Fixed identifier (**0x12 0x4c**)                             |
 | `cmd_id`   |   1    |  uint8_t  | Synchronous Instruction (**0x19**)                           |
 | `length`   |   1    |  uint8_t  | (%d*%n+3) bytes                                              |
-| `cmd_id`   |   1    |  uint8_t  | **[Effective Synchronous Command](https://wiki.fashionrobo.com/uartbasic/uart_rs485_protocols/#183)** id |
-| `length`   |   1    |  uint8_t  | **[Effective Synchronous Command](https://wiki.fashionrobo.com/uartbasic/uart_rs485_protocols/#183)** `length` : **%d** |
+| `cmd_id`   |   1    |  uint8_t  | **[Effective Synchronous Command](https://wiki.fashionstar.com.hk/protocols#elementor-toc__heading-anchor-64)** id |
+| `length`   |   1    |  uint8_t  | **[Effective Synchronous Command](https://wiki.fashionstar.com.hk/protocols#elementor-toc__heading-anchor-64)** `length` : **%d** |
 | `count`    |   1    |  uint8_t  | the count of servo : **%n**                                  |
 | `content`  |   1    |  uint8_t  | the `content` of effective command                           |
 | `checksum` |   1    |  uint8_t  | checksum = Σ(Byte[0..%d%n+6]) % 256                          |
 
 > [!WARNING]
 >
-> - Synchronous Instruction are only applicable to the commands within the **[Effective Synchronous Commands](https://wiki.fashionrobo.com/uartbasic/uart_rs485_protocols/#183)**.
+> - Synchronous Instruction are only applicable to the commands within the **[Effective Synchronous Commands](https://wiki.fashionstar.com.hk/protocols#elementor-toc__heading-anchor-64)**.
 
-![command_0x01](images_rs485/command_0x19.svg)
+![command_0x01](images_rs485/command_0x19.png)
 
 ```
 0x12 0x4c 0x19 0x11 0x08 0x07 0x02 0x01 0x2c 0x01 0xe8 0x03 0x00 0x00 0x02 0x58 0x02 0xd0 0x07 0x00 0x00 0xe5
@@ -839,7 +839,7 @@ The master control sends a command packet to the servo to send control or read r
 ### 19.1 Overview
 
 - Asynchronous writing is composed of a combination of an **asynchronous write instruction** and a **effective synchronous command**.
-- After the command is issued, the online servo will write the next **[Effective Asynchronous Command](https://wiki.fashionrobo.com/uartbasic/uart_rs485_protocols/#193)** into its own buffer zone and execute it immediately upon receiving the **[Asynchronous Activate Instruction](https://wiki.fashionrobo.com/uartbasic/uart_rs485_protocols/#20)**.
+- After the command is issued, the online servo will write the next **[Effective Asynchronous Command](https://wiki.fashionstar.com.hk/protocols#elementor-toc__heading-anchor-64)** into its own buffer zone and execute it immediately upon receiving the **[Asynchronous Activate Instruction](https://wiki.fashionstar.com.hk/protocols#elementor-toc__heading-anchor-71)**.
 - Command ID: **18** (0x12)
 
 
@@ -855,10 +855,10 @@ The master control sends a command packet to the servo to send control or read r
 > [!IMPORTANT]
 >
 > - The instruction takes effect on **all servos on the bus**, and upon receipt, the buffer zone is activated.
-> - The buffer zone is only permitted to store one **[Effective Asynchronous Command](https://wiki.fashionrobo.com/uartbasic/uart_rs485_protocols/#193)** at a time.
+> - The buffer zone is only permitted to store one **[Effective Asynchronous Command](https://wiki.fashionstar.com.hk/protocols#elementor-toc__heading-anchor-64)** at a time.
 > - If a servo with the **same ID** receives an instruction **again**, it will be executed as a regular instruction.
 
-![command_0x12](images_rs485/command_0x12.svg)
+![command_0x12](images_rs485/command_0x12.png)
 
 ```
 0x12 0x4c 0x12 0x00 0x70
@@ -890,7 +890,7 @@ The master control sends a command packet to the servo to send control or read r
 ### 19.4 Response
 
 - There is no response packet for the asynchronous write instruction.
-- For the specific content of the response packet for a effective asynchronous command, please refer to [6.3. Response (Optional)](https://wiki.fashionrobo.com/uartbasic/uart_rs485_protocols/#6).
+- For the specific content of the response packet for a effective asynchronous command, please refer to [6.3. Response (Optional)](https://wiki.fashionstar.com.hk/protocols#elementor-toc__heading-anchor-16).
 
 
 
@@ -919,7 +919,7 @@ The master control sends a command packet to the servo to send control or read r
 >
 > - After power-off, the buffer content automatically becomes invalid.
 
-![command_0x01](images_rs485/command_0x13.svg)
+![command_0x01](images_rs485/command_0x13.png)
 
 ```
 0x12 0x4c 0x13 0x01 0x00 0x72
@@ -927,7 +927,7 @@ The master control sends a command packet to the servo to send control or read r
 
 **Example Explanation:**
 
-- Execute **[Asynchronous Activate Instruction](https://wiki.fashionrobo.com/uartbasic/uart_rs485_protocols/#20)**, 
+- Execute **[Asynchronous Activate Instruction](https://wiki.fashionstar.com.hk/protocols#elementor-toc__heading-anchor-71)**, 
 - Clear and close all servo registers.
 
 
@@ -958,7 +958,7 @@ The master control sends a command packet to the servo to send control or read r
 | `data_id`  |   1    |  uint8_t  | Please refer to the [working status parameters]() and [servo configuration parameters](). |
 | `checksum` |   1    |  uint8_t  | checksum = Σ(Byte[0..5]) % 256                               |
 
-![command_0x03](images_rs485/command_0x03.svg)
+![command_0x03](images_rs485/command_0x03.png)
 
 ```
 0x12 0x4c 0x03 0x02 0x00 0x03 0x66
@@ -978,10 +978,10 @@ The master control sends a command packet to the servo to send control or read r
 | `cmd_id`       |   1    |  uint8_t  | Read Data (**0x03**)                                         |
 | `length`       |   1    |  uint8_t  | 3 bytes (**0x03**)                                           |
 | `servo_id`     |   1    |  uint8_t  | servo ID, range 0 ~ 254 (0x00 ~ 0xfc )                       |
-| `data_content` |  1/2   | int8/16_t | Based on the return values of the parameters read from the instructions, Please refer to the [operating status parameters]() and [servo configuration parameters](). |
+| `data_content` |  1/2   | int8/16_t | Based on the return values of the parameters read from the instructions, Please refer to the [operating status parameters](https://wiki.fashionstar.com.hk/protocols#elementor-toc__heading-anchor-88) and [servo configuration parameters](https://wiki.fashionstar.com.hk/protocols#elementor-toc__heading-anchor-89). |
 | `checksum`     |   1    |  uint8_t  | checksum = Σ(Byte[0..6]) % 256                               |
 
-![response_0x03](./images_rs485/response_0x03.svg)
+![response_0x03](./images_rs485/response_0x03.png)
 
 ```
 0x05 0x1C 0x03 0x04 0x00 0x03 0x62 0x01 0x8e
@@ -1012,7 +1012,7 @@ The master control sends a command packet to the servo to send control or read r
 | `servo_id` |   1    |  uint8_t  | servo ID, range 0 ~ 254 (0x00 ~ 0xfc ) |
 | `checksum` |   1    |  uint8_t  | checksum = Σ(Byte[0..4]) % 256         |
 
-![command_0x01](images_rs485/command_0x16.svg)
+![command_0x01](images_rs485/command_0x16.png)
 
 ```
 0x12 0x4c 0x16 0x01 0x00 0x75
@@ -1045,7 +1045,7 @@ The master control sends a command packet to the servo to send control or read r
 >
 > It is recommended to set a maximum waiting time, `timeout`. If no response is received within this time, it indicates that the servo is not online.
 
-![response_0x01](images_rs485/response_0x16.svg)
+![response_0x01](images_rs485/response_0x16.png)
 
 ```
 0x05 0x1c 0x16 0x10 0x00 0x83 0x1e 0x1e 0x00 0xea 0x00 0x2c 0x07 0x00 0xaf 0x0b 0x00 0x00 0x00 0x00 0xdd
