@@ -1031,9 +1031,9 @@ FSUS_STATUS FSUS_ReadData(Usart_DataTypeDef *usart, uint8_t servoId,  uint8_t ad
 
 * `usart`: UART data object for servo control`Usart_DataTypeDef`
 * `servo_id`: Servo ID
-* `address`:Read-only parameter or user-defined parameter address
-* `value`:Pointer to store the read data
-* `size`:Pointer to store the length of the read data
+* `address` 只读参数或自定义参数地址
+* `value` 读取到的数据存放指针
+* `size` 读取到的数据的长度存放指针
 
 **Example Code**
 
@@ -1131,187 +1131,216 @@ void FSUSExample_ReadData(void)
 }
 ```
 
-### 10.2 Customize Configuration Parameters
+### 10.2 Write Custom Parameters
 
-> [!NOTE]
->
-> It is recommended to use the PC configuration tool to write custom parameters.
+</td></tr></table><table><tr><td bgcolor=#DDDDDD>
 
-**Code Prototype**
+It is recommended to use the PC configuration tool to write custom parameters.
+
+</td></tr></table>
+
+**Function Prototype**
 
 ```c
-// Write Data
+// 写入数据
 FSUS_STATUS FSUS_WriteData(Usart_DataTypeDef *usart, uint8_t servoId, uint8_t address, uint8_t *value, uint8_t size);
 ```
 
-* `usart`: UART data object for servo control`Usart_DataTypeDef`
-* `servo_id`: Servo ID
-* `address`:Read-only parameter or user-defined parameter address
-* `value`:Pointer to store the read data
-* `size`:Pointer to store the length of the read data
+* `usart`: UART data object corresponding to servo control `Usart_DataTypeDef`
+* `servoId`: Servo ID
+* `address`: Custom parameter address
+* `value`: Pointer to the data to be written
+* `size`: Length of the data to be written
 
-**Example Code**
+**使用示例**
 
 ```c
-/* User-defined Data - Write */
-void FSUSExample_WriteData(void)
-{
-	uint8_t servo_id = 0;	 // Servo ID number connected to the transceiver board
-	FSUS_STATUS status_code; // Status code
-	// Angle limit
-	float angle_limit_high = 90.0;	   // Servo angle upper limit (default 180)
-	float angle_limit_low = -90.0;	   // Servo angle lower limit (default -180)
-	uint8_t angle_limit_switch = 0x01; // 0x01: Enable limit; 0x00: Disable limit
-
-	uint16_t value;
-
-	// Write servo angle upper limit
-	value = (int16_t)(angle_limit_high * 10); // Convert servo angle upper limit to 0.1 degree units
-	status_code = FSUS_WriteData(servo_usart, servo_id, FSUS_PARAM_ANGLE_LIMIT_HIGH, (uint8_t *)&value, 2);
-	printf("write angle limit high = %f, status code: %d\r\n", angle_limit_high, status_code);
-
-	// Write servo angle lower limit
-	value = (int16_t)(angle_limit_low * 10); // Convert servo angle lower limit to 0.1 degree units
-	status_code = FSUS_WriteData(servo_usart, servo_id, FSUS_PARAM_ANGLE_LIMIT_LOW, (uint8_t *)&value, 2);
-	printf("write angle limit low = %f, status code: %d\r\n", angle_limit_low, status_code);
-
-	// Enable servo angle limit switch, configuration takes effect
-	status_code = FSUS_WriteData(servo_usart, servo_id, FSUS_PARAM_ANGLE_LIMIT_LOW, &angle_limit_switch, 1);
-	printf("enable angle limit mode, status code: %d\r\n", status_code);
-
-	while (1)
-	{
-		// Control servo angle
-		FSUS_SetServoAngle(servo_usart, servo_id, 90.0, 2000, 0);
-		FSUS_SetServoAngle(servo_usart, servo_id, -90.0, 2000, 0);
-	}
-}
+uint8_t servoId = 0;  		// 连接在转接板上的总线伺服舵机ID号
+float angleLimitLow = -90.0; 	// 舵机角度下限设定值
+value = (int16_t)(angleLimitLow*10); // 舵机角度下限 转换单位为0.1度
+statusCode = FSUS_WriteData(servoUsart, servoId, FSUS_PARAM_ANGLE_LIMIT_LOW, (uint8_t *)&value, 2);
 ```
 
 ### 10.3 Reset Servo Custom Parameters
 
-**Code Prototype**
+**Function Prototype**
 
 ```c
 FSUS_STATUS FSUS_ResetUserData(Usart_DataTypeDef *usart, uint8_t servoId);
 ```
 
-* `usart`: UART data object for servo control`Usart_DataTypeDef`
-* `servo_id`: Servo ID
+* `usart`: UART data object corresponding to servo control `Usart_DataTypeDef`
+* `servoId`: Servo ID
 
-**Example Code**
+**使用示例**
 
 ```c
-/* User-defined Data - Reset */
-void FSUSExample_ResetData(void)
-{
-
-	// Servo ID number connected to the transceiver board
-	uint8_t servo_id = 0;
-	// Status code
-	FSUS_STATUS status_code;
-
-	// Send reset user data command
-	status_code = FSUS_ResetUserData(servo_usart, servo_id);
-	printf("=====reset user data======\r\n status code: %d\r\n", status_code);
-	if (status_code == FSUS_STATUS_SUCCESS)
-	{
-		printf("sucess\r\n");
-	}
-	else
-	{
-		printf("fail\r\n");
-	}
-
-	// Infinite loop
-	while (1)
-	{
-	}
-}
+uint8_t servoId = 0;  		// 连接在转接板上的总线伺服舵机ID号
+FSUS_ResetUserData(servoUsart, servoId);
 ```
+
+
 
 **Function Description**
 
-Read the real-time status of the servo and provide examples for judging abnormal working status.
+读取舵机的实时状态，并且给出了判断工作状态异常的示例
 
-- Voltage
-- Current
-- Power
-- Temperature
-- Working Status Flag Bit
+- 电压
+- 电流
+- 功率
+- 温度
+- 工作状态标志位
 
 **Example Log**
 
 ```C
-read ID: 0                                     // Servo ID
-read success, voltage: 8905 mv                 // Current voltage
-read success, current: 0 ma                    // Current current
-read success, power: 0 mw                      // Current power
-read success, temperature: 32.240993           // Current temperature
-read success, voltage too high                 // The flag bit can be read if the current voltage exceeds the servo high-voltage protection value set in the servo parameters
+read ID: 0                                      //舵机id
+read success, voltage: 8905 mv                 //当前电压
+read success, current: 0 ma                    //当前电流
+read success, power: 0 mw                      //当前功率
+read success, temperature: 32.240993           //当前温度
+read success, voltage too high                 //如果当前电压超过舵机参数设置的舵机高压保护值，可以读到标志位
 ```
 
 
 
-## 11.Stop Instructions
+## 12. Stop Command
 
-> [!NOTE]
->
-> In the torque-released state, the servo will still respond to commands.
+</td></tr></table><table><tr><td bgcolor=#DDDDDD>
 
-**Code Prototype**
+**Notes:**
+
+- In the torque-released state, the servo will still respond to commands.
+
+</td></tr></table>
+
+**Function Prototype**
 
 ```c
 FSUS_STATUS FSUS_StopOnControlMode(Usart_DataTypeDef *usart, uint8_t servo_id, uint8_t mode, uint16_t power)；
 ```
 
-* `usart`: UART data object for servo control`Usart_DataTypeDef`
-* `servo_id`: Servo ID
-* `mode`: Servo stop command number
-* `power`: Servo drive power in mV; default 0
+* `usart`: UART data object corresponding to servo control `Usart_DataTypeDef`
+* `servo_id` 舵机的ID
+* `mode` 舵机停止指令编号
+* `power` 舵机的功率  单位mW
 
-**Example Code**
+**使用示例**
 
 ```c
-/* Control Mode Stop State */
-void FSUSExample_StopOnControlMode(void)
-{
-//0-Release after stop (unlock)
-//1-Maintain lock after stop
-//2-Enter damping state after stop
-uint8_t stopcolmode=2;
-	
-float	angle = 135.0;// Servo target angle
-uint16_t interval = 1000;// Time interval in ms
-uint16_t	power = 500;// Servo operating power
-uint8_t servo_id=0;// Servo ID number
+/* 舵机控制模式停止指令*/
+//mode 指令停止形式
+//0-停止后卸力(失锁)
+//1-停止后保持锁力
+//2-停止后进入阻尼状态
+uint8_t stopcolmode=0;
+uint8_t servo_id = 0; 	// 连接在转接板上的总线伺服舵机ID号
+uint16_t power = 500;  //功率
+FSUS_StopOnControlMode(servoUsart, servo_id, stopcolmode, power);
+```
 
-  FSUS_SetServoAngle(servo_usart, servo_id, angle, interval, power);
-	SysTick_DelayMs(1000);
+### 12.1 Example – Enter Damping Mode After Command Execution
+
+
+
+**Function Description**
+
+Enter damping mode after executing the control command.
+
+
+
+**源代码**
+
+```c
+/********************************************************
+* 控制舵机执行完指令进入阻尼状态
+ ********************************************************/
+#include "stm32f10x.h"
+#include "usart.h"
+#include "sys_tick.h"
+#include "fashion_star_uart_servo.h"
+
+// 使用串口1作为舵机控制的端口
+// <接线说明>
+// STM32F103 PA9(Tx)    <----> 总线伺服舵机转接板 Rx
+// STM32F103 PA10(Rx)   <----> 总线伺服舵机转接板 Tx
+// STM32F103 GND        <----> 总线伺服舵机转接板 GND
+// STM32F103 V5         <----> 总线伺服舵机转接板 5V
+// <注意事项>
+// 使用前确保已设置usart.h里面的USART1_ENABLE为1
+Usart_DataTypeDef* servo_usart = &usart1; 
+
+// 使用串口2作为日志输出的端口
+// <接线说明>
+// STM32F103 PA2(Tx) <----> USB转TTL Rx
+// STM32F103 PA3(Rx) <----> USB转TTL Tx
+// STM32F103 GND     <----> USB转TTL GND
+// STM32F103 V5      <----> USB转TTL 5V (可选)
+Usart_DataTypeDef* logging_usart = &usart2;
+
+// 重定向c库函数printf到串口，重定向后可使用printf函数
+int fputc(int ch, FILE *f)
+{
+    while((logging_usart->pUSARTx->SR&0X40)==0){}
+    /* 发送一个字节数据到串口 */
+    USART_SendData(logging_usart->pUSARTx, (uint8_t) ch);
+    /* 等待发送完毕 */
+    // while (USART_GetFlagStatus(USART1, USART_FLAG_TC) != SET);       
+    return (ch);
+}
+
+
+//0-停止后卸力(失锁)
+//1-停止后保持锁力
+//2-停止后进入阻尼状态
+uint8_t stopcolmode=0;
 	
-	// Enter corresponding state after stop
+float	angle = 135.0;// 舵机的目标角度
+uint16_t interval = 1000;// 时间间隔ms
+uint16_t	power = 500;// 舵机执行功率
+uint8_t servo_id=0;// 舵机的ID号
+
+int main (void)
+{
+    // 嘀嗒定时器初始化
+    SysTick_Init();
+    // 串口初始化
+    Usart_Init();
+
+  	FSUS_SetServoAngle(servo_usart, servo_id, angle, interval, power);
+	SysTick_DelayMs(2000);
+	
+	//停止后进入对应状态
 	FSUS_StopOnControlMode(servo_usart, servo_id, stopcolmode, power);
 	SysTick_DelayMs(1000);
+    while (1){
+			
+  }
 }
 ```
 
 
 
-## 12.Set Origin Point
+## 13. Origin Point Setting
 
-> [!NOTE]
->
-> - Applicable only to brushless magnetic encoder servos.
-> - This API must be used in the torque-released state.
+</td></tr></table><table><tr><td bgcolor=#DDDDDD>
 
-**Code Prototype**
+**注意事项**：
+
+- Applicable only to brushless magnetic encoder servos.
+- This API must be used in the torque-released state.
+
+</td></tr></table>
+
+**Function Prototype**
 
 ```C
 FSUS_STATUS FSUS_SetOriginPoint(Usart_DataTypeDef *usart, uint8_t servo_id);
 ```
 
-* `usart`: UART data object for servo control`Usart_DataTypeDef`
-* `servo_id`: Servo ID
+* `usart`: UART data object corresponding to servo control `Usart_DataTypeDef`
+
+* `servo_id` 舵机的ID
 
 **使用示例**
 
@@ -1322,17 +1351,17 @@ FSUS_SetOriginPoint(servoUsart, servoId); // 设置当前舵机角度为原点
 
 
 
-## 14.异步指令
+## 14. Asynchronous Commands
 
-### 14.1.异步写入
+### 14.1 Asynchronous Write
 
-**函数原型**
+**Function Prototype**
 
 ```c
 FSUS_STATUS FSUS_BeginAsync(Usart_DataTypeDef *usart)；
 ```
 
-* `usart` 舵机控制对应的串口数据对象`Usart_DataTypeDef`
+* `usart`: UART data object corresponding to servo control `Usart_DataTypeDef`
 
 **使用示例**
 
@@ -1340,15 +1369,15 @@ FSUS_STATUS FSUS_BeginAsync(Usart_DataTypeDef *usart)；
 FSUS_BeginAsync(servo_usart);
 ```
 
-### 14.2.异步执行
+### 14.2 Asynchronous Execute
 
-**函数原型**
+**Function Prototype**
 
 ```c
 FSUS_STATUS FSUS_EndAsync(Usart_DataTypeDef *usart,uint8_t mode)；
 ```
 
-* `usart` 舵机控制对应的串口数据对象`Usart_DataTypeDef`
+* `usart`: UART data object corresponding to servo control `Usart_DataTypeDef`
 * `mode` 舵机执行方式
 
 **使用示例**
@@ -1358,11 +1387,11 @@ uint8_t async_mode=0; //0:执行存储的命令  1:取消存储的命令
 FSUS_EndAsync(servo_usart,async_mode);
 ```
 
-### 14.3.例程-异步指令
+### 14.3 Example – Asynchronous Command
 
-**功能简介**
+**Function Description**
 
-存储一次命令，在下次收到异步执行指令的时候才执行
+Store a command and execute it only when the asynchronous execute command is received next time.
 
 **源代码**
 
@@ -1451,7 +1480,7 @@ int main (void)
 
 
 
-## 附表1 - 只读参数表
+## Appendix 1 - Read-Only Parameter Table
 
 | address | 参数<br/>名称<br/>(en) | 参数<br/>名称<br/>(cn) | 字节<br/>类型 | 字节<br/>长度 | 说明                                                         | 单位 |
 | :-----: | ---------------------- | ---------------------- | ------------- | ------------- | ------------------------------------------------------------ | ---- |
@@ -1466,7 +1495,7 @@ int main (void)
 
 ------
 
-## 附表2 - 自定义参数表
+## Appendix 2 - Custom Parameter Table
 
 | address | 参数<br/>名称<br/>(en) | 参数<br/>名称<br/>(cn) | 字节<br>类型 | 字节<br/>长度 | 说明                                                         | 单位  |
 | :-----: | ---------------------- | ---------------------- | ------------ | ------------- | ------------------------------------------------------------ | ----- |
@@ -1495,13 +1524,13 @@ int main (void)
 
 ------
 
-## 附表3 - 温度ADC值转换表
+## Appendix 3 - Temperature ADC Conversion Table
 
-温度为ADC值，需要进行转换。
+Temperature is represented as ADC values and needs to be converted.
 
 ![](./images/ADC.png)
 
-以下为50-79℃ 温度/ADC参照表。
+The following is the temperature/ADC reference table for 50–79°C.
 
 
 | 温度(℃) | ADC  | 温度(℃) | ADC  | 温度(℃) | ADC  |
