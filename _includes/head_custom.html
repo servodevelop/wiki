@@ -1,43 +1,35 @@
 <style>
-/* 右侧 TOC 的基础样式（不依赖其它文件） */
+/* 桌面端：正文 + 右侧 TOC 并排 */
 @media (min-width: 67rem) {
+  .main-content-wrap { display: flex; align-items: flex-start; gap: 32px; }
+  .main-content { flex: 1 1 auto; min-width: 0; }
+
   #page-toc {
-    width: 260px;
-    margin-left: 32px;
+    flex: 0 0 260px;
     position: sticky;
     top: 96px;
     max-height: calc(100vh - 140px);
     overflow: auto;
-    border-left: 1px solid rgba(255,255,255,0.10);
+    border-left: 1px solid rgba(255,255,255,0.12);
     padding-left: 16px;
   }
-  #page-toc .title {
-    font-size: 0.85rem;
-    color: #9bb0c5;
-    margin-bottom: 10px;
-  }
+  #page-toc .title { font-size: 0.85rem; color: #9bb0c5; margin-bottom: 10px; }
   #page-toc ul { list-style: none; padding: 0; margin: 0; font-size: 0.85rem; }
   #page-toc li { margin: 8px 0; }
   #page-toc li.lvl-h3 { margin-left: 10px; }
   #page-toc a { color: #b8c4d1; text-decoration: none; }
   #page-toc a:hover { color: #76b900; text-decoration: underline; text-underline-offset: 3px; }
-
-  /* 关键：让正文和 TOC 横向并排 */
-  .main-content-wrap { display: flex; align-items: flex-start; }
-  .main-content { flex: 1 1 auto; min-width: 0; }
 }
 
-@media (max-width: 66.99rem) {
-  #page-toc { display: none; }
-}
+/* 小屏隐藏 */
+@media (max-width: 66.99rem) { #page-toc { display: none; } }
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-  // 防重复
+document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('page-toc')) return;
 
-  const main = document.querySelector('.main-content');
+  const main = document.querySelector('.main-content') || document.querySelector('#main-content');
   const wrap = document.querySelector('.main-content-wrap') || (main && main.parentElement);
   if (!main || !wrap) return;
 
@@ -50,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
     .replace(/\-+/g, '-');
 
   const used = new Set();
-  function ensureId(h) {
+  const ensureId = (h) => {
     if (h.id) return h.id;
     const base = slugify(h.textContent) || 'section';
     let id = base, i = 2;
@@ -58,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
     h.id = id;
     used.add(id);
     return id;
-  }
+  };
 
   const aside = document.createElement('aside');
   aside.id = 'page-toc';
@@ -69,14 +61,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const id = ensureId(h);
     const li = document.createElement('li');
     li.className = 'lvl-' + h.tagName.toLowerCase();
+
     const a = document.createElement('a');
     a.href = '#' + id;
     a.textContent = h.textContent;
+
     li.appendChild(a);
     ul.appendChild(li);
   });
 
-  // 插到正文外层，形成右侧栏
   wrap.appendChild(aside);
 });
 </script>
