@@ -1,8 +1,7 @@
 layout: default
 title: HA8-U25(H)-M/RA8-U25(H)-M
-parent: HA_RA_Series
-grand_parent: UART
-grand_grand_parent: Servo
+parent: UART        # 必须指向上级的 title
+grand_parent: Servo
 nav_order: 1
 
 # UART Bus Servo 25KG Series 
