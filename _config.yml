@@ -15,3 +15,7 @@ search:
 nav_external_links:
   - title: "切换深色模式"
     url: "#"
+
+# 在 _config.yml 中添加
+aux_links:
+  "Edit on GitHub": "https://github.com/servodevelop/wiki"
