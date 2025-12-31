@@ -19,3 +19,12 @@ nav_external_links:
 # 在 _config.yml 中添加
 aux_links:
   "Edit on GitHub": "https://github.com/servodevelop/wiki"
+
+
+# 在 _config.yml 中定义 NVIDIA 专属色板
+color_scheme: nvidia-dark
+
+# 在 assets/css/custom.scss 中定义具体数值
+$body-background-color: #000000;      /* 全黑背景 */
+$sidebar-color: #111111;             /* 侧边栏稍浅一点 */
+$link-color: #76b900;                /* 链接颜色 */
