@@ -1,12 +1,20 @@
 <script>
-  function toggleTheme() {
+  function toggleNvidiaTheme() {
     const body = document.body;
-    const currentTheme = body.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    const isDark = body.getAttribute('data-theme') === 'dark';
+    const newTheme = isDark ? 'light' : 'dark';
     body.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
+    localStorage.setItem('nvidia-theme', newTheme);
   }
+  // 页面加载时自动应用上次的选择
+  document.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem('nvidia-theme');
+    if (saved) document.body.setAttribute('data-theme', saved);
+  });
 </script>
-<button onclick="toggleTheme()" style="position:fixed; bottom:20px; right:20px; z-index:100; padding:10px; border-radius:50%; cursor:pointer;">
-  🌓
-</button>
+
+<div style="position: fixed; top: 10px; right: 20px; z-index: 999;">
+  <button onclick="toggleNvidiaTheme()" style="background:#76b900; color:white; border:none; padding:5px 10px; border-radius:4px; cursor:pointer;">
+    🌓 切换模式
+  </button>
+</div>
