@@ -2,73 +2,89 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  // Avoid duplicates
-  if (document.getElementById('page-toc')) return;
+  // -----------------------
+  // A) Auto-generate right TOC from h2/h3
+  // -----------------------
+  if (!document.getElementById('page-toc')) {
+    const main = document.querySelector('.main-content');
+    const wrap = document.querySelector('.main-content-wrap');
+    if (main && wrap) {
+      const headings = Array.from(main.querySelectorAll('h2, h3'));
+      if (headings.length) {
+        const slugify = (s) => (s || '').trim().toLowerCase()
+          .replace(/[\s]+/g, '-')
+          .replace(/[^\w\-]+/g, '')
+          .replace(/\-+/g, '-');
 
-  const main = document.querySelector('.main-content');
-  const wrap = document.querySelector('.main-content-wrap');
-  if (!main || !wrap) return;
+        const used = new Set();
+        function ensureId(h) {
+          if (h.id) return h.id;
+          const base = slugify(h.textContent) || 'section';
+          let id = base, i = 2;
+          while (used.has(id) || document.getElementById(id)) id = base + '-' + (i++);
+          h.id = id;
+          used.add(id);
+          return id;
+        }
 
-  // Collect headings (you can extend to h4 if needed)
-  const headings = Array.from(main.querySelectorAll('h2, h3'));
-  if (!headings.length) return;
+        const aside = document.createElement('aside');
+        aside.id = 'page-toc';
+        aside.className = 'page-toc';
+        aside.innerHTML = '<div class="page-toc-title">On this page</div><ul class="page-toc-list"></ul>';
 
-  const slugify = (s) => (s || '').trim().toLowerCase()
-    .replace(/[\s]+/g, '-')
-    .replace(/[^a-z0-9\u4e00-\u9fa5\-]/g, '')
-    .replace(/\-+/g, '-')
-    .replace(/^\-|\-$/g, '');
+        const ul = aside.querySelector('.page-toc-list');
+        headings.forEach(h => {
+          const id = ensureId(h);
+          const li = document.createElement('li');
+          li.className = 'lvl-' + h.tagName.toLowerCase();
+          const a = document.createElement('a');
+          a.href = '#' + id;
+          a.textContent = h.textContent;
+          li.appendChild(a);
+          ul.appendChild(li);
+        });
 
-  const used = new Set();
-  function ensureId(h){
-    if (h.id) return h.id;
-    const base = slugify(h.textContent) || 'section';
-    let id = base, i = 2;
-    while (used.has(id) || document.getElementById(id)) id = `${base}-${i++}`;
-    h.id = id;
-    used.add(id);
-    return id;
-  }
-
-  const aside = document.createElement('aside');
-  aside.id = 'page-toc';
-  aside.className = 'page-toc';
-  aside.innerHTML = '<div class="page-toc-title">On this page</div><ul class="page-toc-list"></ul>';
-
-  const ul = aside.querySelector('.page-toc-list');
-  headings.forEach(h => {
-    const id = ensureId(h);
-    const li = document.createElement('li');
-    li.className = 'lvl-' + h.tagName.toLowerCase();
-    const a = document.createElement('a');
-    a.href = '#' + id;
-    a.textContent = h.textContent;
-    li.appendChild(a);
-    ul.appendChild(li);
-  });
-
-  wrap.appendChild(aside);
-
-  // ---------- Sidebar: add .is-expanded to expanded directories (no :has needed) ----------
-  function syncExpanded(){
-    document.querySelectorAll('.nav-list-expander').forEach(btn => {
-      const li = btn.closest('.nav-list-item');
-      if (!li) return;
-      const expanded = btn.getAttribute('aria-expanded') === 'true';
-      li.classList.toggle('is-expanded', expanded);
-    });
-  }
-
-  syncExpanded();
-
-  const sideBar = document.querySelector('.side-bar');
-  if (sideBar){
-    sideBar.addEventListener('click', function(e){
-      if (e.target && e.target.closest && e.target.closest('.nav-list-expander')){
-        // Wait for Just-the-Docs to update aria-expanded
-        setTimeout(syncExpanded, 0);
+        wrap.appendChild(aside);
       }
-    });
+    }
   }
+
+  // -----------------------
+  // B) Left nav: add green bar for expanded sections (no :has)
+  //   - Adds class "fs-expanded" on the <li.nav-list-item> that is expanded
+  // -----------------------
+  function refreshExpanded() {
+    // Clear
+    document.querySelectorAll('.nav-list .nav-list-item.fs-expanded')
+      .forEach(li => li.classList.remove('fs-expanded'));
+
+    // Mark expanded (button with aria-expanded=true)
+    document.querySelectorAll('.nav-list-expander[aria-expanded="true"]')
+      .forEach(btn => {
+        const li = btn.closest('.nav-list-item');
+        if (li) li.classList.add('fs-expanded');
+      });
+
+    // Also mark ancestors of the active page (so parent sections light up)
+    document.querySelectorAll('.nav-list .nav-list-item.active')
+      .forEach(li => {
+        let p = li.parentElement;
+        while (p) {
+          const pli = p.closest('.nav-list-item');
+          if (!pli) break;
+          pli.classList.add('fs-expanded');
+          p = pli.parentElement;
+        }
+      });
+  }
+
+  refreshExpanded();
+
+  // When clicking expanders, update after toggle
+  document.addEventListener('click', function (e) {
+    const expander = e.target.closest && e.target.closest('.nav-list-expander');
+    if (!expander) return;
+    setTimeout(refreshExpanded, 0);
+  });
 });
 </script>

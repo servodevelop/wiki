@@ -4,9 +4,9 @@ remote_theme: just-the-docs/just-the-docs
 color_scheme: dark
 search_enabled: true
 
+# Enable custom head include
+head_custom: _includes/head_custom.html
+
 # GitHub Pages project site under /wiki
 url: "https://servodevelop.github.io"
 baseurl: "/wiki"
-
-# Load custom head (TOC + nav behaviors)
-head_custom: _includes/head_custom.html
