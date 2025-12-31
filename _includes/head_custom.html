@@ -1,8 +1,7 @@
-<!-- Load compiled custom CSS (SCSS -> CSS) -->
 <link rel="stylesheet" href="{{ '/assets/css/just-the-docs-custom.css' | relative_url }}">
 
 <script>
-/* Ctrl+K focus search (like docs sites) */
+/* Ctrl+K 聚焦搜索 */
 document.addEventListener('keydown', function (e) {
   const isMac = navigator.platform.toUpperCase().includes('MAC');
   const k = (e.key || '').toLowerCase() === 'k';
@@ -14,22 +13,32 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-/* Build "On this page" TOC on every page (no need to include toc.md in pages) */
+/* 每页自动生成右侧 TOC（h2/h3） */
 document.addEventListener('DOMContentLoaded', function () {
   const main = document.querySelector('.main-content');
   const wrap = document.querySelector('.main-content-wrap');
   if (!main || !wrap) return;
 
-  // collect headings (H2/H3)
+  // 如果某页 front matter 写 toc: false，可关闭
+  // （Jekyll 会把 page 变量渲染到 HTML 中）
+  try {
+    const tocDisabled = {{ page.toc == false | jsonify }};
+    if (tocDisabled) return;
+  } catch (e) {}
+
   const headings = Array.from(main.querySelectorAll('h2, h3'))
     .filter(h => !h.classList.contains('no_toc'));
 
   if (headings.length === 0) return;
-
-  // avoid duplicate
   if (document.getElementById('page-toc')) return;
 
-  // create toc container
+  const slugify = (s) => (s || '').trim().toLowerCase()
+    .replace(/[\s]+/g, '-')
+    .replace(/[^\w\-]+/g, '')
+    .replace(/\-+/g, '-');
+
+  const used = new Set();
+
   const tocBox = document.createElement('aside');
   tocBox.id = 'page-toc';
   tocBox.className = 'page-toc';
@@ -37,18 +46,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const list = tocBox.querySelector('.page-toc-list');
 
-  // ensure unique ids
-  const used = new Set();
-  const slugify = (s) => s.trim().toLowerCase()
-    .replace(/[\s]+/g, '-')
-    .replace(/[^\w\-]+/g, '')
-    .replace(/\-+/g, '-');
-
   headings.forEach(h => {
     let id = h.id;
     if (!id) {
-      const base = slugify(h.textContent || 'section');
-      let uniq = base || 'section';
+      const base = slugify(h.textContent) || 'section';
+      let uniq = base;
       let i = 2;
       while (used.has(uniq) || document.getElementById(uniq)) uniq = `${base}-${i++}`;
       id = uniq;
@@ -67,7 +69,6 @@ document.addEventListener('DOMContentLoaded', function () {
     list.appendChild(li);
   });
 
-  // append to right side (wrap is flex)
   wrap.appendChild(tocBox);
 });
 </script>
