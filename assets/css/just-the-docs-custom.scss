@@ -35,3 +35,102 @@ html, body, .side-bar, .main-content-wrap, .main-header {
         list-style: none !important;
     }
 }
+
+/* ---------------------------
+   NVIDIA-like dark polishing
+   --------------------------- */
+
+/* 阅读宽度 & 字体层级 */
+.main-content {
+  max-width: 980px;
+  line-height: 1.75;
+}
+
+h1, h2, h3 {
+  letter-spacing: -0.01em;
+}
+
+h1 { font-size: 2.0rem; }
+h2 { font-size: 1.35rem; margin-top: 2.0rem; }
+h3 { font-size: 1.15rem; margin-top: 1.5rem; }
+
+hr {
+  border: 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+/* 链接：绿色强调，但不“刺眼” */
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* 左侧导航：像 NVIDIA 一样用“左侧色条 + 微底色”突出当前项 */
+.nav-list .nav-list-item > .nav-list-link {
+  border-left: 3px solid transparent;
+  padding-left: 14px;
+}
+
+.nav-list .nav-list-item.active > .nav-list-link,
+.nav-list .nav-list-item > .nav-list-link.active {
+  color: #eaffd4 !important;
+  border-left-color: #76b900 !important;
+  background: rgba(118, 185, 0, 0.10) !important;
+}
+
+.nav-list .nav-list-item > .nav-list-link:hover {
+  background: rgba(255,255,255,0.04) !important;
+}
+
+/* 搜索框：更像 docs 风格的“面板” */
+.search-input-wrap input {
+  border: 1px solid rgba(255,255,255,0.10) !important;
+  border-radius: 12px !important;
+  background: rgba(255,255,255,0.03) !important;
+}
+
+/* 代码块：更面板化 */
+pre, code { border-radius: 10px; }
+pre {
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+/* 表格：轻边框 + 圆角 */
+table {
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 10px;
+  overflow: hidden;
+}
+th, td {
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+/* 右侧 On this page（你的 TOC） */
+#markdown-toc {
+  border-left: 1px solid rgba(255,255,255,0.10) !important;
+  padding-left: 16px !important;
+  font-size: 0.85rem !important;
+}
+#markdown-toc a {
+  color: #b8c4d1 !important;
+}
+#markdown-toc a:hover {
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+/* Callouts：note / warning / tip / important */
+.note, .warning, .tip, .important {
+  border: 1px solid rgba(255,255,255,0.10);
+  border-left-width: 4px;
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.03);
+}
+.note { border-left-color: #2b77ff; }
+.tip { border-left-color: #76b900; }      /* 主色 */
+.warning { border-left-color: #ffb020; }
+.important { border-left-color: #ff4d6d; }
