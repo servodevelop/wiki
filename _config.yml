@@ -1,9 +1,17 @@
-title: ServoDevelop Wiki
+# 主题设置
 remote_theme: just-the-docs/just-the-docs
 
-# 启用颜色切换开关（白色/黑色）
-color_scheme: light # 默认颜色
-search_enabled: true
+# 颜色方案：light（默认）, dark（深色）
+# Just the Docs 会自动根据用户系统设置切换，或通过下方设置强制开启
+color_scheme: dark
 
-# 如果你想开启深色模式支持，Just the Docs 默认会跟随系统，
-# 或者你可以通过自定义 CSS 来强化开关效果。
+# 开启搜索功能
+search_enabled: true
+search:
+  tokenizer: separator
+  separator: '[\s\-\/]+'
+
+# 开启侧边栏底部切换按钮 (取决于主题版本支持)
+nav_external_links:
+  - title: "切换深色模式"
+    url: "#"
