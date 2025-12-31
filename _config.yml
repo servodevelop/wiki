@@ -6,7 +6,7 @@ remote_theme: just-the-docs/just-the-docs
 search_enabled: true
 
 # 默认颜色方案
-color_scheme: dark
+color_scheme: nvidia-dark
 
 # 允许加载自定义的 head 内容
 head_custom: _includes/head_custom.html
