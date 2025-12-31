@@ -1,12 +1,14 @@
 ---
 ---
 
-/* 背景统一深色 */
+/* =========================
+   Base (Dark + keep green)
+   ========================= */
 html, body, .side-bar, .main-content-wrap, .main-header {
   background-color: #000000 !important;
 }
 
-/* 1) 正文链接不要全绿：默认灰白，hover 才绿 */
+/* Links: default light gray, hover green */
 .main-content a {
   color: #cbd5e1 !important;
   text-decoration: none;
@@ -18,25 +20,46 @@ html, body, .side-bar, .main-content-wrap, .main-header {
   text-underline-offset: 3px;
 }
 
-/* 2) 左侧选中项不要白底：暗底 + 绿左边线 */
+/* =========================
+   Left nav: active item highlight + GREEN BAR
+   ========================= */
+.nav-list .nav-list-link {
+  position: relative; /* for ::before indicator */
+}
+
+/* Active link (two selectors cover JTD variations) */
 .nav-list .nav-list-item.active > .nav-list-link,
 .nav-list .nav-list-item > .nav-list-link.active {
   background: rgba(118, 185, 0, 0.12) !important;
   color: #e6edf3 !important;
-  border-left: 4px solid #76b900 !important;
-  padding-left: 15px !important;
-}
-.nav-list .nav-list-item > .nav-list-link:hover {
-  background: rgba(255,255,255,0.04) !important;
 }
 
-/* 排版微调 */
+/* Force the green vertical bar (more robust than border-left) */
+.nav-list .nav-list-item.active > .nav-list-link::before,
+.nav-list .nav-list-item > .nav-list-link.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 4px;
+  background: #76b900;
+  border-radius: 2px;
+}
+
+/* Hover background (subtle) */
+.nav-list .nav-list-item > .nav-list-link:hover {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+/* =========================
+   Typography / content feel
+   ========================= */
 .main-content {
-  max-width: 980px;
   line-height: 1.75;
 }
 
-/* 代码块/表格更“文档站” */
+/* Code blocks / tables: doc-site look */
 pre {
   border: 1px solid rgba(255,255,255,0.10);
   border-radius: 10px;
@@ -50,21 +73,41 @@ th, td {
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
-/* 3) 桌面端：正文左 + 右侧 TOC */
+/* =========================
+   Layout ratio (NVIDIA-like)
+   Goal: left nav + wide content + right toc, less weird whitespace
+   ========================= */
+
+/* Desktop */
 @media (min-width: 67rem) {
-  .main-content-wrap {
-    display: flex !important;
-    align-items: flex-start !important;
-    gap: 32px;
+
+  /* Remove the "centered narrow column" feeling */
+  .main {
+    max-width: none !important;
   }
 
+  /* Reduce big side paddings that create huge blank space */
+  .main-content-wrap {
+    max-width: none !important;
+    padding-left: 1.75rem !important;
+    padding-right: 1.75rem !important;
+
+    /* If your TOC is in DOM as #page-toc and you want it at right */
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 28px !important;
+  }
+
+  /* Content column: wider than before, but still readable */
   .main-content {
     flex: 1 1 auto;
     min-width: 0;
+    max-width: 1100px;  /* 核心：放宽正文宽度 */
   }
 
+  /* Right TOC column (if exists) */
   #page-toc.page-toc {
-    flex: 0 0 260px;
+    flex: 0 0 280px;
     position: sticky;
     top: 96px;
     max-height: calc(100vh - 140px);
@@ -86,14 +129,18 @@ th, td {
     padding: 0;
     font-size: 0.85rem;
   }
+
   #page-toc .page-toc-list li { margin: 8px 0; }
   #page-toc .page-toc-list li.lvl-h3 { margin-left: 10px; }
 
-  #page-toc a { color: #b8c4d1 !important; text-decoration: none; }
+  #page-toc a {
+    color: #b8c4d1 !important;
+    text-decoration: none;
+  }
   #page-toc a:hover { color: #76b900 !important; }
 }
 
-/* 小屏隐藏右侧 TOC */
+/* Mobile: hide right TOC */
 @media (max-width: 66.99rem) {
   #page-toc { display: none; }
 }
