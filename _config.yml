@@ -1,17 +1,9 @@
-# 网站标题
 title: ServoDevelop Wiki
-description: 总线舵机与机器人技术文档中心
-
-# 启用专业 Wiki 主题
 remote_theme: just-the-docs/just-the-docs
 
-# 搜索配置
+# 启用颜色切换开关（白色/黑色）
+color_scheme: light # 默认颜色
 search_enabled: true
-search:
-  tokenizer: separator
-  separator: '[\s\-\/]+'
 
-# 页面布局配置
-aux_links:
-  "GitHub 仓库":
-    - https://github.com/servodevelop/wiki
+# 如果你想开启深色模式支持，Just the Docs 默认会跟随系统，
+# 或者你可以通过自定义 CSS 来强化开关效果。
