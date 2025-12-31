@@ -1,156 +1,174 @@
 ---
 ---
 
-/* =========================
-   Base: dark background
-   ========================= */
-html, body, .side-bar, .main-content-wrap, .main-header {
-  background-color: #000 !important;
+/* ServoDevelop Wiki — custom overrides for Just the Docs (dark)
+   Accent: #8641A9
+*/
+
+:root{
+  --fs-accent: #8641A9;
+  --fs-accent-rgb: 134,65,169;
+  --fs-text: #e6e6e6;
+  --fs-muted: #a9b0b8;
+  --fs-bg: #000000;
+  --fs-panel: rgba(255,255,255,0.03);
+  --fs-border: rgba(255,255,255,0.12);
 }
 
-/* Links: default gray/white, hover green */
+/* -------- Base background -------- */
+html, body, .side-bar, .main, .main-header, .main-content-wrap {
+  background: var(--fs-bg) !important;
+}
+
+/* -------- Global links (content) -------- */
 .main-content a {
-  color: #cbd5e1 !important;
+  color: #c7ced8 !important;
   text-decoration: none;
 }
-.main-content a:hover,
-.main-content a:focus {
-  color: #76b900 !important;
+.main-content a:hover {
+  color: var(--fs-accent) !important;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
-/* =========================
-   1) Fix: huge blank area (left of content)
-   - Just the Docs centers .main-content-wrap by default (max-width + margin:auto)
-   - We cancel that and control width ourselves.
-   ========================= */
-@media (min-width: 67rem) {
-  .main-content-wrap{
-    max-width: none !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    padding-left: 2rem !important;
-    padding-right: 2rem !important;
-
-    /* Layout: content + right TOC */
-    display: grid !important;
-    grid-template-columns: minmax(0, 1fr) 280px;
-    column-gap: 32px;
-    align-items: start;
-  }
-
-  .main-content{
-    grid-column: 1;
-    width: 100%;
-    max-width: 1100px;   /* closer to NVIDIA feel */
-    margin: 0 !important; /* key: no auto-centering */
-    line-height: 1.75;
-  }
+/* -------- Sidebar nav: default gray (NOT blue) -------- */
+.side-bar a,
+.nav-list .nav-list-link {
+  color: var(--fs-muted) !important;
+}
+.nav-list .nav-list-link:hover {
+  color: #ffffff !important;
 }
 
-/* Small screens: keep theme default flow; hide right TOC */
-@media (max-width: 66.99rem){
-  #page-toc{ display:none; }
+/* Active page item */
+.nav-list .nav-list-item.active > .nav-list-link,
+.nav-list .nav-list-item .nav-list-link.active {
+  color: #ffffff !important;
+  background-color: rgba(var(--fs-accent-rgb), 0.14) !important;
+  box-shadow: inset 0 0 0 1px rgba(var(--fs-accent-rgb), 0.28);
 }
 
-/* =========================
-   2) Breadcrumb: keep one line (no wrapping)
-   ========================= */
-.breadcrumb-nav{
+/* Expanded directory item (JS adds .is-expanded on <li>) */
+.nav-list .nav-list-item.is-expanded > .nav-list-link {
+  color: #ffffff !important;
+  background-color: rgba(var(--fs-accent-rgb), 0.10) !important;
+}
+
+/* Accent left bar for active + expanded (directory or leaf) */
+.nav-list .nav-list-link {
+  position: relative;
+  border-radius: 10px;
+}
+.nav-list .nav-list-item.active > .nav-list-link::before,
+.nav-list .nav-list-item.is-expanded > .nav-list-link::before,
+.nav-list .nav-list-link.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 4px;
+  border-radius: 999px;
+  background: var(--fs-accent);
+}
+
+/* -------- Expander caret (尖头) color -------- */
+/* Default caret muted */
+.nav-list-expander,
+.nav-list-expander svg {
+  color: var(--fs-muted) !important;
+  fill: var(--fs-muted) !important;
+  stroke: var(--fs-muted) !important;
+}
+/* Active / expanded caret accent */
+.nav-list-item.active > .nav-list-expander,
+.nav-list-item.is-expanded > .nav-list-expander {
+  color: var(--fs-accent) !important;
+}
+.nav-list-item.active > .nav-list-expander svg,
+.nav-list-item.is-expanded > .nav-list-expander svg {
+  fill: var(--fs-accent) !important;
+  stroke: var(--fs-accent) !important;
+}
+
+/* -------- Breadcrumb: keep on one line -------- */
+.breadcrumb-nav {
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.breadcrumb-nav-list{
-  display: flex;
-  flex-wrap: nowrap;
-  white-space: nowrap;
-  gap: .35rem;
-  overflow: hidden;
+.breadcrumb-nav a {
+  color: var(--fs-muted) !important;
 }
-.breadcrumb-nav-list-item{
-  white-space: nowrap;
+.breadcrumb-nav a:hover {
+  color: var(--fs-accent) !important;
 }
 
-/* =========================
-   3) Left nav highlight (green bar)
-   - Active page and expanded sections both show the bar
-   - Expanded sections get class "fs-expanded" from JS (head_custom.html)
-   ========================= */
-.nav-list .nav-list-link{
-  position: relative;
-}
-
-.nav-list .nav-list-item.active > .nav-list-link,
-.nav-list .nav-list-item > .nav-list-link.active,
-.nav-list .nav-list-item.fs-expanded > .nav-list-link{
-  background: rgba(118, 185, 0, 0.12) !important;
-  color: #e6edf3 !important;
-}
-
-.nav-list .nav-list-item.active > .nav-list-link::before,
-.nav-list .nav-list-item > .nav-list-link.active::before,
-.nav-list .nav-list-item.fs-expanded > .nav-list-link::before{
-  content:"";
-  position:absolute;
-  left:0;
-  top:6px;
-  bottom:6px;
-  width:4px;
-  background:#76b900;
-  border-radius:2px;
-}
-
-/* Keep hover subtle */
-.nav-list .nav-list-item > .nav-list-link:hover{
-  background: rgba(255,255,255,0.04) !important;
-}
-
-/* =========================
-   4) Right TOC (sticky)
-   ========================= */
+/* -------- Content width: closer to NVIDIA docs -------- */
 @media (min-width: 67rem) {
-  #page-toc.page-toc{
-    grid-column: 2;
+  /* widen the whole content lane to reduce giant empty gutter */
+  .main-content-wrap {
+    max-width: 1440px !important;
+    margin: 0 auto !important;
+    padding-left: 2.0rem !important;
+    padding-right: 2.0rem !important;
+  }
+
+  /* reserve space for right TOC so it doesn't overlap */
+  .main-content {
+    margin-right: 320px !important;
+    max-width: 980px !important;
+  }
+}
+
+/* -------- Right-side TOC (sticky) -------- */
+#page-toc.page-toc { display: none; }
+
+@media (min-width: 67rem) {
+  #page-toc.page-toc {
+    display: block;
     position: sticky;
     top: 96px;
+    float: right;
+    width: 280px;
+    margin-left: 2rem;
+    padding-left: 16px;
+    border-left: 1px solid var(--fs-border);
     max-height: calc(100vh - 140px);
     overflow: auto;
-    border-left: 1px solid rgba(255,255,255,0.10);
-    padding-left: 16px;
   }
-
-  #page-toc .page-toc-title{
-    font-size: .85rem;
-    color: #9bb0c5;
-    margin-bottom: 10px;
+  #page-toc .page-toc-title {
+    font-size: 0.85rem;
+    color: #cfd3d8;
+    margin: 0 0 10px 0;
   }
-
-  #page-toc .page-toc-list{
-    list-style:none;
-    margin:0;
-    padding:0;
-    font-size:.85rem;
+  #page-toc .page-toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.85rem;
   }
-  #page-toc .page-toc-list li{ margin: 8px 0; }
-  #page-toc .page-toc-list li.lvl-h3{ margin-left: 10px; }
-
-  #page-toc a{ color:#b8c4d1 !important; text-decoration:none; }
-  #page-toc a:hover{ color:#76b900 !important; text-decoration:underline; text-underline-offset:3px; }
+  #page-toc .page-toc-list li {
+    margin: 6px 0;
+    line-height: 1.25;
+  }
+  #page-toc .page-toc-list li.lvl-h3 {
+    margin-left: 12px;
+    opacity: 0.95;
+  }
+  #page-toc a {
+    color: var(--fs-muted) !important;
+    text-decoration: none;
+  }
+  #page-toc a:hover {
+    color: var(--fs-accent) !important;
+  }
 }
 
-/* =========================
-   5) Tables / code blocks (doc feel)
-   ========================= */
-pre{
-  border: 1px solid rgba(255,255,255,0.10);
-  border-radius: 10px;
+@media (max-width: 66.99rem) {
+  #page-toc.page-toc { display: none !important; }
+  .main-content { margin-right: 0 !important; }
 }
-table{
-  border: 1px solid rgba(255,255,255,0.10);
-  border-radius: 10px;
-  overflow: hidden;
-}
-th, td{
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
+
+/* -------- Headings readable -------- */
+h1, h2, h3, h4, h5, h6 { color: #ffffff; }

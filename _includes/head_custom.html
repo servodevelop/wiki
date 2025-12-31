@@ -1,27 +1,27 @@
+<!-- Custom head: load compiled CSS + generate right-side TOC + nav expand highlighting -->
 <link rel="stylesheet" href="{{ '/assets/css/just-the-docs-custom.css' | relative_url }}">
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  // -----------------------
-  // A) Auto-generate right TOC from h2/h3
-  // -----------------------
+
+  // ---------- 1) Right-side TOC (auto) ----------
+  // If you already have a TOC, don't duplicate
   if (!document.getElementById('page-toc')) {
     const main = document.querySelector('.main-content');
-    const wrap = document.querySelector('.main-content-wrap');
-    if (main && wrap) {
+    if (main) {
       const headings = Array.from(main.querySelectorAll('h2, h3'));
       if (headings.length) {
+        const used = new Set();
         const slugify = (s) => (s || '').trim().toLowerCase()
           .replace(/[\s]+/g, '-')
           .replace(/[^\w\-]+/g, '')
           .replace(/\-+/g, '-');
 
-        const used = new Set();
         function ensureId(h) {
           if (h.id) return h.id;
           const base = slugify(h.textContent) || 'section';
           let id = base, i = 2;
-          while (used.has(id) || document.getElementById(id)) id = base + '-' + (i++);
+          while (used.has(id) || document.getElementById(id)) id = `${base}-${i++}`;
           h.id = id;
           used.add(id);
           return id;
@@ -44,47 +44,30 @@ document.addEventListener('DOMContentLoaded', function () {
           ul.appendChild(li);
         });
 
-        wrap.appendChild(aside);
+        // Put TOC inside main-content so float/sticky behave nicely
+        main.appendChild(aside);
       }
     }
   }
 
-  // -----------------------
-  // B) Left nav: add green bar for expanded sections (no :has)
-  //   - Adds class "fs-expanded" on the <li.nav-list-item> that is expanded
-  // -----------------------
-  function refreshExpanded() {
-    // Clear
-    document.querySelectorAll('.nav-list .nav-list-item.fs-expanded')
-      .forEach(li => li.classList.remove('fs-expanded'));
-
-    // Mark expanded (button with aria-expanded=true)
-    document.querySelectorAll('.nav-list-expander[aria-expanded="true"]')
-      .forEach(btn => {
-        const li = btn.closest('.nav-list-item');
-        if (li) li.classList.add('fs-expanded');
-      });
-
-    // Also mark ancestors of the active page (so parent sections light up)
-    document.querySelectorAll('.nav-list .nav-list-item.active')
-      .forEach(li => {
-        let p = li.parentElement;
-        while (p) {
-          const pli = p.closest('.nav-list-item');
-          if (!pli) break;
-          pli.classList.add('fs-expanded');
-          p = pli.parentElement;
-        }
-      });
+  // ---------- 2) Sidebar: mark expanded directory items ----------
+  function syncExpanded() {
+    document.querySelectorAll('.nav-list-item').forEach(li => li.classList.remove('is-expanded'));
+    document.querySelectorAll('.nav-list-expander[aria-expanded="true"]').forEach(btn => {
+      const li = btn.closest('.nav-list-item');
+      if (li) li.classList.add('is-expanded');
+    });
   }
 
-  refreshExpanded();
+  syncExpanded();
 
-  // When clicking expanders, update after toggle
-  document.addEventListener('click', function (e) {
-    const expander = e.target.closest && e.target.closest('.nav-list-expander');
-    if (!expander) return;
-    setTimeout(refreshExpanded, 0);
+  // Listen to expander clicks to update state
+  document.querySelectorAll('.nav-list-expander').forEach(btn => {
+    btn.addEventListener('click', function () {
+      // aria-expanded changes after click; wait one tick
+      setTimeout(syncExpanded, 0);
+    });
   });
+
 });
 </script>
