@@ -1,28 +1,9 @@
-# 主题设置
+# 基础信息
+title: ServoDevelop Wiki
 remote_theme: just-the-docs/just-the-docs
 
-# 颜色方案：light（默认）, dark（深色）
-# Just the Docs 会自动根据用户系统设置切换，或通过下方设置强制开启
-color_scheme: dark
-
-# 开启搜索功能
+# 开启搜索
 search_enabled: true
-search:
-  tokenizer: separator
-  separator: '[\s\-\/]+'
 
-# 开启侧边栏底部切换按钮 (取决于主题版本支持)
-nav_external_links:
-  - title: "切换深色模式"
-    url: "#"
-
-# 在 _config.yml 中添加
-aux_links:
-  "Edit on GitHub": "https://github.com/servodevelop/wiki"
-
-
-
-# 在 assets/css/custom.scss 中定义具体数值
-$body-background-color: #000000;      /* 全黑背景 */
-$sidebar-color: #111111;             /* 侧边栏稍浅一点 */
-$link-color: #76b900;                /* 链接颜色 */
+# 默认颜色方案
+color_scheme: dark
