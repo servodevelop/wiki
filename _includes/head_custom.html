@@ -8,8 +8,9 @@ document.addEventListener('DOMContentLoaded', function () {
   // If you already have a TOC, don't duplicate
   if (!document.getElementById('page-toc')) {
     const main = document.querySelector('.main-content');
+    const wrap = document.querySelector('.main-content-wrap') || main;
     if (main) {
-      const headings = Array.from(main.querySelectorAll('h2, h3'));
+      const headings = Array.from(main.querySelectorAll('h2, h3, h4'));
       if (headings.length) {
         const used = new Set();
         const slugify = (s) => (s || '').trim().toLowerCase()
@@ -45,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         // Put TOC inside main-content so float/sticky behave nicely
-        main.appendChild(aside);
+        wrap.appendChild(aside);
       }
     }
   }

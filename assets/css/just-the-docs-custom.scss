@@ -104,34 +104,36 @@ html, body, .side-bar, .main, .main-header, .main-content-wrap {
   color: var(--fs-accent) !important;
 }
 
-/* -------- Content width: closer to NVIDIA docs -------- */
-@media (min-width: 67rem) {
+/* -------- Content width + right TOC layout (NVIDIA docs vibe) -------- */
+#page-toc.page-toc { display: none; }
+
+@media (min-width: 62rem) {
   /* widen the whole content lane to reduce giant empty gutter */
   .main-content-wrap {
     max-width: 1440px !important;
     margin: 0 auto !important;
     padding-left: 2.0rem !important;
     padding-right: 2.0rem !important;
+
+    /* 2-column layout: article + "On this page" */
+    display: flex !important;
+    align-items: flex-start;
+    gap: 2rem;
   }
 
-  /* reserve space for right TOC so it doesn't overlap */
   .main-content {
-    margin-right: 320px !important;
+    flex: 1 1 auto;
+    min-width: 0; /* prevent flex overflow */
     max-width: 980px !important;
+    margin-right: 0 !important;
   }
-}
 
-/* -------- Right-side TOC (sticky) -------- */
-#page-toc.page-toc { display: none; }
-
-@media (min-width: 67rem) {
+  /* -------- Right-side TOC (sticky) -------- */
   #page-toc.page-toc {
     display: block;
+    flex: 0 0 280px;
     position: sticky;
     top: 96px;
-    float: right;
-    width: 280px;
-    margin-left: 2rem;
     padding-left: 16px;
     border-left: 1px solid var(--fs-border);
     max-height: calc(100vh - 140px);
@@ -156,6 +158,10 @@ html, body, .side-bar, .main, .main-header, .main-content-wrap {
     margin-left: 12px;
     opacity: 0.95;
   }
+  #page-toc .page-toc-list li.lvl-h4 {
+    margin-left: 22px;
+    opacity: 0.9;
+  }
   #page-toc a {
     color: var(--fs-muted) !important;
     text-decoration: none;
@@ -165,10 +171,12 @@ html, body, .side-bar, .main, .main-header, .main-content-wrap {
   }
 }
 
-@media (max-width: 66.99rem) {
+@media (max-width: 61.99rem) {
   #page-toc.page-toc { display: none !important; }
+  .main-content-wrap { display: block !important; }
   .main-content { margin-right: 0 !important; }
 }
+
 
 /* -------- Headings readable -------- */
 h1, h2, h3, h4, h5, h6 { color: #ffffff; }
