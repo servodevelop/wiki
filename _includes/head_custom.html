@@ -1,52 +1,48 @@
 <style>
-/* 桌面端：正文左 + TOC右 */
+/* 右侧 TOC 的基础样式（不依赖其它文件） */
 @media (min-width: 67rem) {
-  .main-content-wrap {
-    display: flex !important;
-    align-items: flex-start !important;
-    gap: 32px;
-  }
-  .main-content {
-    flex: 1 1 auto;
-    min-width: 0;
-  }
-  #page-toc.page-toc {
-    flex: 0 0 260px;
+  #page-toc {
+    width: 260px;
+    margin-left: 32px;
     position: sticky;
-    top: 100px;
+    top: 96px;
     max-height: calc(100vh - 140px);
     overflow: auto;
     border-left: 1px solid rgba(255,255,255,0.10);
     padding-left: 16px;
   }
-  #page-toc .page-toc-title {
+  #page-toc .title {
     font-size: 0.85rem;
     color: #9bb0c5;
     margin-bottom: 10px;
   }
-  /* 右侧 TOC 链接 */
-  #page-toc a { color: #b8c4d1 !important; text-decoration: none; }
-  #page-toc a:hover { color: #76b900 !important; }
+  #page-toc ul { list-style: none; padding: 0; margin: 0; font-size: 0.85rem; }
+  #page-toc li { margin: 8px 0; }
+  #page-toc li.lvl-h3 { margin-left: 10px; }
+  #page-toc a { color: #b8c4d1; text-decoration: none; }
+  #page-toc a:hover { color: #76b900; text-decoration: underline; text-underline-offset: 3px; }
+
+  /* 关键：让正文和 TOC 横向并排 */
+  .main-content-wrap { display: flex; align-items: flex-start; }
+  .main-content { flex: 1 1 auto; min-width: 0; }
 }
 
-/* 小屏隐藏 TOC */
 @media (max-width: 66.99rem) {
   #page-toc { display: none; }
 }
 </style>
 
 <script>
-/* 每页自动生成右侧 TOC（抓 h2/h3） */
 document.addEventListener('DOMContentLoaded', function () {
-  const main = document.querySelector('.main-content');
-  const wrap = document.querySelector('.main-content-wrap');
-  if (!main || !wrap) return;
-
-  // 已存在就不重复生成
+  // 防重复
   if (document.getElementById('page-toc')) return;
 
+  const main = document.querySelector('.main-content');
+  const wrap = document.querySelector('.main-content-wrap') || (main && main.parentElement);
+  if (!main || !wrap) return;
+
   const headings = Array.from(main.querySelectorAll('h2, h3'));
-  if (headings.length === 0) return;
+  if (!headings.length) return;
 
   const slugify = (s) => (s || '').trim().toLowerCase()
     .replace(/[\s]+/g, '-')
@@ -54,36 +50,33 @@ document.addEventListener('DOMContentLoaded', function () {
     .replace(/\-+/g, '-');
 
   const used = new Set();
+  function ensureId(h) {
+    if (h.id) return h.id;
+    const base = slugify(h.textContent) || 'section';
+    let id = base, i = 2;
+    while (used.has(id) || document.getElementById(id)) id = `${base}-${i++}`;
+    h.id = id;
+    used.add(id);
+    return id;
+  }
 
-  const tocBox = document.createElement('aside');
-  tocBox.id = 'page-toc';
-  tocBox.className = 'page-toc';
-  tocBox.innerHTML = '<div class="page-toc-title">On this page</div><ul class="page-toc-list"></ul>';
-
-  const list = tocBox.querySelector('.page-toc-list');
+  const aside = document.createElement('aside');
+  aside.id = 'page-toc';
+  aside.innerHTML = '<div class="title">On this page</div><ul></ul>';
+  const ul = aside.querySelector('ul');
 
   headings.forEach(h => {
-    // 给没有 id 的标题自动补 id
-    if (!h.id) {
-      const base = slugify(h.textContent) || 'section';
-      let id = base, i = 2;
-      while (used.has(id) || document.getElementById(id)) id = `${base}-${i++}`;
-      h.id = id;
-      used.add(id);
-    }
-
+    const id = ensureId(h);
     const li = document.createElement('li');
-    li.style.margin = '8px 0';
-    if (h.tagName.toLowerCase() === 'h3') li.style.marginLeft = '10px';
-
+    li.className = 'lvl-' + h.tagName.toLowerCase();
     const a = document.createElement('a');
-    a.href = `#${h.id}`;
+    a.href = '#' + id;
     a.textContent = h.textContent;
-
     li.appendChild(a);
-    list.appendChild(li);
+    ul.appendChild(li);
   });
 
-  wrap.appendChild(tocBox);
+  // 插到正文外层，形成右侧栏
+  wrap.appendChild(aside);
 });
 </script>
