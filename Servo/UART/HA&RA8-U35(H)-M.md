@@ -3,7 +3,7 @@ layout: default
 title: HA8/RA8-U35H-M
 parent: UART
 grand_parent: Servo
-nav_order: 1
+nav_order: 2
 toc: true
 
 
