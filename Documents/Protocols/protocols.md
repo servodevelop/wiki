@@ -1,12 +1,10 @@
 ---
 layout: default
-title: UART/RS485 Bus Servo Communication Protocol      # 文章在侧边栏显示的标题
-has_toc: true  # 开启本页目录
-parent: Protocols        # 它的父级是哪个“小类”
-grand_parent: Documents  # 它的祖父级是哪个“大类”（三层结构必须写这个）
+title: UART/RS485 Bus Servo Communication Protocol
+parent: Protocols
+grand_parent: Documents
 nav_order: 1
 ---
-
 
 # UART/RS485 Bus Servo Communication Protocol
 
