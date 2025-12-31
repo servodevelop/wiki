@@ -4,6 +4,7 @@ title: UART/RS485 Bus Servo Communication Protocol
 parent: Protocols
 grand_parent: Documents
 nav_order: 1
+toc: true
 ---
 
 # UART/RS485 Bus Servo Communication Protocol
