@@ -1,7 +1,0 @@
-如何下载上位机及串口助手.md
-
-[282上位机](https://wiki.fashionstar.com.hk/download/1318/?tmstv=1767151095)
-
-{% include en/dxl/note_performance_graph.md %}
-
-james
