@@ -1,7 +1,35 @@
-/* 自定义 NVIDIA 风格竖线条 */
+---
+---
+@import "./just-the-docs/default";
+
+/* 1. 强制全黑底色 */
+:root {
+  --body-background-color: #000000 !important;
+  --sidebar-color: #0d0d0d !important;
+}
+
+/* 2. 左侧侧边栏：选中时的绿色竖条 */
 .nav-list-item.active > .nav-list-link {
-    color: #76b900 !important; /* NVIDIA 经典绿 */
-    border-left: 3px solid #76b900; /* 左侧绿色竖条 */
-    padding-left: 12px;
-    background-color: rgba(118, 185, 0, 0.05); /* 淡淡的背景色 */
+  color: #76b900 !important; /* NVIDIA 绿 */
+  border-left: 3px solid #76b900 !important;
+  background-color: rgba(118, 185, 0, 0.1) !important;
+  padding-left: 15px !important;
+}
+
+/* 3. 模拟 NVIDIA 右侧导航栏布局 */
+@media (min-width: 60rem) {
+  #main-content {
+    display: flex;
+    flex-direction: row-reverse; /* 将 TOC 挤到右边 */
+    justify-content: space-between;
+  }
+  .table-of-contents {
+    width: 200px;
+    position: sticky;
+    top: 5rem;
+    align-self: flex-start;
+    border-left: 1px solid #333;
+    padding-left: 1rem;
+    font-size: 0.8em;
+  }
 }
