@@ -148,3 +148,17 @@ th, td {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+
+/* 左侧导航当前项：深底 + 绿左边线，不要白底 */
+.nav-list .nav-list-item.active > .nav-list-link,
+.nav-list .nav-list-item > .nav-list-link.active {
+  background: rgba(118, 185, 0, 0.12) !important;
+  color: #e6edf3 !important;
+  border-left: 4px solid #8641A9 !important;
+}
+
+/* hover 也别变白 */
+.nav-list .nav-list-item > .nav-list-link:hover {
+  background: rgba(255,255,255,0.04) !important;
+}
