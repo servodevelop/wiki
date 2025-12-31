@@ -1,7 +1,9 @@
 title: ServoDevelop Wiki
+
 remote_theme: just-the-docs/just-the-docs
-
-search_enabled: true
 color_scheme: dark
+search_enabled: true
 
-head_custom: _includes/head_custom.html
+# GitHub Pages project site under /wiki
+url: "https://servodevelop.github.io"
+baseurl: "/wiki"
