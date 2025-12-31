@@ -1,14 +1,36 @@
 <script>
-  function switchTheme() {
-    const current = document.body.getAttribute('data-theme');
+  // 主题切换核心逻辑
+  function toggleNvidiaTheme() {
+    const body = document.body;
+    const current = body.getAttribute('data-theme');
     const target = current === 'dark' ? 'light' : 'dark';
-    document.body.setAttribute('data-theme', target);
+    body.setAttribute('data-theme', target);
     localStorage.setItem('jtd-theme', target);
   }
+
+  // 确保页面加载时应用上次的选择
+  (function() {
+    const saved = localStorage.getItem('jtd-theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', saved);
+  })();
 </script>
 
-<div style="position: fixed; top: 15px; right: 60px; z-index: 1000;">
-  <button onclick="switchTheme()" style="cursor:pointer; background:#76b900; color:white; border:none; padding:4px 8px; border-radius:4px;">
-    🌓 Theme
-  </button>
-</div>
+<style>
+  .theme-toggle-btn {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    z-index: 2000;
+    background: #76b900;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+    box-shadow: 0 0 10px rgba(118,185,0,0.5);
+  }
+</style>
+
+<button class="theme-toggle-btn" onclick="toggleNvidiaTheme()">🌓 MODE</button>
