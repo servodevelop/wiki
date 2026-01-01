@@ -1,6 +1,6 @@
 ---
 layout: default
-title: includes_test
+title: include_test
 parent: Downloads
 has_children: true
 nav_order: 2
