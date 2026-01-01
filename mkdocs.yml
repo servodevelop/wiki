@@ -5,17 +5,26 @@ theme:
   name: material
   language: zh
   features:
-    - navigation.tabs          # 开启顶部一级导航
-    - navigation.sections      # 开启侧边栏分组
-    - content.code.copy        # 代码一键复制
+    - navigation.tabs             # 开启顶部一级导航
+    - navigation.sections         # 开启侧边栏分组显示
+    - navigation.expand           # 默认展开左侧所有菜单（专业 Wiki 风格）
+    - navigation.indexes          # 允许点击父级目录标题（如点击 Datasheet 跳转）
+    - navigation.top              # 开启回到顶部按钮
+    - content.code.copy           # 代码一键复制
+  
+  # 颜色方案配置：保留黑白切换逻辑
   palette:
+    # 浅色模式
     - scheme: default
-      primary: indigo
+      primary: custom             # 配合 CSS 变量使用品牌色
+      accent: custom
       toggle:
         icon: material/brightness-7
         name: 切换至深色模式
+    # 深色模式
     - scheme: slate
-      primary: indigo
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-4
         name: 切换至浅色模式
@@ -26,20 +35,19 @@ plugins:
       touchNavigation: true
       loop: false
       effect: zoom
-      width: auto # 自动适应图片原始宽度
+      width: auto
       height: auto
       zoomable: true
       draggable: true
 
-
 markdown_extensions:
-  - pymdownx.snippets:         # 开启嵌套调用功能
+  - pymdownx.snippets:          # 开启嵌套调用功能
       base_path: ["docs"]
-  - admonition                 # 开启彩色提示框
-  - pymdownx.details           # 开启折叠块
-  - pymdownx.superfences       # 开启代码高亮
-  - attr_list      # 必须：开启此项才能使用 {: width="45%"} 调整大小
-  - md_in_html     # 建议：允许在 HTML 容器内写 Markdown（用于网格布局）
+  - admonition                  # 开启彩色提示框
+  - pymdownx.details            # 开启折叠块
+  - pymdownx.superfences        # 开启代码高亮
+  - attr_list                   # 开启属性列表，支持 {: width="45%"}
+  - md_in_html                  # 允许在 HTML 容器内写 Markdown
 
 extra_css:
   - stylesheets/extra.css
@@ -51,12 +59,11 @@ nav:
           - HA8/RA8-U25(H)-M: uart_servo/datasheet/HA_RA8_U25(H)_M.md
           - HA8/RA8-U35(H)-M: uart_servo/datasheet/HA_RA8_U35(H)_M.md
       - CAD Files:
-          - step/DWG/pdf:  uart_servo/cad_files/cad_files.md
+          - STEP/DWG/PDF: uart_servo/cad_files/cad_files.md
       - Software: 
-          - Confiration Tools: uart_servo/software/pc_configuration_ser_manual.md
+          - Configuration Tools: uart_servo/software/pc_configuration_ser_manual.md
   - Robotic Arm:
       - StarAI Arm: 
           - Quick Start: robotic_arm/starai_arm/index.md
       - Piper Mate: 
           - User Manual: robotic_arm/piper_mate/index.md
-  
