@@ -1,22 +1,28 @@
-/* 图片全局样式：圆角、阴影、居中 */
+/* 全局图片美化：单栏居中、圆角、阴影 */
 article img {
     display: block;
-    margin: 1.5rem auto !important; /* 自动居中并增加上下间距 */
+    margin: 2rem auto !important; /* 增加垂直间距，并水平居中 */
     border-radius: 8px;           /* 柔和圆角 */
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08); /* 极简阴影 */
-    max-width: 90%;               /* 默认不撑满屏幕，留点呼吸感 */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08); /* 柔和阴影，增加层次感 */
+    max-width: 85%;               /* 限制最大宽度，在 PC 上不会太突兀 */
+    height: auto;
 }
 
-/* 并排显示网格的微调 */
-.grid.cards {
-    grid-gap: 1rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+/* 适配手机端 */
+@media screen and (max-width: 76.25em) {
+    article img {
+        max-width: 100%;          /* 手机端允许图片占满宽度 */
+        margin: 1.5rem auto !important;
+    }
+}
+
+/* 图片下方的文字描述样式 */
+.img-caption {
+    text-align: center;
+    display: block;
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: -1.5rem;          /* 让文字靠近图片 */
     margin-bottom: 2rem;
-}
-
-.grid.cards p {
-    margin: 0 !important; /* 去掉网格内文字的额外间距 */
-    text-align: center;   /* 文字居中 */
-    font-weight: bold;    /* 标题加粗 */
+    font-weight: bold;
 }
