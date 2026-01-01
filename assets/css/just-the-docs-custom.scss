@@ -73,13 +73,12 @@ html, body, .side-bar, .main, .main-header, .main-content-wrap {
 }
 
 /* -------- Expander caret (尖头) color -------- */
-/* Default caret: use brand accent */
+/* Default caret muted */
 .nav-list-expander,
-.nav-list-expander svg,
-.nav-list-expander svg * {
-  color: var(--fs-accent) !important;
-  fill: var(--fs-accent) !important;
-  stroke: var(--fs-accent) !important;
+.nav-list-expander svg {
+  color: var(--fs-muted) !important;
+  fill: var(--fs-muted) !important;
+  stroke: var(--fs-muted) !important;
 }
 /* Active / expanded caret accent */
 .nav-list-item.active > .nav-list-expander,
@@ -92,17 +91,22 @@ html, body, .side-bar, .main, .main-header, .main-content-wrap {
   stroke: var(--fs-accent) !important;
 }
 
-/* -------- Breadcrumb: keep on one line -------- */
+/* -------- Breadcrumb: keep on one line (no wrap, no truncation) -------- */
+.breadcrumb-nav,
+.breadcrumb-nav * {
+  white-space: nowrap !important;
+}
 .breadcrumb-nav {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  text-overflow: clip !important;
+  -webkit-overflow-scrolling: touch;
 }
 .breadcrumb-nav a {
-  color: var(--fs-accent) !important;
+  color: var(--fs-muted) !important;
 }
 .breadcrumb-nav a:hover {
-  color: #ffffff !important;
+  color: var(--fs-accent) !important;
 }
 
 /* -------- Content width: closer to NVIDIA docs -------- */
@@ -115,19 +119,23 @@ html, body, .side-bar, .main, .main-header, .main-content-wrap {
     padding-right: 2.0rem !important;
   }
 
-  /* reserve space for right TOC so it doesn't overlap */
-  .main-content {
+  }
+
+@media (min-width: 67rem) {
+  /* Only reserve space when the right TOC actually exists (JS sets .has-page-toc on <html>) */
+  html.has-page-toc .main-content {
     margin-right: 320px !important;
     max-width: 980px !important;
   }
 }
 
 /* -------- Right-side TOC (sticky) -------- */
+/* Hide unless JS confirms TOC exists */
 #page-toc.page-toc { display: none; }
 
 @media (min-width: 67rem) {
-  #page-toc.page-toc {
-    display: block;
+  html.has-page-toc #page-toc.page-toc {
+    display: block !important;
     position: sticky;
     top: 96px;
     float: right;
@@ -167,19 +175,28 @@ html, body, .side-bar, .main, .main-header, .main-content-wrap {
 }
 
 @media (max-width: 66.99rem) {
-  #page-toc.page-toc { display: none !important; }
-  .main-content { margin-right: 0 !important; }
+  html.has-page-toc #page-toc.page-toc { display: none !important; }
+  html.has-page-toc .main-content { margin-right: 0 !important; }
+}
+
+
+/* -------- Breadcrumbs: keep on one line (avoid wrapping) -------- */
+.breadcrumb-nav,
+.breadcrumb-nav-list {
+  white-space: nowrap;
+}
+.breadcrumb-nav-list {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.35rem;
+  overflow: hidden;
+}
+.breadcrumb-nav-list-item {
+  flex: 0 0 auto;
+}
+.breadcrumb-nav a {
+  max-width: 100%;
 }
 
 /* -------- Headings readable -------- */
 h1, h2, h3, h4, h5, h6 { color: #ffffff; }
-
-
-/* Prevent theme blue hover on caret */
-.nav-list-expander:hover,
-.nav-list-expander:hover svg,
-.nav-list-expander:hover svg * {
-  color: #ffffff !important;
-  fill: #ffffff !important;
-  stroke: #ffffff !important;
-}
