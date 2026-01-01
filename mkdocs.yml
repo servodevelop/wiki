@@ -29,6 +29,8 @@ markdown_extensions:
   - attr_list      # 必须：开启此项才能使用 {: width="45%"} 调整大小
   - md_in_html     # 建议：允许在 HTML 容器内写 Markdown（用于网格布局）
 
+extra_css:
+  - stylesheets/extra.css
 
 nav:
   - Home: index.md
