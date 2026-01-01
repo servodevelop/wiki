@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Fashion Star Wiki - NVIDIA Isaac Sim 工业级重构
+   Fashion Star Wiki - NVIDIA Isaac Sim 工业级重构 (v3)
    品牌色: #8641A9
    ========================================================================== */
 
@@ -7,26 +7,29 @@
   --fs-accent: #8641A9;
   --md-primary-fg-color: var(--fs-accent);
   
-  /* 全局正文行间距优化 */
+  /* 全局正文行间距优化： Issac 风格通常较为空旷 */
   --md-typeset-line-height: 1.8; 
   --md-typeset-font-size: 0.75rem;
 }
 
-/* --- 1. 三栏物理分割线 --- */
+/* --- 1. 三栏物理分割线：强制在侧边栏上建立边界 --- */
 
-/* 强制显示垂直分割线，确保线条贯穿 */
+/* 左侧导航栏容器：在其右侧建立分割线 */
 .md-sidebar--primary {
-  border-right: 1.5px solid rgba(0, 0, 0, 0.08) !important; /* 左栏右侧线 */
+  border-right: 1px solid rgba(0, 0, 0, 0.08) !important;
 }
 
+/* 右侧目录栏容器：在其左侧建立分割线 */
 .md-sidebar--secondary {
-  border-left: 1.5px solid rgba(0, 0, 0, 0.08) !important;  /* 右栏左侧线 */
+  border-left: 1px solid rgba(0, 0, 0, 0.08) !important;
+  margin-left: 0 !important; /* 消除默认间距，让线贴合内容 */
 }
 
+/* 深色模式下的线颜色微调 */
 [data-md-color-scheme="slate"] .md-sidebar--primary { border-right-color: rgba(255, 255, 255, 0.1) !important; }
 [data-md-color-scheme="slate"] .md-sidebar--secondary { border-left-color: rgba(255, 255, 255, 0.1) !important; }
 
-/* --- 2. 左侧导航栏优化 (去掉引导线，修正缩进) --- */
+/* --- 2. 左侧导航栏：极简缩进 & 无引导线 --- */
 
 .md-nav__title {
   color: var(--fs-accent) !important;
@@ -34,79 +37,86 @@
   padding: 1rem !important;
 }
 
-/* 彻底移除左栏内部所有引导线 */
+/* 彻底移除左栏内部目录层级之间的所有引导线 */
 .md-nav__item .md-nav {
   border-left: none !important; 
-  margin-left: 0.6rem !important; /* 减小缩进，防止层级太深导致文字挤压 */
+  /* 极小缩进：参考 Issac，仅保持 0.5rem 以区分层级，不占用多余横向空间 */
+  margin-left: 0.5rem !important; 
 }
 
 .md-nav__link {
-  padding: 0.35rem 0.8rem !important;
+  padding: 0.3rem 0.8rem !important;
   font-size: 0.72rem;
-  line-height: 1.3 !important; /* 修正导航行间距 */
+  line-height: 1.3 !important; /* 修正目录行间距 */
+  transition: color 0.2s ease;
 }
 
-/* 仅激活项保留左侧紫色指示条 */
+/* 仅在激活项左侧保留 3px 紫色实条 */
 .md-nav__item--active > .md-nav__link {
   color: var(--fs-accent) !important;
   font-weight: 700;
   border-left: 3px solid var(--fs-accent) !important;
   background-color: rgba(134, 65, 169, 0.04);
+  padding-left: 15px !important;
+  margin-left: -1px; /* 修正对齐线 */
 }
 
-/* --- 3. 右侧目录 (TOC) 空间最大化 --- */
+/* --- 3. 右侧目录 (TOC) 空间最大化 & 极简风格 --- */
 
-/* 解决“两边空太多”的问题：扩大侧边栏宽度 */
+/* 解决 Issac 风格中右侧空间不足导致频繁换行的问题 */
 @media screen and (min-width: 76.25em) {
+  /* 强制锁定右侧栏宽度，确保内容不被压缩 */
   .md-sidebar--secondary {
-    width: 14rem !important; /* 增加右侧栏物理宽度 */
+    width: 14.5rem !important; 
   }
+  
+  /* 允许主体布局占据更多屏幕，减少两头无意义的留白 */
   .md-main__inner {
-    max-width: 100% !important; /* 允许布局占满屏幕，减少留白 */
-    margin: 0 2rem !important;
+    max-width: 100% !important; 
+    margin: 0 1rem !important;
   }
 }
 
+/* 移除右侧目录所有视觉杂项（无背景、无框、无引导线） */
 .md-nav--secondary {
   background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
   padding: 0 !important;
 }
 
 .md-nav--secondary .md-nav__title {
   font-size: 0.65rem;
   text-transform: uppercase;
+  letter-spacing: 0.08em;
   color: #888;
-  padding: 1rem 0 0.5rem 0.8rem !important;
+  padding: 1.5rem 0 0.5rem 1rem !important;
 }
 
-/* 彻底移除右侧引导线和颜色条 */
+/* 修正右侧目录的行间距与对齐 */
 .md-nav--secondary .md-nav__link {
-  border-left: none !important;
-  padding: 0.3rem 0.8rem !important; /* 减小内边距，增加可用空间 */
+  border-left: none !important; /* 移除引导线 */
+  padding: 0.4rem 1rem !important; /* 增加上下间距，修正行间距感官 */
   font-size: 0.68rem;
-  line-height: 1.4 !important; /* 修正目录行间距 */
-  white-space: normal; /* 允许折行，但不建议频繁折行 */
+  line-height: 1.5 !important; /* 显著提升行间距 */
+  white-space: normal; /* 允许必要时的折行 */
 }
 
+/* 仅高亮文字颜色，不添加颜色条 */
 .md-nav--secondary .md-nav__link--active,
 .md-nav--secondary .md-nav__link:hover {
   color: var(--fs-accent) !important;
   background: transparent !important;
 }
 
-/* --- 4. 正文排版 (复刻 NVIDIA 质感) --- */
+/* --- 4. 正文排版布局 --- */
 
 .md-content__inner {
-  max-width: 58rem !important; /* 适当放宽正文，配合三栏布局 */
+  /* 配合三栏线，正文宽度适当放宽至 58rem */
+  max-width: 58rem !important; 
   margin: 0 auto !important;
   padding: 2rem 3rem !important;
 }
 
-.md-typeset h1 {
-  font-weight: 800;
-  font-size: 1.8rem;
-  margin-bottom: 2rem;
-  color: var(--md-default-fg-color);
-}
-
+/* 隐藏 Logo 图标 */
 .md-header__button.md-logo { display: none; }
