@@ -1,124 +1,110 @@
-<!-- FS head_custom v6: load compiled CSS + generate right-side TOC (Turbolinks-safe) -->
-<meta name="fs-head-custom" content="v6">
+<!-- Custom head: right-side "On this page" TOC (robust for different Just-the-Docs DOM versions) -->
 <link rel="stylesheet" href="{{ '/assets/css/just-the-docs-custom.css' | relative_url }}">
 
 <script>
-(function () {
-  function fsBuildPageToc() {
-    const root = document.documentElement;
+document.addEventListener('DOMContentLoaded', function () {
+  // --------- Find main content element (robust selectors) ---------
+  const main =
+    document.querySelector('main.main-content') ||
+    document.querySelector('.main-content') ||
+    document.querySelector('main') ||
+    document.querySelector('article');
 
-    // Remove any previous TOC (Turbolinks/Turbo navigation can re-use the same <head>)
-    const old = document.getElementById('page-toc');
-    if (old) old.remove();
-    root.classList.remove('has-page-toc');
+  if (!main) return;
 
-    // Prefer the real main content node
-    const main =
-      document.querySelector('#main-content') ||
-      document.querySelector('main.main-content') ||
-      document.querySelector('main') ||
-      document.querySelector('.main-content') ||
-      document.querySelector('article');
+  // Container where we'll create a 2-column layout
+  const container =
+    main.closest('.main-content-wrap') ||
+    main.parentElement;
 
-    if (!main) return;
+  if (!container) return;
 
-    // Pick headings inside main content only
-    const headings = Array.from(main.querySelectorAll('h2, h3'))
-      .filter(h => !h.classList.contains('no_toc') && !h.closest('nav, aside, footer'));
+  // Avoid duplicates
+  if (document.getElementById('page-toc')) return;
 
-    // Too few headings -> don't show TOC and don't change layout
-    if (headings.length < 2) return;
+  // --------- Collect headings from within main content only ---------
+  const headings = Array.from(main.querySelectorAll('h2, h3, h4'))
+    .filter(h => h.textContent && h.textContent.trim().length > 0)
+    .filter(h => !h.closest('nav, aside, footer, header'));
 
-    const used = new Set();
-    const slugify = (s) => (s || '')
-      .trim()
-      .toLowerCase()
-      .replace(/[\s]+/g, '-')
-      .replace(/[^a-z0-9\-\u00A0-\uFFFF]/g, '');
+  if (!headings.length) return;
 
-    const ensureId = (el) => {
-      let id = (el.id || '').trim();
-      if (!id) {
-        id = slugify(el.textContent) || 'section';
-        let base = id, n = 2;
-        while (used.has(id) || document.getElementById(id)) id = base + '-' + (n++);
-        el.id = id;
-      }
-      used.add(id);
-      return id;
-    };
+  // --------- Ensure each heading has a unique id ---------
+  const used = new Set();
+  const slugify = (s) => (s || '')
+    .trim()
+    .toLowerCase()
+    .replace(/[\s]+/g, '-')
+    .replace(/[^\p{L}\p{N}\-]+/gu, '');
 
-    const toc = document.createElement('nav');
-    toc.id = 'page-toc';
-    toc.className = 'page-toc';
-    toc.setAttribute('aria-label', 'On this page');
-
-    const title = document.createElement('div');
-    title.className = 'page-toc-title';
-    title.textContent = 'On this page';
-    toc.appendChild(title);
-
-    const ul = document.createElement('ul');
-    ul.className = 'page-toc-list';
-
-    headings.forEach(h => {
-      const level = (h.tagName || '').toUpperCase();
-      const id = ensureId(h);
-
-      const li = document.createElement('li');
-      li.className = level === 'H3' ? 'lvl-h3' : 'lvl-h2';
-
-      const a = document.createElement('a');
-      a.href = '#' + id;
-      a.textContent = (h.textContent || '').trim();
-
-      li.appendChild(a);
-      ul.appendChild(li);
-    });
-
-    toc.appendChild(ul);
-
-    // Put TOC next to the main content (better for sticky right sidebar)
-    const wrap =
-      document.querySelector('.main-content-wrap') ||
-      (main.closest && main.closest('.main-content-wrap')) ||
-      main.parentElement ||
-      main;
-
-    wrap.appendChild(toc);
-    root.classList.add('has-page-toc');
+  function ensureId(el){
+    let id = (el.id || '').trim();
+    if (!id) id = slugify(el.textContent) || 'section';
+    let base = id, i = 2;
+    while (document.getElementById(id) || used.has(id)) id = base + '-' + (i++);
+    used.add(id);
+    el.id = id;
+    return id;
   }
 
-  function fsInit() {
-    // Let layout settle (especially after Turbolinks swap)
-    requestAnimationFrame(fsBuildPageToc);
-  }
+  // --------- Build TOC DOM ---------
+  const aside = document.createElement('aside');
+  aside.id = 'page-toc';
+  aside.className = 'page-toc';
+  aside.setAttribute('aria-label', 'On this page');
 
-  document.addEventListener('DOMContentLoaded', fsInit);
-  document.addEventListener('turbolinks:load', fsInit);
-  document.addEventListener('turbolinks:render', fsInit);
-  document.addEventListener('turbo:load', fsInit);
-})();
-</script>
+  const title = document.createElement('div');
+  title.className = 'page-toc-title';
+  title.textContent = 'On this page';
+  aside.appendChild(title);
 
+  const ul = document.createElement('ul');
+  ul.className = 'page-toc-list';
 
-<script>
-(function () {
-  function fsSyncExpanded() {
-    document.querySelectorAll('.nav-list-item').forEach(li => {
-      if (li.querySelector(':scope > .nav-list')) li.classList.add('has-children');
-      if (li.classList.contains('active')) {
-        let p = li.parentElement;
-        while (p) {
-          if (p.classList && p.classList.contains('nav-list-item')) p.classList.add('is-expanded');
-          p = p.parentElement;
-        }
-      }
-    });
-  }
-  document.addEventListener('DOMContentLoaded', fsSyncExpanded);
-  document.addEventListener('turbolinks:load', fsSyncExpanded);
-  document.addEventListener('turbolinks:render', fsSyncExpanded);
-  document.addEventListener('turbo:load', fsSyncExpanded);
-})();
+  headings.forEach(h => {
+    const tag = (h.tagName || '').toLowerCase();
+    const id = ensureId(h);
+
+    const li = document.createElement('li');
+    li.className = 'lvl-' + tag;
+
+    const a = document.createElement('a');
+    a.href = '#' + id;
+    a.textContent = h.textContent;
+
+    li.appendChild(a);
+    ul.appendChild(li);
+  });
+
+  aside.appendChild(ul);
+
+  // --------- Insert TOC as a sibling of main to form a right column ---------
+  // If main is the only content, appending to its parent works across JTD versions.
+  container.classList.add('has-page-toc');
+  container.appendChild(aside);
+
+  // --------- Active section highlight ---------
+  const links = Array.from(aside.querySelectorAll('a[href^="#"]'));
+  const targets = links
+    .map(a => document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1))))
+    .filter(Boolean);
+
+  const setActive = () => {
+    let best = null;
+    let bestTop = -Infinity;
+    for (const el of targets) {
+      const top = el.getBoundingClientRect().top;
+      if (top < 120 && top > bestTop) { bestTop = top; best = el; }
+    }
+    links.forEach(a => a.classList.remove('active'));
+    if (best) {
+      const sel = 'a[href="#' + CSS.escape(best.id) + '"]';
+      const activeLink = aside.querySelector(sel);
+      if (activeLink) activeLink.classList.add('active');
+    }
+  };
+
+  setActive();
+  window.addEventListener('scroll', setActive, { passive: true });
+});
 </script>
