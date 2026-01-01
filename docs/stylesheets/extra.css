@@ -1,6 +1,5 @@
 /* ==========================================================================
-   Fashion Star Wiki - 工业级重构 (彻底消除蓝色 + 锁定 0.75rem/600加粗)
-   品牌色: #8641A9 | 背景色: #131314
+   Fashion Star Wiki - 工业级重构 (修正图标冗余 + 彻底去色)
    ========================================================================== */
 
 :root {
@@ -43,45 +42,59 @@
 .md-sidebar--primary { border-right: 1px solid rgba(255, 255, 255, 0.08) !important; }
 .md-sidebar--secondary { border-left: 1px solid rgba(255, 255, 255, 0.08) !important; margin-left: 0 !important; }
 
-/* --- 4. 左侧导航栏 (消除蓝色，字号 0.75rem + 600加粗 + 2px竖线) --- */
+/* --- 4. 左侧导航栏 (消除冗余图标、字号 0.75rem、600加粗) --- */
 
-/* 核心：统一所有行的高度、字号，并强制取消蓝色 */
+/* 核心：隐藏侧边栏多余的目录图标/索引图标 */
+.md-nav__icon--index,
+.md-nav__icon--toc {
+  display: none !important;
+}
+
+/* 统一所有导航行样式，消除蓝色链接 */
 .md-nav__link { 
   padding: 0.35rem 0.8rem !important; 
   line-height: 1.25 !important;       
-  font-size: 0.75rem;
-  color: var(--md-default-fg-color) !important; /* 强制设为标准文本白/灰，消除蓝 */
+  font-size: 0.75rem;                 /* 锁定 12px */
+  color: var(--md-default-fg-color) !important; /* 强制白/灰，消除蓝 */
   min-height: 1.7rem;                 
   display: flex !important;
   align-items: center;                
   transition: all 0.2s ease;
+  background-color: transparent !important; /* 强制背景透明 */
 }
 
+/* 移除所有内部引导线 */
 .md-nav__item .md-nav { border-left: none !important; margin-left: 0.5rem !important; }
 
-/* 激活项样式：仅文字紫色 + 600加粗 + 2px 细竖杠 */
+/* 激活项样式：锁定紫色文字 + 600加粗 + 2px 细竖杠 */
 .md-nav__item--active > .md-nav__link {
   color: var(--fs-accent) !important;      
-  font-weight: 600;                   
-  border-left: 2px solid var(--fs-accent) !important; 
-  background-color: transparent !important; 
+  font-weight: 600;                   /* 锁定 600 */
+  border-left: 2px solid var(--fs-accent) !important; /* 锁定 2px */
+  background-color: transparent !important; /* 彻底移除激活底色 */
   padding-left: 11px !important;      
   margin-left: -1px;
 }
 
-/* 强制保留展开箭头为白色 */
+/* 修正带有子级的项的底部默认间距 */
+.md-nav__item--nested > .md-nav__link {
+  margin-bottom: 0 !important;
+}
+
+/* 强制保留展开/折叠箭头为白色，不随文字变紫 */
 .md-nav__link .md-nav__icon {
   color: #ffffff !important;
   opacity: 0.8;
+  display: block !important; /* 确保文件夹箭头显示 */
 }
 
-/* 悬停效果：文字变纯白 */
+/* 悬停效果：文字变白，不带底色 */
 .md-nav__link:hover {
   color: #ffffff !important;
   background-color: transparent !important;
 }
 
-/* --- 5. 正文布局与面包屑 (消除蓝) --- */
+/* --- 5. 正文布局与面包屑 --- */
 .md-content__inner { 
   max-width: 58rem !important; 
   margin: 0 auto !important; 
@@ -93,10 +106,7 @@
   color: var(--md-default-fg-color--light) !important;
   text-decoration: none;
 }
-.md-content__nav a:hover {
-  color: var(--fs-accent) !important;
-}
-
+.md-content__nav a:hover { color: var(--fs-accent) !important; }
 .md-content__nav { font-size: 0.62rem; margin-bottom: 1.5rem; }
 
 /* 一级标题 */
