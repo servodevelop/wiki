@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Fashion Star Wiki - 工业级重构 (终极根除 TOC 图标 + 视觉锁定版)
+   Fashion Star Wiki - 工业级重构 (彻底解决重复行与 TOC 图标)
    品牌色: #8641A9 | 背景色: #131314
    ========================================================================== */
 
@@ -21,7 +21,6 @@
   --md-code-bg-color: #1e1f20;
 }
 
-/* 顶部 Header */
 .md-header { background-color: var(--fs-accent) !important; }
 .md-header__button.md-logo { display: none; }
 
@@ -41,35 +40,42 @@
 .md-sidebar--primary { border-right: 1px solid rgba(255, 255, 255, 0.08) !important; }
 .md-sidebar--secondary { border-left: 1px solid rgba(255, 255, 255, 0.08) !important; margin-left: 0 !important; }
 
-/* --- 4. 左侧导航栏 (根除 TOC 图标、锁定 12px、600加粗) --- */
+/* --- 4. 左侧导航栏精修 (锁定 12px、600加粗、2px竖线、根除重复) --- */
 
-/* 【核心修正】彻底根除侧边栏的所有 TOC/列表图标 */
-/* 包含：索引图标、目录图标以及所有带有 toc 触发功能的 label */
+/* 【核心修正】彻底根除 TOC 切换按钮及其占位符 */
 .md-nav__icon--index,
 .md-nav__icon--toc,
-.md-nav__link[for*="__toc"] .md-nav__icon { 
+label.md-nav__link[for*="__toc"] { 
   display: none !important; 
   visibility: hidden !important;
   width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
-/* 统一所有导航行样式：锁定 12px、消除蓝色 */
+/* 【核心修正】解决选中时出现重复行的问题 */
+/* 隐藏 active 状态下自动生成的冗余子列表 */
+.md-nav__item--active > .md-nav > .md-nav__list > .md-nav__item--active {
+  display: none !important;
+}
+
+/* 统一所有行样式：锁定 12px、消除背景色与蓝色 */
 .md-nav__link { 
   padding: 0.35rem 0.8rem !important; 
   line-height: 1.25 !important;       
-  font-size: 0.75rem !important;      /* 锁定 12px (0.75rem) */
+  font-size: 0.75rem !important;      /* 锁定 12px */
   color: var(--md-default-fg-color) !important; 
   min-height: 1.7rem;                 
   display: flex !important;
   align-items: center;                
   transition: all 0.2s ease;
-  background-color: transparent !important; /* 彻底透明背景 */
+  background-color: transparent !important; 
 }
 
-/* 移除所有内部引导线 */
 .md-nav__item .md-nav { border-left: none !important; margin-left: 0.5rem !important; }
 
-/* 激活项样式：锁定紫色、600加粗、2px细竖杠 */
+/* 激活项样式：锁定紫色文字、600加粗、2px竖杠 */
 .md-nav__item--active > .md-nav__link {
   color: var(--fs-accent) !important;      
   font-weight: 600 !important;         /* 锁定 600 加粗 */
@@ -79,8 +85,7 @@
   margin-left: -1px;
 }
 
-/* 强制保留文件夹的展开/折叠箭头为白色 */
-/* 排除掉那些用于 TOC 的按钮，只保留纯粹的箭头 */
+/* 强制保留文件夹箭头为白色 */
 .md-nav__item .md-nav__icon {
   color: #ffffff !important;
   opacity: 0.8;
@@ -100,7 +105,6 @@
   padding: 0.5rem 3rem 3rem 3rem !important; 
 }
 
-/* 面包屑路径与正文链接 (消除蓝) */
 .md-content__nav a {
   color: var(--md-default-fg-color--light) !important;
   text-decoration: none !important;
