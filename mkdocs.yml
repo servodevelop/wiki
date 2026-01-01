@@ -52,10 +52,10 @@ nav:
           - HA8/RA8-U35(H)-M: uart_servo/datasheet/HA_RA8_U35(H)_M.md
       - CAD Files:
           - step/DWG/pdf:  uart_servo/cad_files/cad_files.md
-      - Software: index.md
-      - SDK: index.md
-      - Application Notes: index.md
+      - Software: "#"
+      - SDK: "#"
+      - Application Notes: "#"
   - Robotic Arm:
-      - StarAI Arm: index.md
-      - Piper Mate: index.md
+      - StarAI Arm: "#"
+      - Piper Mate: "#"
       
