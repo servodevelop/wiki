@@ -1,15 +1,18 @@
 /* ==========================================================================
-   Fashion Star Wiki - 工业级重构 (左侧导航精修版 - 细化竖杠)
+   Fashion Star Wiki - 工业级重构 (彻底消除蓝色 + 锁定 0.75rem/600加粗)
+   品牌色: #8641A9 | 背景色: #131314
    ========================================================================== */
 
 :root {
   --fs-accent: #8641A9;
   --md-primary-fg-color: var(--fs-accent);
+  
+  /* 全局正文行间距 */
   --md-typeset-line-height: 1.8; 
   --md-typeset-font-size: 0.75rem;
 }
 
-/* --- 1. 深色模式 (Gemini #131314) --- */
+/* --- 1. 深色模式重构 (Gemini #131314) --- */
 [data-md-color-scheme="slate"] {
   --md-default-bg-color: #131314;
   --md-default-bg-color--light: #1e1f20;
@@ -18,10 +21,13 @@
   --md-code-bg-color: #1e1f20;
 }
 
-.md-header { background-color: var(--fs-accent) !important; }
+/* 顶部条背景 */
+.md-header { 
+  background-color: var(--fs-accent) !important; 
+}
 .md-header__button.md-logo { display: none; }
 
-/* --- 2. 修正右侧目录标题 --- */
+/* --- 2. 右侧目录 (On this page) --- */
 .md-nav--secondary .md-nav__title { font-size: 0 !important; }
 .md-nav--secondary .md-nav__title::after {
   content: "On this page";
@@ -31,42 +37,67 @@
   color: #8e918f;
   display: block;
 }
+
+/* --- 3. 三栏物理分割线 --- */
 .md-main__inner { display: flex !important; }
 .md-sidebar--primary { border-right: 1px solid rgba(255, 255, 255, 0.08) !important; }
 .md-sidebar--secondary { border-left: 1px solid rgba(255, 255, 255, 0.08) !important; margin-left: 0 !important; }
 
-/* --- 3. 左侧导航 (竖杠变细为 2px，保持紫色文字) --- */
-.md-nav__item .md-nav { border-left: none !important; margin-left: 0.5rem !important; }
+/* --- 4. 左侧导航栏 (消除蓝色，字号 0.75rem + 600加粗 + 2px竖线) --- */
 
+/* 核心：统一所有行的高度、字号，并强制取消蓝色 */
 .md-nav__link { 
-  padding: 0.25rem 0.8rem !important; 
-  line-height: 1.25 !important;
+  padding: 0.35rem 0.8rem !important; 
+  line-height: 1.25 !important;       
+  font-size: 0.75rem;
+  color: var(--md-default-fg-color) !important; /* 强制设为标准文本白/灰，消除蓝 */
+  min-height: 1.7rem;                 
+  display: flex !important;
+  align-items: center;                
   transition: all 0.2s ease;
 }
 
-/* 激活项：仅文字紫色 + 2px 细竖杠 */
+.md-nav__item .md-nav { border-left: none !important; margin-left: 0.5rem !important; }
+
+/* 激活项样式：仅文字紫色 + 600加粗 + 2px 细竖杠 */
 .md-nav__item--active > .md-nav__link {
   color: var(--fs-accent) !important;      
-  font-weight: 600;
-  /* --- 核心修改：从 4px 减为 2px --- */
+  font-weight: 600;                   
   border-left: 2px solid var(--fs-accent) !important; 
   background-color: transparent !important; 
-  padding-left: 14px !important; /* 稍微增加内边距补偿缩短的厚度，保持文字对齐感 */
+  padding-left: 11px !important;      
   margin-left: -1px;
 }
 
-/* 强制保留箭头为白色 */
+/* 强制保留展开箭头为白色 */
 .md-nav__link .md-nav__icon {
   color: #ffffff !important;
   opacity: 0.8;
 }
 
+/* 悬停效果：文字变纯白 */
 .md-nav__link:hover {
   color: #ffffff !important;
   background-color: transparent !important;
 }
 
-/* --- 4. 正文布局 --- */
-.md-content__inner { max-width: 58rem !important; margin: 0 auto !important; padding: 0.5rem 3rem 3rem 3rem !important; }
+/* --- 5. 正文布局与面包屑 (消除蓝) --- */
+.md-content__inner { 
+  max-width: 58rem !important; 
+  margin: 0 auto !important; 
+  padding: 0.5rem 3rem 3rem 3rem !important; 
+}
+
+/* 修正面包屑颜色 (消除蓝) */
+.md-content__nav a {
+  color: var(--md-default-fg-color--light) !important;
+  text-decoration: none;
+}
+.md-content__nav a:hover {
+  color: var(--fs-accent) !important;
+}
+
 .md-content__nav { font-size: 0.62rem; margin-bottom: 1.5rem; }
+
+/* 一级标题 */
 .md-typeset h1 { color: var(--fs-accent); font-weight: 800; margin-top: 0; }
