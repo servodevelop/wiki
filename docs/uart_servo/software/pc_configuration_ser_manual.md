@@ -8,7 +8,7 @@ This software is a bus servo PC configuration tool used for ID configuration, Pa
 
 ## 2. Download and Run
 
--   [Click to Download](https://fashionrobo.com/wp-content/uploads/download/Develop-US_1.0.9.266.rar) the latest PC configuration tool software (1.0.9.266).
+[📥 下载调试软件 (v1.0.9.266)](Develop-US_1.0.9.266.rar){ .md-button .md-button--primary }
     
 -   Extract it to any directory, no installation required, simply double-click `Develop.exe` to start the software.
     
