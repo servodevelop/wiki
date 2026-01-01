@@ -1,0 +1,31 @@
+site_name: Fashion Star Wiki
+site_url: https://servodevelop.github.io/wiki/
+
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.tabs          # 顶部一级导航
+    - navigation.sections      # 侧边栏分组
+    - content.code.copy        # 代码一键复制
+  palette:
+    - scheme: default          # 浅色模式
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 切换至深色模式
+    - scheme: slate            # 深色模式
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 切换至浅色模式
+
+markdown_extensions:
+  - pymdownx.snippets:         # 开启嵌套调用功能
+      base_path: ["docs"]
+  - admonition                 # 开启彩色提示框
+  - pymdownx.details           # 开启折叠块
+  - pymdownx.superfences       # 开启代码高亮
+
+nav:
+  - 首页: index.md
