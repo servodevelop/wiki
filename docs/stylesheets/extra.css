@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Fashion Star Wiki - 工业级重构 (彻底根除 TOC 图标 + 视觉锁定版)
+   Fashion Star Wiki - 工业级重构 (彻底抹除 TOC 图标 + 视觉锁定版)
    ========================================================================== */
 
 :root {
@@ -41,16 +41,21 @@
 
 /* --- 4. 左侧导航栏精修 (锁定 0.75rem + 600加粗 + 2px竖线) --- */
 
-/* 【核心修正】彻底根除侧边栏的所有索引/目录图标 */
-.md-nav__item .md-nav__link .md-nav__icon--index,
-.md-nav__item .md-nav__link .md-nav__icon--toc,
-.md-nav__link svg[viewBox="0 0 24 24"] { 
+/* 【终极修正】彻底抹除那个三横杠图标 */
+.md-nav__link .md-nav__icon--index,
+.md-nav__link .md-nav__icon--toc,
+.md-nav__link svg { 
   display: none !important; 
-  visibility: hidden !important;
-  width: 0 !important;
 }
 
-/* 统一所有行样式，确保无背景色，无蓝色链接 */
+/* 特殊：唯独要把文件夹的箭头图标重新显示回来，不然无法看折叠状态 */
+.md-nav__link .md-nav__icon {
+  display: block !important;
+  color: #ffffff !important;
+  opacity: 0.8;
+}
+
+/* 统一所有行样式，强制取消背景色和蓝色链接 */
 .md-nav__link { 
   padding: 0.35rem 0.8rem !important; 
   line-height: 1.25 !important;       
@@ -75,13 +80,6 @@
   margin-left: -1px;
 }
 
-/* 强制保留文件夹箭头为白色 (不让它变紫或变蓝) */
-.md-nav__link .md-nav__icon {
-  color: #ffffff !important;
-  opacity: 0.8;
-  display: block !important;
-}
-
 /* 悬停效果：文字变白，无背景色 */
 .md-nav__link:hover {
   color: #ffffff !important;
@@ -95,7 +93,6 @@
   padding: 0.5rem 3rem 3rem 3rem !important; 
 }
 
-/* 面包屑路径修正 */
 .md-content__nav a {
   color: var(--md-default-fg-color--light) !important;
   text-decoration: none !important;
