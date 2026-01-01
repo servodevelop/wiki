@@ -5,18 +5,20 @@ theme:
   name: material
   language: zh
   features:
-    - navigation.tabs             # 开启顶部一级导航
-    - navigation.sections         # 开启侧边栏分组显示
-    - navigation.expand           # 默认展开左侧所有菜单（专业 Wiki 风格）
-    - navigation.indexes          # 允许点击父级目录标题（如点击 Datasheet 跳转）
-    - navigation.top              # 开启回到顶部按钮
-    - content.code.copy           # 代码一键复制
+    - navigation.tabs              # 顶部一级导航
+    - navigation.tabs.sticky       # 粘性顶部导航
+    - navigation.sections          # 侧边栏分组显示横线
+    - navigation.expand            # 默认展开左侧所有菜单
+    - navigation.indexes           # 允许点击父级目录标题跳转
+    - navigation.path              # 开启面包屑导航 (Seeed 风格核心)
+    - navigation.top               # 开启回到顶部按钮
+    - content.code.copy            # 代码一键复制
+    - toc.follow                   # 目录跟随滚动
   
-  # 颜色方案配置：保留黑白切换按钮
   palette:
     # 浅色模式
     - scheme: default
-      primary: custom             # 配合 CSS 变量使用品牌色 #8641A9
+      primary: custom             # 品牌色 #8641A9
       accent: custom
       toggle:
         icon: material/brightness-7
@@ -30,24 +32,22 @@ theme:
         name: 切换至浅色模式
 
 plugins:
-  - search      # 保持默认的搜索功能
-  - glightbox:  # 开启图片灯箱插件
+  - search
+  - glightbox:
       touchNavigation: true
       loop: false
       effect: zoom
-      width: auto
-      height: auto
       zoomable: true
       draggable: true
 
 markdown_extensions:
-  - pymdownx.snippets:          # 开启嵌套调用功能
+  - pymdownx.snippets:
       base_path: ["docs"]
-  - admonition                  # 开启彩色提示框
-  - pymdownx.details            # 开启折叠块
-  - pymdownx.superfences        # 开启代码高亮
-  - attr_list                   # 开启属性列表，支持 {: width="45%"} 调整大小
-  - md_in_html                  # 允许在 HTML 容器内写 Markdown
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - attr_list
+  - md_in_html
 
 extra_css:
   - stylesheets/extra.css
