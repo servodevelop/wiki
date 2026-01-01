@@ -1,122 +1,120 @@
 /* ==========================================================================
-   Fashion Star Wiki - NVIDIA Isaac Sim 风格深度修正
+   Fashion Star Wiki - NVIDIA Isaac Sim 高对比度风格重构
    ========================================================================== */
 
 :root {
   --fs-accent: #8641A9;
   --md-primary-fg-color: var(--fs-accent);
   
-  /* 全局行间距优化 */
+  /* 全局间距优化 */
   --md-typeset-line-height: 1.8; 
   --md-typeset-font-size: 0.75rem;
 }
 
-/* --- 1. 顶部条 (Header) --- */
+/* --- 1. 高对比度底色 (复刻 NVIDIA Isaac) --- */
+
+/* 深色模式下的背景色调优：使用更深邃的黑色系 */
+[data-md-color-scheme="slate"] {
+  --md-default-bg-color: #000000;         /* 纯黑背景 */
+  --md-default-bg-color--light: #0d0d0d;  /* 侧边栏稍浅 */
+  --md-default-fg-color: #f2f2f2;         /* 极高对比度白字 */
+  --md-default-fg-color--light: #a6a6a6;  /* 次级灰色字 */
+  --md-code-bg-color: #1a1a1a;            /* 代码块背景 */
+}
+
+/* 顶部 Header */
 .md-header {
   background-color: var(--fs-accent) !important;
   color: #ffffff !important;
 }
 .md-header__button.md-logo { display: none; }
 
-/* --- 2. 三栏物理分割线 (强制贯穿) --- */
+/* --- 2. 三栏物理分割线 (增强对比) --- */
 .md-sidebar--primary {
-  border-right: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.12) !important; /* 调亮边框线，增加可见度 */
 }
 .md-sidebar--secondary {
-  border-left: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.12) !important;
   margin-left: 0 !important;
 }
 
-[data-md-color-scheme="slate"] .md-sidebar--primary { border-right-color: rgba(255, 255, 255, 0.1) !important; }
-[data-md-color-scheme="slate"] .md-sidebar--secondary { border-left-color: rgba(255, 255, 255, 0.1) !important; }
+/* 浅色模式分割线保持原样 */
+[data-md-color-scheme="default"] .md-sidebar--primary { border-right-color: rgba(0, 0, 0, 0.08) !important; }
+[data-md-color-scheme="default"] .md-sidebar--secondary { border-left-color: rgba(0, 0, 0, 0.08) !important; }
 
-/* --- 3. 左侧侧边栏：紧凑高亮效果 --- */
+/* --- 3. 左侧导航栏 (紧凑缩进 & 极简状态) --- */
 .md-nav__title {
   color: #ffffff !important;
   font-weight: 700;
   padding: 1rem !important;
 }
 
-/* 极小缩进，无内部引导线 */
 .md-nav__item .md-nav {
   border-left: none !important;
   margin-left: 0.5rem !important; 
 }
 
-/* 导航链接：压缩上下内边距以降低激活背景的高度 */
 .md-nav__link {
-  padding: 0.2rem 0.8rem !important; /* 修正：减小上下间距，使背景条变薄 */
+  padding: 0.25rem 0.8rem !important;
   line-height: 1.25 !important;
   font-size: 0.72rem;
-  color: #a9b0b8 !important; /* 默认灰色 */
-  transition: all 0.2s ease;
 }
 
-/* 激活项：文字白色高亮 + 紫色 4px 实条指示杠 */
+/* 激活项：白色高亮文字 + 紫色指示杠 */
 .md-nav__item--active > .md-nav__link {
-  color: #ffffff !important; /* 核心：选中后文字保持白色高亮 */
+  color: #ffffff !important;
   font-weight: 700;
-  background-color: rgba(255, 255, 255, 0.08); /* 极淡的背景 */
-  border-left: 4px solid var(--fs-accent) !important; /* 紫色指示线 */
+  border-left: 4px solid var(--fs-accent) !important;
+  background-color: rgba(255, 255, 255, 0.05);
   padding-left: 0.8rem !important;
-  margin-left: -1px;
 }
 
-/* 浅色模式文字高亮修正 */
-[data-md-color-scheme="default"] .md-nav__link { color: #555 !important; }
-[data-md-color-scheme="default"] .md-nav__item--active > .md-nav__link { 
-  color: #000 !important; 
-  background-color: rgba(0, 0, 0, 0.03); 
-}
-
-/* --- 4. 右侧目录 (TOC - 极度紧凑) --- */
+/* --- 4. 右侧目录 (TOC - 修正行间距与极简显示) --- */
 @media screen and (min-width: 76.25em) {
   .md-sidebar--secondary { width: 15rem !important; }
   .md-main__inner { max-width: 100% !important; margin: 0 1.5rem !important; }
 }
 
-.md-nav--secondary .md-nav__link {
-  border-left: none !important;
-  padding: 0.15rem 1rem !important; /* 极度压缩间距 */
-  font-size: 0.68rem;
-  line-height: 1.4 !important;
+.md-nav--secondary .md-nav__title {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: #888;
+  padding: 1.2rem 0 0.5rem 0.8rem !important;
 }
 
-/* 右侧激活项：仅文字高亮 */
-[data-md-color-scheme="slate"] .md-nav--secondary .md-nav__link--active { color: #ffffff !important; }
-[data-md-color-scheme="default"] .md-nav--secondary .md-nav__link--active { color: #000000 !important; }
+.md-nav--secondary .md-nav__link {
+  border-left: none !important;
+  padding: 0.25rem 1rem !important;
+  font-size: 0.68rem;
+  line-height: 1.5 !important;
+}
 
-/* --- 5. 正文内容排版 (修正标题颜色) --- */
+/* 右侧激活项：直接紫色高亮 */
+.md-nav--secondary .md-nav__link--active {
+  color: var(--fs-accent) !important;
+  font-weight: 700;
+}
+
+/* --- 5. 正文与面包屑 --- */
 .md-content__inner {
-  max-width: 56rem !important;
+  max-width: 58rem !important;
   margin: 0 auto !important;
   padding: 0.5rem 3rem 3rem 3rem !important;
 }
 
-/* 面包屑导航样式 */
 .md-content__nav {
   font-size: 0.62rem;
   margin-bottom: 1.5rem;
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
-/* 核心：正文标题回归标准色，不使用紫色 */
-.md-typeset h1, 
-.md-typeset h2, 
-.md-typeset h3 {
-  color: inherit !important; /* 继承主题默认的黑/白色 */
+.md-typeset h1 {
+  color: var(--fs-accent);
   font-weight: 800;
+  margin-top: 0;
 }
 
-.md-typeset h1 { margin-top: 0; font-size: 1.8rem; }
-
-/* 强制修改右侧 TOC 标题为 On this page (CSS 兜底方案) */
-.md-nav--secondary .md-nav__title {
-  visibility: hidden;
-}
-.md-nav--secondary .md-nav__title::after {
-  content: "On this page";
-  visibility: visible;
-  display: block;
-  margin-top: -1.2em;
+/* 修正正文普通段落对比度 */
+.md-typeset {
+  color: var(--md-default-fg-color);
 }
