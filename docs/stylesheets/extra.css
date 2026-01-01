@@ -1,86 +1,61 @@
-/* --- 基础变量定义 (参考自 Just-the-Docs) --- */
+/* --- 品牌色定义 --- */
 :root {
   --fs-accent: #8641A9;
-  --fs-accent-rgb: 134, 65, 169;
   --md-primary-fg-color: var(--fs-accent);
   --md-primary-fg-color--light: #a46bc3;
   --md-primary-fg-color--dark: #6a3387;
-  
-  /* 字体间距优化 */
-  --md-typeset-font-size: 0.75rem;
-  --md-typeset-line-height: 1.6;
 }
 
-/* --- 1. 侧边栏样式 (左侧指示线) --- */
-/* 未选中状态为灰色 */
+/* --- 1. 复刻 Seeed 侧边栏层级指示线 --- */
+/* 只有激活项会显示紫色粗竖线 */
+.md-nav__item--active > .md-nav__link {
+  color: var(--fs-accent) !important;
+  font-weight: 700;
+  border-left: 4px solid var(--fs-accent);
+  padding-left: 12px !important;
+  margin-left: -4px;
+}
+
+/* 未激活项显示淡灰色细线 (增加层级深度感) */
 .md-nav__link {
-  color: #a9b0b8 !important;
+  border-left: 1px solid rgba(0,0,0,0.05);
+  padding-left: 15px;
   transition: all 0.2s;
 }
 
-/* 悬停变白 */
-.md-nav__link:hover {
-  color: #ffffff !important;
+[data-md-color-scheme="slate"] .md-nav__link {
+  border-left-color: rgba(255,255,255,0.1);
 }
 
-/* 激活状态：白色文字 + 左侧 3px 紫色实线 (复刻参考图) */
-.md-nav__item--active > .md-nav__link {
-  color: #ffffff !important;
-  font-weight: 600;
-  border-left: 3px solid var(--fs-accent) !important;
-  padding-left: 0.75rem !important;
-  background-color: rgba(255, 255, 255, 0.03);
-}
-
-/* --- 2. 右侧目录面板 (TOC / On this page) --- */
-/* 将 Material 默认目录改造成参考图中的“面板”风格 */
+/* --- 2. 复刻 Seeed 右侧 TOC 面板效果 --- */
 @media screen and (min-width: 60em) {
   .md-sidebar--secondary {
+    background: rgba(255, 255, 255, 0.02);
+    border-left: 1px solid rgba(0,0,0,0.05);
     margin-left: 1rem;
   }
-  
-  .md-nav--secondary {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 10px;
-    padding: 0.8rem;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-    position: sticky;
-    top: 5rem;
-  }
 
+  /* 使 TOC 标题更具专业感 */
   .md-nav--secondary .md-nav__title {
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: #a9b0b8;
-    margin-bottom: 0.5rem;
+    color: var(--md-default-fg-color--light);
+    padding-top: 1rem;
   }
 }
 
-/* --- 3. 正文排版 (Typography) --- */
-.md-typeset h1 { font-weight: 700; font-size: 1.8rem; margin-bottom: 1.5rem; }
-.md-typeset h2 { font-weight: 600; font-size: 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.3rem; }
-
-/* 表格居中且圆角 */
-.md-typeset table {
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.1);
-  margin-left: auto;
-  margin-right: auto;
+/* --- 3. 正文宽度限制 (Seeed 风格，防止文字太长难以阅读) --- */
+.md-content__inner {
+  max-width: 54rem;
+  margin: 0 auto;
+  padding: 1.5rem 2.5rem;
 }
 
-/* 图片阴影与圆角 */
+/* --- 4. 图片美化 --- */
 article img {
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   margin: 2rem auto !important;
-}
-
-/* 修正 Admonition (警告框) 样式 */
-.admonition {
-  border-radius: 8px !important;
-  border-left-width: 0.3rem !important;
-  font-size: 0.7rem;
+  display: block;
 }
