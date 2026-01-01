@@ -52,7 +52,8 @@ nav:
           - HA8/RA8-U35(H)-M: uart_servo/datasheet/HA_RA8_U35(H)_M.md
       - CAD Files:
           - step/DWG/pdf:  uart_servo/cad_files/cad_files.md
-      - Software: "#"
+      - Software: 
+          - Confiration Tools: uart_servo/software/pc_configuration_ser_manual.md
       - SDK: "#"
       - Application Notes: "#"
   - Robotic Arm:
