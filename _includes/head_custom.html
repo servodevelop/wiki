@@ -1,110 +1,43 @@
-<!-- Custom head: right-side "On this page" TOC (robust for different Just-the-Docs DOM versions) -->
-<link rel="stylesheet" href="{{ '/assets/css/just-the-docs-custom.css' | relative_url }}">
-
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  // --------- Find main content element (robust selectors) ---------
-  const main =
-    document.querySelector('main.main-content') ||
-    document.querySelector('.main-content') ||
-    document.querySelector('main') ||
-    document.querySelector('article');
+  // 1. 寻找主内容容器
+  const main = document.querySelector('.main-content');
+  const wrap = document.querySelector('.main-content-wrap');
+  if (!main || !wrap) return;
 
-  if (!main) return;
+  // 2. 抓取所有二级和三级标题
+  const headings = Array.from(main.querySelectorAll('h2, h3'));
+  if (headings.length < 2) return; // 标题太少则不生成
 
-  // Container where we'll create a 2-column layout
-  const container =
-    main.closest('.main-content-wrap') ||
-    main.parentElement;
-
-  if (!container) return;
-
-  // Avoid duplicates
-  if (document.getElementById('page-toc')) return;
-
-  // --------- Collect headings from within main content only ---------
-  const headings = Array.from(main.querySelectorAll('h2, h3, h4'))
-    .filter(h => h.textContent && h.textContent.trim().length > 0)
-    .filter(h => !h.closest('nav, aside, footer, header'));
-
-  if (!headings.length) return;
-
-  // --------- Ensure each heading has a unique id ---------
-  const used = new Set();
-  const slugify = (s) => (s || '')
-    .trim()
-    .toLowerCase()
-    .replace(/[\s]+/g, '-')
-    .replace(/[^\p{L}\p{N}\-]+/gu, '');
-
-  function ensureId(el){
-    let id = (el.id || '').trim();
-    if (!id) id = slugify(el.textContent) || 'section';
-    let base = id, i = 2;
-    while (document.getElementById(id) || used.has(id)) id = base + '-' + (i++);
-    used.add(id);
-    el.id = id;
-    return id;
-  }
-
-  // --------- Build TOC DOM ---------
+  // 3. 构建 TOC HTML
   const aside = document.createElement('aside');
   aside.id = 'page-toc';
-  aside.className = 'page-toc';
-  aside.setAttribute('aria-label', 'On this page');
-
-  const title = document.createElement('div');
-  title.className = 'page-toc-title';
-  title.textContent = 'On this page';
-  aside.appendChild(title);
-
-  const ul = document.createElement('ul');
-  ul.className = 'page-toc-list';
-
-  headings.forEach(h => {
-    const tag = (h.tagName || '').toLowerCase();
-    const id = ensureId(h);
-
-    const li = document.createElement('li');
-    li.className = 'lvl-' + tag;
-
-    const a = document.createElement('a');
-    a.href = '#' + id;
-    a.textContent = h.textContent;
-
-    li.appendChild(a);
-    ul.appendChild(li);
+  
+  let tocHtml = '<div class="page-toc-title">On this page</div><ul class="page-toc-list">';
+  headings.forEach((h, i) => {
+    if (!h.id) h.id = 'section-' + i;
+    const levelClass = h.tagName === 'H3' ? 'style="margin-left:15px; font-size:12px;"' : '';
+    tocHtml += `<li ${levelClass}><a href="#${h.id}">${h.textContent}</a></li>`;
   });
+  tocHtml += '</ul>';
+  aside.innerHTML = tocHtml;
 
-  aside.appendChild(ul);
+  // 4. 注入并开启布局
+  wrap.classList.add('has-page-toc');
+  wrap.appendChild(aside);
 
-  // --------- Insert TOC as a sibling of main to form a right column ---------
-  // If main is the only content, appending to its parent works across JTD versions.
-  container.classList.add('has-page-toc');
-  container.appendChild(aside);
-
-  // --------- Active section highlight ---------
-  const links = Array.from(aside.querySelectorAll('a[href^="#"]'));
-  const targets = links
-    .map(a => document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1))))
-    .filter(Boolean);
-
-  const setActive = () => {
-    let best = null;
-    let bestTop = -Infinity;
-    for (const el of targets) {
-      const top = el.getBoundingClientRect().top;
-      if (top < 120 && top > bestTop) { bestTop = top; best = el; }
-    }
-    links.forEach(a => a.classList.remove('active'));
-    if (best) {
-      const sel = 'a[href="#' + CSS.escape(best.id) + '"]';
-      const activeLink = aside.querySelector(sel);
-      if (activeLink) activeLink.classList.add('active');
-    }
-  };
-
-  setActive();
-  window.addEventListener('scroll', setActive, { passive: true });
+  // 5. 滚动高亮逻辑
+  const links = aside.querySelectorAll('a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    headings.forEach(h => {
+      const top = h.getBoundingClientRect().top;
+      if (top < 120) current = h.id;
+    });
+    links.forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+    });
+  }, { passive: true });
 });
 </script>
