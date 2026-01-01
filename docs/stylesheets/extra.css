@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Fashion Star Wiki - NVIDIA Isaac Sim 工业级重构
+   Fashion Star Wiki - 工业级重构最终版
    品牌色: #8641A9
    ========================================================================== */
 
@@ -7,32 +7,41 @@
   --fs-accent: #8641A9;
   --md-primary-fg-color: var(--fs-accent);
   
-  /* 全局正文行间距优化 */
+  /* 全局正文行间距 */
   --md-typeset-line-height: 1.8; 
   --md-typeset-font-size: 0.75rem;
 }
 
-/* --- 1. 三栏物理分割线：强制在侧边栏上建立边界 --- */
-.md-sidebar--primary {
-  border-right: 1.5px solid rgba(0, 0, 0, 0.08) !important; /* 左栏右侧线 */
+/* --- 1. Header 适配 (修正浅色模式下字体颜色) --- */
+.md-header {
+  background-color: #ffffff !important;
+  color: #000000 !important;
 }
+[data-md-color-scheme="slate"] .md-header {
+  background-color: #1a1a1b !important;
+  color: #ffffff !important;
+}
+.md-header__button.md-logo { display: none; }
 
+/* --- 2. 三栏物理分割线 --- */
+.md-sidebar--primary {
+  border-right: 1.5px solid rgba(0, 0, 0, 0.08) !important;
+}
 .md-sidebar--secondary {
-  border-left: 1.5px solid rgba(0, 0, 0, 0.08) !important;  /* 右栏左侧线 */
+  border-left: 1.5px solid rgba(0, 0, 0, 0.08) !important;
   margin-left: 0 !important;
 }
-
 [data-md-color-scheme="slate"] .md-sidebar--primary { border-right-color: rgba(255, 255, 255, 0.1) !important; }
 [data-md-color-scheme="slate"] .md-sidebar--secondary { border-left-color: rgba(255, 255, 255, 0.1) !important; }
 
-/* --- 2. 左侧导航栏：白色高亮 + 紫色竖线 --- */
+/* --- 3. 左侧导航栏 (修正缩进、颜色、箭头) --- */
 .md-nav__title {
   color: var(--fs-accent) !important;
   font-weight: 700;
   padding: 1rem !important;
 }
 
-/* 移除引导线并压缩缩进 */
+/* 缩进与引导线处理 */
 .md-nav__item .md-nav {
   border-left: none !important; 
   margin-left: 0.5rem !important; 
@@ -42,34 +51,39 @@
   padding: 0.35rem 0.8rem !important;
   font-size: 0.72rem;
   line-height: 1.3 !important;
-  color: #a9b0b8 !important; /* 未选中时为淡灰色 */
   transition: color 0.2s ease;
 }
 
-/* 激活项：白色高亮文本 + 紫色实条指示器 */
+/* 浅色模式默认文字颜色 */
+[data-md-color-scheme="default"] .md-nav__link {
+  color: #444444 !important;
+}
+/* 深色模式默认文字颜色 */
+[data-md-color-scheme="slate"] .md-nav__link {
+  color: #a9b0b8 !important;
+}
+
+/* 激活项效果：文字高亮 + 紫色左杠 */
 .md-nav__item--active > .md-nav__link {
-  color: #ffffff !important; /* 选中后文字白色高亮 */
   font-weight: 700;
-  border-left: 3px solid var(--fs-accent) !important; /* 紫色竖线 */
-  background-color: rgba(255, 255, 255, 0.05);
+  border-left: 3px solid var(--fs-accent) !important;
+  background-color: rgba(134, 65, 169, 0.05);
   padding-left: 15px !important;
   margin-left: -1px;
 }
 
-/* --- 3. 右侧目录 (TOC) 空间最大化 --- */
-@media screen and (min-width: 76.25em) {
-  .md-sidebar--secondary {
-    width: 15rem !important; /* 锁定宽度防止换行 */
-  }
-  .md-main__inner {
-    max-width: 100% !important;
-    margin: 0 1.5rem !important;
-  }
+/* 激活项文字颜色：深色模式变白，浅色模式变黑 */
+[data-md-color-scheme="slate"] .md-nav__item--active > .md-nav__link {
+  color: #ffffff !important;
+}
+[data-md-color-scheme="default"] .md-nav__item--active > .md-nav__link {
+  color: #000000 !important;
 }
 
-.md-nav--secondary {
-  background: transparent !important;
-  padding: 0 !important;
+/* --- 4. 右侧目录 (TOC) --- */
+@media screen and (min-width: 76.25em) {
+  .md-sidebar--secondary { width: 15rem !important; }
+  .md-main__inner { max-width: 100% !important; margin: 0 1.5rem !important; }
 }
 
 .md-nav--secondary .md-nav__title {
@@ -79,28 +93,20 @@
   padding: 1.2rem 0 0.5rem 0.8rem !important;
 }
 
-/* 移除右侧所有线与颜色条，仅高亮文字 */
 .md-nav--secondary .md-nav__link {
   border-left: none !important;
   padding: 0.3rem 0.8rem !important;
   font-size: 0.68rem;
   line-height: 1.5 !important;
-  color: #a9b0b8 !important;
 }
 
-/* 右侧选中项：白色高亮 */
-.md-nav--secondary .md-nav__link--active,
-.md-nav--secondary .md-nav__link:hover {
-  color: #ffffff !important; 
-  background: transparent !important;
-  font-weight: 700;
-}
+/* 右侧激活高亮 */
+[data-md-color-scheme="slate"] .md-nav--secondary .md-nav__link--active { color: #ffffff !important; font-weight: 700;}
+[data-md-color-scheme="default"] .md-nav--secondary .md-nav__link--active { color: #000000 !important; font-weight: 700;}
 
-/* --- 4. 正文排版与隐藏 Logo --- */
+/* --- 5. 正文宽度 --- */
 .md-content__inner {
   max-width: 56rem !important;
   margin: 0 auto !important;
   padding: 2rem 3rem !important;
 }
-
-.md-header__button.md-logo { display: none; }
