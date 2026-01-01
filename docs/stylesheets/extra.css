@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Fashion Star Wiki - 工业级重构 (Gemini 色调 + 回归简洁图标版)
+   Fashion Star Wiki - 工业级重构 (修正标题大小写)
    ========================================================================== */
 
 :root {
@@ -21,22 +21,24 @@
 .md-header { background-color: var(--fs-accent) !important; }
 .md-header__button.md-logo { display: none; }
 
-/* --- 2. 标题与三栏线 --- */
+/* --- 2. 修正右侧目录标题 (去掉强制大写) --- */
 .md-nav--secondary .md-nav__title { font-size: 0 !important; }
 .md-nav--secondary .md-nav__title::after {
   content: "On this page";
   font-size: 0.65rem;
   visibility: visible;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  /* text-transform: uppercase;  <-- 已删除此行，恢复原本大小写 */
+  letter-spacing: 0.02em;        /* 缩小字距，适合非大写排版 */
   color: #8e918f;
   display: block;
 }
+
+/* --- 3. 三栏物理分割线 --- */
 .md-main__inner { display: flex !important; }
 .md-sidebar--primary { border-right: 1px solid rgba(255, 255, 255, 0.08) !important; }
 .md-sidebar--secondary { border-left: 1px solid rgba(255, 255, 255, 0.08) !important; margin-left: 0 !important; }
 
-/* --- 3. 左侧导航 (指示杠修正) --- */
+/* --- 4. 左侧导航 (指示杠修正) --- */
 .md-nav__item .md-nav { border-left: none !important; margin-left: 0.5rem !important; }
 .md-nav__link { padding: 0.25rem 0.8rem !important; line-height: 1.25 !important; }
 .md-nav__item--active > .md-nav__link {
@@ -48,9 +50,7 @@
   margin-left: -1px;
 }
 
-/* --- 4. 正文布局 --- */
+/* --- 5. 正文布局 --- */
 .md-content__inner { max-width: 58rem !important; margin: 0 auto !important; padding: 0.5rem 3rem 3rem 3rem !important; }
 .md-content__nav { font-size: 0.62rem; margin-bottom: 1.5rem; }
 .md-typeset h1 { color: var(--fs-accent); font-weight: 800; margin-top: 0; }
-
-/* (已删除之前的胶囊按钮样式代码) */
