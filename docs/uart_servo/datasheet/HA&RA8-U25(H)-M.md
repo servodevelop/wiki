@@ -46,31 +46,37 @@
 | **No‑load Speed**         | 51 rpm (0.198 sec@60°)        |
 | **Peak Current**          | 3 A                           |
 
-### 3.3 Performance & Overload Graph
+### 3.3 Performance & Overload Analysis
 
-![U25特性曲线](img/U25特性曲线.png){ width="45%" }
-![U25过载曲线](img/U25过载曲线.png){ width="45%" }
+<div class="grid cards" markdown>
 
----
+-   **Performance Graph**
+    
+    ![特性曲线](img/U25特性曲线.png){: width="100%" }
 
-## 4. Drawings and Installation
+-   **Overload Graph**
+    
+    ![过载曲线](img/U25过载曲线.png){: width="100%" }
 
-### 4.1 CAD Dimensional Drawing
-
-| ![U25_3D图](img/U25_3D图.png){ width="80%" } |
-| :------------------------------------------: |
-
-### 4.2 Interface Definition
-
-| ![U25接口图](img/U25接口图.png){ width="80%" } |
-| :--------------------------------------------: |
-
-### 4.3 Wiring & Installation
-
-- **Connection**: ![U25串联](img/U25串联.png){ width="40%" } ![U25并联](img/U25并联.png){ width="40%" }
-- **Installation**: ![U25单轴安装](img/U25单轴安装.png){ width="40%" } ![U25双轴安装](img/U25双轴安装.png){ width="40%" }
+</div>
 
 ---
+
+### 4. Drawings and Installation Instructions
+
+#### 4.1 CAD Dimensional Drawing
+![U25_3D图](img/U25_3D图.png){: width="75%" }
+
+#### 4.2 Interface Definition & Wiring
+<div class="grid cards" markdown>
+
+-   **Interface Definition**
+    ![U25接口图](img/U25接口图.png)
+
+-   **Wiring (Series)**
+    ![U25串联](img/U25串联.png)
+
+</div>
 
 ## 5. Protections
 
