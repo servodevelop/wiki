@@ -1,156 +1,110 @@
-<!-- ===== TOC Debug / Minimal Test Head (temporary) ===== -->
-<meta name="fs-head-custom" content="toc-test-v1">
-
-<style>
-  /* A visible badge so you can confirm this head is really loaded */
-  #fs-head-test-badge{
-    position:fixed; left:12px; bottom:12px;
-    z-index:99999;
-    font:12px/1.2 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-    background:rgba(10,10,12,.85);
-    border:1px solid #8641A9;
-    padding:6px 8px;
-    border-radius:8px;
-    color:#fff;
-    letter-spacing:.2px;
-  }
-
-  /* Right-side TOC test panel (overlay; does NOT change layout) */
-  #fs-toc-test{
-    position:fixed; right:16px; top:120px;
-    z-index:99998;
-    width:280px;
-    max-height: calc(100vh - 160px);
-    overflow:auto;
-    background:rgba(12,12,14,.92);
-    border:1px solid rgba(134,65,169,.65);
-    border-left:4px solid #8641A9;
-    border-radius:12px;
-    padding:12px 12px 10px 12px;
-    display:none; /* JS will show it */
-    box-shadow: 0 12px 32px rgba(0,0,0,.35);
-  }
-  #fs-toc-test .title{
-    font-weight:600;
-    font-size:13px;
-    color:#E9E3F4;
-    margin:0 0 10px 0;
-  }
-  #fs-toc-test .meta{
-    font-size:11px;
-    opacity:.75;
-    margin:0 0 10px 0;
-  }
-  #fs-toc-test ul{ list-style:none; padding:0; margin:0; }
-  #fs-toc-test li{ margin:6px 0; line-height:1.25; }
-  #fs-toc-test li.l3{ margin-left:12px; opacity:.95; }
-  #fs-toc-test li.l4{ margin-left:22px; opacity:.9; }
-  #fs-toc-test a{
-    color:#C9B7E8;
-    text-decoration:none;
-  }
-  #fs-toc-test a:hover{ color:#8641A9; }
-</style>
+<!-- Custom head: right-side "On this page" TOC (robust for different Just-the-Docs DOM versions) -->
+<link rel="stylesheet" href="{{ '/assets/css/just-the-docs-custom.css' | relative_url }}">
 
 <script>
-(function(){
-  function pickMain(){
-    return document.querySelector('#main-content')
-      || document.querySelector('main.main-content')
-      || document.querySelector('.main-content')
-      || document.querySelector('article')
-      || document.querySelector('main');
-  }
+document.addEventListener('DOMContentLoaded', function () {
+  // --------- Find main content element (robust selectors) ---------
+  const main =
+    document.querySelector('main.main-content') ||
+    document.querySelector('.main-content') ||
+    document.querySelector('main') ||
+    document.querySelector('article');
 
-  function slugify(s){
-    return (s||'').trim().toLowerCase()
-      .replace(/\s+/g,'-')
-      .replace(/[^a-z0-9\-\u00A0-\uFFFF]/g,'');
-  }
+  if (!main) return;
+
+  // Container where we'll create a 2-column layout
+  const container =
+    main.closest('.main-content-wrap') ||
+    main.parentElement;
+
+  if (!container) return;
+
+  // Avoid duplicates
+  if (document.getElementById('page-toc')) return;
+
+  // --------- Collect headings from within main content only ---------
+  const headings = Array.from(main.querySelectorAll('h2, h3, h4'))
+    .filter(h => h.textContent && h.textContent.trim().length > 0)
+    .filter(h => !h.closest('nav, aside, footer, header'));
+
+  if (!headings.length) return;
+
+  // --------- Ensure each heading has a unique id ---------
+  const used = new Set();
+  const slugify = (s) => (s || '')
+    .trim()
+    .toLowerCase()
+    .replace(/[\s]+/g, '-')
+    .replace(/[^\p{L}\p{N}\-]+/gu, '');
 
   function ensureId(el){
-    if (el.id && el.id.trim()) return el.id;
-    let base = slugify(el.textContent) || 'section';
-    let id = base, n = 2;
-    while (document.getElementById(id)) id = base + '-' + (n++);
+    let id = (el.id || '').trim();
+    if (!id) id = slugify(el.textContent) || 'section';
+    let base = id, i = 2;
+    while (document.getElementById(id) || used.has(id)) id = base + '-' + (i++);
+    used.add(id);
     el.id = id;
     return id;
   }
 
-  function buildToc(){
-    // Ensure badge exists (confirm head is loaded)
-    if (!document.getElementById('fs-head-test-badge')){
-      const b = document.createElement('div');
-      b.id = 'fs-head-test-badge';
-      b.textContent = 'fs head_custom loaded: toc-test-v1';
-      document.body.appendChild(b);
-    }
+  // --------- Build TOC DOM ---------
+  const aside = document.createElement('aside');
+  aside.id = 'page-toc';
+  aside.className = 'page-toc';
+  aside.setAttribute('aria-label', 'On this page');
 
-    // Ensure panel exists
-    let panel = document.getElementById('fs-toc-test');
-    if (!panel){
-      panel = document.createElement('aside');
-      panel.id = 'fs-toc-test';
-      panel.innerHTML = '<div class="title">TOC Test Panel</div><div class="meta" id="fs-toc-meta"></div><ul id="fs-toc-list"></ul>';
-      document.body.appendChild(panel);
-    }
+  const title = document.createElement('div');
+  title.className = 'page-toc-title';
+  title.textContent = 'On this page';
+  aside.appendChild(title);
 
-    const main = pickMain();
-    const meta = document.getElementById('fs-toc-meta');
-    const list = document.getElementById('fs-toc-list');
+  const ul = document.createElement('ul');
+  ul.className = 'page-toc-list';
 
-    if (!main){
-      panel.style.display = 'block';
-      meta.textContent = 'Main container: NOT FOUND';
-      list.innerHTML = '<li>Could not find main content container.</li>';
-      console.warn('[TOC TEST] main container not found');
-      return;
-    }
+  headings.forEach(h => {
+    const tag = (h.tagName || '').toLowerCase();
+    const id = ensureId(h);
 
-    const selector = 'h2, h3, h4';
-    const headings = Array.from(main.querySelectorAll(selector)).filter(h => !h.closest('nav, aside, footer'));
+    const li = document.createElement('li');
+    li.className = 'lvl-' + tag;
 
-    panel.style.display = 'block';
-    meta.textContent = 'Main: ' + (main.id ? ('#' + main.id) : main.className ? ('.' + main.className) : main.tagName.toLowerCase())
-      + ' | headings: ' + headings.length;
+    const a = document.createElement('a');
+    a.href = '#' + id;
+    a.textContent = h.textContent;
 
-    if (!headings.length){
-      list.innerHTML = '<li>No headings found (h2/h3/h4). Try adding a simple test page with headings.</li>';
-      console.warn('[TOC TEST] found 0 headings in main', main);
-      return;
-    }
-
-    list.innerHTML = '';
-    headings.forEach(h => {
-      const tag = (h.tagName||'').toLowerCase();
-      const id = ensureId(h);
-
-      const li = document.createElement('li');
-      li.className = tag === 'h2' ? 'l2' : tag === 'h3' ? 'l3' : 'l4';
-
-      const a = document.createElement('a');
-      a.href = '#' + id;
-      a.textContent = h.textContent;
-      li.appendChild(a);
-      list.appendChild(li);
-    });
-
-    console.log('[TOC TEST] built', headings.length, 'items from', main);
-  }
-
-  // Run on initial load
-  document.addEventListener('DOMContentLoaded', function(){
-    buildToc();
-    // Re-run after render settles (some themes load content late)
-    requestAnimationFrame(() => requestAnimationFrame(buildToc));
-    setTimeout(buildToc, 800);
-    setTimeout(buildToc, 2000);
+    li.appendChild(a);
+    ul.appendChild(li);
   });
 
-  // Run on SPA-style navigations (Just-the-Docs can use turbolinks/turbo)
-  document.addEventListener('turbolinks:load', buildToc);
-  document.addEventListener('turbolinks:render', buildToc);
-  document.addEventListener('turbo:load', buildToc);
-})();
+  aside.appendChild(ul);
+
+  // --------- Insert TOC as a sibling of main to form a right column ---------
+  // If main is the only content, appending to its parent works across JTD versions.
+  container.classList.add('has-page-toc');
+  container.appendChild(aside);
+
+  // --------- Active section highlight ---------
+  const links = Array.from(aside.querySelectorAll('a[href^="#"]'));
+  const targets = links
+    .map(a => document.getElementById(decodeURIComponent(a.getAttribute('href').slice(1))))
+    .filter(Boolean);
+
+  const setActive = () => {
+    let best = null;
+    let bestTop = -Infinity;
+    for (const el of targets) {
+      const top = el.getBoundingClientRect().top;
+      if (top < 120 && top > bestTop) { bestTop = top; best = el; }
+    }
+    links.forEach(a => a.classList.remove('active'));
+    if (best) {
+      const sel = 'a[href="#' + CSS.escape(best.id) + '"]';
+      const activeLink = aside.querySelector(sel);
+      if (activeLink) activeLink.classList.add('active');
+    }
+  };
+
+  setActive();
+  window.addEventListener('scroll', setActive, { passive: true });
+});
 </script>
-<!-- ===== /TOC Debug Head ===== -->
