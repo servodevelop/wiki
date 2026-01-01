@@ -119,84 +119,77 @@ html, body, .side-bar, .main, .main-header, .main-content-wrap {
     padding-right: 2.0rem !important;
   }
 
-  }
-
-@media (min-width: 67rem) {
-  /* Only reserve space when the right TOC actually exists (JS sets .has-page-toc on <html>) */
-  html.has-page-toc .main-content {
+  /* reserve space for right TOC so it doesn't overlap */
+  .main-content {
     margin-right: 320px !important;
     max-width: 980px !important;
   }
 }
 
 /* -------- Right-side TOC (sticky) -------- */
-/* Hide unless JS confirms TOC exists */
+/* Default hidden (mobile + when no headings) */
 #page-toc.page-toc { display: none; }
 
 @media (min-width: 67rem) {
-  html.has-page-toc #page-toc.page-toc {
-    display: block !important;
+  /* When TOC exists, turn main area into 2-column layout */
+  html.has-page-toc .main-content-wrap{
+    display: flex;
+    align-items: flex-start;
+  }
+  html.has-page-toc .main-content{
+    flex: 1 1 auto;
+    min-width: 0; /* prevent overflow from wide tables/images */
+  }
+
+  html.has-page-toc #page-toc.page-toc{
+    display: block;
+    flex: 0 0 280px;
+    margin-left: 2rem;
     position: sticky;
     top: 96px;
-    float: right;
-    width: 280px;
-    margin-left: 2rem;
-    padding-left: 16px;
-    border-left: 1px solid var(--fs-border);
-    max-height: calc(100vh - 140px);
+    max-height: calc(100vh - 120px);
     overflow: auto;
+    padding: 0.75rem 0.75rem;
+    border-left: 1px solid var(--fs-border);
+    background: transparent;
   }
-  #page-toc .page-toc-title {
-    font-size: 0.85rem;
-    color: #cfd3d8;
-    margin: 0 0 10px 0;
+
+  #page-toc .page-toc-title{
+    font-size: 12px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--fs-muted);
+    margin: 0 0 0.5rem 0;
   }
-  #page-toc .page-toc-list {
+
+  #page-toc .page-toc-list{
     list-style: none;
     padding: 0;
     margin: 0;
-    font-size: 0.85rem;
   }
-  #page-toc .page-toc-list li {
-    margin: 6px 0;
+
+  #page-toc .page-toc-list li{
+    margin: 0.25rem 0;
     line-height: 1.25;
   }
-  #page-toc .page-toc-list li.lvl-h3 {
-    margin-left: 12px;
-    opacity: 0.95;
-  }
-  #page-toc a {
+
+  #page-toc .page-toc-list li.lvl-h3{ padding-left: 0.75rem; }
+  #page-toc .page-toc-list li.lvl-h4{ padding-left: 1.5rem; }
+
+  #page-toc a{
     color: var(--fs-muted) !important;
     text-decoration: none;
   }
-  #page-toc a:hover {
+  #page-toc a:hover{
     color: var(--fs-accent) !important;
   }
 }
 
+/* Safety: force-hide on smaller screens */
 @media (max-width: 66.99rem) {
-  html.has-page-toc #page-toc.page-toc { display: none !important; }
-  html.has-page-toc .main-content { margin-right: 0 !important; }
+  #page-toc.page-toc { display: none !important; }
 }
 
-
-/* -------- Breadcrumbs: keep on one line (avoid wrapping) -------- */
-.breadcrumb-nav,
-.breadcrumb-nav-list {
-  white-space: nowrap;
-}
-.breadcrumb-nav-list {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 0.35rem;
-  overflow: hidden;
-}
-.breadcrumb-nav-list-item {
-  flex: 0 0 auto;
-}
-.breadcrumb-nav a {
-  max-width: 100%;
-}
 
 /* -------- Headings readable -------- */
 h1, h2, h3, h4, h5, h6 { color: #ffffff; }
