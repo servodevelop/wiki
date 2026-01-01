@@ -1,144 +1,156 @@
-/* --- 品牌主色调 --- */
+/* ==========================================================================
+   Fashion Star Wiki - 品牌视觉兜底 (Ref: NVIDIA & Just-the-Docs)
+   品牌色: #8641A9
+   ========================================================================== */
+
 :root {
   --fs-accent: #8641A9;
+  --fs-accent-rgb: 134, 65, 169;
   --md-primary-fg-color: var(--fs-accent);
   --md-primary-fg-color--light: #a46bc3;
   --md-primary-fg-color--dark: #6a3387;
 }
 
-/* --- 1. 侧边栏整体布局优化 --- */
-.md-nav__title {
+/* --- 1. Header & Logo 处理 --- */
+.md-header__button.md-logo {
+  display: none; /* 按照要求隐藏 Logo 图标 */
+}
+
+.md-header__title {
   font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--fs-accent) !important; /* 标题使用 logo 色 */
-  padding-left: 0.8rem !important;
-}
-
-/* --- 2. 目录缩进与层级 (NVIDIA 风格) --- */
-.md-nav__link {
-  padding: 0.4rem 0.8rem !important;
-  font-size: 0.75rem;
-  border-left: 1px solid rgba(255, 255, 255, 0.05); /* 基础引导线 */
-}
-
-/* 增加每一级的缩进量 */
-.md-nav--secondary .md-nav__link, 
-.md-nav__item .md-nav {
   margin-left: 0.5rem;
 }
 
-/* --- 3. 激活项：带颜色的竖线 (复刻 NVIDIA) --- */
+/* --- 2. 左侧侧边栏 (NVIDIA 风格) --- */
+.md-nav__title {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--fs-accent) !important; 
+  padding-left: 0.8rem !important;
+  margin-bottom: 0.5rem;
+}
+
+/* 层级缩进与引导线 */
+.md-nav__link {
+  padding: 0.5rem 0.8rem !important;
+  font-size: 0.75rem;
+  border-left: 1px solid rgba(0, 0, 0, 0.07); /* 浅色模式引导线 */
+  transition: all 0.2s ease;
+}
+
+[data-md-color-scheme="slate"] .md-nav__link {
+  border-left: 1px solid rgba(255, 255, 255, 0.1); /* 深色模式引导线 */
+}
+
+/* 每一级的缩进 */
+.md-nav__item .md-nav {
+  margin-left: 0.6rem;
+}
+
+/* 激活项样式：紫色粗竖线 + 背景 */
 .md-nav__item--active > .md-nav__link {
   color: #ffffff !important;
   font-weight: 600;
-  border-left: 3px solid var(--fs-accent) !important; /* 紫色粗竖线 */
-  background-color: rgba(134, 65, 169, 0.1);    /* 淡淡的紫色背景 */
+  border-left: 3px solid var(--fs-accent) !important;
+  background-color: rgba(134, 65, 169, 0.12) !important;
   padding-left: 15px !important;
 }
 
-/* --- 4. 目录右侧的上下箭头 (折叠指示器) --- */
-/* MkDocs Material 默认在左侧或隐藏，我们强制其在右侧并美化 */
+/* 右侧状态箭头 (折叠指示器) */
 .md-nav__item--nested > .md-nav__link::after {
   content: " ";
   background-color: currentColor;
   -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>');
   mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>');
   display: block;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   position: absolute;
-  right: 10px;
-  transition: transform 0.2s;
+  right: 12px;
+  transition: transform 0.25s ease;
 }
 
-/* 展开时的箭头向下旋转 */
 .md-nav__item--active > .md-nav__link::after {
   transform: rotate(90deg);
 }
 
-/* --- 5. 正文排版微调 --- */
+/* --- 3. 正文排版 (Typography) --- */
+.md-content__inner {
+  max-width: 52rem; /* 限制宽度提高阅读效率 */
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+}
+
 .md-typeset h1 {
-  color: var(--fs-accent); /* 标题使用 logo 色 */
+  color: var(--fs-accent);
+  font-weight: 800;
   border-bottom: 2px solid rgba(134, 65, 169, 0.1);
   padding-bottom: 0.5rem;
+  margin-bottom: 2rem;
 }
 
-/* 限制内容宽度，增加两侧留白 */
-.md-content__inner {
-  max-width: 54rem;
-  margin: 0 auto;
+/* 图片阴影与圆角 */
+article img {
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto !important;
+  display: block;
 }
 
-/* 隐藏标题左侧的 Logo 图标 */
-.md-header__button.md-logo {
-  display: none;
+/* 表格样式美化 */
+.md-typeset table {
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-/* --- 右侧目录栏 (TOC) 面板化定制 --- */
-
+/* --- 4. 右侧目录 (TOC) 面板化 --- */
 @media screen and (min-width: 76.25em) {
-  /* 针对大屏幕下的右侧侧边栏 */
   .md-sidebar--secondary {
-    margin-left: 1rem; /* 与正文保持一定间距 */
+    margin-left: 1.5rem;
   }
 
   .md-nav--secondary {
-    /* 1. 背景与边框：参考 Just-the-Docs 的面板感 */
-    background: rgba(255, 255, 255, 0.03); /* 极淡的透明背景 */
-    border: 1px solid rgba(255, 255, 255, 0.12); /* 细微边框 */
-    border-radius: 10px; /* 圆角 */
-    
-    /* 2. 阴影：增加立体悬浮感 */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35); 
-    
-    /* 3. 布局与间距 */
-    padding: 14px;
-    margin-top: 2rem;
+    background: rgba(134, 65, 169, 0.03); /* 使用品牌色的极淡透明背景 */
+    border: 1px solid rgba(134, 65, 169, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); /* 柔和阴影 */
+    padding: 16px;
     position: sticky;
-    top: 5rem; /* 随页面滚动时固定的位置 */
+    top: 6rem;
   }
 
-  /* 4. “目录”标题样式：转为全大写、低饱和度颜色 */
+  /* 适配深色模式的 TOC 面板 */
+  [data-md-color-scheme="slate"] .md-nav--secondary {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
   .md-nav--secondary .md-nav__title {
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    color: #a9b0b8; /* 灰色字 */
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #a9b0b8;
     text-transform: uppercase;
-    margin-bottom: 8px;
-    padding: 0;
+    margin-bottom: 12px;
   }
 
-  /* 5. 目录列表项间距 */
-  .md-nav--secondary .md-nav__list li {
-    margin-bottom: 6px;
-  }
-
-  /* 6. 激活/鼠标悬停时的紫色指示线 */
   .md-nav--secondary .md-nav__link {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: #c7ced8 !important;
-    border-left: 3px solid transparent; /* 默认透明 */
-    padding-left: 10px !important;
-    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+    padding-left: 12px !important;
   }
 
-  /* 鼠标悬停变白 */
   .md-nav--secondary .md-nav__link:hover {
-    color: #ffffff !important;
-    border-left-color: rgba(134, 65, 169, 0.5); /* 紫色半透明 */
+    color: var(--fs-accent) !important;
+    border-left-color: rgba(134, 65, 169, 0.4);
   }
 
-  /* 当前阅读到的章节：紫色实线 */
   .md-nav--secondary .md-nav__link--active {
-    color: #ffffff !important;
-    font-weight: 600;
-    border-left-color: #8641A9 !important; /* Logo紫色 */
+    color: var(--fs-accent) !important;
+    font-weight: 700;
+    border-left-color: var(--fs-accent) !important;
   }
-}
-
-/* 适配深色模式：让面板在深色背景下更有质感 */
-[data-md-color-scheme="slate"] .md-nav--secondary {
-  background: rgba(0, 0, 0, 0.2);
-  border-color: rgba(255, 255, 255, 0.1);
 }
