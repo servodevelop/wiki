@@ -47,7 +47,7 @@
 /* 激活项：仅文字紫色 + 2px 细竖杠 */
 .md-nav__item--active > .md-nav__link {
   color: var(--fs-accent) !important;      
-  font-weight: 700;
+  font-weight: 600;
   /* --- 核心修改：从 4px 减为 2px --- */
   border-left: 2px solid var(--fs-accent) !important; 
   background-color: transparent !important; 
