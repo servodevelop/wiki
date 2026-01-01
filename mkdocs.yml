@@ -13,14 +13,12 @@ theme:
     - toc.follow                  # 右侧目录跟随滚动
 
   palette:
-    # 浅色模式
     - scheme: default
       primary: custom
       accent: custom
       toggle:
         icon: material/weather-night 
         name: Switch to dark mode
-    # 深色模式
     - scheme: slate
       primary: custom
       accent: custom
