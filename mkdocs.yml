@@ -5,28 +5,34 @@ theme:
   name: material
   language: en
   features:
-    - navigation.path              # 找回正文顶部的面包屑路径
-    - navigation.indexes           # 允许点击父级目录标题
-    - navigation.top               # 回到顶部按钮
-    - navigation.tracking          # 地址栏自动同步滚动位置
-    - content.code.copy           # 代码一键复制
-    - toc.follow                  # 右侧目录跟随滚动
-    # 保持删除 expand 以维持手风琴效果
-    # 保持删除 sections 以确保一级目录有箭头
+    - navigation.path
+    - navigation.indexes
+    - navigation.top
+    - navigation.tracking
+    - content.code.copy
+    - toc.follow
+    - navigation.tabs
+    - navigation.sections
 
   palette:
     - scheme: default
-      primary: custom             # 品牌色 #8641A9
+      primary: custom
       accent: custom
       toggle:
         icon: material/brightness-7
-        name: 切换至深色模式
+        name: Switch to dark mode
     - scheme: slate
       primary: custom
       accent: custom
       toggle:
         icon: material/brightness-4
-        name: 切换至浅色模式
+        name: Switch to light mode
+
+# 本次新增修改：覆盖默认的目录标题
+extra:
+  translations:
+    en:
+      toc.title: "On this page"
 
 extra_css:
   - stylesheets/extra.css
