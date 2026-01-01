@@ -28,8 +28,13 @@ markdown_extensions:
   - pymdownx.superfences       # 开启代码高亮
 
 nav:
-  - 首页: index.md
+  - Home: index.md
   - UART Servo:
+      - Datasheet:
+          - HA8/RA8-U25(H)-M: uart servo/datasheet/HA&RA8-U25(H)-M.md
+          - HA8/RA8-U35(H)-M: uart servo/datasheet/HA&RA8-U35(H)-M.md
+      - CAD Fiels:    
+  - Robotic Arm:
       - Datasheet:
           - HA8/RA8-U25(H)-M: uart servo/datasheet/HA&RA8-U25(H)-M.md
           - HA8/RA8-U35(H)-M: uart servo/datasheet/HA&RA8-U35(H)-M.md
