@@ -91,89 +91,111 @@ html, body, .side-bar, .main, .main-header, .main-content-wrap {
   stroke: var(--fs-accent) !important;
 }
 
-/* -------- Breadcrumb -------- */
-/* Keep Just the Docs default breadcrumb behavior (no forced ellipsis). */
-.breadcrumb-nav { 
-  white-space: normal;
-  overflow: visible;
-  text-overflow: unset;
+/* -------- Breadcrumb: keep on one line -------- */
+.breadcrumb-nav{
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  text-overflow: clip;
 }
-.breadcrumb-nav a { color: var(--fs-muted) !important; }
-.breadcrumb-nav a:hover { color: var(--fs-accent) !important; }
+.breadcrumb-nav-list{
+  display: flex;
+  flex-wrap: nowrap;
+  gap: .25rem;
+}
+.breadcrumb-nav-list-item{
+  white-space: nowrap;
+}
+.breadcrumb-nav a{
+  color: var(--fs-muted) !important;
+  text-decoration: none;
+}
+.breadcrumb-nav a:hover{
+  color: var(--fs-accent) !important;
+}
 
-/* -------- Content width + right TOC layout (NVIDIA docs vibe) -------- */
-/* #page-toc is injected by head_custom.html; hidden on small screens below */
-
-@media (min-width: 60rem) {
-  /* widen the whole content lane to reduce giant empty gutter */
-  .main-content-wrap {
-    max-width: 1440px !important;
+/* subtle horizontal scrollbar (desktop) */
+@media (min-width: 62rem){
+  .breadcrumb-nav::-webkit-scrollbar{ height: 6px; }
+  .breadcrumb-nav::-webkit-scrollbar-thumb{ background: var(--fs-border); border-radius: 6px; }
+}
+/* -------- Content width + right "On this page" (NVIDIA-like) -------- */
+@media (min-width: 62rem) {
+  /* wider content lane */
+  .main-content-wrap{
+    width: 100% !important;
+    max-width: 1600px !important;
     margin: 0 auto !important;
-    padding-left: 2.0rem !important;
-    padding-right: 2.0rem !important;
-
-    /* 2-column layout: article + "On this page" */
-    display: flex !important;
-    align-items: flex-start;
-    gap: 2rem;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
   }
 
-  .main-content {
-    flex: 1 1 auto;
-    min-width: 0; /* prevent flex overflow */
-    max-width: 980px !important;
+  /* default: keep article left-aligned (no phantom empty space) */
+  .main-content{
+    max-width: 1040px !important;
+    margin-left: 0 !important;
     margin-right: 0 !important;
   }
 
-  /* -------- Right-side TOC (sticky) -------- */
-  #page-toc.page-toc {
-    display: block;
+  /* 2-column only when TOC actually exists */
+  html.has-page-toc .main-content-wrap{
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 2.25rem !important;
+  }
+  html.has-page-toc .main-content{
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
+
+  /* Right TOC (sticky) */
+  #page-toc.page-toc{ display: none; }
+  html.has-page-toc #page-toc.page-toc{
+    display: block !important;
+    width: 280px;
     flex: 0 0 280px;
     position: sticky;
     top: 96px;
+    align-self: flex-start;
     padding-left: 16px;
     border-left: 1px solid var(--fs-border);
     max-height: calc(100vh - 140px);
     overflow: auto;
   }
-  #page-toc .page-toc-title {
-    font-size: 0.85rem;
-    color: #cfd3d8;
-    margin: 0 0 10px 0;
+
+  #page-toc .page-toc-title{
+    font-weight: 700;
+    font-size: .9rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+    letter-spacing: .2px;
   }
-  #page-toc .page-toc-list {
+  #page-toc .page-toc-list{
     list-style: none;
     padding: 0;
     margin: 0;
-    font-size: 0.85rem;
   }
-  #page-toc .page-toc-list li {
-    margin: 6px 0;
-    line-height: 1.25;
-  }
-  #page-toc .page-toc-list li.lvl-h3 {
-    margin-left: 12px;
-    opacity: 0.95;
-  }
-  #page-toc .page-toc-list li.lvl-h4 {
-    margin-left: 22px;
-    opacity: 0.9;
-  }
-  #page-toc a {
+  #page-toc .page-toc-list li{ margin: 0; padding: 0; }
+  #page-toc .page-toc-list li.lvl-h2{ margin-top: 10px; }
+  #page-toc .page-toc-list li.lvl-h3{ margin-top: 6px; padding-left: 12px; }
+  #page-toc .page-toc-list li.lvl-h4{ margin-top: 4px; padding-left: 24px; }
+
+  #page-toc a{
+    display: inline-block;
+    width: 100%;
     color: var(--fs-muted) !important;
     text-decoration: none;
+    line-height: 1.35;
   }
-  #page-toc a:hover {
+  #page-toc a:hover{
     color: var(--fs-accent) !important;
   }
 }
 
-@media (max-width: 59.99rem) {
-  #page-toc.page-toc { display: none !important; }
-  .main-content-wrap { display: block !important; }
-  .main-content { margin-right: 0 !important; }
+@media (max-width: 61.99rem){
+  #page-toc.page-toc{ display: none !important; }
+  .main-content-wrap{ display: block !important; }
+  .main-content{ margin-right: 0 !important; }
 }
-
-
 /* -------- Headings readable -------- */
 h1, h2, h3, h4, h5, h6 { color: #ffffff; }

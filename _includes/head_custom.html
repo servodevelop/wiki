@@ -2,39 +2,60 @@
 <link rel="stylesheet" href="{{ '/assets/css/just-the-docs-custom.css' | relative_url }}">
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+(function () {
 
-  // ---------- 1) Right-side TOC (auto) ----------
-  function buildPageTOC() {
-    // If TOC already exists, don't duplicate
-    if (document.getElementById('page-toc')) return;
+  // ---------- 1) Right-side "On this page" TOC (auto) ----------
+  function slugify(s) {
+    return (s || '')
+      .trim()
+      .toLowerCase()
+      .replace(/[\s]+/g, '-')
+      .replace(/[^a-z0-9\-\u00A0-\uFFFF]/g, '')
+      .replace(/\-+/g, '-')
+      .replace(/\-$/g, '');
+  }
 
-    // Pick the best "content root" across Just-the-Docs versions
-    const contentRoot =
-      document.getElementById('main-content') ||               // common in JTD
-      document.querySelector('.page-content') ||               // common in JTD
-      document.querySelector('.main-content') ||               // fallback
-      document.querySelector('main');                          // last resort
+  function getMainContentEl() {
+    // Cover common Just-the-Docs variants
+    return (
+      document.getElementById('main-content') ||
+      document.querySelector('main#main-content') ||
+      document.querySelector('main.main-content') ||
+      document.querySelector('.main-content') ||
+      document.querySelector('article')
+    );
+  }
 
-    if (!contentRoot) return;
+  function buildPageToc() {
+    const main = getMainContentEl();
+    if (!main) return false;
 
-    // Only scan headings inside the *article area* (avoid nav/sidebar)
-    const headings = Array.from(contentRoot.querySelectorAll('h2, h3, h4'))
-      .filter(h => h.textContent && h.textContent.trim().length > 0);
+    // Collect headings (exclude ones inside any existing TOC)
+    const headings = Array.from(main.querySelectorAll('h2, h3, h4'))
+      .filter(h => !h.closest('#page-toc'));
 
-    if (!headings.length) return;
+    // Only show TOC when it is actually useful
+    if (headings.length < 2) return false;
+
+    const wrap =
+      main.closest('.main-content-wrap') ||
+      main.parentElement;
+
+    if (!wrap) return false;
+
+    // Remove old TOC (if any) to avoid duplicates / stale state
+    const old = document.getElementById('page-toc');
+    if (old) old.remove();
 
     const used = new Set();
-    const slugify = (s) => (s || '').trim().toLowerCase()
-      .replace(/[\s]+/g, '-')
-      .replace(/[^\w\-]+/g, '')
-      .replace(/\-+/g, '-');
-
     function ensureId(h) {
       if (h.id) return h.id;
       const base = slugify(h.textContent) || 'section';
-      let id = base, i = 2;
-      while (used.has(id) || document.getElementById(id)) id = `${base}-${i++}`;
+      let id = base;
+      let n = 2;
+      while (used.has(id) || document.getElementById(id)) {
+        id = base + '-' + n++;
+      }
       h.id = id;
       used.add(id);
       return id;
@@ -43,53 +64,113 @@ document.addEventListener('DOMContentLoaded', function () {
     const aside = document.createElement('aside');
     aside.id = 'page-toc';
     aside.className = 'page-toc';
-    aside.innerHTML = '<div class="page-toc-title">On this page</div><ul class="page-toc-list"></ul>';
 
-    const ul = aside.querySelector('.page-toc-list');
+    const title = document.createElement('div');
+    title.className = 'page-toc-title';
+    title.textContent = 'On this page';
+    aside.appendChild(title);
+
+    const ul = document.createElement('ul');
+    ul.className = 'page-toc-list';
+
     headings.forEach(h => {
-      const id = ensureId(h);
+      const tag = (h.tagName || '').toLowerCase();
+      const lvl = tag === 'h2' ? 'lvl-h2' : (tag === 'h3' ? 'lvl-h3' : 'lvl-h4');
+
       const li = document.createElement('li');
-      li.className = 'lvl-' + h.tagName.toLowerCase();
+      li.className = lvl;
+
       const a = document.createElement('a');
-      a.href = '#' + id;
-      a.textContent = h.textContent.trim();
+      a.href = '#' + ensureId(h);
+      a.textContent = (h.textContent || '').trim();
+
       li.appendChild(a);
       ul.appendChild(li);
     });
 
-    // Place TOC next to the main content area (stable across layouts)
-    const wrap =
-      document.querySelector('.main-content-wrap') ||
-      document.querySelector('.main') ||
-      contentRoot.closest('.main-content-wrap') ||
-      contentRoot.parentElement;
+    aside.appendChild(ul);
 
-    if (wrap) wrap.appendChild(aside);
+    // Insert TOC as a sibling of main content so CSS can make a real 2-column layout
+    try {
+      main.insertAdjacentElement('afterend', aside);
+    } catch (e) {
+      wrap.appendChild(aside);
+    }
+
+    document.documentElement.classList.add('has-page-toc');
+    return true;
   }
 
-  // Run multiple times to handle different load behaviors (and prevent "sometimes empty")
-  buildPageTOC();
-  window.addEventListener('load', buildPageTOC);
-  setTimeout(buildPageTOC, 0);
-  setTimeout(buildPageTOC, 200);
-// ---------- 2) Sidebar: mark expanded directory items ----------
+  function scheduleBuildToc() {
+    let done = false;
+
+    function attempt() {
+      if (done) return;
+      done = buildPageToc();
+      if (!done) requestAnimationFrame(attempt);
+    }
+
+    attempt();
+
+    // Retry a few times (helps if content is injected late)
+    window.addEventListener('load', function () {
+      if (!done) done = buildPageToc();
+      if (!done) setTimeout(buildPageToc, 300);
+      if (!done) setTimeout(buildPageToc, 900);
+    }, { once: true });
+
+    const main = getMainContentEl();
+    if (main && 'MutationObserver' in window) {
+      const obs = new MutationObserver(function () {
+        if (buildPageToc()) {
+          done = true;
+          obs.disconnect();
+        }
+      });
+      obs.observe(main, { childList: true, subtree: true });
+      setTimeout(function () { obs.disconnect(); }, 5000);
+    }
+  }
+
+  // ---------- 2) Left nav: keep active path expanded ----------
   function syncExpanded() {
-    document.querySelectorAll('.nav-list-item').forEach(li => li.classList.remove('is-expanded'));
-    document.querySelectorAll('.nav-list-expander[aria-expanded="true"]').forEach(btn => {
-      const li = btn.closest('.nav-list-item');
-      if (li) li.classList.add('is-expanded');
-    });
+    const activeLink = document.querySelector('.nav-list-link.active');
+    if (!activeLink) return;
+
+    let el = activeLink;
+    for (let i = 0; i < 20 && el; i++) {
+      const item = el.closest && el.closest('.nav-list-item');
+      if (!item) break;
+
+      const expander = item.querySelector(':scope > .nav-list-expander');
+      if (expander) expander.setAttribute('aria-expanded', 'true');
+
+      const childList = item.querySelector(':scope > .nav-list');
+      if (childList) childList.classList.add('active');
+
+      item.classList.add('active');
+      el = item.parentElement && item.parentElement.closest && item.parentElement.closest('.nav-list-item');
+    }
   }
 
-  syncExpanded();
+  function onReady(fn) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fn, { once: true });
+    } else {
+      fn();
+    }
+  }
 
-  // Listen to expander clicks to update state
-  document.querySelectorAll('.nav-list-expander').forEach(btn => {
-    btn.addEventListener('click', function () {
-      // aria-expanded changes after click; wait one tick
-      setTimeout(syncExpanded, 0);
+  onReady(function () {
+    scheduleBuildToc();
+    syncExpanded();
+
+    document.querySelectorAll('.nav-list-expander').forEach(btn => {
+      btn.addEventListener('click', function () {
+        setTimeout(syncExpanded, 0);
+      });
     });
   });
 
-});
+})();
 </script>
