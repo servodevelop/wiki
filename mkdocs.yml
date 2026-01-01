@@ -1,31 +1,32 @@
-site_name: Fashion Star Wiki
-site_url: https://servodevelop.github.io/wiki/
+name: Deploy-Wiki
+on:
+  push:
+    branches:
+      - main
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
-theme:
-  name: material
-  language: zh
-  features:
-    - navigation.tabs          # 顶部一级导航
-    - navigation.sections      # 侧边栏分组
-    - content.code.copy        # 代码一键复制
-  palette:
-    - scheme: default          # 浅色模式
-      primary: indigo
-      toggle:
-        icon: material/brightness-7
-        name: 切换至深色模式
-    - scheme: slate            # 深色模式
-      primary: indigo
-      toggle:
-        icon: material/brightness-4
-        name: 切换至浅色模式
-
-markdown_extensions:
-  - pymdownx.snippets:         # 开启嵌套调用功能
-      base_path: ["docs"]
-  - admonition                 # 开启彩色提示框
-  - pymdownx.details           # 开启折叠块
-  - pymdownx.superfences       # 开启代码高亮
-
-nav:
-  - 首页: index.md
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+      - run: pip install mkdocs-material
+      - run: mkdocs build                     # 仅编译，不推送到分支
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3 # 上传编译后的 site 文件夹
+        with:
+          path: site/
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4        # 执行正式部署
