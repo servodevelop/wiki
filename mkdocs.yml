@@ -5,26 +5,31 @@ theme:
   name: material
   language: en
   features:
-    - navigation.path              # 找回面包屑路径
-    - navigation.indexes           # 允许点击父级目录标题
+    - navigation.path              # 找回正文顶部的面包屑路径
+    - navigation.indexes           # 允许点击父级目录标题跳转
     - navigation.top               # 回到顶部按钮
-    - navigation.tracking          # 锚点同步
-    - content.code.copy           # 代码复制
+    - navigation.tracking          # 地址栏锚点同步
+    - content.code.copy           # 代码一键复制
     - toc.follow                  # 右侧目录跟随滚动
+    # 保持删除以下两项，确保顶部无菜单且左侧可折叠
+    # - navigation.tabs
+    # - navigation.sections
 
   palette:
-    # 浅色模式 (Default) - 此时显示太阳
+    # 0: 浅色模式 (Light Mode)
     - scheme: default
       primary: custom
       accent: custom
       toggle:
+        # 当背景是浅色时，显示太阳
         icon: material/weather-sunny 
         name: Switch to dark mode
-    # 深色模式 (Slate) - 此时显示月亮
+    # 1: 深色模式 (Dark Mode)
     - scheme: slate
       primary: custom
       accent: custom
       toggle:
+        # 当背景是深色时，显示月亮
         icon: material/weather-night
         name: Switch to light mode
 
