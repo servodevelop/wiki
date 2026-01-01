@@ -1,33 +1,54 @@
-/* 1. 限制整体内容的宽度，增加左右留白，看起来更像书页 */
+/* --- 1. 品牌变量设定 --- */
+:root {
+  --md-primary-fg-color: #8641A9;
+  --md-primary-fg-color--light: #a46bc3;
+  --md-primary-fg-color--dark: #6a3387;
+}
+
+/* --- 2. 侧边栏垂直指示线 (复刻图片效果) --- */
+/* 当菜单项激活时，在左侧显示粗紫色竖线 */
+.md-nav__item--active > .md-nav__link {
+  color: #8641A9 !important;
+  font-weight: 700;
+  border-left: 4px solid #8641A9; /* 竖线厚度与颜色 */
+  padding-left: 12px !important;  /* 补偿竖线占用的位置 */
+  margin-left: -4px;              /* 保持对齐 */
+}
+
+/* 多级嵌套时的指示线（可选，增加层级感） */
+.md-nav__link--active {
+  background-color: rgba(134, 65, 169, 0.05); /* 淡淡的背景色 */
+}
+
+/* --- 3. 正文排版与留白 (Seeed 风格) --- */
 .md-content__inner {
-    max-width: 48rem; /* 限制文字内容宽度，提高阅读舒适度 */
-    margin: 0 auto;
-    padding: 1.5rem 1.5rem;
+  max-width: 52rem;               /* 限制内容宽度，增加阅读舒适度 */
+  margin: 0 auto;
+  padding: 1.5rem 2.5rem;         /* 增加两侧留白 */
 }
 
-/* 2. 图片自动居中，并限制最大显示比例，防止大图过于突兀 */
+/* --- 4. 图片美化 (垂直排列、居中、阴影) --- */
 article img {
-    display: block;
-    margin: 2rem auto !important; /* 增加上下间距 */
-    max-width: 85% !important;     /* 默认不占满全屏，两边留一点空隙 */
-    border-radius: 4px;
-    transition: transform 0.3s ease;
+  display: block;
+  margin: 2.5rem auto !important; /* 确保上下有足够的呼吸感 */
+  max-width: 85% !important;      /* 防止图片过大 */
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* 柔和阴影 */
 }
 
-/* 3. 让表格也居中且不要太宽 */
-article table {
-    margin-left: auto;
-    margin-right: auto;
-    display: table;
-    min-width: 60%;
+/* 图片描述/标题居中样式 */
+.img-title {
+  text-align: center;
+  display: block;
+  font-weight: bold;
+  color: #666;
+  margin-top: -1.5rem;            /* 让标题贴合图片底部 */
+  margin-bottom: 2rem;
+  font-size: 0.95em;
 }
 
-/* 兜底：美化普通的 blockquote 引用块 */
-article blockquote {
-    margin: 1.5rem 0;
-    padding: 0.8rem 1rem;
-    color: var(--md-default-fg-color--light);
-    background-color: var(--md-code-bg-color);
-    border-left: 0.2rem solid var(--md-typeset-a-color);
-    border-radius: 0.1rem;
+/* --- 5. Admonition (警告/提示框) 细节美化 --- */
+.admonition {
+  border-radius: 6px !important;
+  border-left-width: 0.3rem !important;
 }
