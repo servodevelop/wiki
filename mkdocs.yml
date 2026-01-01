@@ -5,32 +5,32 @@ theme:
   name: material
   language: en
   features:
-    - navigation.path              # 面包屑路径
-    - navigation.indexes           # 父级目录点击
-    - navigation.top               # 回到顶部
-    - navigation.tracking          # 锚点同步
+    - navigation.path              # 找回面包屑路径
+    - navigation.indexes           # 允许点击父级目录标题
+    - navigation.top               # 回到顶部按钮
+    - navigation.tracking          # 地址栏锚点同步
     - content.code.copy           # 代码复制
     - toc.follow                  # 右侧目录跟随滚动
+    # 已删除 navigation.tabs 和 navigation.sections，确保顶部无冗余菜单
 
   palette:
-    # 浅色模式 (Light Mode)
+    # 浅色模式 (Default)
     - scheme: default
-      primary: custom             # 品牌色 #8641A9
+      primary: custom
       accent: custom
       toggle:
-        # --- 核心修改：浅色模式下显示月亮，代表点击去深色 ---
-        icon: material/weather-night 
+        # 对应您的需求：浅色模式显示太阳，点击切深色
+        icon: material/weather-sunny 
         name: Switch to dark mode
-    # 深色模式 (Dark Mode)
+    # 深色模式 (Slate)
     - scheme: slate
       primary: custom
       accent: custom
       toggle:
-        # --- 核心修改：深色模式下显示太阳，代表点击去浅色 ---
-        icon: material/weather-sunny
+        # 对应您的需求：深色模式显示月亮，点击切浅色
+        icon: material/weather-night
         name: Switch to light mode
 
-# 翻译覆盖：保险层
 extra:
   translations:
     en:
