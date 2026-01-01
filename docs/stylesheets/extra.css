@@ -1,12 +1,10 @@
 /* ==========================================================================
-   Fashion Star Wiki - 工业级重构 (Gemini 色调 + 最终标题锁定)
+   Fashion Star Wiki - 工业级重构 (Gemini 色调 + 回归简洁图标版)
    ========================================================================== */
 
 :root {
   --fs-accent: #8641A9;
   --md-primary-fg-color: var(--fs-accent);
-  
-  /* 全局行间距 */
   --md-typeset-line-height: 1.8; 
   --md-typeset-font-size: 0.75rem;
 }
@@ -20,80 +18,39 @@
   --md-code-bg-color: #1e1f20;
 }
 
-/* 顶部条底色 */
-.md-header {
-  background-color: var(--fs-accent) !important;
-}
+.md-header { background-color: var(--fs-accent) !important; }
 .md-header__button.md-logo { display: none; }
 
-/* --- 2. 强制修改右侧目录标题 (保险第二层) --- */
-.md-nav--secondary .md-nav__title {
-  font-size: 0 !important; /* 隐藏原始 "Table of contents" 文字 */
-}
+/* --- 2. 标题与三栏线 --- */
+.md-nav--secondary .md-nav__title { font-size: 0 !important; }
 .md-nav--secondary .md-nav__title::after {
   content: "On this page";
-  font-size: 0.65rem;      /* 重新定义文字大小 */
+  font-size: 0.65rem;
   visibility: visible;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: #8e918f;
   display: block;
 }
+.md-main__inner { display: flex !important; }
+.md-sidebar--primary { border-right: 1px solid rgba(255, 255, 255, 0.08) !important; }
+.md-sidebar--secondary { border-left: 1px solid rgba(255, 255, 255, 0.08) !important; margin-left: 0 !important; }
 
-/* --- 3. 三栏物理分割线 (增强显示) --- */
-.md-main__inner {
-  display: flex !important;
-}
-.md-sidebar--primary {
-  border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
-}
-.md-sidebar--secondary {
-  border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
-  margin-left: 0 !important;
-}
-
-/* --- 4. 左侧导航 (白色高亮 + 紫色杠) --- */
-.md-nav__item .md-nav {
-  border-left: none !important;
-  margin-left: 0.5rem !important; 
-}
-.md-nav__link {
-  padding: 0.25rem 0.8rem !important;
-  line-height: 1.25 !important;
-}
+/* --- 3. 左侧导航 (指示杠修正) --- */
+.md-nav__item .md-nav { border-left: none !important; margin-left: 0.5rem !important; }
+.md-nav__link { padding: 0.25rem 0.8rem !important; line-height: 1.25 !important; }
 .md-nav__item--active > .md-nav__link {
-  color: #ffffff !important; /* 选中白色高亮 */
+  color: #ffffff !important;
   font-weight: 700;
-  border-left: 4px solid var(--fs-accent) !important; /* 紫色竖杠 */
+  border-left: 4px solid var(--fs-accent) !important;
   background-color: rgba(255, 255, 255, 0.04);
-  padding-left: 15px !important;
+  padding-left: 12px !important;
   margin-left: -1px;
 }
 
-/* --- 5. 右侧目录间距与高亮 --- */
-.md-nav--secondary .md-nav__link {
-  border-left: none !important;
-  padding: 0.2rem 1rem !important;
-  font-size: 0.68rem;
-  line-height: 1.5 !important;
-}
-.md-nav--secondary .md-nav__link--active {
-  color: var(--fs-accent) !important;
-  font-weight: 700;
-}
+/* --- 4. 正文布局 --- */
+.md-content__inner { max-width: 58rem !important; margin: 0 auto !important; padding: 0.5rem 3rem 3rem 3rem !important; }
+.md-content__nav { font-size: 0.62rem; margin-bottom: 1.5rem; }
+.md-typeset h1 { color: var(--fs-accent); font-weight: 800; margin-top: 0; }
 
-/* --- 6. 正文与面包屑路径 --- */
-.md-content__inner {
-  max-width: 58rem !important;
-  margin: 0 auto !important;
-  padding: 0.5rem 3rem 3rem 3rem !important;
-}
-.md-content__nav {
-  font-size: 0.62rem;
-  margin-bottom: 1.5rem;
-}
-.md-typeset h1 {
-  color: var(--fs-accent);
-  font-weight: 800;
-  margin-top: 0;
-}
+/* (已删除之前的胶囊按钮样式代码) */
