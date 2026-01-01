@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Fashion Star Wiki - 工业级重构 (修正标题大小写)
+   Fashion Star Wiki - 工业级重构 (左侧导航精修版)
    ========================================================================== */
 
 :root {
@@ -21,36 +21,52 @@
 .md-header { background-color: var(--fs-accent) !important; }
 .md-header__button.md-logo { display: none; }
 
-/* --- 2. 修正右侧目录标题 (去掉强制大写) --- */
+/* --- 2. 标题与三栏线 --- */
 .md-nav--secondary .md-nav__title { font-size: 0 !important; }
 .md-nav--secondary .md-nav__title::after {
   content: "On this page";
   font-size: 0.65rem;
   visibility: visible;
-  /* text-transform: uppercase;  <-- 已删除此行，恢复原本大小写 */
-  letter-spacing: 0.02em;        /* 缩小字距，适合非大写排版 */
+  letter-spacing: 0.02em;
   color: #8e918f;
   display: block;
 }
-
-/* --- 3. 三栏物理分割线 --- */
 .md-main__inner { display: flex !important; }
 .md-sidebar--primary { border-right: 1px solid rgba(255, 255, 255, 0.08) !important; }
 .md-sidebar--secondary { border-left: 1px solid rgba(255, 255, 255, 0.08) !important; margin-left: 0 !important; }
 
-/* --- 4. 左侧导航 (指示杠修正) --- */
+/* --- 3. 左侧导航 (彻底去除底色，紫色文字+白色箭头) --- */
 .md-nav__item .md-nav { border-left: none !important; margin-left: 0.5rem !important; }
-.md-nav__link { padding: 0.25rem 0.8rem !important; line-height: 1.25 !important; }
+
+.md-nav__link { 
+  padding: 0.25rem 0.8rem !important; 
+  line-height: 1.25 !important;
+  transition: all 0.2s ease;
+}
+
+/* 激活项样式：去除底色，仅保留文字紫色和左侧竖杠 */
 .md-nav__item--active > .md-nav__link {
-  color: #ffffff !important;
+  color: var(--fs-accent) !important;      /* 文字设为 Logo 紫色 */
   font-weight: 700;
-  border-left: 4px solid var(--fs-accent) !important;
-  background-color: rgba(255, 255, 255, 0.04);
+  border-left: 4px solid var(--fs-accent) !important; /* 左侧紫色竖杠 */
+  background-color: transparent !important; /* 彻底去除区隔底色 */
   padding-left: 12px !important;
   margin-left: -1px;
 }
 
-/* --- 5. 正文布局 --- */
+/* 强制保留箭头为白色 (即便父级是紫色文字) */
+.md-nav__link .md-nav__icon {
+  color: #ffffff !important;
+  opacity: 0.8;
+}
+
+/* 悬停效果：仅文字变白，不添加底色 */
+.md-nav__link:hover {
+  color: #ffffff !important;
+  background-color: transparent !important;
+}
+
+/* --- 4. 正文布局 --- */
 .md-content__inner { max-width: 58rem !important; margin: 0 auto !important; padding: 0.5rem 3rem 3rem 3rem !important; }
 .md-content__nav { font-size: 0.62rem; margin-bottom: 1.5rem; }
 .md-typeset h1 { color: var(--fs-accent); font-weight: 800; margin-top: 0; }
