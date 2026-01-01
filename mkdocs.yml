@@ -55,6 +55,8 @@ nav:
       - Software: 
           - Confiration Tools: uart_servo/software/pc_configuration_ser_manual.md
   - Robotic Arm:
-      - StarAI Arm: user_servo/robotic_arm/starai_arm/index.md
-      - Piper Mate: user_servo/robotic_arm/piper_mate/index.md
+      - StarAI Arm: 
+          - Quick Start: user_servo/robotic_arm/starai_arm/index.md
+      - Piper Mate: 
+          - User Manual: user_servo/robotic_arm/piper_mate/index.md
       
