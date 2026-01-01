@@ -5,23 +5,22 @@ theme:
   name: material
   language: zh
   features:
-    - navigation.path              # 核心：找回正文顶部的面包屑路径
-    - navigation.expand            # 默认展开/折叠功能
-    - navigation.indexes           # 允许点击父级目录标题
+    - navigation.path              # 找回正文顶部的面包屑路径
+    - navigation.indexes           # 允许点击父级目录标题跳转
     - navigation.top               # 回到顶部按钮
-    - navigation.tracking          # 锚点跟随
-    - content.code.copy            # 代码一键复制
-    - toc.follow                   # 右侧目录跟随滚动
+    - navigation.tracking          # 地址栏自动同步滚动位置
+    - content.code.copy           # 代码一键复制
+    - toc.follow                  # 右侧目录跟随滚动
+    # - navigation.expand          # 已删除：删除此项以实现“展开当前，隐藏其他”
+    # - navigation.sections        # 已删除：确保一级目录有折叠箭头
 
   palette:
-    # 浅色模式
     - scheme: default
       primary: custom             # 品牌色 #8641A9
       accent: custom
       toggle:
         icon: material/brightness-7
         name: 切换至深色模式
-    # 深色模式
     - scheme: slate
       primary: custom
       accent: custom
