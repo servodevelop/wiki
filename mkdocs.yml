@@ -5,12 +5,13 @@ theme:
   name: material
   language: en
   features:
-    - navigation.path              # 开启面包屑路径导航
+    - navigation.path              # 找回正文顶部的面包屑路径
     - navigation.indexes           # 允许点击父级目录标题
     - navigation.top               # 回到顶部按钮
     - navigation.tracking          # 地址栏锚点同步
-    - content.code.copy           # 代码一键复制
+    - content.code.copy            # 代码一键复制
     - toc.follow                  # 右侧目录跟随滚动
+    # 确保没有 navigation.tabs 和 navigation.sections 以保持极简侧边栏
 
   palette:
     - scheme: default
@@ -19,13 +20,14 @@ theme:
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
-    - scheme: slate               # 深色模式配置
+    - scheme: slate               # 深色模式
       primary: custom
       accent: custom
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
 
+# 翻译覆盖：保险第一层
 extra:
   translations:
     en:
