@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Fashion Star Wiki - Gemini 风格 & 胶囊切换按钮修正版
+   Fashion Star Wiki - 工业级重构 (胶囊按钮修复版)
    ========================================================================== */
 
 :root {
@@ -57,34 +57,29 @@
 .md-content__nav { font-size: 0.62rem; margin-bottom: 1.5rem; }
 .md-typeset h1 { color: var(--fs-accent); font-weight: 800; margin-top: 0; }
 
-/* --- 6. 顶部深浅切换“单胶囊”按钮美化 --- */
+/* --- 6. 顶部深浅切换“胶囊”按钮美化 --- */
 
-/* 默认隐藏所有调色板标签，防止出现两个胶囊 */
+/* 针对切换按钮的 Label 进行美化 */
 .md-header__option label[for*="__palette"] {
-    display: none; 
-    background-color: rgba(255, 255, 255, 0.12);
-    border-radius: 20px;
-    padding: 3px 12px;
+    background-color: rgba(255, 255, 255, 0.12); /* 半透明背景 */
+    border-radius: 20px;                         /* 胶囊形状 */
+    padding: 2px 12px;                           /* 按钮宽度 */
     height: 30px;
     border: 1px solid rgba(255, 255, 255, 0.15);
     transition: all 0.3s ease;
+    display: flex;                               /* 确保显示 */
     align-items: center;
     cursor: pointer;
     margin-left: 8px;
 }
 
-/* 只有当前应该显示的那个按钮才设为 flex (单胶囊逻辑) */
-[data-md-color-palette="__palette_0"] .md-header__option label[for="__palette_1"],
-[data-md-color-palette="__palette_1"] .md-header__option label[for="__palette_0"] {
-    display: flex;
-}
-
 .md-header__option label[for*="__palette"]:hover {
     background-color: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 .md-header__option label[for*="__palette"] svg {
     height: 1.0rem;
     width: 1.0rem;
-    fill: #ffffff;
+    fill: #ffffff; /* 图标设为白色 */
 }
