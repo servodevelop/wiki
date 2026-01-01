@@ -1,156 +1,134 @@
 /* ==========================================================================
-   Fashion Star Wiki - 品牌视觉兜底 (Ref: NVIDIA & Just-the-Docs)
-   品牌色: #8641A9
+   Fashion Star Wiki - NVIDIA Isaac Sim 极简风格重构
+   品牌色: #8641A9 (紫色)
    ========================================================================== */
 
 :root {
   --fs-accent: #8641A9;
-  --fs-accent-rgb: 134, 65, 169;
   --md-primary-fg-color: var(--fs-accent);
-  --md-primary-fg-color--light: #a46bc3;
-  --md-primary-fg-color--dark: #6a3387;
+  
+  /* 全局行间距优化：参考 NVIDIA 提升阅读舒适度 */
+  --md-typeset-line-height: 1.7; 
+  --md-typeset-font-size: 0.75rem;
 }
 
-/* --- 1. Header & Logo 处理 --- */
-.md-header__button.md-logo {
-  display: none; /* 按照要求隐藏 Logo 图标 */
+/* --- 1. Header 顶部栏 --- */
+.md-header {
+  background-color: #ffffff !important; /* 浅色模式下使用纯白背景 */
+  color: #000000 !important;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.05) !important;
 }
 
-.md-header__title {
-  font-weight: 700;
-  margin-left: 0.5rem;
+[data-md-color-scheme="slate"] .md-header {
+  background-color: #1a1a1b !important; /* 深色模式背景 */
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-/* --- 2. 左侧侧边栏 (NVIDIA 风格) --- */
+.md-header__button.md-logo { display: none; } /* 隐藏 Logo */
+
+/* --- 2. 左侧侧边栏 (NVIDIA 层级缩进) --- */
 .md-nav__title {
   font-weight: 700;
-  letter-spacing: -0.02em;
-  color: var(--fs-accent) !important; 
-  padding-left: 0.8rem !important;
-  margin-bottom: 0.5rem;
+  color: var(--fs-accent) !important;
+  padding: 0.8rem !important;
+  font-size: 0.8rem;
 }
 
-/* 层级缩进与引导线 */
 .md-nav__link {
-  padding: 0.5rem 0.8rem !important;
-  font-size: 0.75rem;
-  border-left: 1px solid rgba(0, 0, 0, 0.07); /* 浅色模式引导线 */
-  transition: all 0.2s ease;
+  padding: 0.5rem 1rem !important;
+  font-size: 0.72rem;
+  transition: color 0.2s ease;
 }
 
-[data-md-color-scheme="slate"] .md-nav__link {
-  border-left: 1px solid rgba(255, 255, 255, 0.1); /* 深色模式引导线 */
-}
-
-/* 每一级的缩进 */
+/* 层级垂直线 */
 .md-nav__item .md-nav {
-  margin-left: 0.6rem;
+  margin-left: 0.8rem;
+  border-left: 1px solid rgba(0,0,0,0.05);
 }
 
-/* 激活项样式：紫色粗竖线 + 背景 */
+[data-md-color-scheme="slate"] .md-nav__item .md-nav {
+  border-left-color: rgba(255,255,255,0.1);
+}
+
+/* 激活项：紫色实杠 */
 .md-nav__item--active > .md-nav__link {
-  color: #ffffff !important;
-  font-weight: 600;
+  color: var(--fs-accent) !important;
+  font-weight: 700;
   border-left: 3px solid var(--fs-accent) !important;
-  background-color: rgba(134, 65, 169, 0.12) !important;
-  padding-left: 15px !important;
+  margin-left: -1px; /* 对齐边框 */
 }
 
-/* 右侧状态箭头 (折叠指示器) */
-.md-nav__item--nested > .md-nav__link::after {
-  content: " ";
-  background-color: currentColor;
-  -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>');
-  mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>');
-  display: block;
-  width: 16px;
-  height: 16px;
-  position: absolute;
-  right: 12px;
-  transition: transform 0.25s ease;
-}
-
-.md-nav__item--active > .md-nav__link::after {
-  transform: rotate(90deg);
-}
-
-/* --- 3. 正文排版 (Typography) --- */
-.md-content__inner {
-  max-width: 52rem; /* 限制宽度提高阅读效率 */
-  margin: 0 auto;
-  padding: 1.5rem 2rem;
-}
-
-.md-typeset h1 {
-  color: var(--fs-accent);
-  font-weight: 800;
-  border-bottom: 2px solid rgba(134, 65, 169, 0.1);
-  padding-bottom: 0.5rem;
-  margin-bottom: 2rem;
-}
-
-/* 图片阴影与圆角 */
-article img {
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  margin: 2rem auto !important;
-  display: block;
-}
-
-/* 表格样式美化 */
-.md-typeset table {
-  border-radius: 6px;
-  overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-}
-
-/* --- 4. 右侧目录 (TOC) 面板化 --- */
-@media screen and (min-width: 76.25em) {
+/* --- 3. 右侧目录 (TOC - 复刻 NVIDIA 极简风格) --- */
+/* 彻底去掉边框、背景、阴影，让空间更开阔 */
+@media screen and (min-width: 60em) {
   .md-sidebar--secondary {
-    margin-left: 1.5rem;
+    background: transparent !important;
   }
 
   .md-nav--secondary {
-    background: rgba(134, 65, 169, 0.03); /* 使用品牌色的极淡透明背景 */
-    border: 1px solid rgba(134, 65, 169, 0.1);
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); /* 柔和阴影 */
-    padding: 16px;
-    position: sticky;
-    top: 6rem;
-  }
-
-  /* 适配深色模式的 TOC 面板 */
-  [data-md-color-scheme="slate"] .md-nav--secondary {
-    background: rgba(255, 255, 255, 0.02);
-    border-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
   }
 
   .md-nav--secondary .md-nav__title {
     font-size: 0.65rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
-    color: #a9b0b8;
     text-transform: uppercase;
-    margin-bottom: 12px;
+    letter-spacing: 0.08em;
+    color: #888;
+    margin-bottom: 1rem;
   }
 
+  /* 调整 TOC 行间距，使其疏朗 */
   .md-nav--secondary .md-nav__link {
-    font-size: 0.7rem;
-    color: #c7ced8 !important;
-    border-left: 3px solid transparent;
-    padding-left: 12px !important;
+    padding: 0.35rem 0 !important;
+    font-size: 0.68rem;
+    border-left: 2px solid transparent !important;
+    padding-left: 1rem !important;
+    line-height: 1.4;
   }
 
+  /* 悬停与激活状态 */
   .md-nav--secondary .md-nav__link:hover {
     color: var(--fs-accent) !important;
-    border-left-color: rgba(134, 65, 169, 0.4);
   }
 
   .md-nav--secondary .md-nav__link--active {
     color: var(--fs-accent) !important;
-    font-weight: 700;
     border-left-color: var(--fs-accent) !important;
+    font-weight: 700;
   }
+}
+
+/* --- 4. 正文排版优化 --- */
+.md-content__inner {
+  max-width: 56rem; /* 适度放宽正文，配合行间距 */
+  margin: 0 auto;
+  padding: 2rem 2.5rem;
+}
+
+.md-typeset p {
+  margin-bottom: 1.2em; /* 增加段落间距 */
+}
+
+.md-typeset h1 {
+  font-weight: 800;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.md-typeset h2 {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+/* 表格与代码块增加圆角 */
+.md-typeset table, .md-code {
+  border-radius: 4px;
+  overflow: hidden;
 }
