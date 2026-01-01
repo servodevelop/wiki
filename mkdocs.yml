@@ -11,17 +11,16 @@ theme:
     - navigation.tracking          # 地址栏锚点同步
     - content.code.copy           # 代码一键复制
     - toc.follow                  # 右侧目录跟随滚动
-    # 以下两项已删除，以确保顶部无菜单且左侧可折叠
-    # - navigation.tabs
-    # - navigation.sections
 
   palette:
+    # 浅色模式 (保持简洁)
     - scheme: default
       primary: custom             # 品牌色 #8641A9
       accent: custom
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
+    # 深色模式 (复刻 NVIDIA Isaac 核心)
     - scheme: slate
       primary: custom
       accent: custom
@@ -29,7 +28,6 @@ theme:
         icon: material/brightness-4
         name: Switch to light mode
 
-# 修正右侧目录标题
 extra:
   translations:
     en:
