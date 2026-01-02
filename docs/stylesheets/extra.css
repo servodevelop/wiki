@@ -1,5 +1,6 @@
 /* ==========================================================================
-   Fashion Star Wiki - Minimal stable overrides (no left vertical bars)
+   Fashion Star Wiki - Minimal stable overrides (V10 baseline)
+   V11: Fix double active bar on index pages (keep parent bars)
    Brand accent: #8641A9 | Dark bg: #131314
    ========================================================================== */
 
@@ -311,50 +312,30 @@ font-weight: 600 !important;
 }
 
 /* ==========================================================================
-   Left sidebar active trail indicator (global + no double-bar on index pages)
-   Strategy:
-   - Do NOT use .md-nav__link--active::before (it can overlap with aria-current)
-   - Ancestors: li.md-nav__item--active > a.md-nav__link (excluding the current page)
-   - Current page: a[aria-current="page"]
+   V11 Patch: Prevent "double bar" on index pages while keeping parent bars
+   - Material sometimes adds .md-nav__link--active to the current page too.
+   - This can stack with [aria-current="page"] bar => looks like double lines.
+   - We disable the bar coming from .md-nav__link--active and rely on:
+       * Parent trail: .md-nav__item--active > .md-nav__link:not([aria-current="page"])
+       * Current page: .md-nav__link[aria-current="page"]
    ========================================================================== */
 
-/* Disable any previous indicator bound to .md-nav__link--active to prevent double bars */
+/* Disable any bar drawn via .md-nav__link--active to avoid duplicates */
 .md-sidebar--primary .md-nav__link--active::before{
   content: none !important;
 }
 
-/* Keep a consistent gutter so alignment never shifts */
-.md-sidebar--primary .md-nav__link,
-.md-sidebar--primary .md-nav__item .md-nav__link{
-  padding-left: 18px !important;
-  box-sizing: border-box;
-  position: relative;
-}
-
-/* Ancestors (active path) */
-.md-sidebar--primary .md-nav__item--active > .md-nav__link:not([aria-current="page"])::before{
-  content: "";
-  position: absolute;
-  left: 8px;
-  width: 3px;
-  top: 50%;
-  height: 17.568px;
-  transform: translateY(-50%);
-  border-radius: 999px;
-  background: var(--fs-accent);
-  opacity: 1;
-}
-
-/* Current page */
+/* Re-assert bars for parent trail + current page (same geometry as V10) */
+.md-sidebar--primary .md-nav__item--active > .md-nav__link:not([aria-current="page"])::before,
 .md-sidebar--primary .md-nav__link[aria-current="page"]::before{
-  content: "";
+  content: "" !important;
   position: absolute;
-  left: 8px;
-  width: 3px;
   top: 50%;
   height: 17.568px;
   transform: translateY(-50%);
-  border-radius: 999px;
+  left: 8px;
+  width: 3px;
   background: var(--fs-accent);
-  opacity: 1;
+  border-radius: 2px;
+  pointer-events: none;
 }
