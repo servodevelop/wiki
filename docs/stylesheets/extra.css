@@ -416,44 +416,86 @@
   }
 }
 
-/* ==========================================================================
-   V14.6 - Mobile header title vertical centering + drawer back icon spacing
-   ========================================================================== */
+/* ===============================================
+   V14.7 - Mobile header: compact height, true vertical centering,
+          and show only ONE palette (sun/moon) icon
+   =============================================== */
 
-@media screen and (max-width: 59.984375em){
-  /* Header: keep compact but vertically center all items */
+@media screen and (max-width: 59.9375em){
+  /* Hide logo button (keep only “Fashion Star Wiki”) */
+  .md-header__button.md-logo{
+    display: none !important;
+  }
+
+  /* Compact header bar (still touch-friendly) */
+  .md-header{
+    height: auto !important;
+  }
   .md-header__inner{
-    min-height: 44px !important;
+    display: flex !important;
     align-items: center !important;
+    min-height: 48px !important;
+    padding: 0 12px !important;
   }
+
+  /* Title block: no absolute positioning, real flex-centering */
   .md-header__title{
+    position: static !important;
     display: flex !important;
     align-items: center !important;
-    height: 44px !important;
-    padding-block: 0 !important;
+    height: 100% !important;
+
+    margin: 0 !important;
+    padding: 0 12px !important;  /* space between hamburger and title */
+    flex: 1 1 auto !important;
+    min-width: 0 !important;     /* enable ellipsis */
   }
-  .md-header__title .md-ellipsis{
+  .md-header__ellipsis{
     display: flex !important;
     align-items: center !important;
-    line-height: 1.2 !important;
-    padding-block: 0 !important;
+    height: 100% !important;
   }
-  .md-header__button{
-    height: 44px !important;
+
+  /* Keep ONLY the site name line (hide page-title line) */
+  .md-header__topic + .md-header__topic{
+    display: none !important;
+  }
+
+  /* Vertical centering for the text itself */
+  .md-header__topic,
+  .md-header__topic .md-ellipsis{
+    display: flex !important;
+    align-items: center !important;
+    line-height: 1.15 !important;
+    padding: 0 !important;
+  }
+  .md-header__topic .md-ellipsis{
+    font-size: 18px !important;
+    font-weight: 700 !important;
+  }
+
+  /* Make all header buttons align to the same 48px height */
+  .md-header__button,
+  .md-header__option label,
+  label.md-header__button{
+    height: 48px !important;
     display: flex !important;
     align-items: center !important;
   }
 
-  /* Drawer nested title: reserve space for the back icon so it never overlaps text */
-  .md-nav--primary label.md-nav__title[for^="__nav"]{
-    position: relative !important;
-    padding-left: 56px !important; /* 16px left + 24px icon + ~16px gap */
+  /* Palette toggle: show ONLY one icon (the "other" scheme) */
+  #__palette_0:checked ~ .md-header .md-header__option label[for="__palette_0"],
+  #__palette_1:checked ~ .md-header .md-header__option label[for="__palette_1"]{
+    display: none !important;
   }
-  .md-nav--primary label.md-nav__title[for^="__nav"] .md-nav__icon{
-    position: absolute !important;
-    left: 16px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    margin: 0 !important;
+  #__palette_0:checked ~ .md-header .md-header__option label[for="__palette_1"],
+  #__palette_1:checked ~ .md-header .md-header__option label[for="__palette_0"]{
+    display: flex !important;
+  }
+
+  /* Safety: if theme adds more palette radios, never show more than one label */
+  .md-header__option label[for^="__palette_"]{
+    max-width: 48px;
   }
 }
+
