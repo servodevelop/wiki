@@ -2,30 +2,20 @@ site_name: Fashion Star Wiki
 site_url: https://servodevelop.github.io/wiki/
 
 theme:
-  name: material
-  language: en
-  features:
-    - navigation.path              # Breadcrumb path at the top
-    - navigation.indexes           # Clickable parent folders
-    - navigation.top               # Back to top button
-    - navigation.tracking          # URL anchor sync
-    - content.code.copy           # One-click code copy
-    - toc.follow                  # Table of contents follows scroll
-
   palette:
-    # Light Mode: Shows Moon to suggest switching to Dark
+    # Light Mode: Shows Moon icon
     - scheme: default
       primary: custom
-      accent: custom               # Eliminates default Material blue
+      accent: custom
       toggle:
-        icon: assets/icons/tech-moon.svg 
+        icon: assets/icons/tech-moon.svg  # Direct path from 'docs/'
         name: Switch to dark mode
-    # Dark Mode: Shows Sun to suggest switching to Light
+    # Dark Mode: Shows Sun icon
     - scheme: slate
       primary: custom
       accent: custom
       toggle:
-        icon: assets/icons/tech-sun.svg
+        icon: assets/icons/tech-sun.svg   # Direct path from 'docs/'
         name: Switch to light mode
 
 extra:
