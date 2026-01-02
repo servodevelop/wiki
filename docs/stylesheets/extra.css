@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Fashion Star Wiki - V14.6 (V14.x + mobile header centering + nav back icon spacing)
+   Fashion Star Wiki - V14.9 (V14.x + palette toggle fix: single icon + works)
    Fix: primary-nav active purple bar stretches to link height (single-line ~19.8px)
    Brand accent: #8641A9 | Dark bg: #131314
    ========================================================================== */
@@ -535,3 +535,30 @@
     line-height: 1.2 !important;
   }
 }
+
+/* ==========================================================================
+   V14.9 - Palette toggle (fix: keep ONE icon AND keep it functional)
+   Principle: hide the currently-selected palette button; show the other one.
+   Works whether MkDocs Material renders the toggles as <label> or <button>.
+   ========================================================================== */
+
+/* When light palette is active, show dark toggle */
+#__palette_0:checked ~ .md-header label[for="__palette_0"],
+#__palette_0:checked ~ .md-header .md-header__button[for="__palette_0"]{
+  display: none !important;
+}
+#__palette_0:checked ~ .md-header label[for="__palette_1"],
+#__palette_0:checked ~ .md-header .md-header__button[for="__palette_1"]{
+  display: inline-flex !important;
+}
+
+/* When dark palette is active, show light toggle */
+#__palette_1:checked ~ .md-header label[for="__palette_1"],
+#__palette_1:checked ~ .md-header .md-header__button[for="__palette_1"]{
+  display: none !important;
+}
+#__palette_1:checked ~ .md-header label[for="__palette_0"],
+#__palette_1:checked ~ .md-header .md-header__button[for="__palette_0"]{
+  display: inline-flex !important;
+}
+
