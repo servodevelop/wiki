@@ -96,7 +96,7 @@
 .md-sidebar--primary .md-nav__item--active > .md-nav__link,
 .md-sidebar--primary .md-nav__link[aria-current="page"]{
   color: var(--md-default-fg-color) !important;
-  font-weight: 600 !important;
+  font-weight: 400 !important;
 }
 
 /* 2px brand bar on active trail */
@@ -108,7 +108,7 @@
   top: 50%;
   height: 17.568px;
   transform: translateY(-50%);
-  left: 0;  width: 2px;
+  left: 0;  width: 4px;
   background: var(--fs-accent);
   border-radius: 2px;
   pointer-events: none;
@@ -118,7 +118,7 @@
 .md-sidebar--primary .md-nav__link--active,
 .md-sidebar--primary .md-nav__item--active > .md-nav__link,
 .md-sidebar--primary .md-nav__link[aria-current="page"]{
-  padding-left: 14px !important;
+  padding-left: 20px !important; /* reserve space for 4px active bar */
 }
 
 /* Keep nested nav clean (no extra guide lines) */
