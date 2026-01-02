@@ -353,3 +353,41 @@
     line-height: 1.2 !important;
   }
 }
+/* ==========================================================================
+   V14.4 - Mobile drawer header height tighten (hide logo already, reduce purple block)
+   ========================================================================== */
+@media screen and (max-width: 59.9375em){
+
+  /* Top app header (when drawer is closed) */
+  .md-header{
+    min-height: 44px !important;
+    height: auto !important;
+  }
+  .md-header__inner{
+    height: 44px !important;
+    padding: 0 12px !important;
+    align-items: center !important;
+  }
+  .md-header__title{
+    line-height: 44px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Drawer opened: the big purple "site name" block comes from the nav title.
+     Make it compact and vertically centered. */
+  .md-sidebar--primary .md-nav__title{
+    display: flex !important;
+    align-items: center !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    padding: 0 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* If any logo button sneaks into the drawer title, hide it */
+  .md-sidebar--primary .md-nav__title .md-nav__button.md-logo,
+  .md-sidebar--primary .md-nav__title .md-header__button.md-logo{
+    display: none !important;
+  }
+}
