@@ -5,26 +5,27 @@ theme:
   name: material
   language: en
   features:
-    - navigation.path
-    - navigation.indexes
-    - navigation.top
-    - navigation.tracking
-    - content.code.copy
-    - toc.follow
+    - navigation.path              # 顶部面包屑路径
+    - navigation.indexes           # 允许点击父级目录
+    - navigation.top               # 回到顶部按钮
+    - navigation.tracking          # 地址栏锚点同步
+    - content.code.copy           # 代码复制
+    - toc.follow                  # 右侧目录跟随滚动
+
   palette:
-    # Light Mode: Target icon is the Moon (to go Dark)
+    # 浅色模式
     - scheme: default
       primary: custom
-      accent: custom
+      accent: custom               # 锁定 accent 以消除蓝色
       toggle:
-        icon: assets/icons/tech-moon.svg
+        icon: material/weather-night 
         name: Switch to dark mode
-    # Dark Mode: Target icon is the Sun (to go Light)
+    # 深色模式
     - scheme: slate
       primary: custom
       accent: custom
       toggle:
-        icon: assets/icons/tech-sun.svg
+        icon: material/weather-sunny
         name: Switch to light mode
 
 extra:
