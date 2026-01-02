@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Fashion Star Wiki - V15
+   Fashion Star Wiki - V15.1
    Stable overrides (based on V14.2 + fixes) with WORKING palette toggle restored.
    - Fix: primary nav alignment for md-nav__container (index.md sections)
    - Fix: left-nav active bar vertical centering (bar follows container height)
@@ -295,5 +295,28 @@
   .md-sidebar--primary .md-nav__title .md-ellipsis{
     line-height: 1.15 !important;
     padding: 0 !important;
+  }
+}
+
+
+
+/* ==========================================================================
+   V15.1 patch - mobile: hide logo icon everywhere (keep title only)
+   ========================================================================== */
+@media screen and (max-width: 59.9375em){
+  /* Top header logo button (if configured) */
+  .md-header__button.md-logo,
+  .md-header__button.md-logo *,
+  /* Drawer title/logo button */
+  .md-nav__title .md-logo,
+  .md-nav__title .md-logo *,
+  .md-nav__button.md-logo,
+  .md-nav__button.md-logo *{
+    display: none !important;
+  }
+
+  /* Keep the drawer title aligned after removing the logo */
+  .md-nav__title{
+    padding-left: 16px !important;
   }
 }
