@@ -40,7 +40,7 @@
   line-height: 1.25 !important;       
   font-size: 0.75rem !important;      /* 锁定 12px */
   color: var(--md-default-fg-color) !important; 
-  min-height: 1.5rem;                 
+  min-height: 1.7rem;                 
   display: flex !important;
   align-items: center;                
 }
