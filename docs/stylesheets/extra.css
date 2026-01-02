@@ -96,7 +96,7 @@
 .md-sidebar--primary .md-nav__item--active > .md-nav__link,
 .md-sidebar--primary .md-nav__link[aria-current="page"]{
 color: var(--fs-accent) !important;
-font-weight: 400 !important;
+font-weight: 600 !important;
 }
 
 /* 2px brand bar on active trail */
