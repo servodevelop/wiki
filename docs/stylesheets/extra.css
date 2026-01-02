@@ -105,10 +105,10 @@
 .md-sidebar--primary .md-nav__link[aria-current="page"]::before{
   content: "";
   position: absolute;
-  left: 0;
-  top: 0.18rem;
-  bottom: 0.18rem;
-  width: 2px;
+  top: 50%;
+  height: 17.568px;
+  transform: translateY(-50%);
+  left: 0;  width: 2px;
   background: var(--fs-accent);
   border-radius: 2px;
   pointer-events: none;
