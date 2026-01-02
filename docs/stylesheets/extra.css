@@ -154,10 +154,6 @@
 /* ==========================================================================
    Right TOC (secondary sidebar) - compact + 10px text
    ========================================================================== */
-.md-sidebar--secondary .md-nav--secondary .md-nav__title{
-  font-size: 10px !important;
-  margin-bottom: 0.35rem !important;
-}
 
 .md-sidebar--secondary .md-nav--secondary .md-nav__list{
   margin-top: 0 !important;
@@ -219,10 +215,20 @@
   font-size: 14.4px !important;
 }
 
-/* Title ("Table of contents"/"On this page") */
+
+/* Rename TOC title text visually (Material default: "Table of contents") */
 .md-sidebar--secondary .md-nav--secondary .md-nav__title{
-  font-size: 14.4px !important;
+  /* hide original text */
+  font-size: 0 !important;
+  color: transparent !important;
   margin-bottom: 0.25rem !important;
+  position: relative !important;
+}
+.md-sidebar--secondary .md-nav--secondary .md-nav__title::before{
+  content: "On this page" !important;
+  font-size: 14.4px !important;
+  color: var(--md-default-fg-color--light) !important;
+  letter-spacing: 0.02em;
 }
 
 /* Any TOC link in the secondary nav */
