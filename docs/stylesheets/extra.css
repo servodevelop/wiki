@@ -65,7 +65,7 @@
   .md-sidebar--secondary .md-nav--secondary::before{
     content: "";
     position: absolute;
-    left: 0;
+    left: 0.4rem;
     top: 0;
     bottom: 0;
     width: 1px;
@@ -112,13 +112,6 @@
   background: var(--fs-accent);
   border-radius: 2px;
   pointer-events: none;
-}
-
-/* Add a little padding so text doesn't touch the bar */
-.md-sidebar--primary .md-nav__link--active,
-.md-sidebar--primary .md-nav__item--active > .md-nav__link,
-.md-sidebar--primary .md-nav__link[aria-current="page"]{
-  padding-left: 14px !important;
 }
 
 /* Keep nested nav clean (no extra guide lines) */
