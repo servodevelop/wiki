@@ -121,3 +121,36 @@
   font-size: 9px !important;
   padding: 0.14rem 0 !important;
 }
+
+/* ==========================================================================
+   Right TOC (secondary sidebar) - compact + 11px text (with indent)
+   ========================================================================== */
+.md-sidebar--secondary .md-nav--secondary .md-nav__title{
+  font-size: 11px !important;
+  margin-bottom: 0.4rem !important;
+}
+
+.md-sidebar--secondary .md-nav--secondary .md-nav__list{
+  margin-top: 0 !important;
+  padding-left: 0 !important;
+}
+
+/* All TOC links: 11px */
+.md-sidebar--secondary .md-nav--secondary .md-nav__link{
+  font-size: 11px !important;
+  line-height: 1.3 !important;
+  padding: 0.2rem 0 !important;
+}
+
+/* Nested TOC list indentation (2nd level and deeper) */
+.md-sidebar--secondary .md-nav--secondary .md-nav__item .md-nav{
+  padding-left: 12px !important;
+  margin-left: 0 !important;
+}
+
+/* Keep nested links same size but slightly tighter */
+.md-sidebar--secondary .md-nav--secondary .md-nav__item .md-nav .md-nav__link{
+  font-size: 11px !important;
+  padding: 0.18rem 0 !important;
+}
+
