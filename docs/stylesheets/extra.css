@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Fashion Star Wiki - V15.1
+   Fashion Star Wiki - V15.2
    Stable overrides (based on V14.2 + fixes) with WORKING palette toggle restored.
    - Fix: primary nav alignment for md-nav__container (index.md sections)
    - Fix: left-nav active bar vertical centering (bar follows container height)
@@ -299,24 +299,65 @@
 }
 
 
+/* =========================================================
+   V15.2 - Layout width tuning (NVIDIA-like reading width)
+   Goals:
+   - Wider center content (less cramped)
+   - Slightly wider left nav and right TOC (balanced)
+   Notes:
+   - Material for MkDocs sets overall content width via .md-grid max-width.
+     We override it on larger screens (desktop/tablet landscape).
+   ========================================================= */
 
-/* ==========================================================================
-   V15.1 patch - mobile: hide logo icon everywhere (keep title only)
-   ========================================================================== */
-@media screen and (max-width: 59.9375em){
-  /* Top header logo button (if configured) */
-  .md-header__button.md-logo,
-  .md-header__button.md-logo *,
-  /* Drawer title/logo button */
-  .md-nav__title .md-logo,
-  .md-nav__title .md-logo *,
-  .md-nav__button.md-logo,
-  .md-nav__button.md-logo *{
-    display: none !important;
+@media screen and (min-width: 60em){
+  /* ======================================================================
+     V15.2 - Layout width tuning (match NVIDIA-like proportions)
+     Target desktop grid: ~1760px
+       - Left nav: 20rem (≈320px)
+       - Content: up to 74rem (≈1184px) but will shrink as needed
+       - Right TOC: 18rem (≈288px)
+     ====================================================================== */
+
+  /* Give the page more breathing room (your center column was being squeezed) */
+  .md-grid{
+    max-width: min(1760px, 96vw) !important;
   }
 
-  /* Keep the drawer title aligned after removing the logo */
-  .md-nav__title{
-    padding-left: 16px !important;
+  /* Make article column wider (but still readable) */
+  .md-content__inner{
+    max-width: 74rem !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Sidebars similar to NVIDIA docs */
+  .md-sidebar--primary{
+    width: 20rem !important;
+    flex: 0 0 20rem !important;
+  }
+  .md-sidebar--secondary{
+    width: 18rem !important;
+    flex: 0 0 18rem !important;
+  }
+
+  /* Let the center flex item actually take the remaining space */
+  .md-content{
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
   }
 }
+
+@media screen and (min-width: 80em){
+  /* A touch wider on very large screens */
+  .md-grid{
+    max-width: min(1840px, 97vw) !important;
+  }
+  .md-content__inner{
+    max-width: 78rem !important;
+  }
+}
+  .md-content__inner { max-width: 76rem; }
+  .md-sidebar--primary { width: 18rem; }
+  .md-sidebar--secondary { width: 18rem; }
+}
+
