@@ -1,10 +1,6 @@
 /* ==========================================================================
-   Fashion Star Wiki - Minimal stable overrides (V10 baseline)
-   V13 (rev5): Primary nav alignment fix (index/section padding) + consistent bars
-   ========================================================================== */
-
-/* ==========================================================================
-   Fashion Star Wiki - Minimal stable overrides (no left vertical bars)
+   Fashion Star Wiki - V14 (based on your last stable V10)
+   Minimal stable overrides + primary-nav alignment fix for md-nav__container
    Brand accent: #8641A9 | Dark bg: #131314
    ========================================================================== */
 
@@ -53,7 +49,7 @@
     position: relative !important;
     z-index: 2 !important;
     min-height: 100vh;
-    /* Left and right dividers */
+    /* Left divider only */
     box-shadow:
       inset 1px 0 0 var(--fs-divider) !important;
   }
@@ -91,20 +87,20 @@
   }
 }
 
-/* NVIDIA-like active trail indicator (2px brand bar on current item + ancestors) */
+/* NVIDIA-like active trail indicator (3px brand bar on current item + ancestors) */
 .md-sidebar--primary .md-nav__link{
   position: relative; /* anchor for the bar */
 }
 
-/* Keep active text normal (NOT brand-colored) */
+/* Active text: brand color + semi-bold */
 .md-sidebar--primary .md-nav__link--active,
 .md-sidebar--primary .md-nav__item--active > .md-nav__link,
 .md-sidebar--primary .md-nav__link[aria-current="page"]{
-color: var(--fs-accent) !important;
-font-weight: 600 !important;
+  color: var(--fs-accent) !important;
+  font-weight: 600 !important;
 }
 
-/* 2px brand bar on active trail */
+/* 3px brand bar on active trail */
 .md-sidebar--primary .md-nav__link--active:not([aria-current="page"])::before,
 .md-sidebar--primary .md-nav__item--active > .md-nav__link:not([aria-current="page"])::before,
 .md-sidebar--primary .md-nav__link[aria-current="page"]::before{
@@ -113,17 +109,21 @@ font-weight: 600 !important;
   top: 50%;
   height: 17.568px;
   transform: translateY(-50%);
-  left: 0;  width: 3px;
+  left: 8px;
+  width: 3px;
   background: var(--fs-accent);
   border-radius: 2px;
   pointer-events: none;
 }
 
-/* Add a little padding so text doesn't touch the bar */
-.md-sidebar--primary .md-nav__link--active,
-.md-sidebar--primary .md-nav__item--active > .md-nav__link,
-.md-sidebar--primary .md-nav__link[aria-current="page"]{
-  padding-left: 18px !important; /* reserve space for 3px active bar */
+/* Primary nav gutter for active trail bar (keep sibling alignment)
+   Bar: 3px @ left 8px, Gap: 7px, Total gutter: 18px */
+.md-sidebar--primary .md-nav__link,
+.md-sidebar--primary .md-nav__item .md-nav__link{
+  padding-left: 18px !important;
+  box-sizing: border-box;
+  font-size: 14.4px !important;
+  line-height: 1.22 !important;
 }
 
 /* Keep nested nav clean (no extra guide lines) */
@@ -131,37 +131,13 @@ font-weight: 600 !important;
   border-left: none !important;
 }
 
-/* ==========================================================================
-   Left sidebar navigation (primary) - 14.4px
-   ========================================================================== */
-.md-sidebar--primary .md-nav__title{
-  font-size: 14.4px !important;
-}
-
-.md-sidebar--primary .md-nav__link{
-  font-size: 14.4px !important;
-  line-height: 1.22 !important;
-  padding-left: 16px !important; /* reserve space for 2px active bar */
-
-}
-
-
-
-/* Hide the "Table of contents" toggle that can appear in the LEFT nav
-   (the icon often looks like three horizontal lines). Keep folder arrows. */
+/* Hide the "Table of contents" toggle that can appear in the LEFT nav */
 .md-sidebar--primary label.md-nav__link[for="__toc"],
 .md-sidebar--primary a.md-nav__link[href="#__toc"],
 .md-sidebar--primary .md-nav__icon--toc,
 .md-sidebar--primary .md-nav__link[for="__toc"],
 .md-sidebar--primary .md-nav__link[href="#__toc"]{
   display: none !important;
-}
-
-/* Right TOC title (simple, no hacks) */
-.md-nav--secondary .md-nav__title{
-  font-size: 0.65rem !important;
-  color: var(--md-default-fg-color--light) !important;
-  letter-spacing: 0.02em;
 }
 
 /* Breadcrumb links (no blue) */
@@ -200,7 +176,6 @@ font-weight: 600 !important;
   font-size: 14.4px !important;
 }
 
-
 /* Rename TOC title text visually (Material default: "Table of contents") */
 .md-sidebar--secondary .md-nav--secondary .md-nav__title{
   /* hide original text */
@@ -232,12 +207,6 @@ font-weight: 600 !important;
   margin-left: 0 !important;
 }
 
-/* Nested links also 14.4px (keep same size) */
-.md-sidebar--secondary .md-nav--secondary .md-nav__item .md-nav .md-nav__link{
-  font-size: 14.4px !important;
-  padding: 0.10rem 0 !important;
-}
-
 /* Right TOC active item: brand color + bold */
 .md-sidebar--secondary .md-nav--secondary .md-nav__item--active > .md-nav__link,
 .md-sidebar--secondary .md-nav--secondary .md-nav__link--active{
@@ -246,105 +215,35 @@ font-weight: 600 !important;
 }
 
 /* ==========================================================================
-   V13 (rev5) - Fix primary nav alignment across levels + consistent bar gap
-   Problem:
-   - Some items (especially section/index links) get different internal padding
-     from the theme, so the text shifts but the bar doesn't, causing large gaps.
-   Strategy:
-   - We do NOT fight theme's unknown variables.
-   - We explicitly set per-depth indentation for primary nav links (a+label),
-     then place the bar at a matching per-depth x so the bar-to-text gap is constant.
-   Notes:
-   - Depth 1: left pad 18px, bar at 8px
-   - Depth 2: left pad 34px, bar at 24px
-   - Depth 3: left pad 50px, bar at 40px
-   - Depth 4: left pad 66px, bar at 56px
+   V14 PATCH: Fix primary nav alignment for items rendered as md-nav__container
+   (these happen when a nav entry is both a link + a toggle, e.g. index.md)
    ========================================================================== */
 
-/* Helper: make sure links are bar-anchored */
-.md-sidebar--primary a.md-nav__link,
-.md-sidebar--primary label.md-nav__link{
-  position: relative;
+/* 1) Ensure ALL top-level clickable items (a/label/div container) share same gutter */
+.md-sidebar--primary .md-nav__item > a.md-nav__link,
+.md-sidebar--primary .md-nav__item > label.md-nav__link,
+.md-sidebar--primary .md-nav__item > div.md-nav__link,
+.md-sidebar--primary .md-nav__item > .md-nav__link.md-nav__container{
+  padding-left: 18px !important;
   box-sizing: border-box;
 }
 
-/* ---- Depth 1 (top-level inside sidebar nav) ---- */
-.md-sidebar--primary nav.md-nav > ul.md-nav__list > li.md-nav__item > a.md-nav__link,
-.md-sidebar--primary nav.md-nav > ul.md-nav__list > li.md-nav__item > label.md-nav__link{
-  padding-left: 18px !important;
+/* 2) If the item is a container, remove extra inner padding so text doesn't "double-indent" */
+.md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link,
+.md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link{
+  padding-left: 0 !important;
+  margin-left: 0 !important;
 }
 
-/* ---- Depth 2 ---- */
-.md-sidebar--primary nav.md-nav ul.md-nav__list ul.md-nav__list > li.md-nav__item > a.md-nav__link,
-.md-sidebar--primary nav.md-nav ul.md-nav__list ul.md-nav__list > li.md-nav__item > label.md-nav__link{
-  padding-left: 34px !important;
-}
-
-/* ---- Depth 3 ---- */
-.md-sidebar--primary nav.md-nav ul.md-nav__list ul.md-nav__list ul.md-nav__list > li.md-nav__item > a.md-nav__link,
-.md-sidebar--primary nav.md-nav ul.md-nav__list ul.md-nav__list ul.md-nav__list > li.md-nav__item > label.md-nav__link{
-  padding-left: 50px !important;
-}
-
-/* ---- Depth 4 ---- */
-.md-sidebar--primary nav.md-nav ul.md-nav__list ul.md-nav__list ul.md-nav__list ul.md-nav__list > li.md-nav__item > a.md-nav__link,
-.md-sidebar--primary nav.md-nav ul.md-nav__list ul.md-nav__list ul.md-nav__list ul.md-nav__list > li.md-nav__item > label.md-nav__link{
-  padding-left: 66px !important;
-}
-
-/* Current + ancestors text styling (keep as-is, but DO include .md-nav__link--active for Home) */
-.md-sidebar--primary .md-nav__link--active,
-.md-sidebar--primary .md-nav__link[aria-current="page"],
-.md-sidebar--primary .md-nav__item--active > .md-nav__link{
+/* 3) Active color/bold should apply to the inner <a>/<label> inside the container too */
+.md-sidebar--primary .md-nav__item--active > .md-nav__link.md-nav__container > a.md-nav__link,
+.md-sidebar--primary .md-nav__item--active > .md-nav__link.md-nav__container > label.md-nav__link{
   color: var(--fs-accent) !important;
   font-weight: 600 !important;
 }
 
-/* --- Bars: current (link--active OR aria-current) --- */
-.md-sidebar--primary a.md-nav__link.md-nav__link--active::before,
-.md-sidebar--primary a.md-nav__link[aria-current="page"]::before,
-.md-sidebar--primary label.md-nav__link.md-nav__link--active::before,
-.md-sidebar--primary label.md-nav__link[aria-current="page"]::before{
-  content: "";
-  position: absolute;
-  top: 50%;
-  height: 17.568px;
-  transform: translateY(-50%);
-  width: 3px;
-  background: var(--fs-accent);
-  border-radius: 2px;
-  pointer-events: none;
-}
-
-/* --- Bars: ancestors (single bar, no double) --- */
-.md-sidebar--primary .md-nav__item--active > a.md-nav__link:not(.md-nav__link--active):not([aria-current="page"])::before,
-.md-sidebar--primary .md-nav__item--active > label.md-nav__link:not(.md-nav__link--active):not([aria-current="page"])::before{
-  content: "";
-  position: absolute;
-  top: 50%;
-  height: 17.568px;
-  transform: translateY(-50%);
-  width: 3px;
-  background: var(--fs-accent);
-  border-radius: 2px;
-  pointer-events: none;
-}
-
-/* Place bar X by depth */
-.md-sidebar--primary nav.md-nav > ul.md-nav__list > li.md-nav__item > a.md-nav__link::before,
-.md-sidebar--primary nav.md-nav > ul.md-nav__list > li.md-nav__item > label.md-nav__link::before{ left: 8px; }
-
-.md-sidebar--primary nav.md-nav ul.md-nav__list ul.md-nav__list > li.md-nav__item > a.md-nav__link::before,
-.md-sidebar--primary nav.md-nav ul.md-nav__list ul.md-nav__list > li.md-nav__item > label.md-nav__link::before{ left: 24px; }
-
-.md-sidebar--primary nav.md-nav ul.md-nav__list ul.md-nav__list ul.md-nav__list > li.md-nav__item > a.md-nav__link::before,
-.md-sidebar--primary nav.md-nav ul.md-nav__list ul.md-nav__list ul.md-nav__list > li.md-nav__item > label.md-nav__link::before{ left: 40px; }
-
-.md-sidebar--primary nav.md-nav ul.md-nav__list ul.md-nav__list ul.md-nav__list ul.md-nav__list > li.md-nav__item > a.md-nav__link::before,
-.md-sidebar--primary nav.md-nav ul.md-nav__list ul.md-nav__list ul.md-nav__list ul.md-nav__list > li.md-nav__item > label.md-nav__link::before{ left: 56px; }
-
-/* Make sure section/index variants do not add extra inner spacing that breaks alignment */
-.md-sidebar--primary a.md-nav__link.md-nav__link--index{
-  padding-left: inherit !important;
-  padding-inline-start: inherit !important;
+/* 4) Prevent double bars: never draw ::before on inner links/labels inside a container */
+.md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link::before,
+.md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link::before{
+  content: none !important;
 }
