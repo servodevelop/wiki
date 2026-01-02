@@ -298,45 +298,68 @@
   }
 }
 
-/* ------------------------------ */
-/* V15.3 - Layout width (NVIDIA-like proportions) */
-/* Goal:
-   - Wider reading column (center) like NVIDIA docs
-   - Left nav + right TOC keep reasonable widths
-   - Keep content aligned to the left (no big "floating center" gap)
-*/
-@media screen and (min-width: 60em) {
-  /* Overall page container */
+
+/* =========================================================
+   V15.2 - Layout width tuning (NVIDIA-like reading width)
+   Goals:
+   - Wider center content (less cramped)
+   - Slightly wider left nav and right TOC (balanced)
+   Notes:
+   - Material for MkDocs sets overall content width via .md-grid max-width.
+     We override it on larger screens (desktop/tablet landscape).
+   ========================================================= */
+
+/* ---------------------------------------------------------------------------
+   NVIDIA-like layout proportions (v15)
+   Goal:
+   - Wider reading column (less “too narrow”)
+   - Left nav + right “On this page” sidebars similar to NVIDIA docs proportions
+   - Keep overall page centered with a sane max width
+--------------------------------------------------------------------------- */
+
+@media (min-width: 60em) {
+  /* Prefer using MkDocs Material layout variables so all offsets/spacing stay consistent */
+  :root {
+    /* Total page width (centered) */
+    --md-grid-max-width: 92rem; /* ~1472px */
+
+    /* Sidebar widths */
+    --md-sidebar-width: 18rem;             /* ~288px (left nav) */
+    --md-sidebar-width--secondary: 20rem;  /* ~320px (right TOC) */
+
+    /* Content reading width */
+    --md-content-width: 56rem; /* ~896px */
+  }
+
+  /* Ensure grid respects our max width */
   .md-grid {
-    /* NVIDIA feels ~1500-1650px wide on desktop */
-    max-width: min(96rem, 96vw);
+    max-width: var(--md-grid-max-width) !important;
   }
 
-  /* Sidebars */
-  .md-sidebar--primary { width: 18rem; }   /* ~288px */
-  .md-sidebar--secondary { width: 18rem; } /* ~288px */
+  /* Match sidebars to the variables (avoid hard-coded mismatches) */
+  .md-sidebar--primary {
+    width: var(--md-sidebar-width) !important;
+  }
+  .md-sidebar--secondary {
+    width: var(--md-sidebar-width--secondary) !important;
+  }
 
-  /* Main content should not be artificially centered/narrow */
-  .md-content { max-width: none; }
-
-  /* The inner reading column */
+  /* Make the main article area wider and align predictably */
+  .md-content {
+    min-width: 0 !important;
+  }
   .md-content__inner {
-    /* widen, but keep a readable line length */
-    max-width: 62rem;     /* ~992px */
-    margin-left: 0;
-    margin-right: 0;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    max-width: var(--md-content-width) !important;
+    width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
   }
-
-  /* Allow large blocks (tables/images/code) to use the column */
-  .md-typeset { max-width: 100%; }
 }
 
-/* Extra-wide screens: give a little more breathing room */
-@media screen and (min-width: 90em) {
-  .md-grid { max-width: min(104rem, 96vw); }      /* ~1664px */
-  .md-sidebar--secondary { width: 19rem; }        /* slightly wider TOC */
-  .md-content__inner { max-width: 66rem; }        /* ~1056px */
+/* On very wide screens, expand slightly (still Nvidia-like, but less cramped) */
+@media (min-width: 90em) {
+  :root {
+    --md-grid-max-width: 100rem;  /* ~1600px */
+    --md-content-width: 62rem;    /* ~992px */
+  }
 }
-
