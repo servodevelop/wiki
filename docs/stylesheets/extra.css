@@ -1,6 +1,7 @@
 /* ==========================================================================
-   Fashion Star Wiki - Minimal stable overrides (V10 baseline)
-   V11: Fix double active bar on index pages (keep parent bars)
+   Fashion Star Wiki - Minimal stable overrides
+   V12: Fix same-level indent mismatch (e.g., StarAI Arm vs Datasheet) + tighter bar/text gap
+   Based on: V10 baseline + V11 single-bar fix
    Brand accent: #8641A9 | Dark bg: #131314
    ========================================================================== */
 
@@ -338,4 +339,37 @@ font-weight: 600 !important;
   background: var(--fs-accent);
   border-radius: 2px;
   pointer-events: none;
+}
+
+/* ==========================================================================
+   V12 Patch: Same-level alignment + tighter bar-to-text gap
+   Problem observed:
+   - Some items (especially section index pages) can look more indented than peers.
+   Likely cause:
+   - Mixed padding-left rules (16px vs 18px) + active-state padding makes active items shift.
+   Fix:
+   - Force ONE consistent left gutter (18px) for ALL primary nav links, all levels.
+   - Move the bar slightly right so the gap to text is consistent and smaller.
+   ========================================================================== */
+
+/* 1) One gutter for everyone (prevents "StarAI Arm" vs "Datasheet" mismatch) */
+.md-sidebar--primary .md-nav__link,
+.md-sidebar--primary .md-nav__item .md-nav__link{
+  padding-left: 18px !important;
+  box-sizing: border-box;
+  position: relative; /* anchor for the bar */
+}
+
+/* 2) Ensure active/current links don't add extra padding beyond the shared gutter */
+.md-sidebar--primary .md-nav__link--active,
+.md-sidebar--primary .md-nav__item--active > .md-nav__link,
+.md-sidebar--primary .md-nav__link[aria-current="page"]{
+  padding-left: 18px !important;
+}
+
+/* 3) Bar position: keep width=3px but reduce visual gap to text (gap = 18 - left - 3) */
+.md-sidebar--primary .md-nav__item--active > .md-nav__link:not([aria-current="page"])::before,
+.md-sidebar--primary .md-nav__link[aria-current="page"]::before{
+  left: 10px !important;  /* was 8px -> tighter to text */
+  width: 3px !important;
 }
