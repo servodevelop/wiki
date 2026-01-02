@@ -70,6 +70,13 @@
   box-shadow: inset 1px 0 0 var(--fs-divider) !important;
 }
 
+/* Add breathing room between the right divider line and TOC text */
+.md-sidebar--secondary .md-sidebar__inner{
+  padding-left: 12px !important;
+  padding-right: 10px !important;
+}
+
+
 
 
 /* Ensure the right TOC sidebar remains visible on desktop */
