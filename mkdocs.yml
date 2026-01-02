@@ -5,8 +5,8 @@ theme:
   name: material
   language: en
 
-  # Use existing .docs directory as theme overrides (must exist in repo)
-  custom_dir: .docs
+  # Theme overrides directory (keep it under /docs so Actions sparse-checkout won't miss it)
+  custom_dir: docs/overrides
 
   features:
     - navigation.path        # breadcrumb
@@ -22,7 +22,7 @@ theme:
       primary: custom
       accent: custom
       toggle:
-        # uses .docs/.icons/fashion/tech-moon.svg
+        # uses docs/overrides/.icons/fashion/tech-moon.svg
         icon: fashion/tech-moon
         name: Switch to dark mode
 
@@ -31,7 +31,7 @@ theme:
       primary: custom
       accent: custom
       toggle:
-        # uses .docs/.icons/fashion/tech-sun.svg
+        # uses docs/overrides/.icons/fashion/tech-sun.svg
         icon: fashion/tech-sun
         name: Switch to light mode
 
