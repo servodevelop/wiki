@@ -5,19 +5,21 @@ theme:
   name: material
   language: en
   features:
-    - navigation.path        # 顶部面包屑
-    - navigation.indexes     # 允许点击父级目录
-    - navigation.top         # 回到顶部按钮
-    - navigation.tracking    # 地址栏锚点同步
-    - content.code.copy      # 代码复制按钮
-    - toc.follow             # 右侧目录跟随滚动
+    - navigation.path        # breadcrumb
+    - navigation.indexes     # parent index pages clickable
+    - navigation.top         # back-to-top
+    - navigation.tracking    # sync URL hash
+    - content.code.copy      # copy code button
+    - toc.follow             # right TOC follows scroll
   palette:
+    # light
     - scheme: default
       primary: custom
       accent: custom
       toggle:
         icon: material/weather-night
         name: Switch to dark mode
+    # dark
     - scheme: slate
       primary: custom
       accent: custom
@@ -41,14 +43,14 @@ nav:
   - Home: index.md
   - UART Servo:
       - Datasheet:
-          - "HA8/RA8-U25(H)-M": "uart_servo/datasheet/HA_RA8_U25(H)_M.md"
-          - "HA8/RA8-U35(H)-M": "uart_servo/datasheet/HA_RA8_U35(H)_M.md"
+          - HA8/RA8-U25(H)-M: uart_servo/datasheet/HA_RA8_U25(H)_M.md
+          - HA8/RA8-U35(H)-M: uart_servo/datasheet/HA_RA8_U35(H)_M.md
       - CAD Files:
-          - "STEP/DWG/PDF": "uart_servo/cad_files/cad_files.md"
+          - STEP/DWG/PDF: uart_servo/cad_files/cad_files.md
       - Software:
-          - "Configuration Tools": "uart_servo/software/pc_configuration_ser_manual.md"
+          - Configuration Tools: uart_servo/software/pc_configuration_ser_manual.md
   - Robotic Arm:
       - StarAI Arm:
-          - "Quick Start": "robotic_arm/starai_arm/index.md"
+          - Quick Start: robotic_arm/starai_arm/index.md
       - Piper Mate:
-          - "User Manual": "robotic_arm/piper_mate/index.md"
+          - User Manual: robotic_arm/piper_mate/index.md

@@ -1,24 +1,22 @@
 /* ==========================================================================
-   Fashion Star Wiki - MkDocs Material overrides
+   Fashion Star Wiki - Minimal stable overrides (no left vertical bars)
    Brand accent: #8641A9 | Dark bg: #131314
    ========================================================================== */
 
-/* Brand + "kill the blue" via Material variables */
+/* Brand + remove "default blue" by setting BOTH primary & accent tokens */
 :root{
   --fs-accent: #8641A9;
 
-  /* Material theme tokens */
   --md-primary-fg-color: var(--fs-accent);
   --md-accent-fg-color: var(--fs-accent);
   --md-accent-fg-color--transparent: rgba(134, 65, 169, 0.12);
 
-  /* Typography */
+  --md-typeset-a-color: var(--fs-accent);
   --md-typeset-line-height: 1.8;
   --md-typeset-font-size: 0.75rem;
-  --md-typeset-a-color: var(--fs-accent);
 }
 
-/* Dark scheme (Gemini-ish) */
+/* Dark scheme */
 [data-md-color-scheme="slate"]{
   --md-default-bg-color: #131314;
   --md-default-bg-color--light: #1e1f20;
@@ -32,24 +30,21 @@
   background-color: var(--fs-accent) !important;
 }
 
-/* (Optional) hide logo button if you don't have a logo image there */
+/* Optional: hide the logo button if you don't use a logo image */
 .md-header__button.md-logo{
   display: none;
 }
 
-/* --------------------------------------------------------------------------
-   Layout separators (DO NOT change .md-main__inner to flex; it breaks sidebars)
-   -------------------------------------------------------------------------- */
+/* Keep layout stable: DO NOT force .md-main__inner to flex/grid */
 .md-sidebar--primary{
   border-right: 1px solid rgba(255,255,255,0.08) !important;
 }
-
 .md-sidebar--secondary{
   border-left: 1px solid rgba(255,255,255,0.08) !important;
   margin-left: 0 !important;
 }
 
-/* Ensure the right TOC sidebar is visible on desktop */
+/* Ensure the right TOC sidebar remains visible on desktop */
 @media screen and (min-width: 60em){
   .md-sidebar--secondary{
     display: block !important;
@@ -57,110 +52,38 @@
   }
 }
 
-/* --------------------------------------------------------------------------
-   Left navigation (sidebar)
-   -------------------------------------------------------------------------- */
-.md-nav__link{
-  padding: 0.35rem 0.8rem !important;
-  line-height: 1.25 !important;
-  font-size: 0.75rem !important;
-  color: var(--md-default-fg-color--light) !important;
-  background-color: transparent !important;
-  min-height: 1.7rem;
-  display: flex !important;
-  align-items: center;
-  transition: color 0.18s ease;
-}
-
-/* Prevent "active but not selected" links from turning blue */
-.md-nav__link--active{
-  color: var(--md-default-fg-color) !important;
-}
-
-/* Selected (current path) item: purple text + purple left bar */
+/* Remove any left "active" bars / guide lines (minimal look) */
 .md-nav__item--active > .md-nav__link{
-  color: var(--fs-accent) !important;
-  font-weight: 600 !important;
-  border-left: 3px solid var(--fs-accent) !important;
-  padding-left: 0.65rem !important; /* 0.8rem - 0.15rem approx for bar */
-  margin-left: -1px;
+  border-left: none !important;
+  padding-left: inherit !important;
+  margin-left: 0 !important;
 }
-
-/* Keep sub-nav clean */
 .md-nav__item .md-nav{
   border-left: none !important;
-  margin-left: 0.6rem !important;
 }
 
-/* Folder/expand arrows:
-   - default: soft white
-   - active path: purple (matches the left bar) */
-.md-nav__link .md-nav__icon{
-  color: rgba(255,255,255,0.72) !important;
-  opacity: 1 !important;
+/* Hide the "Table of contents" toggle that can appear in the LEFT nav
+   (the icon often looks like three horizontal lines). Keep folder arrows. */
+.md-sidebar--primary label.md-nav__link[for="__toc"],
+.md-sidebar--primary a.md-nav__link[href="#__toc"],
+.md-sidebar--primary .md-nav__icon--toc,
+.md-sidebar--primary .md-nav__link[for="__toc"],
+.md-sidebar--primary .md-nav__link[href="#__toc"]{
+  display: none !important;
 }
 
-.md-nav__item--active > .md-nav__link .md-nav__icon{
-  color: var(--fs-accent) !important;
-}
-
-/* Hover: text brighten */
-.md-nav__link:hover{
-  color: #ffffff !important;
-  background-color: transparent !important;
-}
-
-/* --------------------------------------------------------------------------
-   Right TOC ("On this page")
-   -------------------------------------------------------------------------- */
+/* Right TOC title (simple, no hacks) */
 .md-nav--secondary .md-nav__title{
-  font-size: 0.7rem !important;
+  font-size: 0.65rem !important;
   color: var(--md-default-fg-color--light) !important;
   letter-spacing: 0.02em;
 }
 
-.md-nav--secondary .md-nav__link{
-  font-size: 0.72rem !important;
-  color: var(--md-default-fg-color--light) !important;
-}
-
-/* Active TOC item in purple */
-.md-nav--secondary .md-nav__item--active > .md-nav__link{
-  color: var(--fs-accent) !important;
-  font-weight: 600 !important;
-}
-
-/* Some versions use ::before as the active marker */
-.md-nav--secondary .md-nav__item--active > .md-nav__link::before{
-  background-color: var(--fs-accent) !important;
-}
-
-/* --------------------------------------------------------------------------
-   Content width + breadcrumb
-   -------------------------------------------------------------------------- */
-.md-content__inner{
-  max-width: 62rem !important;
-  margin: 0 auto !important;
-  padding: 0.75rem 2.5rem 3rem 2.5rem !important;
-}
-
-@media screen and (max-width: 59.9375em){
-  .md-content__inner{
-    padding: 0.75rem 1rem 2.5rem 1rem !important;
-  }
-}
-
-/* Breadcrumb (kill blue) */
-.md-content__nav{
-  font-size: 0.62rem;
-  margin-bottom: 1.5rem;
-}
-
+/* Breadcrumb links (no blue) */
 .md-content__nav a{
   color: var(--md-default-fg-color--light) !important;
   text-decoration: none !important;
 }
-
 .md-content__nav a:hover{
   color: var(--fs-accent) !important;
 }
@@ -171,7 +94,6 @@
   font-weight: 800;
   margin-top: 0;
 }
-
 .md-typeset a{
   color: var(--fs-accent);
 }
