@@ -5,11 +5,11 @@ theme:
   name: material
   language: en
   features:
-    - navigation.path              # 面包屑路径
-    - navigation.top               # 回到顶部
+    - navigation.path              # 顶部面包屑路径
+    - navigation.top               # 回到顶部按钮
     - navigation.tracking          # 地址栏锚点同步
-    - content.code.copy           # 代码复制
-    - toc.follow                  # 目录跟随滚动
+    - content.code.copy           # 代码复制按钮
+    - toc.follow                  # 右侧目录跟随滚动
     # 已移除 navigation.indexes 以根除三横杠图标
 
   palette:
