@@ -1,7 +1,7 @@
 /* ==========================================================================
    Fashion Star Wiki - Minimal stable overrides
-   V12: Fix same-level indent mismatch (e.g., StarAI Arm vs Datasheet) + tighter bar/text gap
-   Based on: V10 baseline + V11 single-bar fix
+   V10 baseline (user-stable)
+   V13: Normalize same-level indent for section index items + keep single active bar + stable gutter
    Brand accent: #8641A9 | Dark bg: #131314
    ========================================================================== */
 
@@ -312,21 +312,70 @@ font-weight: 600 !important;
   font-weight: 600 !important;
 }
 
-/* ==========================================================================
-   V11 Patch: Prevent "double bar" on index pages while keeping parent bars
-   - Material sometimes adds .md-nav__link--active to the current page too.
-   - This can stack with [aria-current="page"] bar => looks like double lines.
-   - We disable the bar coming from .md-nav__link--active and rely on:
-       * Parent trail: .md-nav__item--active > .md-nav__link:not([aria-current="page"])
-       * Current page: .md-nav__link[aria-current="page"]
-   ========================================================================== */
+/* =========================================================
+   Hotfix: avoid double purple bars on index pages
+   - Keep ancestor bars
+   - Keep current-page bar
+   - Prevent duplicate bar when a link is both "active" and "aria-current"
+   (Safe override appended; does NOT remove existing rules)
+   ========================================================= */
 
-/* Disable any bar drawn via .md-nav__link--active to avoid duplicates */
+/* If any previous rule draws a bar on .md-nav__link--active, disable it */
 .md-sidebar--primary .md-nav__link--active::before{
   content: none !important;
 }
 
-/* Re-assert bars for parent trail + current page (same geometry as V10) */
+/* Draw bars only for active trail (excluding current page) and current page */
+.md-sidebar--primary .md-nav__item--active > .md-nav__link:not([aria-current="page"])::before,
+.md-sidebar--primary .md-nav__link[aria-current="page"]::before{
+  content: "";
+  position: absolute;
+  left: 8px;
+  width: 3px;
+  top: 50%;
+  height: 17.568px;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  background: var(--fs-accent);
+  opacity: 1;
+}
+
+/* ==========================================================================
+   V13 Patch (only fixes indent/gutter — does NOT change hover behavior)
+   Symptom:
+   - Same-level items can appear with different indentation (e.g., Datasheet vs StarAI Arm).
+   Cause:
+   - With index.md, a section title becomes an <a class="md-nav__link md-nav__link--index">.
+     Without index.md, it's often a <label class="md-nav__link">.
+     Theme applies slightly different padding for these variants.
+   Fix:
+   - Force the SAME left gutter for both <a> and <label> variants at the same level.
+   - Preserve your single-bar logic (ancestor + current page only).
+   ========================================================================== */
+
+/* 1) One consistent gutter for ALL primary nav links (both <a> and <label>) */
+.md-sidebar--primary a.md-nav__link,
+.md-sidebar--primary label.md-nav__link{
+  padding-left: 18px !important;
+  padding-inline-start: 18px !important;
+  box-sizing: border-box;
+}
+
+/* 2) Normalize section/index link padding explicitly (index.md creates --index) */
+.md-sidebar--primary .md-nav__item--section > a.md-nav__link,
+.md-sidebar--primary .md-nav__item--section > a.md-nav__link.md-nav__link--index,
+.md-sidebar--primary .md-nav__item--section > label.md-nav__link{
+  padding-left: 18px !important;
+  padding-inline-start: 18px !important;
+}
+
+/* 3) Keep single-bar logic (avoid index-page double bars)
+      Disable bars from .md-nav__link--active; use parent trail + aria-current only. */
+.md-sidebar--primary .md-nav__link--active::before{
+  content: none !important;
+}
+
+/* Re-assert bars for parent trail + current page (same geometry) */
 .md-sidebar--primary .md-nav__item--active > .md-nav__link:not([aria-current="page"])::before,
 .md-sidebar--primary .md-nav__link[aria-current="page"]::before{
   content: "" !important;
@@ -334,42 +383,17 @@ font-weight: 600 !important;
   top: 50%;
   height: 17.568px;
   transform: translateY(-50%);
-  left: 8px;
-  width: 3px;
+  left: 8px !important;
+  width: 3px !important;
   background: var(--fs-accent);
   border-radius: 2px;
   pointer-events: none;
 }
 
-/* ==========================================================================
-   V12 Patch: Same-level alignment + tighter bar-to-text gap
-   Problem observed:
-   - Some items (especially section index pages) can look more indented than peers.
-   Likely cause:
-   - Mixed padding-left rules (16px vs 18px) + active-state padding makes active items shift.
-   Fix:
-   - Force ONE consistent left gutter (18px) for ALL primary nav links, all levels.
-   - Move the bar slightly right so the gap to text is consistent and smaller.
-   ========================================================================== */
-
-/* 1) One gutter for everyone (prevents "StarAI Arm" vs "Datasheet" mismatch) */
-.md-sidebar--primary .md-nav__link,
-.md-sidebar--primary .md-nav__item .md-nav__link{
-  padding-left: 18px !important;
-  box-sizing: border-box;
-  position: relative; /* anchor for the bar */
-}
-
-/* 2) Ensure active/current links don't add extra padding beyond the shared gutter */
+/* 4) Ensure active/current states don't shift text */
 .md-sidebar--primary .md-nav__link--active,
 .md-sidebar--primary .md-nav__item--active > .md-nav__link,
 .md-sidebar--primary .md-nav__link[aria-current="page"]{
   padding-left: 18px !important;
-}
-
-/* 3) Bar position: keep width=3px but reduce visual gap to text (gap = 18 - left - 3) */
-.md-sidebar--primary .md-nav__item--active > .md-nav__link:not([aria-current="page"])::before,
-.md-sidebar--primary .md-nav__link[aria-current="page"]::before{
-  left: 10px !important;  /* was 8px -> tighter to text */
-  width: 3px !important;
+  padding-inline-start: 18px !important;
 }
