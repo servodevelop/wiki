@@ -55,7 +55,7 @@ label.md-nav__link[for*="__toc"] {
   line-height: 1.25 !important;       
   font-size: 0.75rem !important;      
   color: var(--md-default-fg-color) !important; /* 初始设为标准白/灰 */
-  min-height: 1.7rem;                 
+  min-height: 1.5rem;                 
   display: flex !important;
   align-items: center;                
   transition: all 0.2s ease;
