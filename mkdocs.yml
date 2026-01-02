@@ -50,7 +50,8 @@ plugins:
 nav:
   - Home: index.md
   - UART Servo:
-      - Protocol: uart_servo/protocols/index.md
+      - Protocol: 
+          - Protocol: uart_servo/protocols/uart_rs_485_protocol
       - Datasheet:
           - HA8/RA8-U25(H)-M: uart_servo/datasheet/HA_RA8_U25(H)_M.md
           - HA8/RA8-U35(H)-M: uart_servo/datasheet/HA_RA8_U35(H)_M.md
