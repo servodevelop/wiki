@@ -1,5 +1,6 @@
 /* ==========================================================================
-   Fashion Star Wiki - V14 (based on your last stable V10)
+   Fashion Star Wiki
+   Version: V15 (based on V14)
    Minimal stable overrides + primary-nav alignment fix for md-nav__container
    Brand accent: #8641A9 | Dark bg: #131314
    ========================================================================== */
@@ -92,6 +93,14 @@
   position: relative; /* anchor for the bar */
 }
 
+/* V15 PATCH: ensure nav rows are true single-line boxes and vertically centered */
+.md-sidebar--primary .md-nav__link,
+.md-sidebar--primary label.md-nav__link,
+.md-sidebar--primary .md-nav__link.md-nav__container{
+  display: flex !important;
+  align-items: center !important;
+}
+
 /* Active text: brand color + semi-bold */
 .md-sidebar--primary .md-nav__link--active,
 .md-sidebar--primary .md-nav__item--active > .md-nav__link,
@@ -106,7 +115,7 @@
 .md-sidebar--primary .md-nav__link[aria-current="page"]::before{
   content: "";
   position: absolute;
-  top: 50%;
+  top: calc(50% + 1px);
   height: 17.568px;
   transform: translateY(-50%);
   left: 8px;
