@@ -391,3 +391,27 @@
     display: none !important;
   }
 }
+
+
+/* ==========================================================================
+   V14.5 - Mobile drawer nested-title: fix back arrow overlapping section title
+   Reason: .md-nav__button inside .md-nav__title can be absolutely positioned by theme.
+   Fix: force it into normal flex flow (no absolute positioning), add small gap.
+   ========================================================================== */
+@media screen and (max-width: 59.9375em){
+  .md-sidebar--primary .md-nav__title{
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+
+  /* Put the back button in the flex flow so it cannot overlap the title text */
+  .md-sidebar--primary .md-nav__title > .md-nav__button{
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    margin: 0 !important;
+    flex: 0 0 auto !important;
+  }
+}
