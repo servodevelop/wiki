@@ -1,7 +1,8 @@
 /* ==========================================================================
-   Fashion Star Wiki - Minimal stable overrides
-   V10 baseline (user-stable)
-   V13: Normalize same-level indent for section index items + keep single active bar + stable gutter
+   Fashion Star Wiki - Minimal stable overrides (V10 baseline)
+   V13 (rev2): Make active-bar gap consistent across ALL nav levels by using Material's nav-level variables.
+   - Keeps: single bar (ancestors + current page), 3px width, 17.568px height
+   - Fixes: deeper levels (e.g., StarAI Arm) having huge bar-to-text gap
    Brand accent: #8641A9 | Dark bg: #131314
    ========================================================================== */
 
@@ -341,59 +342,64 @@ font-weight: 600 !important;
 }
 
 /* ==========================================================================
-   V13 Patch (only fixes indent/gutter — does NOT change hover behavior)
-   Symptom:
-   - Same-level items can appear with different indentation (e.g., Datasheet vs StarAI Arm).
-   Cause:
-   - With index.md, a section title becomes an <a class="md-nav__link md-nav__link--index">.
-     Without index.md, it's often a <label class="md-nav__link">.
-     Theme applies slightly different padding for these variants.
-   Fix:
-   - Force the SAME left gutter for both <a> and <label> variants at the same level.
-   - Preserve your single-bar logic (ancestor + current page only).
+   V13 (rev2) Patch — consistent bar + gutter per level
+   MkDocs Material exposes:
+     --md-nav-level  (0,1,2...)  inherited by nested navs
+     --md-nav-indent (indent size) used by the theme
+   We define a per-level gutter so:
+     text start = (level * indent) + 18px
+     bar left   = (level * indent) + 8px
+   => constant gap between bar and text at every depth
    ========================================================================== */
 
-/* 1) One consistent gutter for ALL primary nav links (both <a> and <label>) */
+.md-sidebar--primary{
+  --fs-bar-w: 3px;
+  --fs-bar-h: 17.568px;
+  --fs-bar-left: 8px;    /* inside the per-level gutter */
+  --fs-text-left: 18px;  /* per-level gutter start for text */
+}
+
+/* Force consistent per-level padding for BOTH <a> and <label> nav links */
 .md-sidebar--primary a.md-nav__link,
 .md-sidebar--primary label.md-nav__link{
-  padding-left: 18px !important;
-  padding-inline-start: 18px !important;
+  padding-inline-start: calc(var(--md-nav-level, 0) * var(--md-nav-indent, 0px) + var(--fs-text-left)) !important;
+  padding-left:         calc(var(--md-nav-level, 0) * var(--md-nav-indent, 0px) + var(--fs-text-left)) !important;
   box-sizing: border-box;
+  position: relative; /* anchor for ::before bar */
 }
 
-/* 2) Normalize section/index link padding explicitly (index.md creates --index) */
-.md-sidebar--primary .md-nav__item--section > a.md-nav__link,
-.md-sidebar--primary .md-nav__item--section > a.md-nav__link.md-nav__link--index,
+/* Remove any earlier special-case padding that could re-introduce mismatches */
+.md-sidebar--primary .md-nav__item--section > .md-nav__link,
 .md-sidebar--primary .md-nav__item--section > label.md-nav__link{
-  padding-left: 18px !important;
-  padding-inline-start: 18px !important;
+  padding-inline-start: calc(var(--md-nav-level, 0) * var(--md-nav-indent, 0px) + var(--fs-text-left)) !important;
+  padding-left:         calc(var(--md-nav-level, 0) * var(--md-nav-indent, 0px) + var(--fs-text-left)) !important;
 }
 
-/* 3) Keep single-bar logic (avoid index-page double bars)
-      Disable bars from .md-nav__link--active; use parent trail + aria-current only. */
-.md-sidebar--primary .md-nav__link--active::before{
-  content: none !important;
+/* Current page styling (keeps your v10 behavior) */
+.md-sidebar--primary .md-nav__link--active,
+.md-sidebar--primary .md-nav__item--active > .md-nav__link,
+.md-sidebar--primary .md-nav__link[aria-current="page"]{
+  /* ensure no extra shifting */
+  padding-inline-start: calc(var(--md-nav-level, 0) * var(--md-nav-indent, 0px) + var(--fs-text-left)) !important;
+  padding-left:         calc(var(--md-nav-level, 0) * var(--md-nav-indent, 0px) + var(--fs-text-left)) !important;
 }
 
-/* Re-assert bars for parent trail + current page (same geometry) */
+/* Single-bar logic: bars only for ancestors + current page (not hover-only) */
 .md-sidebar--primary .md-nav__item--active > .md-nav__link:not([aria-current="page"])::before,
 .md-sidebar--primary .md-nav__link[aria-current="page"]::before{
-  content: "" !important;
+  content: "";
   position: absolute;
   top: 50%;
-  height: 17.568px;
+  height: var(--fs-bar-h);
   transform: translateY(-50%);
-  left: 8px !important;
-  width: 3px !important;
+  left: calc(var(--md-nav-level, 0) * var(--md-nav-indent, 0px) + var(--fs-bar-left));
+  width: var(--fs-bar-w);
   background: var(--fs-accent);
   border-radius: 2px;
   pointer-events: none;
 }
 
-/* 4) Ensure active/current states don't shift text */
-.md-sidebar--primary .md-nav__link--active,
-.md-sidebar--primary .md-nav__item--active > .md-nav__link,
-.md-sidebar--primary .md-nav__link[aria-current="page"]{
-  padding-left: 18px !important;
-  padding-inline-start: 18px !important;
+/* Ensure we don't accidentally draw a second bar via .md-nav__link--active rules elsewhere */
+.md-sidebar--primary .md-nav__link--active::before{
+  content: none !important;
 }
