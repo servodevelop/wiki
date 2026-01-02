@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Fashion Star Wiki - V14.1 (V14 + active bar follows link height)
+   Fashion Star Wiki - V14.2 (V14 + active bar follows link height)
    Fix: primary-nav active purple bar stretches to link height (single-line ~19.8px)
    Brand accent: #8641A9 | Dark bg: #131314
    ========================================================================== */
@@ -246,4 +246,46 @@
 .md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link::before,
 .md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link::before{
   content: none !important;
+}
+
+/* ==========================================================================
+   V14.2 Patch
+   1) Mobile: hide logo button (book icon) in header
+   2) Primary nav: vertically center text vs active-trail bar for ALL item types
+   ========================================================================== */
+
+/* 1) Hide header logo button (especially on mobile) */
+.md-header__button.md-logo{
+  display: none !important;
+}
+@media screen and (max-width: 59.984375em){
+  .md-header__button.md-logo{
+    display: none !important;
+  }
+  /* remove the empty gap left by logo */
+  .md-header__title{
+    margin-left: 0 !important;
+  }
+}
+
+/* 2) Vertically center left-nav item text for a/label/div containers */
+.md-sidebar--primary .md-nav__link,
+.md-sidebar--primary .md-nav__link.md-nav__container,
+.md-sidebar--primary a.md-nav__link,
+.md-sidebar--primary label.md-nav__link{
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Normalize the line box so 14.4px text sits visually centered in the item row */
+.md-sidebar--primary .md-nav__link .md-ellipsis,
+.md-sidebar--primary .md-nav__link.md-nav__container .md-ellipsis{
+  line-height: 1.375 !important;   /* 14.4px * 1.375 = 19.8px */
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* Ensure the clickable row height matches the bar height target */
+.md-sidebar--primary .md-nav__link{
+  min-height: 19.8px !important;
 }
