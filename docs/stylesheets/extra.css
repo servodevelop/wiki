@@ -65,7 +65,7 @@
 @media screen and (min-width: 60em){
   .md-sidebar--secondary .md-nav--secondary{
     position: relative !important;
-    padding-left: 8px !important; /* space between line and text */
+    padding-left: 1px !important; /* space between line and text */
   }
   .md-sidebar--secondary .md-nav--secondary::before{
     content: "";
