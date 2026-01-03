@@ -482,7 +482,7 @@
 
 
 /* ==========================================================================
-   V18.8 patch - Headings color matches normal text (no logo accent on headings)
+   V18.7 patch - Headings color matches normal text (no logo accent on headings)
    ========================================================================== */
 .md-typeset h1,
 .md-typeset h2,
@@ -493,43 +493,71 @@
   color: inherit !important;
 }
 
+/* ======================================================================
+   V18.10 patch - Touch devices (iPhone/iPad): revert drawer navigation to
+   V18.1 behavior (collapsible sections + chevrons/back works normally).
 
-/* ==========================================================================
-   V18.8 patch - Restore mobile/iPad navigation behavior
-   Issue seen on some long pages (e.g. PC configuration manual):
-   - Drawer menu / back-to-parent / nested sections not working correctly
-   Root cause: desktop "always expand level-2" + "hide chevrons" rules leaking into
-               touch layouts (mobile/iPad), where Material relies on toggles.
-   Fix: On screens < 60em, re-enable Material's toggle/collapse behavior and show
-        the necessary icons/TOC entry. (Desktop keeps the always-open layout.)
-   ========================================================================== */
-@media screen and (max-width: 59.9375em){
+   Why:
+   - iPad viewport can be >= 60em, so “desktop” rules that force level-2 open
+     and hide top-level chevrons can break the mobile drawer UX.
+   - We keep the desktop experience unchanged, but on touch devices we restore
+     Material’s default toggle-driven expand/collapse.
+   ====================================================================== */
 
-  /* 1) Ensure drawer title keeps space for the back arrow */
-  .md-sidebar--primary .md-nav__title{
-    padding: 0 16px 0 56px !important; /* reserve back icon */
-  }
+/* Apply to touch-first devices (covers iPhone/iPad, even when wide) */
+@media (hover: none) and (pointer: coarse){
 
-  /* 2) Re-enable the TOC entry inside the drawer (needed on mobile) */
-  .md-sidebar--primary label.md-nav__link[for="__toc"],
-  .md-sidebar--primary a.md-nav__link[href="#__toc"],
-  .md-sidebar--primary .md-nav__icon--toc,
-  .md-sidebar--primary .md-nav__link[for="__toc"],
-  .md-sidebar--primary .md-nav__link[href="#__toc"]{
-    display: flex !important;
-  }
-
-  /* 3) Re-show top-level chevrons (so nested sections can be opened/closed) */
-  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item > label.md-nav__link > .md-nav__icon,
-  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item > a.md-nav__link > .md-nav__icon{
+  /* 1) Re-enable the 1st-level chevrons (they are useful in the drawer) */
+  .md-sidebar--primary
+  .md-nav--primary > .md-nav__list > .md-nav__item--nested
+  > label.md-nav__link .md-nav__icon,
+  .md-sidebar--primary
+  .md-nav--primary > .md-nav__list > .md-nav__item--nested
+  > a.md-nav__link .md-nav__icon{
     display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 
-  /* 4) Restore Material's collapse logic for nested navigation */
-  .md-sidebar--primary .md-nav__toggle ~ .md-nav{
+  /* 2) Restore collapsible behavior (don’t force all level-2 open) */
+  .md-sidebar--primary
+  .md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav{
     display: none !important;
   }
-  .md-sidebar--primary .md-nav__toggle:checked ~ .md-nav{
+
+  /* When the toggle is checked (Material), show the nested list */
+  .md-sidebar--primary
+  .md-nav--primary > .md-nav__list > .md-nav__item--nested
+  > input.md-nav__toggle:checked ~ .md-nav{
+    display: block !important;
+  }
+
+  /* Keep the current active trail expanded for usability */
+  .md-sidebar--primary .md-nav__item--active > .md-nav{
+    display: block !important;
+  }
+
+  /* 3) Undo the “arrow space removal” padding tweaks intended for desktop */
+  .md-sidebar--primary
+  .md-nav--primary > .md-nav__list > .md-nav__item--nested
+  > label.md-nav__link,
+  .md-sidebar--primary
+  .md-nav--primary > .md-nav__list > .md-nav__item--nested
+  > a.md-nav__link{
+    padding-right: 16px !important; /* back to a safe default */
+  }
+}
+
+/* iPadOS can report pointer=fine when using a trackpad; ensure drawer still OK
+   by also reverting when there’s no hover (touch) */
+@media (hover: none){
+  .md-sidebar--primary
+  .md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav{
+    display: none !important;
+  }
+  .md-sidebar--primary
+  .md-nav--primary > .md-nav__list > .md-nav__item--nested
+  > input.md-nav__toggle:checked ~ .md-nav{
     display: block !important;
   }
 }
