@@ -502,3 +502,65 @@
   }
 }
 
+/* ===========================================================
+   Fashion Star Wiki – Extra CSS (V16)
+   Goal: keep divider positions; make chevrons closer to divider;
+         unify left/right sidebar widths; keep palette toggle working.
+   =========================================================== */
+
+@media (min-width: 60em) {
+  :root {
+    /* Sidebar widths (match L/R visually) */
+    --fs-sidebar-w: 17rem;              /* requested */
+    --fs-sidebar-pad: 1rem;
+
+    /* Chevron placement */
+    --fs-chevron-inset: 0px;
+    --fs-chevron-reserve: 2.2rem;
+  }
+
+  /* Only change column widths (dividers stay where they are relative to columns) */
+  .md-sidebar--primary { width: var(--fs-sidebar-w) !important; }
+  .md-sidebar--secondary { width: var(--fs-sidebar-w) !important; }
+
+  /* Left sidebar: remove extra inner right padding that creates an "empty chevron column" */
+  .md-sidebar--primary .md-sidebar__inner {
+    padding-right: 0 !important;
+  }
+
+  /* Keep nav content padded nicely */
+  .md-sidebar--primary .md-nav__list,
+  .md-sidebar--secondary .md-nav__list {
+    padding-inline: var(--fs-sidebar-pad) !important;
+  }
+
+  /* Reserve space so link text won't collide with chevrons */
+  .md-sidebar--primary .md-nav__item--nested > :is(a,label).md-nav__link,
+  .md-sidebar--primary .md-nav__item--section > :is(a,label).md-nav__link,
+  .md-sidebar--primary :is(a,label).md-nav__link {
+    padding-inline-end: calc(var(--fs-chevron-reserve) + var(--fs-sidebar-pad)) !important;
+  }
+
+  /* Push chevrons to the far right */
+  .md-sidebar--primary .md-nav__item--nested > :is(a,label).md-nav__link::after,
+  .md-sidebar--primary .md-nav__item--section > :is(a,label).md-nav__link::after {
+    inset-inline-end: var(--fs-chevron-inset) !important;
+    right: var(--fs-chevron-inset) !important;
+  }
+
+  /* MkDocs Material variants that render a separate icon element */
+  .md-sidebar--primary .md-nav__icon {
+    inset-inline-end: var(--fs-chevron-inset) !important;
+    right: var(--fs-chevron-inset) !important;
+  }
+
+  /* Right sidebar: align inner padding with left sidebar "divider distance" feel */
+  .md-sidebar--secondary .md-sidebar__inner {
+    padding-left: 0 !important;
+  }
+
+  /* Optional: make TOC denser when long */
+  .md-sidebar--secondary .md-nav__link {
+    padding-block: 0.35rem !important;
+  }
+}
