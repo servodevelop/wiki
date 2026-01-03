@@ -461,6 +461,21 @@
 
 .md-sidebar--secondary .md-nav--secondary .md-nav__item--active > .md-nav__link,
 .md-sidebar--secondary .md-nav--secondary .md-nav__link--active{
-  color: var(--fs-toc-fg) !important;
+  color: var(--fs-accent) !important;
   font-weight: 600 !important;
+}
+/* ==========================================================================
+   Fashion Star Wiki - V18.5 patch
+   - Keep RIGHT TOC text color as configured
+   - Restore CONTENT headings (h1-h6) to brand accent color
+   ========================================================================== */
+
+/* Content headings keep logo color (both light & dark) */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6{
+  color: var(--fs-accent) !important;
 }
