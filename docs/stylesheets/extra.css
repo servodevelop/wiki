@@ -353,7 +353,6 @@
   font-weight: 600 !important;
 }
 
-@media screen and (min-width: 60em){
 /* 2) Always show level-2 items (children of the level-1 items) */
 .md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav{
   display: block !important;
@@ -370,9 +369,6 @@
   display: block !important;
 }
 
-
-
-}
 
 /* ==========================================================================
    V18.3 patch
@@ -402,7 +398,6 @@
 }
 
 
-@media screen and (min-width: 60em){
 /* Remove 1st-level chevrons in the left primary nav (since level-2 is always expanded) */
 .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item > label.md-nav__link > .md-nav__icon,
 .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item > a.md-nav__link > .md-nav__icon{
@@ -415,19 +410,16 @@
   padding-right: 16px !important;
 }
 
-
-}
-
 /* ==========================================================================
    V18.4 patch - content/TOC typography colors
    Requirements:
-   - Left nav text color: dark #C4C7C5, light #444746
+   - Left nav text color: dark #C4C7C5, light #1A1A1A
    - Content + right TOC text color (including headings): dark #E3E3E3, light #1F1F1F
    - Keep links in brand accent; remove brand accent from headings/TOC active color
    ========================================================================== */
 
 :root{
-  --fs-leftnav-fg: #444746;   /* light scheme */
+  --fs-leftnav-fg: #1A1A1A;   /* light scheme */
   --fs-content-fg: #1F1F1F;   /* light scheme */
   --fs-toc-fg: #1F1F1F;       /* light scheme */
 }
@@ -469,140 +461,78 @@
 
 .md-sidebar--secondary .md-nav--secondary .md-nav__item--active > .md-nav__link,
 .md-sidebar--secondary .md-nav--secondary .md-nav__link--active{
-  color: var(--fs-accent) !important;
+  color: var(--fs-toc-fg) !important;
   font-weight: 600 !important;
 }
-/* ==========================================================================
-   Fashion Star Wiki - V18.5 patch
-   - Keep RIGHT TOC text color as configured
-   - Restore CONTENT headings (h1-h6) to brand accent color
-   ========================================================================== */
-
-/* Content headings keep logo color (both light & dark) */
-.md-typeset h1,
-.md-typeset h2,
-.md-typeset h3,
-.md-typeset h4,
-.md-typeset h5,
-.md-typeset h6{
-  color: var(--fs-accent) !important;
-}
 
 
 /* ==========================================================================
-   V18.7 patch - Headings color matches normal text (no logo accent on headings)
+   V18.4.1 patch
+   - Add clean hover highlight for LEFT nav + RIGHT TOC (no shadow, near-rect corners)
+   - Highlight is drawn on the <li> so it covers BOTH text and the chevron icon.
+   - Keeps existing "active" logo-color logic; hover only adds a subtle background.
    ========================================================================== */
-.md-typeset h1,
-.md-typeset h2,
-.md-typeset h3,
-.md-typeset h4,
-.md-typeset h5,
-.md-typeset h6{
-  color: inherit !important;
+
+:root{
+  /* Hover background (light) */
+  --fs-nav-hover-bg: rgba(60, 64, 67, 0.10); /* slightly stronger so it's visible in light mode */
+}
+[data-md-color-scheme="slate"]{
+  /* Hover background (dark) */
+  --fs-nav-hover-bg: rgba(255, 255, 255, 0.06);
 }
 
-/* ======================================================================
-   V18.10 patch - Touch devices (iPhone/iPad): revert drawer navigation to
-   V18.1 behavior (collapsible sections + chevrons/back works normally).
-
-   Why:
-   - iPad viewport can be >= 60em, so “desktop” rules that force level-2 open
-     and hide top-level chevrons can break the mobile drawer UX.
-   - We keep the desktop experience unchanged, but on touch devices we restore
-     Material’s default toggle-driven expand/collapse.
-   ====================================================================== */
-
-/* Apply to touch-first devices (covers iPhone/iPad, even when wide) */
-@media (hover: none) and (pointer: coarse){
-
-  /* 1) Re-enable the 1st-level chevrons (they are useful in the drawer) */
-  .md-sidebar--primary
-  .md-nav--primary > .md-nav__list > .md-nav__item--nested
-  > label.md-nav__link .md-nav__icon,
-  .md-sidebar--primary
-  .md-nav--primary > .md-nav__list > .md-nav__item--nested
-  > a.md-nav__link .md-nav__icon{
-    display: inline-flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-
-  /* 2) Restore collapsible behavior (don’t force all level-2 open) */
-  .md-sidebar--primary
-  .md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav{
-    display: none !important;
-  }
-
-  /* When the toggle is checked (Material), show the nested list */
-  .md-sidebar--primary
-  .md-nav--primary > .md-nav__list > .md-nav__item--nested
-  > input.md-nav__toggle:checked ~ .md-nav{
-    display: block !important;
-  }
-
-  /* Keep the current active trail expanded for usability */
-  .md-sidebar--primary .md-nav__item--active > .md-nav{
-    display: block !important;
-  }
-
-  /* 3) Undo the “arrow space removal” padding tweaks intended for desktop */
-  .md-sidebar--primary
-  .md-nav--primary > .md-nav__list > .md-nav__item--nested
-  > label.md-nav__link,
-  .md-sidebar--primary
-  .md-nav--primary > .md-nav__list > .md-nav__item--nested
-  > a.md-nav__link{
-    padding-right: 16px !important; /* back to a safe default */
-  }
+/* ---------- LEFT: primary sidebar + mobile drawer ---------- */
+.md-sidebar--primary .md-nav__list .md-nav__item{
+  position: relative;
+}
+.md-sidebar--primary .md-nav__list .md-nav__item::before{
+  content: "";
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  top: 1px;
+  bottom: 1px;
+  border-radius: 2px;
+  background: transparent;
+  pointer-events: none;
+  z-index: 0;
+  transition: background-color 80ms linear;
+}
+.md-sidebar--primary .md-nav__list .md-nav__item:hover::before{
+  background: var(--fs-nav-hover-bg);
+}
+/* Ensure links/icons sit above the hover layer */
+.md-sidebar--primary .md-nav__link,
+.md-sidebar--primary .md-nav__label,
+.md-sidebar--primary .md-nav__link.md-nav__container,
+.md-sidebar--primary .md-nav__toggle{
+  position: relative;
+  z-index: 1;
 }
 
-/* iPadOS can report pointer=fine when using a trackpad; ensure drawer still OK
-   by also reverting when there’s no hover (touch) */
-@media (hover: none){
-  .md-sidebar--primary
-  .md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav{
-    display: none !important;
-  }
-  .md-sidebar--primary
-  .md-nav--primary > .md-nav__list > .md-nav__item--nested
-  > input.md-nav__toggle:checked ~ .md-nav{
-    display: block !important;
-  }
+/* ---------- RIGHT: secondary TOC ---------- */
+.md-sidebar--secondary .md-nav--secondary .md-nav__item{
+  position: relative;
 }
-
-
-/* ==========================================================================
-   V18.13 patch - Headings weight: 700 for H1-H6 (colors unchanged)
-   ========================================================================== */
-.md-typeset h1,
-.md-typeset h2,
-.md-typeset h3,
-.md-typeset h4,
-.md-typeset h5,
-.md-typeset h6{
-  font-weight: 700 !important;
+.md-sidebar--secondary .md-nav--secondary .md-nav__item::before{
+  content: "";
+  position: absolute;
+  left: 6px;   /* keep the vertical divider visually separate */
+  right: 6px;
+  top: 1px;
+  bottom: 1px;
+  border-radius: 2px;
+  background: transparent;
+  pointer-events: none;
+  z-index: 0;
+  transition: background-color 80ms linear;
 }
-
-/* ======================================================================
-   V18.14 patch - restore LEFT NAV active trail color (logo accent)
-   Fixes:
-   1) When a child page (e.g., "Get Ready") is selected, its parents (e.g., "Piper Mate")
-      must also show accent color.
-   Cause:
-   - Later base-color rules re-applied left-nav colors with !important,
-     overriding the earlier active selectors.
-   ====================================================================== */
-
-/* Make current page + active ancestors use accent (applies to both link and container wrappers) */
-.md-sidebar--primary .md-nav__link[aria-current="page"],
-.md-sidebar--primary .md-nav__link[aria-current="page"] > a.md-nav__link,
-.md-sidebar--primary .md-nav__link--active,
-.md-sidebar--primary .md-nav__link--active > a.md-nav__link,
-.md-sidebar--primary .md-nav__item--active > .md-nav__link,
-.md-sidebar--primary .md-nav__item--active > label.md-nav__link,
-.md-sidebar--primary .md-nav__item--active > .md-nav__link.md-nav__container,
-.md-sidebar--primary .md-nav__item--active > .md-nav__link.md-nav__container > a.md-nav__link,
-.md-sidebar--primary .md-nav__item--active > .md-nav__link.md-nav__container > label.md-nav__link{
-  color: var(--fs-accent) !important;
-  font-weight: 600 !important;
+.md-sidebar--secondary .md-nav--secondary .md-nav__item:hover::before{
+  background: var(--fs-nav-hover-bg);
+}
+/* Ensure TOC links are above hover layer */
+.md-sidebar--secondary .md-nav--secondary .md-nav__link{
+  position: relative;
+  z-index: 1;
 }
