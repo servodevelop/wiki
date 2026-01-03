@@ -569,3 +569,16 @@
     display: block !important;
   }
 }
+
+
+/* ==========================================================================
+   V18.13 patch - Headings weight: 700 for H1-H6 (colors unchanged)
+   ========================================================================== */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6{
+  font-weight: 700 !important;
+}
