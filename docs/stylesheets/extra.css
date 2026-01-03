@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Fashion Star Wiki - V17.0 (sidebar=200px patch)
+   Fashion Star Wiki - V17.1 (sidebar=200px patch)
    Stable overrides (based on V14.2 + fixes) with WORKING palette toggle restored.
    - Fix: primary nav alignment for md-nav__container (index.md sections)
    - Fix: left-nav active bar vertical centering (bar follows container height)
@@ -24,7 +24,7 @@
   --md-typeset-line-height: 1.8;
   --md-typeset-font-size: 16px;
 
-  /* V17.0 patch: force both sidebars to 200px on desktop */
+  /* V17.1 patch: force both sidebars to 200px on desktop */
   --fs-sidebar-w: 200px;
   --md-sidebar-width: var(--fs-sidebar-w);
   --md-sidebar-width--primary: var(--fs-sidebar-w);
@@ -52,7 +52,31 @@
   display: none !important;
 }
 
-/* Keep layout stable: DO NOT force .md-main__inner to flex/grid */
+/* V17.1 layout patch: force sidebars to 200px by overriding the 3-column grid (desktop only). */
+
+@media screen and (min-width: 60em){
+  /* Force 3-column proportions (left sidebar / content / right TOC) */
+  .md-main__inner{
+    grid-template-columns: var(--fs-sidebar-w) minmax(0, 1fr) var(--fs-sidebar-w) !important;
+  }
+
+  /* Ensure sidebar boxes themselves respect the width */
+  .md-sidebar--primary,
+  .md-sidebar--secondary{
+    width: var(--fs-sidebar-w) !important;
+    max-width: var(--fs-sidebar-w) !important;
+    flex: 0 0 var(--fs-sidebar-w) !important;
+  }
+
+  /* Inner wrappers sometimes carry width constraints */
+  .md-sidebar--primary .md-sidebar__inner,
+  .md-sidebar--primary .md-sidebar__scrollwrap,
+  .md-sidebar--secondary .md-sidebar__inner,
+  .md-sidebar--secondary .md-sidebar__scrollwrap{
+    width: var(--fs-sidebar-w) !important;
+    max-width: var(--fs-sidebar-w) !important;
+  }
+}
 
 
 /* Divider line between left nav and content (stable after JS hydration)
@@ -370,7 +394,7 @@
 
 
 /* ==========================================================================
-   V17.0 patch: sidebar widths = 200px (desktop only)
+   V17.1 patch: sidebar widths = 200px (desktop only)
    ========================================================================== */
 @media screen and (min-width: 60em){
   /* Primary (left) sidebar */
