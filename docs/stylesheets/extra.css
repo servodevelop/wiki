@@ -368,3 +368,34 @@
 .md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item--nested > input ~ .md-nav{
   display: block !important;
 }
+
+
+/* ==========================================================================
+   V18.3 patch
+   - Left nav text color:
+     * light: #444746
+     * slate: #C4C7C5
+   - Remove chevron/arrow for 1st-level items in LEFT primary nav
+   ========================================================================== */
+
+/* Left nav text color tokens */
+:root{ --fs-leftnav-fg: #444746; }
+[data-md-color-scheme="slate"]{ --fs-leftnav-fg: #C4C7C5; }
+
+/* Apply to left sidebar only (keep active/hover overrides intact) */
+.md-sidebar--primary .md-nav__title,
+.md-sidebar--primary .md-nav__link{
+  color: var(--fs-leftnav-fg) !important;
+}
+
+/* Remove 1st-level chevrons in the left primary nav (since level-2 is always expanded) */
+.md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item > label.md-nav__link > .md-nav__icon,
+.md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item > a.md-nav__link > .md-nav__icon{
+  display: none !important;
+}
+
+/* Avoid reserving extra space for the removed icon */
+.md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item > label.md-nav__link,
+.md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item > a.md-nav__link{
+  padding-right: 16px !important;
+}
