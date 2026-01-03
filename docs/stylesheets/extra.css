@@ -413,3 +413,92 @@
     transform: translateY(-50%);
   }
 }
+
+
+/* ============================================================
+   v15.4 — Sidebar divider symmetry + chevron inset sync
+   Your measured values (example):
+   - primary_width = 360px
+   - content_width = 541px
+   - secondary_width = 360px
+   - arrow_to_left_divider = 36px  (too large)
+   Goals:
+   1) Keep the left divider position unchanged (do NOT move primary width)
+   2) Make the left chevron inset match the right sidebar text inset to divider
+   3) Make right sidebar width visually equal to left
+   Notes:
+   - Desktop breakpoint in Material is ~60em; we only change above that.
+   - We avoid touching the theme palette toggle / JS behavior.
+   ============================================================ */
+
+@media (min-width: 60em) {
+
+  /* --- Hard-lock both sidebars to the same width (visual symmetry) --- */
+  :root{
+    /* If your rem is 20px, 18rem = 360px (matches your console table). */
+    --fs-sidebar-w: 18rem;
+    /* Sidebar inner padding (distance from divider to content). */
+    --fs-sidebar-pad: 1rem;
+    /* Reserve enough space for the chevron so text never overlaps it. */
+    --fs-chevron-reserve: 2.4rem;
+  }
+
+  .md-sidebar--primary,
+  .md-sidebar--secondary{
+    width: var(--fs-sidebar-w) !important;
+    flex: 0 0 var(--fs-sidebar-w) !important;
+  }
+
+  .md-sidebar--primary .md-sidebar__inner,
+  .md-sidebar--secondary .md-sidebar__inner{
+    padding-left: var(--fs-sidebar-pad) !important;
+    padding-right: var(--fs-sidebar-pad) !important;
+  }
+
+  /* --- Bring the LEFT sidebar chevron closer to the divider --- */
+  /* Nested items use either:
+     - <a class="md-nav__link"> ... <span class="md-nav__icon"> ... </span>
+     - or a pseudo-element (::after) chevron on the link (depends on version)
+  */
+
+  /* 1) Reserve space on the right edge of the clickable row */
+  .md-sidebar--primary .md-nav__item--nested > :is(a,label).md-nav__link{
+    position: relative !important;
+    padding-right: calc(var(--fs-sidebar-pad) + var(--fs-chevron-reserve)) !important;
+  }
+
+  /* 2) If there is an actual icon element, dock it to the same inset as right sidebar text */
+  .md-sidebar--primary .md-nav__item--nested > :is(a,label).md-nav__link .md-nav__icon{
+    position: absolute !important;
+    inset-inline-end: var(--fs-sidebar-pad) !important; /* << key: inset to divider */
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    margin: 0 !important;
+  }
+
+  /* 3) If chevron is a pseudo-element on the link, force it to the same inset */
+  .md-sidebar--primary .md-nav__item--nested > :is(a,label).md-nav__link::after{
+    position: absolute;
+    inset-inline-end: var(--fs-sidebar-pad) !important;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  /* --- Keep RIGHT sidebar content aligned consistently (avoid extra padding surprises) --- */
+  .md-sidebar--secondary .md-nav{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* Optional: make the right "On this page" list a bit tighter if it feels too loose */
+  .md-sidebar--secondary .md-nav__list,
+  .md-sidebar--secondary .md-nav__item{
+    margin-top: 0.12rem !important;
+    margin-bottom: 0.12rem !important;
+  }
+  .md-sidebar--secondary .md-nav__link{
+    padding-top: 0.18rem !important;
+    padding-bottom: 0.18rem !important;
+  }
+}
+
