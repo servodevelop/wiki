@@ -482,7 +482,7 @@
 
 
 /* ==========================================================================
-   V18.7 patch - Headings color matches normal text (no logo accent on headings)
+   V18.8 patch - Headings color matches normal text (no logo accent on headings)
    ========================================================================== */
 .md-typeset h1,
 .md-typeset h2,
@@ -491,4 +491,45 @@
 .md-typeset h5,
 .md-typeset h6{
   color: inherit !important;
+}
+
+
+/* ==========================================================================
+   V18.8 patch - Restore mobile/iPad navigation behavior
+   Issue seen on some long pages (e.g. PC configuration manual):
+   - Drawer menu / back-to-parent / nested sections not working correctly
+   Root cause: desktop "always expand level-2" + "hide chevrons" rules leaking into
+               touch layouts (mobile/iPad), where Material relies on toggles.
+   Fix: On screens < 60em, re-enable Material's toggle/collapse behavior and show
+        the necessary icons/TOC entry. (Desktop keeps the always-open layout.)
+   ========================================================================== */
+@media screen and (max-width: 59.9375em){
+
+  /* 1) Ensure drawer title keeps space for the back arrow */
+  .md-sidebar--primary .md-nav__title{
+    padding: 0 16px 0 56px !important; /* reserve back icon */
+  }
+
+  /* 2) Re-enable the TOC entry inside the drawer (needed on mobile) */
+  .md-sidebar--primary label.md-nav__link[for="__toc"],
+  .md-sidebar--primary a.md-nav__link[href="#__toc"],
+  .md-sidebar--primary .md-nav__icon--toc,
+  .md-sidebar--primary .md-nav__link[for="__toc"],
+  .md-sidebar--primary .md-nav__link[href="#__toc"]{
+    display: flex !important;
+  }
+
+  /* 3) Re-show top-level chevrons (so nested sections can be opened/closed) */
+  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item > label.md-nav__link > .md-nav__icon,
+  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item > a.md-nav__link > .md-nav__icon{
+    display: inline-flex !important;
+  }
+
+  /* 4) Restore Material's collapse logic for nested navigation */
+  .md-sidebar--primary .md-nav__toggle ~ .md-nav{
+    display: none !important;
+  }
+  .md-sidebar--primary .md-nav__toggle:checked ~ .md-nav{
+    display: block !important;
+  }
 }
