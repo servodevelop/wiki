@@ -318,108 +318,50 @@
 --------------------------------------------------------------------------- */
 
 @media (min-width: 60em) {
-  /* Prefer using MkDocs Material layout variables so all offsets/spacing stay consistent */
+  /* Use Material layout variables so content and sidebars stay in sync */
   :root {
-    /* Total page width (centered) */
-    --md-grid-max-width: 92rem; /* ~1472px */
-
-    /* Sidebar widths */
-    --md-sidebar-width: 18rem;             /* ~288px (left nav) */
-    --md-sidebar-width--secondary: 20rem;  /* ~320px (right TOC) */
-
-    /* Content reading width */
-    --md-content-width: 56rem; /* ~896px */
+    /* Remove the huge auto-padding that comes from centering a fixed max-width grid */
+    --md-grid-max-width: 100%;
+    /* NVIDIA-like ratios */
+    --md-sidebar-width: 16rem;            /* left nav */
+    --md-sidebar-width--secondary: 15rem; /* right "On this page" */
   }
 
-  /* Ensure grid respects our max width */
-  .md-grid {
-    max-width: var(--md-grid-max-width) !important;
+  /* Ensure the main grid can actually expand */
+  .md-grid,
+  .md-main__inner {
+    max-width: 100%;
   }
 
-  /* Match sidebars to the variables (avoid hard-coded mismatches) */
+  /* Sidebar inner padding: keep a small, constant inset (no calc-based giant padding) */
+  .md-sidebar__inner {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
   .md-sidebar--primary {
-    width: var(--md-sidebar-width) !important;
+    width: var(--md-sidebar-width);
   }
   .md-sidebar--secondary {
-    width: var(--md-sidebar-width--secondary) !important;
+    width: var(--md-sidebar-width--secondary);
   }
 
-  /* Make the main article area wider and align predictably */
+  /* Make the article column fill available space and grow wider */
   .md-content {
-    min-width: 0 !important;
+    max-width: none;
   }
   .md-content__inner {
-    max-width: var(--md-content-width) !important;
-    width: 100% !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    max-width: 64rem;       /* wider reading column (about 1024px) */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.6rem;   /* comfortable gutter */
+    padding-right: 1.6rem;
   }
 }
 
-/* On very wide screens, expand slightly (still Nvidia-like, but less cramped) */
+
+/* On very wide screens, allow a bit more width (still readable) */
 @media (min-width: 90em) {
-  :root {
-    --md-grid-max-width: 100rem;  /* ~1600px */
-    --md-content-width: 62rem;    /* ~992px */
-  }
-}
-
-
-/* =====================================================================================
-   v15.2 — NVIDIA-like 3-column proportions (wider reading area)
-   Goal (desktop): Left nav ~18rem, Content ~60rem, Right toc ~20rem, total ~96rem
-   ===================================================================================== */
-
-:root{
-  --fs-max-width: 96rem;
-  --fs-content-width: 60rem;
-  --fs-sidebar-primary: 18rem;
-  --fs-sidebar-secondary: 20rem;
-}
-
-/* Desktop / large screens */
-@media screen and (min-width: 76.25em){
-  /* Increase overall container width (MkDocs Material uses .md-grid as the clamp) */
-  .md-grid{
-    max-width: var(--fs-max-width) !important;
-  }
-
-  /* Keep main row aligned with grid */
-  .md-main__inner{
-    max-width: var(--fs-max-width) !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-
-  /* Sidebars */
-  .md-sidebar--primary{
-    width: var(--fs-sidebar-primary) !important;
-  }
-  .md-sidebar--secondary{
-    width: var(--fs-sidebar-secondary) !important;
-  }
-
-  /* Main content column */
-  .md-content{
-    max-width: none !important;
-  }
   .md-content__inner{
-    max-width: var(--fs-content-width) !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    max-width: 68rem; /* ~1088px */
   }
-}
-
-/* Medium screens (keep it roomy but avoid overflow) */
-@media screen and (min-width: 60em) and (max-width: 76.249em){
-  :root{
-    --fs-max-width: 92rem;
-    --fs-content-width: 56rem;
-    --fs-sidebar-primary: 16rem;
-    --fs-sidebar-secondary: 18rem;
-  }
-  .md-grid{ max-width: var(--fs-max-width) !important; }
-  .md-sidebar--primary{ width: var(--fs-sidebar-primary) !important; }
-  .md-sidebar--secondary{ width: var(--fs-sidebar-secondary) !important; }
-  .md-content__inner{ max-width: var(--fs-content-width) !important; }
 }
