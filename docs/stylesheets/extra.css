@@ -479,3 +479,16 @@
 .md-typeset h6{
   color: var(--fs-accent) !important;
 }
+
+
+/* ==========================================================================
+   V18.7 patch - Headings color matches normal text (no logo accent on headings)
+   ========================================================================== */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6{
+  color: inherit !important;
+}
