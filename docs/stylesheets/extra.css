@@ -467,72 +467,69 @@
 
 
 /* ==========================================================================
-   V18.4.1 patch
-   - Add clean hover highlight for LEFT nav + RIGHT TOC (no shadow, near-rect corners)
-   - Highlight is drawn on the <li> so it covers BOTH text and the chevron icon.
-   - Keeps existing "active" logo-color logic; hover only adds a subtle background.
+   V18.4.2 - Hover highlight (NO nested "container boxes")
+   - Apply highlight ONLY to the clickable link row (not the <li> item)
+   - No shadow / no lift, tiny radius, solid background so it won't bleed into next row
    ========================================================================== */
 
+/* Hover tokens */
 :root{
-  /* Hover background (light) */
-  --fs-nav-hover-bg: rgba(60, 64, 67, 0.10); /* slightly stronger so it's visible in light mode */
+  --fs-nav-hover-bg: rgba(0,0,0,0.06);        /* light default */
+  --fs-nav-hover-bg-strong: rgba(0,0,0,0.08); /* a bit darker for light mode visibility */
+  --fs-toc-hover-bg: rgba(0,0,0,0.06);
 }
 [data-md-color-scheme="slate"]{
-  /* Hover background (dark) */
-  --fs-nav-hover-bg: rgba(255, 255, 255, 0.06);
+  --fs-nav-hover-bg: rgba(255,255,255,0.06);
+  --fs-nav-hover-bg-strong: rgba(255,255,255,0.08);
+  --fs-toc-hover-bg: rgba(255,255,255,0.06);
 }
 
-/* ---------- LEFT: primary sidebar + mobile drawer ---------- */
-.md-sidebar--primary .md-nav__list .md-nav__item{
-  position: relative;
-}
-.md-sidebar--primary .md-nav__list .md-nav__item::before{
-  content: "";
-  position: absolute;
-  left: 6px;
-  right: 6px;
-  top: 1px;
-  bottom: 1px;
-  border-radius: 2px;
-  background: transparent;
-  pointer-events: none;
-  z-index: 0;
-  transition: background-color 80ms linear;
-}
-.md-sidebar--primary .md-nav__list .md-nav__item:hover::before{
-  background: var(--fs-nav-hover-bg);
-}
-/* Ensure links/icons sit above the hover layer */
-.md-sidebar--primary .md-nav__link,
-.md-sidebar--primary .md-nav__label,
-.md-sidebar--primary .md-nav__link.md-nav__container,
-.md-sidebar--primary .md-nav__toggle{
-  position: relative;
-  z-index: 1;
+/* ---------------- LEFT SIDEBAR hover ---------------- */
+
+/* Make sure the row is the hit-target */
+@media screen and (min-width: 60em){
+  .md-sidebar--primary .md-nav__link{
+    border-radius: 2px !important;
+    background-clip: padding-box;
+  }
+  /* For "index.md containers" the clickable parts are inside */
+  .md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link,
+  .md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link{
+    border-radius: 2px !important;
+    background-clip: padding-box;
+  }
+
+  /* Hover/focus highlight (no shadow) */
+  .md-sidebar--primary .md-nav__link:hover,
+  .md-sidebar--primary .md-nav__link:focus-visible{
+    background: var(--fs-nav-hover-bg-strong) !important;
+  }
+  .md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link:hover,
+  .md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link:focus-visible,
+  .md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link:hover,
+  .md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link:focus-visible{
+    background: var(--fs-nav-hover-bg-strong) !important;
+  }
+
+  /* IMPORTANT: never paint the <li> itself (prevents nested “stacked boxes”) */
+  .md-sidebar--primary .md-nav__item::before,
+  .md-sidebar--primary .md-nav__item::after{
+    content: none !important;
+    display: none !important;
+  }
 }
 
-/* ---------- RIGHT: secondary TOC ---------- */
-.md-sidebar--secondary .md-nav--secondary .md-nav__item{
-  position: relative;
-}
-.md-sidebar--secondary .md-nav--secondary .md-nav__item::before{
-  content: "";
-  position: absolute;
-  left: 6px;   /* keep the vertical divider visually separate */
-  right: 6px;
-  top: 1px;
-  bottom: 1px;
-  border-radius: 2px;
-  background: transparent;
-  pointer-events: none;
-  z-index: 0;
-  transition: background-color 80ms linear;
-}
-.md-sidebar--secondary .md-nav--secondary .md-nav__item:hover::before{
-  background: var(--fs-nav-hover-bg);
-}
-/* Ensure TOC links are above hover layer */
-.md-sidebar--secondary .md-nav--secondary .md-nav__link{
-  position: relative;
-  z-index: 1;
+/* ---------------- RIGHT TOC hover ---------------- */
+
+@media screen and (min-width: 60em){
+  .md-sidebar--secondary .md-nav--secondary .md-nav__link{
+    border-radius: 2px !important;
+    background-clip: padding-box;
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+  .md-sidebar--secondary .md-nav--secondary .md-nav__link:hover,
+  .md-sidebar--secondary .md-nav--secondary .md-nav__link:focus-visible{
+    background: var(--fs-toc-hover-bg) !important;
+  }
 }
