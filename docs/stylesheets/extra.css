@@ -678,3 +678,58 @@
     box-shadow: none !important;
   }
 }
+
+
+/* ==========================================================================
+   V18.18 hotfix - Primary nav hover for items WITH index.md (md-nav__container)
+   Fix: highlight/hover background should span the FULL row including chevron.
+   Reason: Material renders "index" items as a split row:
+           <div class="md-nav__link md-nav__container">
+             <a class="md-nav__link">Title</a>
+             <label class="md-nav__link">[chevron]</label>
+           </div>
+           Our hover styling was applied to the <a>/<label> separately, so the
+           chevron area could be left unhighlighted.
+   ========================================================================== */
+
+@media screen and (min-width: 60em){
+  /* Make container row behave like a single full-width flex row */
+  .md-sidebar--primary .md-nav__link.md-nav__container{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+  }
+
+  /* Put the hover/active background on the container row, not the split children */
+  .md-sidebar--primary .md-nav__link.md-nav__container{
+    padding: 0.26rem 0.4rem 0.26rem 18px !important; /* keep the gutter consistent */
+    box-sizing: border-box !important;
+  }
+
+  .md-sidebar--primary .md-nav__link.md-nav__container:hover{
+    background: var(--fs-nav-hover-bg) !important;
+    border-radius: 3px !important; /* near-rect */
+  }
+
+  /* Children: inherit layout, but keep backgrounds OFF so we don't get "short" highlight */
+  .md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link,
+  .md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link{
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  .md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link{
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link{
+    flex: 0 0 auto !important;
+    padding: 0 0.35rem !important; /* hit area around chevron */
+    margin: 0 !important;
+  }
+}
