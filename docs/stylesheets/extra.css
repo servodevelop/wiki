@@ -65,7 +65,7 @@
 @media screen and (min-width: 60em){
   .md-sidebar--secondary .md-nav--secondary{
     position: relative !important;
-    padding-left: 1px !important; /* space between line and text */
+    padding-left: 14px !important; /* space between line and text */
   }
   .md-sidebar--secondary .md-nav--secondary::before{
     content: "";
@@ -194,7 +194,7 @@
   padding: 0.06rem 0 !important;
 }
 .md-sidebar--secondary .md-nav--secondary .md-nav__item .md-nav{
-  padding-left: 14px !important;
+  padding-left: 6px !important;
   margin-left: 0 !important;
 }
 .md-sidebar--secondary .md-nav--secondary .md-nav__item .md-nav .md-nav__link{
