@@ -365,3 +365,51 @@
     max-width: 68rem; /* ~1088px */
   }
 }
+/* ============================================================
+   v15.3 — Layout micro-tuning (desktop)
+   Goals:
+   1) Keep the left divider position unchanged
+   2) Move the left-nav expand/collapse arrow closer to the divider
+      (match the right sidebar content-to-divider inset)
+   3) Keep left/right sidebar widths visually consistent
+   ============================================================ */
+
+/* Keep both sidebars equal width on desktop (no special-casing ultra-wide) */
+@media (min-width: 60em) {
+  .md-sidebar--primary  { width: 18rem; }
+  .md-sidebar--secondary{ width: 18rem; }
+}
+
+/* Reduce extra right padding in the left sidebar so the arrow can sit closer to the divider */
+@media (min-width: 60em) {
+  .md-sidebar--primary .md-sidebar__inner{
+    padding-right: 12px !important;
+  }
+}
+
+/* Place the expand/collapse icon closer to the divider, and reserve space so text never overlaps it */
+@media (min-width: 60em) {
+  /* Reserve space on the right side of links so the icon can float there */
+  .md-sidebar--primary .md-nav__link{
+    padding-right: 52px !important; /* 12px inset + 24px icon + buffer */
+  }
+
+  /* Material sometimes uses a span.md-nav__icon (with ::after). Make it "dock" to the right. */
+  .md-sidebar--primary .md-nav__item--nested > .md-nav__link{
+    position: relative;
+  }
+  .md-sidebar--primary .md-nav__item--nested > .md-nav__link .md-nav__icon{
+    position: absolute;
+    right: 12px;          /* distance from divider ≈ right sidebar inset */
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 !important;
+  }
+
+  /* Fallback: if the icon is implemented via pseudo-element on the link */
+  .md-sidebar--primary .md-nav__item--nested > .md-nav__link::after{
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
