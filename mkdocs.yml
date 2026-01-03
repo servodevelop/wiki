@@ -49,18 +49,18 @@ plugins:
 
 nav:
   - Home: index.md
-  - UART Servo:
-      - Protocol: 
-          - Protocol: uart_servo/protocols/uart_rs_485_protocol.md
-      - Datasheet:
-          - HA8/RA8-U25(H)-M: uart_servo/datasheet/HA_RA8_U25(H)_M.md
-          - HA8/RA8-U35(H)-M: uart_servo/datasheet/HA_RA8_U35(H)_M.md
+  - Bus Servo:
+      - Protocols: 
+          - UART/RS-485: bus_servo/protocols/uart_rs_485_protocol.md
+      - Specifications:
+          - HA8/RA8-U25(H)-M: bus_servo/specifications/HA_RA8_U25(H)_M.md
+          - HA8/RA8-U35(H)-M: bus_servo/specifications/HA_RA8_U35(H)_M.md
       - CAD Files:
-          - STEP/DWG/PDF: uart_servo/cad_files/cad_files.md
+          - STEP/DWG/PDF: bus_servo/cad_files/cad_files.md
       - Software:
-          - Configuration Tools: uart_servo/software/pc_configuration_ser_manual.md
+          - Configuration Tools: bus_servo/software/pc_configuration_ser_manual.md
   - Robotic Arm:
       - StarAI Arm:
           - Quick Start: robotic_arm/starai_arm/index.md
       - Piper Mate:
-          - User Manual: robotic_arm/piper_mate/index.md
+          - Get Ready: robotic_arm/piper_mate/get_ready.md
