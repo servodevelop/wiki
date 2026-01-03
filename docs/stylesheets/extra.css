@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Fashion Star Wiki - V17.0
+   Fashion Star Wiki - V17.0 (sidebar=200px patch)
    Stable overrides (based on V14.2 + fixes) with WORKING palette toggle restored.
    - Fix: primary nav alignment for md-nav__container (index.md sections)
    - Fix: left-nav active bar vertical centering (bar follows container height)
@@ -23,7 +23,14 @@
   --md-typeset-a-color: var(--fs-accent);
   --md-typeset-line-height: 1.8;
   --md-typeset-font-size: 16px;
+
+  /* V17.0 patch: force both sidebars to 200px on desktop */
+  --fs-sidebar-w: 200px;
+  --md-sidebar-width: var(--fs-sidebar-w);
+  --md-sidebar-width--primary: var(--fs-sidebar-w);
+  --md-sidebar-width--secondary: var(--fs-sidebar-w);
 }
+
 
 /* Dark scheme */
 [data-md-color-scheme="slate"]{
@@ -359,5 +366,29 @@
   .md-content__inner { max-width: 76rem; }
   .md-sidebar--primary { width: 18rem; }
   .md-sidebar--secondary { width: 18rem; }
+}
+
+
+/* ==========================================================================
+   V17.0 patch: sidebar widths = 200px (desktop only)
+   ========================================================================== */
+@media screen and (min-width: 60em){
+  /* Primary (left) sidebar */
+  .md-sidebar--primary{
+    width: var(--fs-sidebar-w) !important;
+  }
+  .md-sidebar--primary .md-sidebar__scrollwrap,
+  .md-sidebar--primary .md-sidebar__inner{
+    width: var(--fs-sidebar-w) !important;
+  }
+
+  /* Secondary (right TOC) sidebar */
+  .md-sidebar--secondary{
+    width: var(--fs-sidebar-w) !important;
+  }
+  .md-sidebar--secondary .md-sidebar__scrollwrap,
+  .md-sidebar--secondary .md-sidebar__inner{
+    width: var(--fs-sidebar-w) !important;
+  }
 }
 
