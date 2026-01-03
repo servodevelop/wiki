@@ -63,4 +63,5 @@ nav:
       - StarAI Arm:
           - Quick Start: robotic_arm/starai_arm/index.md
       - Piper Mate:
+          - robotic_arm/piper_mate/index.md
           - Get Ready: robotic_arm/piper_mate/get_ready.md
