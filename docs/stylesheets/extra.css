@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Fashion Star Wiki - V18.0 (Stable)
+   Fashion Star Wiki - V18.1 (Stable)
    Base: V15.1 stable overrides + tuned desktop container width + font tweaks
    Current targets (desktop >= 60em):
    - Total container max-width: 1380px  (≈ 242 + 896 + 242)
@@ -20,7 +20,7 @@
   --md-accent-fg-color--transparent: rgba(134, 65, 169, 0.12);
 
   --md-typeset-a-color: var(--fs-accent);
-  --md-typeset-line-height: 1.8;
+  --md-typeset-line-height: 1.6;
   --md-typeset-font-size: 16px;
 }
 
@@ -227,7 +227,7 @@
 /* Body typography */
 .md-typeset{
   font-size: 16px !important;
-  line-height: 1.8 !important;
+  line-height: 1.6 !important;
 }
 
 .md-typeset h1{
