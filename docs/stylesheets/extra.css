@@ -337,3 +337,34 @@
     padding-left: 16px !important;
   }
 }
+
+/* ==========================================================================
+   V18.2 patch (based on V18.1 stable)
+   1) Level-1 items: font-weight 600
+   2) Keep level-2 nav always expanded (no need to click to open)
+   NOTE: Visual/active effects remain as-is.
+   ========================================================================== */
+
+/* 1) Level-1 (top-level) nav items in the LEFT sidebar */
+.md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link,
+.md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link.md-nav__container,
+.md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link.md-nav__container > a.md-nav__link,
+.md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link.md-nav__container > label.md-nav__link{
+  font-weight: 600 !important;
+}
+
+/* 2) Always show level-2 items (children of the level-1 items) */
+.md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav{
+  display: block !important;
+  height: auto !important;
+  max-height: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+/* Some Material versions animate/collapse via the sibling selector:
+   input ~ .md-nav / input:checked ~ .md-nav. Force open in both states. */
+.md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item--nested > input ~ .md-nav{
+  display: block !important;
+}
