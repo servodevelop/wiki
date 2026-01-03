@@ -436,7 +436,7 @@
   /* --- Hard-lock both sidebars to the same width (visual symmetry) --- */
   :root{
     /* If your rem is 20px, 18rem = 360px (matches your console table). */
-    --fs-sidebar-w: 18rem;
+    --fs-sidebar-w: 17rem;
     /* Sidebar inner padding (distance from divider to content). */
     --fs-sidebar-pad: 1rem;
     /* Reserve enough space for the chevron so text never overlaps it. */
