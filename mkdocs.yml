@@ -62,6 +62,7 @@ nav:
       - Protocol: uart_bus_servo/protocols/uart_rs_485_protocol.md
 
       - Specifications:
+          - uart_bus_servo/specifications/index.md
           - RP6-U12H-M: uart_bus_servo/specifications/RP6_U12H_M.md
           - RX6-U12H-M: uart_bus_servo/specifications/RX6_U12H_M.md
           - HP6/RP6-U15H-M: uart_bus_servo/specifications/HP_RP6_U15H_M.md
