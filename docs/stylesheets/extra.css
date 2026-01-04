@@ -1314,12 +1314,16 @@
 }
 
 /* ==========================================================================
-   V19.2 - Images
+   V19.3 - Images
    1) Center images
-   2) Keep 30px gutter on BOTH sides inside the content column
+   2) Keep ~100px gutter on BOTH sides (desktop), responsive on small screens inside the content column
    3) Keep click-to-zoom/lightbox behavior (e.g., glightbox) intact
    Scope: only content images (paragraph/figure) to avoid touching icons/emoji.
    ========================================================================== */
+
+
+:root{ --fs-img-gutter: 100px; }
+@media (max-width: 900px){ :root{ --fs-img-gutter: 24px; } }
 
 .md-typeset p > img,
 .md-typeset p > a > img,
@@ -1327,7 +1331,7 @@
 .md-typeset figure > a > img{
   display: block !important;
   height: auto !important;
-  max-width: calc(100% - 60px) !important; /* 30px + 30px */
+  max-width: calc(100% - (var(--fs-img-gutter) * 2)) !important; /* 100px + 100px (desktop) */
   margin: 0.9rem auto !important;
 }
 
@@ -1337,7 +1341,7 @@
 }
 .md-typeset figure figcaption{
   text-align: center;
-  max-width: calc(100% - 60px);
+  max-width: calc(100% - (var(--fs-img-gutter) * 2));
   margin-left: auto;
   margin-right: auto;
 }
