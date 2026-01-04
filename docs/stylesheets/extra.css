@@ -1414,3 +1414,52 @@
 .md-typeset table:not([class]) td{
   word-break: break-word;
 }
+
+
+/* =========================
+   V19.6 – TABLE WIDTH + AUTO COLS (keep typography unchanged)
+   Goal:
+   - tables same visual width as other content blocks (e.g., admonitions)
+   - centered
+   - keep click-to-zoom images etc unchanged
+   ========================= */
+
+/* Make the table wrapper take the full content width */
+.md-typeset .md-typeset__table,
+.md-typeset .md-typeset__scrollwrap {
+  max-width: 100%;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Ensure horizontal overflow scrolls instead of clipping borders */
+.md-typeset .md-typeset__scrollwrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Table itself: fill wrapper width, but keep auto column sizing */
+.md-typeset .md-typeset__table > table,
+.md-typeset .md-typeset__scrollwrap > table,
+.md-typeset table:not([class]) {
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  table-layout: auto; /* auto by content */
+  box-sizing: border-box;
+}
+
+/* Slightly squarer, more "tech" corner + make sure outer border is visible */
+.md-typeset .md-typeset__table > table,
+.md-typeset .md-typeset__scrollwrap > table {
+  border-radius: 4px; /* was 10px */
+  overflow: hidden;   /* keep radius clean */
+}
+
+/* If a cell background goes to the edge, keep the right edge border consistent */
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td {
+  background-clip: padding-box;
+}
