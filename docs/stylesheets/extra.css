@@ -1463,3 +1463,24 @@
 .md-typeset table:not([class]) td {
   background-clip: padding-box;
 }
+
+
+/* ============================================================
+   V19.7 - Table fill fix (no right-side blank area)
+   Force mkdocs-material scrollwrap tables to actually stretch
+   to the wrapper width, while keeping content-based sizing.
+   ============================================================ */
+
+.md-typeset .md-typeset__scrollwrap > table,
+.md-typeset .md-typeset__table > table,
+.md-typeset .md-typeset__table table {
+  width: 100% !important;
+  min-width: 100% !important;
+  display: table !important;
+}
+
+/* Some versions set tables to max-content for horizontal scroll.
+   Keep scroll ability via wrapper, but don't shrink the table. */
+.md-typeset .md-typeset__scrollwrap {
+  overflow-x: auto;
+}
