@@ -92,7 +92,14 @@ nav:
               - Inoproshop: uart_bus_servo/sdk/plc/inovance_inoproshop.md
               - GX Works: uart_bus_servo/sdk/plc/mitsubishi_gx_works2.md
               - Step7 MicroWin: uart_bus_servo/sdk/plc/step7_microwin_smart.md
-          - stm32f103: uart_bus_servo/sdk/stm32f103_sdk.md
+          - Stm32f103: uart_bus_servo/sdk/stm32f103_sdk.md
+          - Stm32f407: uart_bus_servo/sdk/stm32f407_sdk.md
+          - Arduino: uart_bus_servo/sdk/arduino_sdk.md
+          - Python: uart_bus_servo/sdk/python_sdk.md
+          - Micro Python: uart_bus_servo/sdk/micropython_sdk.md
+          - C++: uart_bus_servo/sdk/C++_sdk.md
+          - C Sharp: uart_bus_servo/sdk/C#_sdk.md
+          - Ros: uart_bus_servo/sdk/ros_sdk.md
   - Robotic Arm:
       - StarAI Arm:
           - robotic_arm/piper_mate/index.md
