@@ -98,6 +98,7 @@ nav:
           - Python: uart_bus_servo/sdk/python_sdk.md
           - Micro Python: uart_bus_servo/sdk/micropython_sdk.md
           - C++: uart_bus_servo/sdk/C++_sdk.md
+          - "C#": "uart_bus_servo/sdk/c#_sdk.md"
           - Ros: uart_bus_servo/sdk/ros_sdk.md
       - Document: uart_bus_servo/documents/uc01_insrtuction_manual.md    
   - Robotic Arm:
