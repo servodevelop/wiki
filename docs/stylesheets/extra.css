@@ -122,8 +122,16 @@ Fashion Star Wiki - V20.0 (Stable Base)
 /* md-nav__container fix: prevent “double indent” for sections with index.md */
 .md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link,
 .md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link{
-  padding-left: 0 !important;
-  margin-left: 0 !important;
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 2 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    padding-right: .5rem !important;
+    margin: 0 !important;
+    background: transparent !important;
+    cursor: pointer !important;
 }
 
 /* Prevent double bars inside container */
@@ -554,8 +562,19 @@ Fashion Star Wiki - V20.0 (Stable Base)
   }
   /* Let the text link take remaining space; keep icon label at the right */
   .md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link{
-    flex: 1 1 auto !important;
-    min-width: 0 !important;
+    position: relative !important;
+    z-index: 1 !important;
+    display: inline-flex !important;
+    flex: 0 1 auto !important;
+    width: auto !important;
+    max-width: 100% !important;
+    margin-right: auto !important;
+
+    /* Make the whole row act as the accordion toggle (no navigation on text) */
+    pointer-events: none !important;
+
+    /* IMPORTANT: follow the container's active color (fixes missing logo color) */
+    color: inherit !important;
   }
   .md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link{
     flex: 0 0 auto !important;
