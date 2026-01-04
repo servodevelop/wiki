@@ -287,12 +287,9 @@ Fashion Star Wiki - V20.0 (Stable Base)
     line-height: 1.15 !important;
     padding: 0 !important;
   }
-  //* Keep only page title line (hide site name) */
-  .md-header__ellipsis > .md-header__topic:nth-child(1){
+  /* Keep only site name line */
+  .md-header__topic + .md-header__topic{
     display: none !important;
-  }
-  .md-header__ellipsis > .md-header__topic:nth-child(2){
-    display: flex !important;
   }
 
   /* Drawer title row: reserve space for back arrow so it never overlaps text */
@@ -929,14 +926,10 @@ Fashion Star Wiki - V20.0 (Stable Base)
     line-height: 1.15 !important;
     padding: 0 !important;
   }
-  /* Keep only page title line (hide site name) */
-  .md-header__ellipsis > .md-header__topic:nth-child(1){
+  /* Keep only site name line */
+  .md-header__topic + .md-header__topic{
     display: none !important;
   }
-  .md-header__ellipsis > .md-header__topic:nth-child(2){
-    display: flex !important;
-  }
-
 
   /* Drawer title row: reserve space for back arrow so it never overlaps text */
   .md-sidebar--primary .md-nav__title{
@@ -1547,87 +1540,4 @@ Fashion Star Wiki - V20.0 (Stable Base)
 .md-typeset table:not([class]) td code {
   font-size: 13px !important;      /* Inline Code in table */
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-}
-
-
-/* ============================================================
-   V20.1 – MOBILE TABLE: horizontal scroll, NO mid-word wraps
-   - On small screens, keep table columns un-squeezed and scrollable
-   - Prevent short tokens like "servo_id" from breaking into 2 lines
-   - Allow the LAST column (usually Description) to wrap normally
-   ============================================================ */
-
-@media (max-width: 900px){
-  /* Make the table content-driven width so columns don't collapse */
-  .md-typeset__table table:not([class]){
-    width: max-content;
-    min-width: 100%;
-  }
-
-  /* Default: do NOT wrap inside cells (scroll instead) */
-  .md-typeset__table table:not([class]) th,
-  .md-typeset__table table:not([class]) td{
-    white-space: nowrap;
-    word-break: normal;
-    overflow-wrap: normal;
-    hyphens: none;
-  }
-
-  /* Let the last column wrap (usually the long Description column) */
-  .md-typeset__table table:not([class]) th:last-child,
-  .md-typeset__table table:not([class]) td:last-child{
-    white-space: normal;
-    overflow-wrap: anywhere;
-  }
-
-  /* Keep inline code in tables from forcing weird wraps */
-  .md-typeset__table table:not([class]) code{
-    white-space: nowrap;
-    word-break: normal;
-    overflow-wrap: normal;
-    hyphens: none;
-  }
-}
-
-/* Override any earlier aggressive word-breaking inside table cells */
-.md-typeset table:not([class]) td{
-  word-break: normal;
-}
-
-/* ========================================================================== 
-   V20.3 patch
-   1) Mobile header title: avoid blank title by hiding site title ONLY when both topics exist
-   2) Nav font-weight: only true level-0 items keep default bold; deeper levels normal unless active
-   ========================================================================== */
-
-/* 1) Mobile header title: if there is only ONE topic, don't hide it */
-@media (max-width: 59.9375em) {
-  /* Hide the first topic only when there are 2+ topics */
-  .md-header__ellipsis > .md-header__topic:first-child:not(:last-child) {
-    display: none;
-  }
-  /* Always keep the last topic visible (page title) */
-  .md-header__ellipsis > .md-header__topic:last-child {
-    display: flex;
-  }
-}
-
-/* 2) Navigation weights: bold only for global level-0 items */
-.md-nav--primary[data-md-level="0"] > .md-nav__list > .md-nav__item > .md-nav__link,
-.md-nav--primary[data-md-level="0"] > .md-nav__list > .md-nav__item > .md-nav__link.md-nav__container {
-  font-weight: 600;
-}
-
-/* Nested items (level-1+) should NOT be bold by default (including mobile drill-down) */
-.md-nav--primary .md-nav__list .md-nav__list > .md-nav__item > .md-nav__link,
-.md-nav--primary .md-nav__list .md-nav__list > .md-nav__item > .md-nav__link.md-nav__container {
-  font-weight: 400;
-}
-
-/* Active item (and active ancestors): logo color + bold */
-.md-sidebar--primary .md-nav__item--active > .md-nav__link,
-.md-sidebar--primary .md-nav__item--active > .md-nav__link.md-nav__container,
-.md-sidebar--primary .md-nav__link--active {
-  color: var(--fs-accent, #8641A9);
-  font-weight: 600;
 }
