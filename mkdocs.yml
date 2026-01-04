@@ -62,7 +62,7 @@ nav:
       - Protocol: uart_bus_servo/protocols/uart_rs_485_protocol.md
 
       - Specifications:
-          - Overview: uart_bus_servo/specifications/index.md
+          - uart_bus_servo/specifications/index.md
           - RP6-U12H-M: uart_bus_servo/specifications/RP6_U12H_M.md
           - RX6-U12H-M: uart_bus_servo/specifications/RX6_U12H_M.md
           - HP6/RP6-U15H-M: uart_bus_servo/specifications/HP_RP6_U15H_M.md
@@ -109,7 +109,7 @@ nav:
 
   - Robotic Arm:
       - StarAI Arm:
-          - Overview: robotic_arm/starai_arm/index.md
+          - robotic_arm/starai_arm/index.md
       - Piper Mate:
-          - Overview: robotic_arm/piper_mate/index.md
+          - robotic_arm/piper_mate/index.md
           - Get Ready: robotic_arm/piper_mate/get_ready.md
