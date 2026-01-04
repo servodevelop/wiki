@@ -76,7 +76,11 @@ nav:
           - RX18-U100H-M: uart_bus_servo/specifications/RX18_U100H_M.md
           - RX18-U101H-M: uart_bus_servo/specifications/RX18_U101H_M.md
       - CAD Files:
-          - STEP/DWG/PDF: uart_bus_servo/cad_files/cad_files.md
+          - RA8/RP8/RX8 Series: uart_bus_servo/cad_files/RA8_RP8_RX8_series.md
+          - RP6/RX6-U12 Series: uart_bus_servo/cad_files/RP6_RX6_U12_series.md
+          - RX6-U15 Series: uart_bus_servo/cad_files/RX6_U15_series.md
+          - RP6-U18 Series: uart_bus_servo/cad_files/RP6_U18_series.md
+          - RX18 Series: uart_bus_servo/cad_files/RX18_series.md
       - Software:
           - Configuration Tools: uart_bus_servo/software/pc_configuration_ser_manual.md
       - SDK:
