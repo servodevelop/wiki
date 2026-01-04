@@ -1,6 +1,6 @@
 # UART Bus Servo 25KG Test
 
-![U25产品图片](img/U25产品图片.png)
+![U25产品图片](image/U25产品图片.png)
 
 ## 1. Features
 
@@ -17,7 +17,7 @@
 
 ## 2. Model definition
 
-![产品命名-型号规则](img/产品命名-型号规则.png)
+![产品命名-型号规则](image/产品命名-型号规则.png)
 
 | Appearance | R：Dual-shaft | H：Single-shaft | |
 | :--- | :--- | :--- | :--- |
@@ -49,42 +49,42 @@
 | Peak Current | 3 A |
 
 ### 3.3 Performance Graph
-![U25特性曲线](img/U25特性曲线.png)
+![U25特性曲线](image/U25特性曲线.png)
 
 ### 3.4 Overload Graph
-![U25过载曲线](img/U25过载曲线.png)
+![U25过载曲线](image/U25过载曲线.png)
 
 ## 4. Drawings and Installation Instructions
 
 ### 4.1 CAD Dimensional Drawing
-![U25_3D图](img/U25_3D图.png)
+![U25_3D图](image/U25_3D图.png)
 
 ### 4.2 Interface Definition
-![U25接口图](img/U25接口图.png)
+![U25接口图](image/U25接口图.png)
 
 ### 4.3 Wiring Diagram 
 - **Series Connection**
-![U25串联](img/U25串联.png)
+![U25串联](image/U25串联.png)
 
 - **Parallel Connection**
-![U25并联](img/U25并联.png)
+![U25并联](image/U25并联.png)
 
 ### 4.4 Installation Instruction
 - **Single-shaft**
-![U25单轴安装](img/U25单轴安装.png)
+![U25单轴安装](image/U25单轴安装.png)
 
 - **Dual-shaft**
-![U25双轴安装](img/U25双轴安装.png)
+![U25双轴安装](image/U25双轴安装.png)
 
 ## 5. Development & Compatibility
 The bus servo series adopts a unified hardware platform.
-![development environment](img/development environment.png)
+![development environment](image/development environment.png)
 
 ## 6. Protections
 - All protection parameters can be set and modified by our PC configuration tool.
 - The status flag bits are defined as follows: 1 represents Protection triggered，0 represents normal operation.
 
-![protection](img/protection.png)
+![protection](image/protection.png)
 
 > [!WARNING]
 > Modification towards any protection parameters may cause damage to the production.
@@ -93,19 +93,19 @@ The bus servo series adopts a unified hardware platform.
 
 ### 7.2 Communication Format 
 - **Transmit Packet Format**
-![transmit_command](img/transmit_command.png)
+![transmit_command](image/transmit_command.png)
 
 - **Response Packet Format**
-![respond_command](img/respond_command.png)
+![respond_command](image/respond_command.png)
 
 ### 7.6 Single-Turn Position Control
-![Velocity Profile](img/Velocity Profile.png)
+![Velocity Profile](image/Velocity Profile.png)
 
 ### 7.7 Multi-Turn Position Control
-- **Multi-turn Position Reset** ![多圈重置](img/多圈重置.png)
+- **Multi-turn Position Reset** ![多圈重置](image/多圈重置.png)
 
 - **Power-off Position Retention**
-![掉电记忆](img/掉电记忆.png)
+![掉电记忆](image/掉电记忆.png)
 
 ## 8. Configuration Parameters
 | Number | Parameter Name | Write | Unit | Default |
@@ -115,4 +115,4 @@ The bus servo series adopts a unified hardware platform.
 | 41 | Protection Temp | ● | ADC | 70°C |
 
 ### 8.1 Read Data
-![protection](img/protection.png)
+![protection](image/protection.png)
