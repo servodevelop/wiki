@@ -70,6 +70,7 @@ nav:
           - Configuration Tools: bus_servo/software/pc_configuration_ser_manual.md
   - Robotic Arm:
       - StarAI Arm:
+          - robotic_arm/piper_mate/index.md
           - Quick Start: robotic_arm/starai_arm/index.md
       - Piper Mate:
           - robotic_arm/piper_mate/index.md
