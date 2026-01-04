@@ -59,7 +59,7 @@ plugins:
 nav:
   - Home: index.md
   - Bus Servo:
-          - Protocol: bus_servo/protocols/uart_rs_485_protocol.md
+      - Protocol: bus_servo/protocols/uart_rs_485_protocol.md
       - Specifications:
           - HA8/RA8-U25H-M: bus_servo/specifications/HA_RA8_U25_H_M.md
           - HA8/RA8-U35(H)-M: bus_servo/specifications/HA_RA8_U35(H)_M.md
