@@ -1,13 +1,14 @@
-/*
-Fashion Star Wiki - V20.0 (Stable Base)
-- Left nav: level-1 bold 600, level-2 always visible (desktop); mobile keeps original drawer logic
-- Colors: body + headings follow mode text colors; logo accent only for active nav + active TOC item
-- TOC: hover = subtle highlight (no accent); active = bold + logo accent
-- Typography: headings H1-H6 font-weight 700
-- Media: images centered with side gutters; click-to-zoom unaffected
-- Callouts: GitHub-style [!NOTE]/[!TIP]/[!IMPORTANT]/[!WARNING]/[!CAUTION] rendered as Material admonitions (via build hook)
-- Tables: Seeed-ish clean grid; body 14px, header 14px + bold; inline-code 13px monospace; width matches content
-*/
+/* ==========================================================================
+   Fashion Star Wiki - V19.0 (Desktop expanded, Mobile native)
+   Base: V15.1 stable overrides + tuned desktop container width + font tweaks
+   Current targets (desktop >= 60em) / mobile uses native drawer logic:
+   - Total container max-width: 1380px  (≈ 242 + 896 + 242)
+   - Left nav font: 16px
+   - Right TOC font (ALL levels + title): 12.8px
+   - Right TOC nested indent: 2px
+   - Keep palette toggle WORKING (do not hide/force toggle labels)
+   Brand accent: #8641A9 | Dark bg: #131314
+   ========================================================================== */
 
 /* Brand + remove "default blue" by setting BOTH primary & accent tokens */
 :root{
@@ -624,7 +625,7 @@ Fashion Star Wiki - V20.0 (Stable Base)
 
 
 /* ==========================================================================
-   V20.0 patch - headings weight
+   V19.0 patch - headings weight
    Requirement: H1-H6 font-weight 700 (colors follow current rules)
    ========================================================================== */
 .md-typeset h1,
@@ -638,7 +639,7 @@ Fashion Star Wiki - V20.0 (Stable Base)
 
 /* ==========================================================================
    Fashion Star Wiki - V19.0 (Desktop expanded, Mobile native)
-   Base: V15.1 stable overrides + tuned layout + TOC active + callouts + media + tables
+   Base: V15.1 stable overrides + tuned desktop container width + font tweaks
    Current targets (desktop >= 60em) / mobile uses native drawer logic:
    - Total container max-width: 1380px  (≈ 242 + 896 + 242)
    - Left nav font: 16px
@@ -1482,62 +1483,4 @@ Fashion Star Wiki - V20.0 (Stable Base)
    Keep scroll ability via wrapper, but don't shrink the table. */
 .md-typeset .md-typeset__scrollwrap {
   overflow-x: auto;
-}
-
-/* ============================================================
-   V19.8 - Table typography (per spec)
-   - Body text inside tables: 14px (0.875rem)
-   - Header text: 14px + bold (700)
-   - Inline code inside tables: 13px (0.8125rem) monospace
-   Scope: markdown tables only (.md-typeset table:not([class]))
-   ============================================================ */
-
-.md-typeset table:not([class]){
-  font-size: 0.875rem;
-}
-
-.md-typeset table:not([class]) th,
-.md-typeset table:not([class]) td{
-  font-size: 0.875rem;
-  line-height: 1.5;
-}
-
-.md-typeset table:not([class]) thead th{
-  font-size: 0.875rem;
-  font-weight: 700;
-}
-
-.md-typeset table:not([class]) th code,
-.md-typeset table:not([class]) td code{
-  font-size: 0.8125rem;
-  font-family: var(--md-code-font-family, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
-}
-
-
-
-/* =========================
-   V19.8.1 HOTFIX — Table typography (force px sizes)
-   Reason: previous rem-based sizes inherit a larger root font-size on some breakpoints,
-   resulting in ~17.5px instead of the intended 14px.
-   ========================= */
-.md-typeset table:not([class]),
-.md-typeset .md-typeset__table > table:not([class]),
-.md-typeset .md-typeset__scrollwrap > table:not([class]) {
-  font-size: 14px !important;      /* Table Body */
-  line-height: 1.45;
-}
-
-.md-typeset table:not([class]) th,
-.md-typeset table:not([class]) td {
-  font-size: 14px !important;      /* keep header/body aligned */
-}
-
-.md-typeset table:not([class]) thead th {
-  font-weight: 700 !important;     /* Table Header bold */
-}
-
-.md-typeset table:not([class]) th code,
-.md-typeset table:not([class]) td code {
-  font-size: 13px !important;      /* Inline Code in table */
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
