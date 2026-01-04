@@ -82,11 +82,16 @@ nav:
           - RP6-U18 Series: uart_bus_servo/cad_files/RP6_U18_series.md
           - RX18 Series: uart_bus_servo/cad_files/RX18_series.md
       - Software:
-          - Configuration Tools: uart_bus_servo/software/pc_configuration_ser_manual.md
+          - PC Configuration Tools: uart_bus_servo/software/pc_bus_servo_configuration_tool.md
+          - Web Configuration Tools: uart_bus_servo/software/web_bus_servo_configuration_tool.md
       - SDK:
           - PLC: 
               - Sinamics: uart_bus_servo/sdk/plc/sinamics_tia_portal_v19.md
               - Codesys: uart_bus_servo/sdk/plc/codesys.md
+              - Inovance: uart_bus_servo/sdk/plc/inovance.md
+              - Inoproshop: uart_bus_servo/sdk/plc/inovance_inoproshop.md
+              - GX Works: uart_bus_servo/sdk/plc/mitsubishi_gx_works2.md
+              - Step7 MicroWin: uart_bus_servo/sdk/plc/step7_microwin_smart.md
           - stm32f103: uart_bus_servo/sdk/stm32f103_sdk.md
   - Robotic Arm:
       - StarAI Arm:
