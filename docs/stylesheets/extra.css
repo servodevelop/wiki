@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Fashion Star Wiki - V18.4.4 (Desktop expanded, Mobile native)
+   Fashion Star Wiki - V19.0 (Desktop expanded, Mobile native)
    Base: V15.1 stable overrides + tuned desktop container width + font tweaks
    Current targets (desktop >= 60em) / mobile uses native drawer logic:
    - Total container max-width: 1380px  (≈ 242 + 896 + 242)
@@ -622,3 +622,18 @@
     font-weight: 600 !important;
   }
 }
+
+
+/* ==========================================================================
+   V19.0 patch - headings weight
+   Requirement: H1-H6 font-weight 700 (colors follow current rules)
+   ========================================================================== */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6{
+  font-weight: 700 !important;
+}
+
