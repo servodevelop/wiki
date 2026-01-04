@@ -1,14 +1,13 @@
-/* ==========================================================================
-   Fashion Star Wiki - V19.0 (Desktop expanded, Mobile native)
-   Base: V15.1 stable overrides + tuned desktop container width + font tweaks
-   Current targets (desktop >= 60em) / mobile uses native drawer logic:
-   - Total container max-width: 1380px  (≈ 242 + 896 + 242)
-   - Left nav font: 16px
-   - Right TOC font (ALL levels + title): 12.8px
-   - Right TOC nested indent: 2px
-   - Keep palette toggle WORKING (do not hide/force toggle labels)
-   Brand accent: #8641A9 | Dark bg: #131314
-   ========================================================================== */
+/*
+Fashion Star Wiki - V20.0 (Stable Base)
+- Left nav: level-1 bold 600, level-2 always visible (desktop); mobile keeps original drawer logic
+- Colors: body + headings follow mode text colors; logo accent only for active nav + active TOC item
+- TOC: hover = subtle highlight (no accent); active = bold + logo accent
+- Typography: headings H1-H6 font-weight 700
+- Media: images centered with side gutters; click-to-zoom unaffected
+- Callouts: GitHub-style [!NOTE]/[!TIP]/[!IMPORTANT]/[!WARNING]/[!CAUTION] rendered as Material admonitions (via build hook)
+- Tables: Seeed-ish clean grid; body 14px, header 14px + bold; inline-code 13px monospace; width matches content
+*/
 
 /* Brand + remove "default blue" by setting BOTH primary & accent tokens */
 :root{
@@ -625,7 +624,7 @@
 
 
 /* ==========================================================================
-   V19.0 patch - headings weight
+   V20.0 patch - headings weight
    Requirement: H1-H6 font-weight 700 (colors follow current rules)
    ========================================================================== */
 .md-typeset h1,
@@ -639,7 +638,7 @@
 
 /* ==========================================================================
    Fashion Star Wiki - V19.0 (Desktop expanded, Mobile native)
-   Base: V15.1 stable overrides + tuned desktop container width + font tweaks
+   Base: V15.1 stable overrides + tuned layout + TOC active + callouts + media + tables
    Current targets (desktop >= 60em) / mobile uses native drawer logic:
    - Total container max-width: 1380px  (≈ 242 + 896 + 242)
    - Left nav font: 16px
@@ -1344,4 +1343,201 @@
   max-width: calc(100% - (var(--fs-img-gutter) * 2));
   margin-left: auto;
   margin-right: auto;
+}
+
+
+
+/* ============================================================
+   V19.3 + Table polish (Seeed-ish, minimal side-effects)
+   - Only affects markdown tables inside content (.md-typeset)
+   - Keep headings/colors/layout untouched
+   ============================================================ */
+
+/* Ensure tables can scroll on small screens without breaking layout */
+.md-typeset__table{
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Core table look */
+.md-typeset table:not([class]){
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--fs-divider);
+  border-radius: 2px;              /* more squared, more “tech” */
+  background: transparent;
+}
+
+/* Cell borders: avoid missing right edge */
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td{
+  padding: 12px 16px;
+  border-right: 1px solid var(--fs-divider);
+  border-bottom: 1px solid var(--fs-divider);
+  vertical-align: top;
+}
+
+/* Remove outer duplicate borders */
+.md-typeset table:not([class]) tr:last-child td{
+  border-bottom: 0;
+}
+.md-typeset table:not([class]) th:last-child,
+.md-typeset table:not([class]) td:last-child{
+  border-right: 0;
+}
+
+/* Header row */
+.md-typeset table:not([class]) thead th{
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Subtle zebra for readability (but not too “web2.0”) */
+.md-typeset table:not([class]) tbody tr:nth-child(2n) td{
+  background: rgba(0,0,0,0.02);
+}
+
+/* Scheme-specific tweaks */
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) thead th{
+  background: rgba(255,255,255,0.04);
+}
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) tbody tr:nth-child(2n) td{
+  background: rgba(255,255,255,0.03);
+}
+[data-md-color-scheme="default"] .md-typeset table:not([class]) thead th{
+  background: rgba(0,0,0,0.03);
+}
+
+/* Keep long values readable */
+.md-typeset table:not([class]) td{
+  word-break: break-word;
+}
+
+
+/* =========================
+   V19.6 – TABLE WIDTH + AUTO COLS (keep typography unchanged)
+   Goal:
+   - tables same visual width as other content blocks (e.g., admonitions)
+   - centered
+   - keep click-to-zoom images etc unchanged
+   ========================= */
+
+/* Make the table wrapper take the full content width */
+.md-typeset .md-typeset__table,
+.md-typeset .md-typeset__scrollwrap {
+  max-width: 100%;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Ensure horizontal overflow scrolls instead of clipping borders */
+.md-typeset .md-typeset__scrollwrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Table itself: fill wrapper width, but keep auto column sizing */
+.md-typeset .md-typeset__table > table,
+.md-typeset .md-typeset__scrollwrap > table,
+.md-typeset table:not([class]) {
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  table-layout: auto; /* auto by content */
+  box-sizing: border-box;
+}
+
+/* Slightly squarer, more "tech" corner + make sure outer border is visible */
+.md-typeset .md-typeset__table > table,
+.md-typeset .md-typeset__scrollwrap > table {
+  border-radius: 4px; /* was 10px */
+  overflow: hidden;   /* keep radius clean */
+}
+
+/* If a cell background goes to the edge, keep the right edge border consistent */
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td {
+  background-clip: padding-box;
+}
+
+
+/* ============================================================
+   V19.7 - Table fill fix (no right-side blank area)
+   Force mkdocs-material scrollwrap tables to actually stretch
+   to the wrapper width, while keeping content-based sizing.
+   ============================================================ */
+
+.md-typeset .md-typeset__scrollwrap > table,
+.md-typeset .md-typeset__table > table,
+.md-typeset .md-typeset__table table {
+  width: 100% !important;
+  min-width: 100% !important;
+  display: table !important;
+}
+
+/* Some versions set tables to max-content for horizontal scroll.
+   Keep scroll ability via wrapper, but don't shrink the table. */
+.md-typeset .md-typeset__scrollwrap {
+  overflow-x: auto;
+}
+
+/* ============================================================
+   V19.8 - Table typography (per spec)
+   - Body text inside tables: 14px (0.875rem)
+   - Header text: 14px + bold (700)
+   - Inline code inside tables: 13px (0.8125rem) monospace
+   Scope: markdown tables only (.md-typeset table:not([class]))
+   ============================================================ */
+
+.md-typeset table:not([class]){
+  font-size: 0.875rem;
+}
+
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td{
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.md-typeset table:not([class]) thead th{
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.md-typeset table:not([class]) th code,
+.md-typeset table:not([class]) td code{
+  font-size: 0.8125rem;
+  font-family: var(--md-code-font-family, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+}
+
+
+
+/* =========================
+   V19.8.1 HOTFIX — Table typography (force px sizes)
+   Reason: previous rem-based sizes inherit a larger root font-size on some breakpoints,
+   resulting in ~17.5px instead of the intended 14px.
+   ========================= */
+.md-typeset table:not([class]),
+.md-typeset .md-typeset__table > table:not([class]),
+.md-typeset .md-typeset__scrollwrap > table:not([class]) {
+  font-size: 14px !important;      /* Table Body */
+  line-height: 1.45;
+}
+
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td {
+  font-size: 14px !important;      /* keep header/body aligned */
+}
+
+.md-typeset table:not([class]) thead th {
+  font-weight: 700 !important;     /* Table Header bold */
+}
+
+.md-typeset table:not([class]) th code,
+.md-typeset table:not([class]) td code {
+  font-size: 13px !important;      /* Inline Code in table */
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
