@@ -1593,3 +1593,41 @@ Fashion Star Wiki - V20.0 (Stable Base)
 .md-typeset table:not([class]) td{
   word-break: normal;
 }
+
+/* ========================================================================== 
+   V20.3 patch
+   1) Mobile header title: avoid blank title by hiding site title ONLY when both topics exist
+   2) Nav font-weight: only true level-0 items keep default bold; deeper levels normal unless active
+   ========================================================================== */
+
+/* 1) Mobile header title: if there is only ONE topic, don't hide it */
+@media (max-width: 59.9375em) {
+  /* Hide the first topic only when there are 2+ topics */
+  .md-header__ellipsis > .md-header__topic:first-child:not(:last-child) {
+    display: none;
+  }
+  /* Always keep the last topic visible (page title) */
+  .md-header__ellipsis > .md-header__topic:last-child {
+    display: flex;
+  }
+}
+
+/* 2) Navigation weights: bold only for global level-0 items */
+.md-nav--primary[data-md-level="0"] > .md-nav__list > .md-nav__item > .md-nav__link,
+.md-nav--primary[data-md-level="0"] > .md-nav__list > .md-nav__item > .md-nav__link.md-nav__container {
+  font-weight: 600;
+}
+
+/* Nested items (level-1+) should NOT be bold by default (including mobile drill-down) */
+.md-nav--primary .md-nav__list .md-nav__list > .md-nav__item > .md-nav__link,
+.md-nav--primary .md-nav__list .md-nav__list > .md-nav__item > .md-nav__link.md-nav__container {
+  font-weight: 400;
+}
+
+/* Active item (and active ancestors): logo color + bold */
+.md-sidebar--primary .md-nav__item--active > .md-nav__link,
+.md-sidebar--primary .md-nav__item--active > .md-nav__link.md-nav__container,
+.md-sidebar--primary .md-nav__link--active {
+  color: var(--fs-accent, #8641A9);
+  font-weight: 600;
+}
