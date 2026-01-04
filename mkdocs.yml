@@ -69,9 +69,9 @@ nav:
           - Configuration Tools: bus_servo/software/pc_configuration_ser_manual.md
       - SDK:
           - PLC: 
-            - Sinamens: bus_servo/software/pc_configuration_ser_manual.md
-            - Codesys: bus_servo/cad_files/cad_files.md
-          - Stm32: bus_servo/software/pc_configuration_ser_manual.md
+              - Sinamens: bus_servo/software/pc_configuration_ser_manual.md
+              - Codesys: bus_servo/cad_files/cad_files.md
+          - Stm: bus_servo/software/pc_configuration_ser_manual.md
   - Robotic Arm:
       - StarAI Arm:
           - robotic_arm/piper_mate/index.md
