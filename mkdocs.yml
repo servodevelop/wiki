@@ -61,8 +61,9 @@ nav:
   - Bus Servo:
       - Protocol: uart_bus_servo/protocols/uart_rs_485_protocol.md
       - Specifications:
-          - HA8/RA8-U25H-M: uart_bus_servo/specifications/HA_RA8_U25_H_M.md
-          - HA8/RA8-U35(H)-M: uart_bus_servo/specifications/HA_RA8_U35(H)_M.md
+          - HA8/RA8-U25(H)-M: uart_bus_servo/specifications/HA_RA8_U25_H_M.md
+          - HA8/RA8-U35(H)-M: uart_bus_servo/specifications/HA_RA8_U35_H_M.md
+          - HA8/RA8-U45(H)-M: uart_bus_servo/specifications/HA_RA8_U45_H_M.md
       - CAD Files:
           - STEP/DWG/PDF: uart_bus_servo/cad_files/cad_files.md
       - Software:
