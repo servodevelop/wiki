@@ -287,14 +287,12 @@ Fashion Star Wiki - V21.0 (Stable Base)
     line-height: 1.15 !important;
     padding: 0 !important;
   }
+  /* Keep only site name line */
+  .md-header__topic + .md-header__topic{
+    display: none !important;
+  }
 
-/* Respect Material's header topic toggling (prevents blank title on scroll) */
-.md-header__topic[hidden],
-.md-header__topic[aria-hidden="true"]{
-  display: none !important;
-}
-  /* Header: show site title at top, page title after scroll (Material default) */
-/* Drawer title row: reserve space for back arrow so it never overlaps text */
+  /* Drawer title row: reserve space for back arrow so it never overlaps text */
   .md-sidebar--primary .md-nav__title{
     position: relative !important;
     display: flex !important;
@@ -1682,68 +1680,5 @@ Fashion Star Wiki - V21.0 (Stable Base)
   /* Ensure SVG logo/icon follows the same color */
   [data-md-color-scheme="default"] .md-nav--primary .md-nav__title[for="__drawer"] svg {
     fill: currentColor;
-  }
-}
-
-
-/* =========================
-   V23.12: Restore 1st-level chevrons (desktop) + align with child chevrons
-   Reason: V18.3 patch removed top-level .md-nav__icon and reduced padding-right.
-   Scope: Desktop only (>= 60em). Mobile unaffected.
-   ========================= */
-@media screen and (min-width: 60em){
-  /* Re-enable chevrons ONLY for 1st-level items that actually have children */
-  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item--nested > label.md-nav__link > .md-nav__icon,
-  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item--nested > a.md-nav__link > .md-nav__icon{
-    display: inline-flex !important;
-  }
-
-  /* Ensure the link reserves space for the chevron and provides a stable alignment target */
-  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item--nested > label.md-nav__link,
-  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item--nested > a.md-nav__link{
-    position: relative;
-    padding-right: 2.2rem !important; /* matches the visual right gutter used by nested items */
-  }
-
-  /* Align chevron to the same right edge as other levels */
-  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item--nested > label.md-nav__link > .md-nav__icon,
-  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item--nested > a.md-nav__link > .md-nav__icon{
-    position: absolute;
-    right: .6rem;
-    top: 50%;
-    transform: translateY(-50%);
-    margin: 0;
-  }
-}
-
-/* ========================================================================== 
-   V23.13 (desktop sidebar)
-   Fix: Level-1 chevrons + chevron alignment
-   - Restore chevrons for level-1 nested items (some earlier rules hid them)
-   - Align level-1 chevrons with child-level chevrons (same right edge)
-   ========================================================================== */
-
-@media screen and (min-width: 60em) {
-  /* Make nav links full-width & reserve space for chevrons */
-  .md-sidebar--primary nav.md-nav--primary .md-nav__link,
-  .md-sidebar--primary nav.md-nav--primary label.md-nav__link {
-    display: block;
-    position: relative;
-    padding-right: 2.6rem !important; /* space for the chevron */
-  }
-
-  /* Force chevrons visible (override earlier "display:none") */
-  .md-sidebar--primary nav.md-nav--primary .md-nav__icon {
-    display: inline-flex !important;
-  }
-
-  /* Pin chevrons to the same right edge for all levels */
-  .md-sidebar--primary nav.md-nav--primary .md-nav__link .md-nav__icon,
-  .md-sidebar--primary nav.md-nav--primary label.md-nav__link .md-nav__icon {
-    position: absolute;
-    right: 0.75rem;
-    top: 50%;
-    transform: translateY(-50%);
-    margin: 0 !important;
   }
 }
