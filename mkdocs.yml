@@ -57,7 +57,7 @@ plugins:
 
 nav:
   - Home: index.md
-  - Bus Servo:
+  - Uart Bus Servo:
       - Protocol: uart_bus_servo/protocols/uart_rs_485_protocol.md
       - Specifications:
           - RP6-U12H-M: uart_bus_servo/specifications/RP6_U12H_M.md
@@ -99,6 +99,38 @@ nav:
           - "C#": "uart_bus_servo/sdk/c#_sdk.md"
           - Ros: uart_bus_servo/sdk/ros_sdk.md
       - Document: uart_bus_servo/documents/uc01_insrtuction_manual.md    
+  - RS485 Bus Servo:
+      - Protocol: rs485_bus_servo/protocols/uart_rs_485_protocol.md
+      - Specifications:
+          - HX8-R28H-M: rs485_bus_servo/specifications/HX8_R28H_M.md
+          - HX8-R29H-M: rs485_bus_servo/specifications/HX8_R29H_M.md
+          - HX8-R50H-M: rs485_bus_servo/specifications/HX8_R50H_M.md
+          - HX8-R51H-M: rs485_bus_servo/specifications/HX8_R51H_M.md
+          - RX18-R100H-M: rs485_bus_servo/specifications/RX18_R100H_M.md
+          - RX18-R101H-M: rs485_bus_servo/specifications/RX18_R101H_M.md
+      - CAD Files:
+          - HX8/RX8 R Series: rs485_bus_servo/cad_files/HX8_RX8_R_series.md
+          - HX18 R Series: rs485_bus_servo/cad_files/HX18_R_series.md
+      - Software:
+          - PC Configuration Tools: rs485_bus_servo/software/pc_bus_servo_configuration_tool.md
+          - Web Configuration Tools: rs485_bus_servo/software/web_bus_servo_configuration_tool.md
+      - SDK:
+          - PLC:
+              - Sinamics: rs485_bus_servo/sdk/plc/sinamics_tia_portal_v19.md
+              - Codesys: rs485_bus_servo/sdk/plc/codesys.md
+              - Inovance: rs485_bus_servo/sdk/plc/inovance.md
+              - Inoproshop: rs485_bus_servo/sdk/plc/inovance_inoproshop.md
+              - GX Works: rs485_bus_servo/sdk/plc/mitsubishi_gx_works2.md
+              - Step7 MicroWin: rs485_bus_servo/sdk/plc/step7_microwin_smart.md
+          - Stm32f103: rs485_bus_servo/sdk/stm32f103_sdk.md
+          - Stm32f407: rs485_bus_servo/sdk/stm32f407_sdk.md
+          - Arduino: rs485_bus_servo/sdk/arduino_sdk.md
+          - Python: rs485_bus_servo/sdk/python_sdk.md
+          - Micro Python: rs485_bus_servo/sdk/micropython_sdk.md
+          - C++: rs485_bus_servo/sdk/C++_sdk.md
+          - "C#": "rs485_bus_servo/sdk/c#_sdk.md"
+          - Ros: rs485_bus_servo/sdk/ros_sdk.md
+      - Document: rs485_bus_servo/documents/uc01_insrtuction_manual.md
   - Robotic Arm:
       - StarAI Arm:
           - Quick Start: robotic_arm/starai_arm/quick_start.md
