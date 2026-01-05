@@ -1,5 +1,5 @@
 /*
-Fashion Star Wiki - V20.0 (Stable Base)
+Fashion Star Wiki - V21.0 (Stable Base)
 - Left nav: level-1 bold 600, level-2 always visible (desktop); mobile keeps original drawer logic
 - Colors: body + headings follow mode text colors; logo accent only for active nav + active TOC item
 - TOC: hover = subtle highlight (no accent); active = bold + logo accent
@@ -1534,6 +1534,35 @@ Fashion Star Wiki - V20.0 (Stable Base)
 
 .md-typeset table:not([class]) thead th {
   font-weight: 700 !important;     /* Table Header bold */
+}
+
+
+/* ==========================================================================
+   V21.0 - Tables: prevent mid-word & mid-number line breaks
+   - Words should NOT break across lines (hyphen breaks still allowed if they exist)
+   - Numbers should NOT break across lines
+   Mobile: allow horizontal scrolling instead of wrapping
+   ========================================================================== */
+
+/* Default: do not break inside words/numbers */
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td{
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+  hyphens: manual !important;
+}
+
+/* Make numeric-heavy content feel stable */
+.md-typeset table:not([class]){
+  font-variant-numeric: tabular-nums;
+}
+
+/* Mobile: prefer scroll, so keep each cell on one line */
+@media screen and (max-width: 59.9375em){
+  .md-typeset__scrollwrap > table:not([class]) th,
+  .md-typeset__scrollwrap > table:not([class]) td{
+    white-space: nowrap !important;
+  }
 }
 
 .md-typeset table:not([class]) th code,
