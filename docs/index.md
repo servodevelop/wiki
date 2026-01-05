@@ -1,4 +1,3 @@
-    * [Python SDK](sdk/python.md) (Desktop/Embedded)
     ---
     template: home.html
     ---
