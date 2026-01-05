@@ -1616,4 +1616,20 @@ Fashion Star Wiki - V21.0 (Stable Base)
 .md-typeset table th {
   font-variant-numeric: tabular-nums;
 }
+/* =========================
+   V21.2 - Light mode: Sidebar text color unify
+   Requirement: left nav text color #444746 regardless of bold (non-active),
+   keep active (logo) color rules.
+   ========================= */
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav__link,
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav__title,
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav__item .md-nav__link,
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav__item .md-nav__title {
+  color: #444746 !important;
+}
 
+/* Preserve active highlight color (logo) */
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav__link--active,
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav__item--active > .md-nav__link {
+  color: var(--fs-logo, #8641A9) !important;
+}
