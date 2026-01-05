@@ -1,5 +1,5 @@
 /*
-Fashion Star Wiki - V20.0 (Stable Base)
+Fashion Star Wiki - V21.0 (Stable Base)
 - Left nav: level-1 bold 600, level-2 always visible (desktop); mobile keeps original drawer logic
 - Colors: body + headings follow mode text colors; logo accent only for active nav + active TOC item
 - TOC: hover = subtle highlight (no accent); active = bold + logo accent
@@ -1536,8 +1536,100 @@ Fashion Star Wiki - V20.0 (Stable Base)
   font-weight: 700 !important;     /* Table Header bold */
 }
 
+
+/* ==========================================================================
+   V21.0 - Tables: prevent mid-word & mid-number line breaks
+   - Words should NOT break across lines (hyphen breaks still allowed if they exist)
+   - Numbers should NOT break across lines
+   Mobile: allow horizontal scrolling instead of wrapping
+   ========================================================================== */
+
+/* Default: do not break inside words/numbers */
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td{
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+  hyphens: manual !important;
+}
+
+/* Make numeric-heavy content feel stable */
+.md-typeset table:not([class]){
+  font-variant-numeric: tabular-nums;
+}
+
+/* Mobile: prefer scroll, so keep each cell on one line */
+@media screen and (max-width: 59.9375em){
+  .md-typeset__scrollwrap > table:not([class]) th,
+  .md-typeset__scrollwrap > table:not([class]) td{
+    white-space: nowrap !important;
+  }
+}
+
 .md-typeset table:not([class]) th code,
 .md-typeset table:not([class]) td code {
   font-size: 13px !important;      /* Inline Code in table */
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+
+/* ===========================
+   V21.1 – Table: prevent word/number breaking
+   Goal:
+   1) Words should not break into multiple lines (except explicit hyphen '-' / soft-hyphen).
+   2) Numbers should not break.
+   Tables are horizontally scrollable on small screens, so overflow is acceptable.
+   =========================== */
+
+/* Baseline: stop the browser from "emergency wrapping" inside words */
+.md-typeset table td,
+.md-typeset table th {
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: manual !important; /* do not auto-hyphenate */
+}
+
+/* Never break tokens commonly used in specs/protocols */
+.md-typeset table code,
+.md-typeset table kbd,
+.md-typeset table samp {
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: manual !important;
+}
+
+/* For common spec tables: keep first columns (names/length/type) on one line.
+   - Works well with horizontal scroll on mobile.
+   - Doesn't affect "Description" column wrapping.
+*/
+.md-typeset table th:nth-child(1),
+.md-typeset table td:nth-child(1),
+.md-typeset table th:nth-child(2),
+.md-typeset table td:nth-child(2),
+.md-typeset table th:nth-child(3),
+.md-typeset table td:nth-child(3) {
+  white-space: nowrap !important;
+}
+
+/* Numbers: discourage line breaks around digits and common separators */
+.md-typeset table td,
+.md-typeset table th {
+  font-variant-numeric: tabular-nums;
+}
+/* =========================
+   V21.2 - Light mode: Sidebar text color unify
+   Requirement: left nav text color #444746 regardless of bold (non-active),
+   keep active (logo) color rules.
+   ========================= */
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav__link,
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav__title,
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav__item .md-nav__link,
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav__item .md-nav__title {
+  color: #444746 !important;
+}
+
+/* Preserve active highlight color (logo) */
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav__link--active,
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav__item--active > .md-nav__link {
+  color: var(--fs-logo, #8641A9) !important;
 }
