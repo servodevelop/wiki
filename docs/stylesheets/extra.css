@@ -1633,3 +1633,17 @@ Fashion Star Wiki - V21.0 (Stable Base)
 [data-md-color-scheme="default"] .md-sidebar--primary .md-nav__item--active > .md-nav__link {
   color: var(--fs-logo, #8641A9) !important;
 }
+
+
+/* ==========================================================================
+   V21.3 - Sidebar accordion: disable "always expanded" level-2 sections
+   Goal:
+   - Default behavior: click to expand/collapse
+   - If you already use JS to keep only ONE section open, this stays compatible
+   ========================================================================== */
+.md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item--nested > input:not(:checked) ~ .md-nav{
+  display: none !important;
+}
+.md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item--nested > input:checked ~ .md-nav{
+  display: block !important;
+}
