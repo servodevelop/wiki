@@ -1682,3 +1682,25 @@ Fashion Star Wiki - V21.0 (Stable Base)
     fill: currentColor;
   }
 }
+
+/* ===== v23.6: Restore top-level chevrons (expand indicators) =====
+   Previously we hid 1st-level .md-nav__icon to "look always expanded".
+   Now accordion behavior is back, so re-enable the chevrons for nested items.
+*/
+
+/* Desktop + Mobile drawer: show chevrons for top-level nested items */
+.md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item--nested > label.md-nav__link > .md-nav__icon,
+.md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item--nested > a.md-nav__link > .md-nav__icon,
+/* Some Material builds place the icon inside a span */
+.md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item--nested > label.md-nav__link span.md-nav__icon,
+.md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item--nested > a.md-nav__link span.md-nav__icon{
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Keep the icon aligned at the far right (Material default) */
+.md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item--nested > label.md-nav__link,
+.md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item--nested > a.md-nav__link{
+  justify-content: space-between;
+}
