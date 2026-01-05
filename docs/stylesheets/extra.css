@@ -1682,37 +1682,29 @@ Fashion Star Wiki - V21.0 (Stable Base)
     fill: currentColor;
   }
 }
+
+
 /* ============================
-   v23.10 (branch from v23.5)
-   Desktop: restore + align chevrons (expand arrows) for top-level sections
-   Goal:
-   1) 一级目录（有下级内容）恢复右侧箭头
-   2) 箭头与其子目录箭头右对齐（同一列）
-   Scope: Desktop primary sidebar only
+   V23.5 Arrow Restore + Align (Desktop)
+   - Restore 1st-level section chevrons (previously hidden)
+   - Align chevrons with child-level chevrons (right edge)
+   - Desktop only (keep mobile untouched)
    ============================ */
-@media (min-width: 60em) {
-  /* Make sure chevrons are visible again (in case they were hidden by earlier rules) */
-  .md-sidebar--primary .md-nav__item--nested > .md-nav__link .md-nav__icon,
-  .md-sidebar--primary .md-nav__item--nested > label.md-nav__link .md-nav__icon {
+@media screen and (min-width: 60em) {
+  /* Restore chevrons for 1st-level expandable sections */
+  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item--section > label.md-nav__link > .md-nav__icon,
+  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item--section > a.md-nav__link > .md-nav__icon {
     display: inline-flex !important;
-    opacity: 1 !important;
-    visibility: visible !important;
+    margin-left: auto; /* push to the right in flex layouts */
   }
 
-  /* Reserve space on the right so text doesn't collide with the chevron */
-  .md-sidebar--primary .md-nav__item--nested > .md-nav__link,
-  .md-sidebar--primary .md-nav__item--nested > label.md-nav__link {
-    position: relative;
-    padding-right: 2.4rem !important;
-  }
-
-  /* Lock all chevrons to the same right column (align with child section chevrons) */
-  .md-sidebar--primary .md-nav__item--nested > .md-nav__link .md-nav__icon,
-  .md-sidebar--primary .md-nav__item--nested > label.md-nav__link .md-nav__icon {
-    position: absolute !important;
-    right: 0.75rem !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    margin: 0 !important;
+  /* Make 1st-level section links behave like other nav rows so the icon sits at the same right position */
+  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item--section > label.md-nav__link,
+  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item--section > a.md-nav__link {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    /* match typical MkDocs Material nav padding on the right */
+    padding-right: 1.2rem !important;
   }
 }
