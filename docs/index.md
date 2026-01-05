@@ -1,9 +1,3 @@
----
-template: home.html
----
-
-# Welcome to Fashion Star Wiki
-
 **Fashion Star Wiki** is your comprehensive documentation hub for Fashion Star robotics products, UART bus servos, and development tools. Whether you are automating industrial tasks with PLCs, building AI-powered robots, or developing custom control systems, you will find everything you need here.
 
 ---
