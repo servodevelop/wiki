@@ -64,11 +64,11 @@ nav:
   - Uart Bus Servo:
       - Protocol: uart_bus_servo/protocols/uart_rs_485_protocol.md
       - Specifications:
-          - RP6-U12H-M: uart_bus_servo/specifications/RP6_U12H_M.md
+          - RP6-U12H-M: uart_servo/specifications/RP6_U12H_M.md
           - RX6-U12H-M: uart_bus_servo/specifications/RX6_U12H_M.md
           - HP6/RP6-U15H-M: uart_bus_servo/specifications/HP_RP6_U15H_M.md
           - RP6-U18H-M: uart_bus_servo/specifications/RP6_U18H_M.md
-          - HA8/RA8-U25(H)-M: uart_bus_servo/specifications/HA_RA8_U25_H_M.md
+          - HA8/RA8-U25(H)-M: uart_servo/specs/ha-ra8-u25h-m.md
           - HX8/RX8-U28H-M: uart_bus_servo/specifications/HX_RX8_U28H_M.md
           - HX8/RX8-U29H-M: uart_bus_servo/specifications/HX_RX8_U29H_M.md
           - HA8/RA8-U35(H)-M: uart_bus_servo/specifications/HA_RA8_U35_H_M.md
