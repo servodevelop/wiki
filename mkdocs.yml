@@ -119,12 +119,12 @@ nav:
   - RS485 Bus Servo:
     - Protocol: rs485_servo/protocols/uart_rs485_protocol.md
     - Specifications:
-        - HX8-R28H-M: rs485_servo/specifications/hx8-r28h-m.md
-        - HX8-R29H-M: rs485_servo/specifications/hx8-r29h-m.md
-        - HX8-R50H-M: rs485_servo/specifications/hx8-r50h-m.md
-        - HX8-R51H-M: rs485_servo/specifications/hx8-r51h-m.md
-        - RX18-R100H-M: rs485_servo/specifications/rx18-r100h-m.md
-        - RX18-R101H-M: rs485_servo/specifications/rx18-r101h-m.md
+        - HX8-R28H-M: rs485_servo/specs/hx8-r28h-m.md
+        - HX8-R29H-M: rs485_servo/specs/hx8-r29h-m.md
+        - HX8-R50H-M: rs485_servo/specs/hx8-r50h-m.md
+        - HX8-R51H-M: rs485_servo/specs/hx8-r51h-m.md
+        - RX18-R100H-M: rs485_servo/specs/rx18-r100h-m.md
+        - RX18-R101H-M: rs485_servo/specs/rx18-r101h-m.md
     - CAD Files:
         - HX8/RX8 R Series: rs485_servo/cad_files/hx8-rx8-r-series.md
         - HX18 R Series: rs485_servo/cad_files/hx18-r-series.md
@@ -151,8 +151,8 @@ nav:
   - CAN Bus Servo:
     - Protocol: can_servo/protocols/can_protocol.md
     - Specifications:
-        - HX8-C100H-M: can_servo/specifications/hx8-c100h-m.md
-        - HX8-C100W-M: can_servo/specifications/hx8-c100w-m.md
+        - HX8-C100H-M: can_servo/specs/hx8-c100h-m.md
+        - HX8-C100W-M: can_servo/specs/hx8-c100w-m.md
     - CAD Files:
         - HX8/RX8 C Series: can_servo/cad_files/hx8-rx8-c-series.md
         - HX18 C Series: can_servo/cad_files/hx18-c-series.md
