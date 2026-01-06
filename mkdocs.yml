@@ -115,7 +115,7 @@ nav:
           - C++: "uart_servo/sdk/cpp_sdk.md"
           - "C#": "uart_servo/sdk/csharp_sdk.md"
           - Ros: uart_servo/sdk/ros_sdk.md
-      - Document: uart_servo/documents/uc01_insrtuction_manual.md
+      - Document: uart_servo/documents/uc01_instruction_manual.md
   - RS485 Bus Servo:
     - Protocol: rs485_servo/protocols/uart_rs485_protocol.md
     - Specifications:
@@ -181,3 +181,4 @@ nav:
           - Quick Start: robotic_arm/starai_arm/quick_start.md
       - Piper Mate:
           - Get Ready: robotic_arm/piper_mate/get_ready.md
+
