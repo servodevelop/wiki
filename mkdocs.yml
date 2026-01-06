@@ -61,9 +61,16 @@ plugins:
   - i18n:
       default_language: en
       languages:
-        en: English
-        es: Español
-        ja: 日本語
+        - locale: en
+          name: English
+          default: true
+          build: true
+        - locale: es
+          name: Español
+          build: true
+        - locale: ja
+          name: 日本語
+          build: true
 
 nav:
   - Home: index.md
