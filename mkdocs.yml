@@ -70,14 +70,14 @@ plugins:
           name: "🇪🇸 Español"
           build: true
           icon: material/alpha-s-box
-        - locale: de
-          name: "🇩🇪 Deutsch"
-          build: true
-          icon: material/alpha-d-box
         - locale: fr
           name: "🇫🇷 Français"
           build: true
           icon: material/alpha-f-box
+        - locale: de
+          name: "🇩🇪 Deutsch"
+          build: true
+          icon: material/alpha-d-box
         - locale: ja
           name: "🇯🇵 日本語"
           build: true
