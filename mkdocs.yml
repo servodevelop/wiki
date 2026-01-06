@@ -55,6 +55,9 @@ hooks:
 plugins:
   - search
   - glightbox
+  - include-markdown:
+      rewrite_relative_urls: true
+      dedent: true
 
 nav:
   - Home: index.md
