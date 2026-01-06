@@ -58,6 +58,12 @@ plugins:
   - include-markdown:
       rewrite_relative_urls: true
       dedent: true
+  - i18n:
+      default_language: en
+      languages:
+        en: English
+        es: Español
+        ja: 日本語
 
 nav:
   - Home: index.md
