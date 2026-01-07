@@ -1707,3 +1707,38 @@ Fashion Star Wiki - V21.0 (Stable Base)
     flex: 0 0 auto;
   }
 }
+
+/* =====================================================
+   Restore native mobile header & TOC button
+   (Material for MkDocs)
+   ===================================================== */
+@media screen and (max-width: 59.9375em) {
+
+  /* Header baseline height */
+  .md-header,
+  .md-header__inner {
+    min-height: 56px !important; /* Material mobile default */
+  }
+
+  /* Restore flex layout so buttons have space */
+  .md-header__inner {
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 12px !important;
+  }
+
+  /* Title should not cover left/right buttons */
+  .md-header__title {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    margin: 0 8px !important;
+    padding: 0 !important;
+  }
+
+  /* Ensure native TOC button is visible */
+  .md-header__button--toc {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
