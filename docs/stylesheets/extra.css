@@ -148,13 +148,15 @@ Fashion Star Wiki - V21.0 (Stable Base)
   pointer-events: none;
 }
 
-/* Hide the "Table of contents" toggle that can appear in the LEFT nav */
-.md-sidebar--primary label.md-nav__link[for="__toc"],
-.md-sidebar--primary a.md-nav__link[href="#__toc"],
-.md-sidebar--primary .md-nav__icon--toc,
-.md-sidebar--primary .md-nav__link[for="__toc"],
-.md-sidebar--primary .md-nav__link[href="#__toc"]{
-  display: none !important;
+/* Hide the "Table of contents" toggle that can appear in the LEFT nav
+   NOTE: keep it AVAILABLE on mobile (so users can open the in-page TOC),
+   and only hide it on wider screens where the right-side TOC exists. */
+@media screen and (min-width: 60em) {
+  .md-sidebar--primary label.md-nav__link[for="__toc"],
+  .md-sidebar--primary .md-nav__icon--toc,
+  .md-sidebar--primary .md-nav__title:has(label.md-nav__link[for="__toc"]) {
+    display: none !important;
+  }
 }
 
 /* Keep nested nav clean (no extra guide lines) */
