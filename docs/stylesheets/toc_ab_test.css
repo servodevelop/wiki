@@ -1,27 +1,32 @@
-/* A/B TEST: restore mobile TOC title & button
-   Scope: mobile only, secondary sidebar (TOC drawer)
-*/
+/* ===============================
+   Restore native mobile header & TOC button
+   =============================== */
 @media screen and (max-width: 59.9375em) {
 
-  /* 1. Restore TOC drawer title height & text */
-  .md-sidebar--secondary .md-nav--secondary .md-nav__title {
-    font-size: 1rem !important;
-    color: var(--md-default-fg-color) !important;
-    padding: 0 3rem !important;
-    line-height: 2.5rem !important;
+  /* 1. 恢复 header 本身高度（Material 默认被你压扁过） */
+  .md-header {
+    height: auto !important;
+    min-height: 56px !important; /* Material mobile default */
   }
 
-  /* 2. Ensure TOC toggle button is visible & clickable */
-  .md-sidebar--secondary
-  .md-nav--secondary
-  .md-nav__title
-  .md-nav__button[for="__toc"] {
-    position: absolute !important;
-    right: 0.75rem !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    pointer-events: auto !important;
+  /* 2. 恢复 header 内部布局空间 */
+  .md-header__inner {
+    padding: 0 16px !important;
+    min-height: 56px !important;
+    align-items: center !important;
   }
+
+  /* 3. 标题区域：给左右按钮留出空间（这是关键） */
+  .md-header__title {
+    padding: 0 48px !important;
+    line-height: 1.2;
+  }
+
+  /* 4. 确保原生 TOC / menu 按钮不会被隐藏 */
+  .md-header__button {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+
 }
