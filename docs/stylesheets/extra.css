@@ -1708,56 +1708,55 @@ Fashion Star Wiki - V21.0 (Stable Base)
   }
 }
 
-/* =============================
-   Mobile TOC Fix (Overlay)
-   - Show secondary sidebar TOC as an off-canvas panel on small screens
-   - Fix iOS/Safari 'white bar' overlay by constraining the scroller
-   - Does NOT touch theme colors / active nav purple indicators
-   ============================= */
-
-/* =====================================================
-   Mobile TOC FIX – non destructive
-   Append this at the END of your existing extra.css
-   ===================================================== */
-
-@media screen and (max-width: 59.9375em) {
-
-  /* Secondary sidebar (TOC) – hidden by default */
-  .md-sidebar--secondary {
+/* ==========================================================================
+   Mobile TOC overlay (restore "On this page" in mobile)
+   - Keeps desktop behavior intact
+   - Uses Material's built-in TOC toggle: .md-toggle[data-md-toggle="toc"]
+   ========================================================================== */
+@media screen and (max-width: 59.9375em){
+  /* Keep the element available, but park it off-canvas by default */
+  .md-sidebar--secondary{
     display: block !important;
     visibility: visible !important;
 
     position: fixed !important;
-    top: 56px !important;
+    top: var(--md-header-height, 56px) !important;
     right: 0 !important;
+    bottom: 0 !important;
 
-    width: 260px !important;
-    height: calc(100vh - 56px) !important;
+    width: min(20rem, 88vw) !important;
+    max-width: 88vw !important;
 
-    background: #fff !important;
-    z-index: 1000 !important;
-
-    /* fully off-canvas to avoid the “white bar” */
+    background: var(--md-default-bg-color, #fff) !important;
     transform: translateX(100%) !important;
-    pointer-events: none !important;
+    transition: transform .2s ease !important;
 
-    overflow-y: auto !important;
-    box-shadow: -8px 0 24px rgba(0,0,0,.25) !important;
-
-    transition: transform .25s ease !important;
+    z-index: 1000 !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,.25) !important;
   }
 
-  /* When TOC toggle is ON */
-  .md-toggle[data-md-toggle="toc"]:checked
-  ~ .md-container
-  .md-sidebar--secondary {
+  /* Scroll area fills the panel; avoids the "white bar" artifact */
+  .md-sidebar--secondary .md-sidebar__scrollwrap{
+    height: calc(100vh - var(--md-header-height, 56px)) !important;
+  }
+
+  /* Make the TOC title behave nicely inside the panel */
+  .md-sidebar--secondary .md-nav__title{
+    position: sticky !important;
+    top: 0 !important;
+    background: var(--md-default-bg-color, #fff) !important;
+    z-index: 1 !important;
+  }
+
+  /* When TOC toggle is checked, slide the panel in */
+  .md-toggle[data-md-toggle="toc"]:checked ~ .md-container .md-sidebar--secondary{
     transform: translateX(0) !important;
-    pointer-events: auto !important;
   }
 
-  /* Ensure toc content visible */
-  .md-sidebar--secondary [data-md-component="toc"] {
+  /* Ensure overlay catches taps to close */
+  .md-toggle[data-md-toggle="toc"]:checked ~ .md-overlay{
     display: block !important;
-    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
   }
 }
