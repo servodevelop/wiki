@@ -1708,156 +1708,72 @@ Fashion Star Wiki - V21.0 (Stable Base)
   }
 }
 
-/* ==== Mobile TOC patch (known-good) ==== */
-/* Mobile TOC slide-out fix (Material for MkDocs)
-   - Does NOT touch your theme colors / left-nav highlight styles.
-   - Only restores a working TOC panel on small screens using the built-in __toc checkbox.
-*/
+/* ===== Mobile TOC slide-out (v24) ===== */
 
 @media screen and (max-width: 59.9375em){
+  /* 1) Ensure the TOC toggle button (label for #__toc) is visible inside the mobile drawer list */
+  .md-sidebar--primary label.md-nav__link[for="__toc"]{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 8px !important;
+  }
+  /* If previous CSS hid it, force it back */
+  .md-sidebar--primary .md-nav__link[for="__toc"]{ display:flex !important; }
 
-  /* Ensure the built-in TOC checkbox isn't accidentally hidden by custom CSS */
-  #__toc.md-toggle{
-    position: fixed;
-    width: 1px !important;
-    height: 1px !important;
-    overflow: hidden !important;
-    clip: rect(0,0,0,0) !important;
-    clip-path: inset(50%) !important;
-    white-space: nowrap !important;
+  /* Make the icon feel like a real button (no weird extra text) */
+  .md-sidebar--primary label.md-nav__link[for="__toc"]::after{
+    content: "☰" !important;
+    font-size: 22px !important;
+    line-height: 1 !important;
+    color: var(--md-primary-fg-color, #8641A9) !important;
+    margin-left: auto !important;
+  }
+  /* Avoid duplicating any existing icon glyphs */
+  .md-sidebar--primary label.md-nav__link[for="__toc"] svg,
+  .md-sidebar--primary label.md-nav__link[for="__toc"] .md-nav__icon{
+    display: none !important;
   }
 
-  /* TOC panel: hidden off-canvas by default */
+  /* 2) Off-canvas TOC panel (secondary sidebar) */
   .md-sidebar--secondary{
-    display: block !important;               /* override main.*.css 'display:none' */
+    display: block !important;              /* override main.css display:none */
     position: fixed !important;
     top: var(--md-header-height, 56px) !important;
     right: 0 !important;
-    bottom: 0 !important;
-    width: min(82vw, 320px) !important;
-    max-width: 320px !important;
     height: calc(100vh - var(--md-header-height, 56px)) !important;
-    transform: translateX(110%) !important;  /* keep off-screen */
-    transition: transform 180ms ease !important;
-    z-index: 10020 !important;
+    width: min(86vw, 320px) !important;
+    max-width: 320px !important;
     background: var(--md-default-bg-color, #fff) !important;
     box-shadow: 0 8px 30px rgba(0,0,0,.25) !important;
+    z-index: 10020 !important;
     overflow: auto !important;
-    -webkit-overflow-scrolling: touch !important;
+
+    /* closed by default */
+    transform: translateX(100%) !important;
+    pointer-events: none !important;
   }
 
-  /* When TOC toggle is checked, slide panel in */
+  /* inner spacing */
+  .md-sidebar--secondary .md-sidebar__scrollwrap{
+    padding: 0 !important;
+  }
+  .md-sidebar--secondary .md-nav{
+    margin: 0 !important;
+  }
+  .md-sidebar--secondary .md-nav__title{
+    padding: 16px 16px 8px 16px !important;
+    font-weight: 700 !important;
+  }
+
+  /* 3) Open state when #__toc is checked */
   #__toc:checked ~ .md-container .md-sidebar--secondary{
     transform: translateX(0) !important;
+    pointer-events: auto !important;
   }
 
-  /* If a TOC overlay label exists, make it behave like a scrim */
-  label.md-overlay[for="__toc"]{
-    display: none;
-  }
-  #__toc:checked ~ label.md-overlay[for="__toc"]{
-    display: block !important;
-    position: fixed !important;
-    inset: 0 !important;
-    z-index: 10010 !important;
-    background: rgba(0,0,0,.35) !important;
-  }
-
-  /* Defensive: some custom rules may force translate via 'inset' or 'left' */
-  .md-sidebar--secondary[style*="inset"],
-  .md-sidebar--secondary[style*="left"]{
-    left: auto !important;
-  }
-}
-
-
-/* ==========================================================================
-   Fashion Star Wiki - v25 Mobile TOC + Theme Stabilizer
-   Goal:
-   1) Keep the "mobile TOC drawer" working (the structure you said is OK)
-   2) Restore brand color (#8641A9) + left active vertical bar
-   3) Avoid the "double indicator" problem (icon appears + active ::after block)
-   Notes:
-   - We intentionally DO NOT style `.md-nav__icon::after` globally.
-   - Active indicator uses `::before` (safer; avoids clashing with Material's `::after`).
-   ========================================================================== */
-
-:root{
-  --fs-accent: #8641A9;
-  --fs-accent-weak: rgba(134,65,169,.16);
-}
-
-/* --- Ensure TOC toggle entry exists in primary drawer (mobile) --- */
-@media screen and (max-width: 59.9375em){
-  .md-sidebar--primary label.md-nav__link[for="__toc"]{
-    display:flex !important;
-    align-items:center;
-    justify-content:space-between;
-  }
-  .md-sidebar--primary label.md-nav__link[for="__toc"] .md-nav__icon{
-    color: var(--fs-accent) !important;
-  }
-}
-
-/* --- Primary nav active styles (left drawer) --- */
-.md-sidebar--primary .md-nav__link--active{
-  color: var(--fs-accent) !important;
-  font-weight: 600;
-}
-
-/* Remove any competing active indicator that might be defined earlier */
-.md-sidebar--primary .md-nav__link--active::after,
-.md-sidebar--primary .md-nav__item--active > .md-nav__link::after{
-  content: none !important;
-}
-
-/* Use a single, consistent vertical bar on the left */
-.md-sidebar--primary .md-nav__item--active > .md-nav__link,
-.md-sidebar--primary .md-nav__link--active{
-  position: relative;
-  padding-left: 1rem; /* make room for the bar */
-}
-
-.md-sidebar--primary .md-nav__item--active > .md-nav__link::before,
-.md-sidebar--primary .md-nav__link--active::before{
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 3px;
-  height: 28px;
-  border-radius: 2px;
-  background: var(--fs-accent);
-}
-
-/* A subtle background for the active row (optional but matches your previous feel) */
-.md-sidebar--primary .md-nav__item--active > .md-nav__link{
-  background: var(--fs-accent-weak);
-  border-radius: 6px;
-}
-
-/* Keep non-active items looking clean */
-.md-sidebar--primary .md-nav__link{
-  border-radius: 6px;
-}
-
-/* --- Secondary TOC (desktop/right) brand color --- */
-.md-sidebar--secondary [data-md-component="toc"] .md-nav__link--active,
-.md-sidebar--secondary [data-md-component="toc"] .md-nav__link[aria-current="location"]{
-  color: var(--fs-accent) !important;
-  font-weight: 600;
-}
-
-/* Optional: TOC left border accent */
-.md-sidebar--secondary [data-md-component="toc"]{
-  border-left: 2px solid rgba(134,65,169,.25);
-  padding-left: .75rem;
-}
-
-/* --- Guard: if some earlier CSS forced secondary sidebar to display:none, undo on desktop --- */
-@media screen and (min-width: 60em){
-  .md-sidebar--secondary{
-    display:block;
+  /* 4) Clicking a TOC link should feel tappable */
+  .md-sidebar--secondary a.md-nav__link{
+    padding: 10px 16px !important;
   }
 }
