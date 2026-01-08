@@ -1,71 +1,1863 @@
+/*
+Fashion Star Wiki - V21.0 (Stable Base)
+- Left nav: level-1 bold 600, level-2 always visible (desktop); mobile keeps original drawer logic
+- Colors: body + headings follow mode text colors; logo accent only for active nav + active TOC item
+- TOC: hover = subtle highlight (no accent); active = bold + logo accent
+- Typography: headings H1-H6 font-weight 700
+- Media: images centered with side gutters; click-to-zoom unaffected
+- Callouts: GitHub-style [!NOTE]/[!TIP]/[!IMPORTANT]/[!WARNING]/[!CAUTION] rendered as Material admonitions (via build hook)
+- Tables: Seeed-ish clean grid; body 14px, header 14px + bold; inline-code 13px monospace; width matches content
+*/
 
-/* ===============================
-   Mobile TOC + Theme Stable v26
-   Fix duplicate icon sources:
-   - Use md-nav__link--active::after ONLY
-   - Disable md-nav__icon::after on active row
-   =============================== */
-
-/* ---------- Theme color ---------- */
-:root {
+/* Brand + remove "default blue" by setting BOTH primary & accent tokens */
+:root{
   --fs-accent: #8641A9;
+  --fs-divider: rgba(0,0,0,0.12);
+
+  --md-primary-fg-color: var(--fs-accent);
+  --md-accent-fg-color: var(--fs-accent);
+  --md-accent-fg-color--transparent: rgba(134, 65, 169, 0.12);
+
+  --md-typeset-a-color: var(--fs-accent);
+  --md-typeset-line-height: 1.6;
+  --md-typeset-font-size: 16px;
 }
 
-/* ---------- Active nav text ---------- */
-.md-nav__link--active {
+/* Dark scheme */
+[data-md-color-scheme="slate"]{
+  --fs-divider: rgba(255,255,255,0.10);
+  --md-default-bg-color: #131314;
+  --md-default-bg-color--light: #1e1f20;
+  --md-default-fg-color: #e3e3e3;
+  --md-default-fg-color--light: #8e918f;
+  --md-code-bg-color: #1e1f20;
+}
+
+/* Header */
+.md-header{
+  background-color: var(--fs-accent) !important;
+}
+
+/* Hide the logo button everywhere (you only want “Fashion Star Wiki”) */
+.md-header__button.md-logo{
+  display: none !important;
+}
+
+/* ==========================================================================
+   Desktop layout + dividers
+   ========================================================================== */
+@media screen and (min-width: 60em){
+
+  /* Total container width (main lever for content width) */
+  .md-grid{
+    max-width: 1380px !important; /* 242 + 896 + 242 */
+  }
+
+  /* Left divider line: draw on content column so it matches content height */
+  .md-content{
+    position: relative !important;
+    z-index: 2 !important;
+    min-height: 100vh;
+    box-shadow: inset 1px 0 0 var(--fs-divider) !important;
+  }
+
+  /* Right divider line: ends with TOC content height */
+  .md-sidebar--secondary .md-nav--secondary{
+    position: relative !important;
+    padding-left: 14px !important; /* gap between divider line and TOC text */
+  }
+  .md-sidebar--secondary .md-nav--secondary::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--fs-divider);
+    pointer-events: none;
+  }
+
+  /* Keep the right TOC sidebar visible on desktop */
+  .md-sidebar--secondary{
+    display: block !important;
+    visibility: visible !important;
+  }
+}
+
+.md-sidebar--primary{ border-right: none !important; }
+.md-sidebar--secondary{ border-left: none !important; margin-left: 0 !important; }
+
+/* ==========================================================================
+   Left sidebar navigation (primary)
+   ========================================================================== */
+
+/* Base typography (user request: 16px) */
+.md-sidebar--primary .md-nav__title,
+.md-sidebar--primary .md-nav__link{
+  font-size: 16px !important;
+  line-height: 1.22 !important;
+}
+
+/* Active trail text */
+.md-sidebar--primary .md-nav__link--active,
+.md-sidebar--primary .md-nav__item--active > .md-nav__link,
+.md-sidebar--primary .md-nav__link[aria-current="page"],
+.md-sidebar--primary .md-nav__item--active > .md-nav__link.md-nav__container{
+  color: var(--fs-accent) !important;
+  font-weight: 600 !important;
+}
+
+/* Primary nav gutter (reserve space for the bar; keep sibling alignment) */
+.md-sidebar--primary .md-nav__link,
+.md-sidebar--primary .md-nav__item .md-nav__link,
+.md-sidebar--primary .md-nav__link.md-nav__container,
+.md-sidebar--primary .md-nav__link--active,
+.md-sidebar--primary .md-nav__item--active > .md-nav__link,
+.md-sidebar--primary .md-nav__link[aria-current="page"]{
+  padding-left: 18px !important; /* prevents bar/title overlap */
+  box-sizing: border-box;
+  position: relative; /* anchor for ::before */
+}
+
+/* md-nav__container fix: prevent “double indent” for sections with index.md */
+.md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link,
+.md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link{
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+/* Prevent double bars inside container */
+.md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link::before,
+.md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link::before{
+  content: none !important;
+}
+
+/* Active bar: follow container height (good for multi-line titles) */
+.md-sidebar--primary .md-nav__link--active:not([aria-current="page"])::before,
+.md-sidebar--primary .md-nav__item--active > .md-nav__link:not([aria-current="page"])::before,
+.md-sidebar--primary .md-nav__link[aria-current="page"]::before,
+.md-sidebar--primary .md-nav__item--active > .md-nav__link.md-nav__container:not([aria-current="page"])::before{
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--fs-accent);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+/* Hide the "Table of contents" toggle that can appear in the LEFT nav */
+.md-sidebar--primary label.md-nav__link[for="__toc"],
+.md-sidebar--primary a.md-nav__link[href="#__toc"],
+.md-sidebar--primary .md-nav__icon--toc,
+.md-sidebar--primary .md-nav__link[for="__toc"],
+.md-sidebar--primary .md-nav__link[href="#__toc"]{
+  display: none !important;
+}
+
+/* Keep nested nav clean (no extra guide lines) */
+.md-sidebar--primary .md-nav__item .md-nav{
+  border-left: none !important;
+}
+
+/* ==========================================================================
+   Right TOC (secondary sidebar) - 12.8px for ALL levels + title
+   ========================================================================== */
+
+/* Baseline */
+.md-sidebar--secondary,
+.md-sidebar--secondary .md-sidebar__scrollwrap,
+.md-sidebar--secondary .md-sidebar__inner{
+  font-size: 12.8px !important;
+}
+
+/* Title: visually rename to "On this page" */
+.md-sidebar--secondary .md-nav--secondary .md-nav__title{
+  font-size: 0 !important;
+  color: transparent !important;
+  margin-bottom: 0.25rem !important;
+  position: relative !important;
+}
+.md-sidebar--secondary .md-nav--secondary .md-nav__title::before{
+  content: "On this page" !important;
+  font-size: 12.8px !important;
+  color: var(--md-default-fg-color--light) !important;
+  letter-spacing: 0.02em;
+}
+
+/* Link spacing */
+.md-sidebar--secondary .md-nav--secondary .md-nav__link,
+.md-sidebar--secondary .md-nav--secondary a.md-nav__link,
+.md-sidebar--secondary .md-nav--secondary .md-nav__item > .md-nav__link,
+.md-sidebar--secondary .md-nav--secondary .md-nav__item .md-nav .md-nav__link{
+  font-size: 12.8px !important;
+  line-height: 1.12 !important;
+  padding: 0.06rem 0 !important;
+}
+
+/* Nested indent (user final choice: 2px) */
+.md-sidebar--secondary .md-nav--secondary .md-nav__item .md-nav{
+  padding-left: 2px !important;
+  margin-left: 0 !important;
+}
+
+/* Active TOC item */
+.md-sidebar--secondary .md-nav--secondary .md-nav__item--active > .md-nav__link,
+.md-sidebar--secondary .md-nav--secondary .md-nav__link--active{
+  color: var(--fs-accent) !important;
+  font-weight: 600 !important;
+}
+
+/* ==========================================================================
+   Content typography
+   ========================================================================== */
+
+/* Breadcrumb links (no blue) */
+.md-content__nav a{
+  color: var(--md-default-fg-color--light) !important;
+  text-decoration: none !important;
+}
+.md-content__nav a:hover{
+  color: var(--fs-accent) !important;
+}
+
+/* Body typography */
+.md-typeset{
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+}
+
+.md-typeset h1{
+  color: var(--fs-accent);
+  font-weight: 800;
+  margin-top: 0;
+}
+.md-typeset a{
+  color: var(--fs-accent);
+}
+
+/* ==========================================================================
+   Safety clamps (prevents “image goes under sidebar” visual issues)
+   ========================================================================== */
+.md-typeset img,
+.md-typeset svg,
+.md-typeset video,
+.md-typeset iframe{
+  max-width: 100% !important;
+  height: auto !important;
+}
+.md-typeset figure,
+.md-typeset table{
+  max-width: 100% !important;
+}
+.md-typeset__scrollwrap{
+  overflow-x: auto !important;
+}
+
+/* ==========================================================================
+   Mobile fixes: header title centering + drawer back arrow overlap
+   (DO NOT touch palette toggle visibility; let theme handle it)
+   ========================================================================== */
+@media screen and (max-width: 59.9375em){
+
+  /* Header height + true vertical centering */
+  .md-header__inner{
+    display: flex !important;
+    align-items: center !important;
+    min-height: 48px !important;
+    padding: 0 12px !important;
+  }
+  .md-header__title{
+    position: static !important;
+    display: flex !important;
+    align-items: center !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 12px !important;
+  }
+  .md-header__ellipsis,
+  .md-header__topic,
+  .md-header__topic .md-ellipsis{
+    display: flex !important;
+    align-items: center !important;
+    height: 100% !important;
+    line-height: 1.15 !important;
+    padding: 0 !important;
+  }
+/* Drawer title row: reserve space for back arrow so it never overlaps text */
+  .md-sidebar--primary .md-nav__title{
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    min-height: 48px !important;
+    height: 48px !important;
+    box-sizing: border-box !important;
+    padding: 0 16px 0 56px !important; /* left padding reserves back icon */
+  }
+  /* Back button placement */
+  .md-sidebar--primary .md-nav__title .md-nav__button{
+    position: absolute !important;
+    left: 12px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    margin: 0 !important;
+  }
+
+  /* Ensure the title text is centered within its own line box */
+  .md-sidebar--primary .md-nav__title .md-ellipsis{
+    line-height: 1.15 !important;
+    padding: 0 !important;
+  }
+}
+
+/* ==========================================================================
+   Mobile: hide logo icon everywhere (keep title only)
+   ========================================================================== */
+@media screen and (max-width: 59.9375em){
+  .md-header__button.md-logo,
+  .md-header__button.md-logo *,
+  .md-nav__title .md-logo,
+  .md-nav__title .md-logo *,
+  .md-nav__button.md-logo,
+  .md-nav__button.md-logo *{
+    display: none !important;
+  }
+
+  /* Keep the drawer title aligned after removing the logo */
+  .md-nav__title{
+    padding-left: 16px !important;
+  }
+}
+
+/* ==========================================================================
+   V18.2 patch (based on V18.1 stable)
+   1) Level-1 items: font-weight 600
+   2) Keep level-2 nav always expanded (no need to click to open)
+   NOTE: Visual/active effects remain as-is.
+   ========================================================================== */
+
+/* 1) Level-1 (top-level) nav items in the LEFT sidebar */
+.md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link,
+.md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link.md-nav__container,
+.md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link.md-nav__container > a.md-nav__link,
+.md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link.md-nav__container > label.md-nav__link{
+  font-weight: 600 !important;
+}
+
+/* 2) Always show level-2 items (DESKTOP only) */
+@media screen and (min-width: 60em){
+  /* 2) Always show level-2 items (children of the level-1 items) */
+  .md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav{
+    display: block !important;
+    height: auto !important;
+    max-height: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  /* Some Material versions animate/collapse via the sibling selector:
+     input ~ .md-nav / input:checked ~ .md-nav. Force open in both states. */
+  .md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item--nested > input ~ .md-nav{
+    display: block !important;
+  }
+}
+
+
+/* ==========================================================================
+   V18.3 patch
+   - Left nav text color:
+     * light: #444746
+     * slate: #C4C7C5
+   - Remove chevron/arrow for 1st-level items in LEFT primary nav
+   ========================================================================== */
+
+/* Left nav text color tokens */
+:root{ --fs-leftnav-fg: #444746; }
+[data-md-color-scheme="slate"]{ --fs-leftnav-fg: #C4C7C5; }
+
+/* Apply to left sidebar only (keep active/hover overrides intact) */
+.md-sidebar--primary .md-nav__title,
+.md-sidebar--primary .md-nav__link{
+  color: var(--fs-leftnav-fg) !important;
+}
+
+/* Left sidebar active item keeps brand accent */
+.md-sidebar--primary .md-nav__link--active,
+.md-sidebar--primary .md-nav__item--active > .md-nav__link,
+.md-sidebar--primary .md-nav__link[aria-current="page"],
+.md-sidebar--primary .md-nav__item--active > .md-nav__link.md-nav__container{
+  color: var(--fs-accent) !important;
+  font-weight: 600 !important;
+}
+
+
+@media screen and (min-width: 60em){
+  /* Remove 1st-level chevrons in the left primary nav (since level-2 is always expanded) */
+  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item > label.md-nav__link > .md-nav__icon,
+  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item > a.md-nav__link > .md-nav__icon{
+    display: none !important;
+  }
+
+  /* Avoid reserving extra space for the removed icon */
+  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item > label.md-nav__link,
+  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item > a.md-nav__link{
+    padding-right: 16px !important;
+  }
+}
+
+/* ==========================================================================
+   V18.4 patch - content/TOC typography colors
+   Requirements:
+   - Left nav text color: dark #C4C7C5, light #1A1A1A
+   - Content + right TOC text color (including headings): dark #E3E3E3, light #1F1F1F
+   - Keep links in brand accent; remove brand accent from headings/TOC active color
+   ========================================================================== */
+
+:root{
+  --fs-leftnav-fg: #1A1A1A;   /* light scheme */
+  --fs-content-fg: #1F1F1F;   /* light scheme */
+  --fs-toc-fg: #1F1F1F;       /* light scheme */
+}
+
+[data-md-color-scheme="slate"]{
+  --fs-leftnav-fg: #C4C7C5;   /* dark scheme */
+  --fs-content-fg: #E3E3E3;   /* dark scheme */
+  --fs-toc-fg: #E3E3E3;       /* dark scheme */
+}
+
+/* Left sidebar base text color (keep existing active/hover behavior) */
+.md-sidebar--primary .md-nav__title,
+.md-sidebar--primary .md-nav__link{
+  color: var(--fs-leftnav-fg) !important;
+}
+
+/* Content body + headings (stop forcing brand accent on headings) */
+.md-typeset{
+  color: var(--fs-content-fg) !important;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6{
+  color: var(--fs-content-fg) !important;
+}
+
+/* Right TOC: title + links use the same text color; active uses weight only */
+.md-sidebar--secondary .md-nav--secondary .md-nav__title::before{
+  color: var(--fs-toc-fg) !important;
+}
+
+.md-sidebar--secondary .md-nav--secondary .md-nav__link{
+  color: var(--fs-toc-fg) !important;
+}
+
+.md-sidebar--secondary .md-nav--secondary .md-nav__item--active > .md-nav__link,
+.md-sidebar--secondary .md-nav--secondary .md-nav__link--active{
+  color: var(--fs-accent) !important;
+  font-weight: 600 !important;
+}
+
+
+/* ==========================================================================
+   V18.4.2 - Hover highlight (NO nested "container boxes")
+   - Apply highlight ONLY to the clickable link row (not the <li> item)
+   - No shadow / no lift, tiny radius, solid background so it won't bleed into next row
+   ========================================================================== */
+
+/* Hover tokens */
+:root{
+  --fs-nav-hover-bg: rgba(0,0,0,0.06);        /* light default */
+  --fs-nav-hover-bg-strong: rgba(0,0,0,0.08); /* a bit darker for light mode visibility */
+  --fs-toc-hover-bg: rgba(0,0,0,0.06);
+}
+[data-md-color-scheme="slate"]{
+  --fs-nav-hover-bg: rgba(255,255,255,0.06);
+  --fs-nav-hover-bg-strong: rgba(255,255,255,0.08);
+  --fs-toc-hover-bg: rgba(255,255,255,0.06);
+}
+
+/* ---------------- LEFT SIDEBAR hover ---------------- */
+
+/* Make sure the row is the hit-target */
+@media screen and (min-width: 60em){
+  .md-sidebar--primary .md-nav__link{
+    border-radius: 2px !important;
+    background-clip: padding-box;
+  }
+  /* For "index.md containers" the clickable parts are inside */
+  .md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link,
+  .md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link{
+    border-radius: 2px !important;
+    background-clip: padding-box;
+  }
+
+  /* Hover/focus highlight (no shadow) */
+  .md-sidebar--primary .md-nav__link:hover,
+  .md-sidebar--primary .md-nav__link:focus-visible{
+    background: var(--fs-nav-hover-bg-strong) !important;
+  }
+  .md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link:hover,
+  .md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link:focus-visible,
+  .md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link:hover,
+  .md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link:focus-visible{
+    background: var(--fs-nav-hover-bg-strong) !important;
+  }
+
+  /* IMPORTANT: never paint the <li> itself (prevents nested “stacked boxes”) */
+  .md-sidebar--primary .md-nav__item::before,
+  .md-sidebar--primary .md-nav__item::after{
+    content: none !important;
+    display: none !important;
+  }
+}
+
+/* ---------------- RIGHT TOC hover ---------------- */
+
+@media screen and (min-width: 60em){
+  .md-sidebar--secondary .md-nav--secondary .md-nav__link{
+    border-radius: 2px !important;
+    background-clip: padding-box;
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+  .md-sidebar--secondary .md-nav--secondary .md-nav__link:hover,
+  .md-sidebar--secondary .md-nav--secondary .md-nav__link:focus-visible{
+    background: var(--fs-toc-hover-bg) !important;
+  }
+}
+
+
+
+/* ==========================================================================
+   V18.4.3 patch - Fix hover/active background overlap for items that have index.md
+   (Material renders a wrapper: .md-nav__link.md-nav__container containing <a> + <label>)
+   Goal: ONE background spanning the whole row (including chevron), no double blocks.
+   ========================================================================== */
+@media screen and (min-width: 60em){
+  /* Make the container a real flex row so it owns the full-width hover background */
+  .md-sidebar--primary .md-nav__link.md-nav__container{
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.35rem !important;
+  }
+  /* Let the text link take remaining space; keep icon label at the right */
+  .md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link{
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
+  .md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link{
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+    padding: 0 !important; /* container already has padding */
+  }
+
+  /* Background should be applied ONLY once: on the container */
+  .md-sidebar--primary .md-nav__link.md-nav__container:hover{
+    background: var(--fs-nav-hover-bg-strong) !important;
+  }
+  .md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link:hover,
+  .md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link:hover{
+    background: transparent !important;
+  }
+
+  /* Same idea for keyboard focus */
+  .md-sidebar--primary .md-nav__link.md-nav__container:focus-within{
+    background: var(--fs-nav-hover-bg-strong) !important;
+  }
+  .md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link:focus,
+  .md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link:focus{
+    background: transparent !important;
+  }
+}
+
+/* ==========================================================================
+   V18.4.4 - Mobile drawer logic safety
+   Goal: Keep DESKTOP nav always-expanded + no level-1 chevrons,
+         but let MOBILE/iPad drawer use Material's native collapse/expand logic.
+   (The forced-open + chevron-hiding rules are desktop-only above.)
+   ========================================================================== */
+@media screen and (max-width: 59.9375em){
+  /* Ensure nested nav follows the built-in checkbox/animation behavior */
+  .md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav{
+    display: none;
+  }
+  .md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item--nested > input:checked ~ .md-nav{
+    display: block;
+  }
+  /* Restore level-1 chevrons in the drawer (desktop hides them) */
+  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item > label.md-nav__link > .md-nav__icon,
+  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item > a.md-nav__link > .md-nav__icon{
+    display: inline-flex !important;
+  }
+}
+
+/* ==========================================================================
+   V18.4.5 hotfix - TOC active item must be BRAND color
+   - Some Material builds use aria-current on the TOC link (instead of md-nav__link--active)
+   - Keep hover NOT using brand color; only active should be brand color
+   ========================================================================== */
+
+@media screen and (min-width: 60em){
+  /* Highest specificity against theme defaults */
+  .md-sidebar--secondary [data-md-component="toc"] .md-nav__link--active,
+  .md-sidebar--secondary [data-md-component="toc"] .md-nav__item--active > .md-nav__link,
+  .md-sidebar--secondary [data-md-component="toc"] .md-nav__link[aria-current],
+  .md-sidebar--secondary .md-nav--secondary .md-nav__link[aria-current="true"],
+  .md-sidebar--secondary .md-nav--secondary .md-nav__link[aria-current="location"],
+  .md-sidebar--secondary .md-nav--secondary .md-nav__link[aria-current="page"]{
+    color: var(--fs-accent) !important;
+    font-weight: 600 !important;
+  }
+}
+
+
+/* ==========================================================================
+   V20.0 patch - headings weight
+   Requirement: H1-H6 font-weight 700 (colors follow current rules)
+   ========================================================================== */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6{
+  font-weight: 700 !important;
+}
+
+/* ==========================================================================
+   Fashion Star Wiki - V19.0 (Desktop expanded, Mobile native)
+   Base: V15.1 stable overrides + tuned layout + TOC active + callouts + media + tables
+   Current targets (desktop >= 60em) / mobile uses native drawer logic:
+   - Total container max-width: 1380px  (≈ 242 + 896 + 242)
+   - Left nav font: 16px
+   - Right TOC font (ALL levels + title): 12.8px
+   - Right TOC nested indent: 2px
+   - Keep palette toggle WORKING (do not hide/force toggle labels)
+   Brand accent: #8641A9 | Dark bg: #131314
+   ========================================================================== */
+
+/* Brand + remove "default blue" by setting BOTH primary & accent tokens */
+:root{
+  --fs-accent: #8641A9;
+  --fs-divider: rgba(0,0,0,0.12);
+
+  --md-primary-fg-color: var(--fs-accent);
+  --md-accent-fg-color: var(--fs-accent);
+  --md-accent-fg-color--transparent: rgba(134, 65, 169, 0.12);
+
+  --md-typeset-a-color: var(--fs-accent);
+  --md-typeset-line-height: 1.6;
+  --md-typeset-font-size: 16px;
+}
+
+/* Dark scheme */
+[data-md-color-scheme="slate"]{
+  --fs-divider: rgba(255,255,255,0.10);
+  --md-default-bg-color: #131314;
+  --md-default-bg-color--light: #1e1f20;
+  --md-default-fg-color: #e3e3e3;
+  --md-default-fg-color--light: #8e918f;
+  --md-code-bg-color: #1e1f20;
+}
+
+/* Header */
+.md-header{
+  background-color: var(--fs-accent) !important;
+}
+
+/* Hide the logo button everywhere (you only want “Fashion Star Wiki”) */
+.md-header__button.md-logo{
+  display: none !important;
+}
+
+/* ==========================================================================
+   Desktop layout + dividers
+   ========================================================================== */
+@media screen and (min-width: 60em){
+
+  /* Total container width (main lever for content width) */
+  .md-grid{
+    max-width: 1380px !important; /* 242 + 896 + 242 */
+  }
+
+  /* Left divider line: draw on content column so it matches content height */
+  .md-content{
+    position: relative !important;
+    z-index: 2 !important;
+    min-height: 100vh;
+    box-shadow: inset 1px 0 0 var(--fs-divider) !important;
+  }
+
+  /* Right divider line: ends with TOC content height */
+  .md-sidebar--secondary .md-nav--secondary{
+    position: relative !important;
+    padding-left: 14px !important; /* gap between divider line and TOC text */
+  }
+  .md-sidebar--secondary .md-nav--secondary::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--fs-divider);
+    pointer-events: none;
+  }
+
+  /* Keep the right TOC sidebar visible on desktop */
+  .md-sidebar--secondary{
+    display: block !important;
+    visibility: visible !important;
+  }
+}
+
+.md-sidebar--primary{ border-right: none !important; }
+.md-sidebar--secondary{ border-left: none !important; margin-left: 0 !important; }
+
+/* ==========================================================================
+   Left sidebar navigation (primary)
+   ========================================================================== */
+
+/* Base typography (user request: 16px) */
+.md-sidebar--primary .md-nav__title,
+.md-sidebar--primary .md-nav__link{
+  font-size: 16px !important;
+  line-height: 1.22 !important;
+}
+
+/* Active trail text */
+.md-sidebar--primary .md-nav__link--active,
+.md-sidebar--primary .md-nav__item--active > .md-nav__link,
+.md-sidebar--primary .md-nav__link[aria-current="page"],
+.md-sidebar--primary .md-nav__item--active > .md-nav__link.md-nav__container{
+  color: var(--fs-accent) !important;
+  font-weight: 600 !important;
+}
+
+/* Primary nav gutter (reserve space for the bar; keep sibling alignment) */
+.md-sidebar--primary .md-nav__link,
+.md-sidebar--primary .md-nav__item .md-nav__link,
+.md-sidebar--primary .md-nav__link.md-nav__container,
+.md-sidebar--primary .md-nav__link--active,
+.md-sidebar--primary .md-nav__item--active > .md-nav__link,
+.md-sidebar--primary .md-nav__link[aria-current="page"]{
+  padding-left: 18px !important; /* prevents bar/title overlap */
+  box-sizing: border-box;
+  position: relative; /* anchor for ::before */
+}
+
+/* md-nav__container fix: prevent “double indent” for sections with index.md */
+.md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link,
+.md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link{
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+/* Prevent double bars inside container */
+.md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link::before,
+.md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link::before{
+  content: none !important;
+}
+
+/* Active bar: follow container height (good for multi-line titles) */
+.md-sidebar--primary .md-nav__link--active:not([aria-current="page"])::before,
+.md-sidebar--primary .md-nav__item--active > .md-nav__link:not([aria-current="page"])::before,
+.md-sidebar--primary .md-nav__link[aria-current="page"]::before,
+.md-sidebar--primary .md-nav__item--active > .md-nav__link.md-nav__container:not([aria-current="page"])::before{
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--fs-accent);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+/* Hide the "Table of contents" toggle that can appear in the LEFT nav */
+.md-sidebar--primary label.md-nav__link[for="__toc"],
+.md-sidebar--primary a.md-nav__link[href="#__toc"],
+.md-sidebar--primary .md-nav__icon--toc,
+.md-sidebar--primary .md-nav__link[for="__toc"],
+.md-sidebar--primary .md-nav__link[href="#__toc"]{
+  display: none !important;
+}
+
+/* Keep nested nav clean (no extra guide lines) */
+.md-sidebar--primary .md-nav__item .md-nav{
+  border-left: none !important;
+}
+
+/* ==========================================================================
+   Right TOC (secondary sidebar) - 12.8px for ALL levels + title
+   ========================================================================== */
+
+/* Baseline */
+.md-sidebar--secondary,
+.md-sidebar--secondary .md-sidebar__scrollwrap,
+.md-sidebar--secondary .md-sidebar__inner{
+  font-size: 12.8px !important;
+}
+
+/* Title: visually rename to "On this page" */
+.md-sidebar--secondary .md-nav--secondary .md-nav__title{
+  font-size: 0 !important;
+  color: transparent !important;
+  margin-bottom: 0.25rem !important;
+  position: relative !important;
+}
+.md-sidebar--secondary .md-nav--secondary .md-nav__title::before{
+  content: "On this page" !important;
+  font-size: 12.8px !important;
+  color: var(--md-default-fg-color--light) !important;
+  letter-spacing: 0.02em;
+}
+
+/* Link spacing */
+.md-sidebar--secondary .md-nav--secondary .md-nav__link,
+.md-sidebar--secondary .md-nav--secondary a.md-nav__link,
+.md-sidebar--secondary .md-nav--secondary .md-nav__item > .md-nav__link,
+.md-sidebar--secondary .md-nav--secondary .md-nav__item .md-nav .md-nav__link{
+  font-size: 12.8px !important;
+  line-height: 1.12 !important;
+  padding: 0.06rem 0 !important;
+}
+
+/* Nested indent (user final choice: 2px) */
+.md-sidebar--secondary .md-nav--secondary .md-nav__item .md-nav{
+  padding-left: 2px !important;
+  margin-left: 0 !important;
+}
+
+/* Active TOC item */
+.md-sidebar--secondary .md-nav--secondary .md-nav__item--active > .md-nav__link,
+.md-sidebar--secondary .md-nav--secondary .md-nav__link--active{
+  color: var(--fs-accent) !important;
+  font-weight: 600 !important;
+}
+
+/* ==========================================================================
+   Content typography
+   ========================================================================== */
+
+/* Breadcrumb links (no blue) */
+.md-content__nav a{
+  color: var(--md-default-fg-color--light) !important;
+  text-decoration: none !important;
+}
+.md-content__nav a:hover{
+  color: var(--fs-accent) !important;
+}
+
+/* Body typography */
+.md-typeset{
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+}
+
+.md-typeset h1{
+  color: var(--fs-accent);
+  font-weight: 800;
+  margin-top: 0;
+}
+.md-typeset a{
+  color: var(--fs-accent);
+}
+
+/* ==========================================================================
+   Safety clamps (prevents “image goes under sidebar” visual issues)
+   ========================================================================== */
+.md-typeset img,
+.md-typeset svg,
+.md-typeset video,
+.md-typeset iframe{
+  max-width: 100% !important;
+  height: auto !important;
+}
+.md-typeset figure,
+.md-typeset table{
+  max-width: 100% !important;
+}
+.md-typeset__scrollwrap{
+  overflow-x: auto !important;
+}
+
+/* ==========================================================================
+   Mobile fixes: header title centering + drawer back arrow overlap
+   (DO NOT touch palette toggle visibility; let theme handle it)
+   ========================================================================== */
+@media screen and (max-width: 59.9375em){
+
+  /* Header height + true vertical centering */
+  .md-header__inner{
+    display: flex !important;
+    align-items: center !important;
+    min-height: 48px !important;
+    padding: 0 12px !important;
+  }
+  .md-header__title{
+    position: static !important;
+    display: flex !important;
+    align-items: center !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 12px !important;
+  }
+  .md-header__ellipsis,
+  .md-header__topic,
+  .md-header__topic .md-ellipsis{
+    display: flex !important;
+    align-items: center !important;
+    height: 100% !important;
+    line-height: 1.15 !important;
+    padding: 0 !important;
+  }
+/* Drawer title row: reserve space for back arrow so it never overlaps text */
+  .md-sidebar--primary .md-nav__title{
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    min-height: 48px !important;
+    height: 48px !important;
+    box-sizing: border-box !important;
+    padding: 0 16px 0 56px !important; /* left padding reserves back icon */
+  }
+  /* Back button placement */
+  .md-sidebar--primary .md-nav__title .md-nav__button{
+    position: absolute !important;
+    left: 12px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    margin: 0 !important;
+  }
+
+  /* Ensure the title text is centered within its own line box */
+  .md-sidebar--primary .md-nav__title .md-ellipsis{
+    line-height: 1.15 !important;
+    padding: 0 !important;
+  }
+}
+
+/* ==========================================================================
+   Mobile: hide logo icon everywhere (keep title only)
+   ========================================================================== */
+@media screen and (max-width: 59.9375em){
+  .md-header__button.md-logo,
+  .md-header__button.md-logo *,
+  .md-nav__title .md-logo,
+  .md-nav__title .md-logo *,
+  .md-nav__button.md-logo,
+  .md-nav__button.md-logo *{
+    display: none !important;
+  }
+
+  /* Keep the drawer title aligned after removing the logo */
+  .md-nav__title{
+    padding-left: 16px !important;
+  }
+}
+
+/* ==========================================================================
+   V18.2 patch (based on V18.1 stable)
+   1) Level-1 items: font-weight 600
+   2) Keep level-2 nav always expanded (no need to click to open)
+   NOTE: Visual/active effects remain as-is.
+   ========================================================================== */
+
+/* 1) Level-1 (top-level) nav items in the LEFT sidebar */
+.md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link,
+.md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link.md-nav__container,
+.md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link.md-nav__container > a.md-nav__link,
+.md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link.md-nav__container > label.md-nav__link{
+  font-weight: 600 !important;
+}
+
+/* 2) Always show level-2 items (DESKTOP only) */
+@media screen and (min-width: 60em){
+  /* 2) Always show level-2 items (children of the level-1 items) */
+  .md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav{
+    display: block !important;
+    height: auto !important;
+    max-height: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  /* Some Material versions animate/collapse via the sibling selector:
+     input ~ .md-nav / input:checked ~ .md-nav. Force open in both states. */
+  .md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item--nested > input ~ .md-nav{
+    display: block !important;
+  }
+}
+
+
+/* ==========================================================================
+   V18.3 patch
+   - Left nav text color:
+     * light: #444746
+     * slate: #C4C7C5
+   - Remove chevron/arrow for 1st-level items in LEFT primary nav
+   ========================================================================== */
+
+/* Left nav text color tokens */
+:root{ --fs-leftnav-fg: #444746; }
+[data-md-color-scheme="slate"]{ --fs-leftnav-fg: #C4C7C5; }
+
+/* Apply to left sidebar only (keep active/hover overrides intact) */
+.md-sidebar--primary .md-nav__title,
+.md-sidebar--primary .md-nav__link{
+  color: var(--fs-leftnav-fg) !important;
+}
+
+/* Left sidebar active item keeps brand accent */
+.md-sidebar--primary .md-nav__link--active,
+.md-sidebar--primary .md-nav__item--active > .md-nav__link,
+.md-sidebar--primary .md-nav__link[aria-current="page"],
+.md-sidebar--primary .md-nav__item--active > .md-nav__link.md-nav__container{
+  color: var(--fs-accent) !important;
+  font-weight: 600 !important;
+}
+
+
+@media screen and (min-width: 60em){
+  /* Remove 1st-level chevrons in the left primary nav (since level-2 is always expanded) */
+  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item > label.md-nav__link > .md-nav__icon,
+  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item > a.md-nav__link > .md-nav__icon{
+    display: none !important;
+  }
+
+  /* Avoid reserving extra space for the removed icon */
+  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item > label.md-nav__link,
+  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item > a.md-nav__link{
+    padding-right: 16px !important;
+  }
+}
+
+/* ==========================================================================
+   V18.4 patch - content/TOC typography colors
+   Requirements:
+   - Left nav text color: dark #C4C7C5, light #1A1A1A
+   - Content + right TOC text color (including headings): dark #E3E3E3, light #1F1F1F
+   - Keep links in brand accent; remove brand accent from headings/TOC active color
+   ========================================================================== */
+
+:root{
+  --fs-leftnav-fg: #1A1A1A;   /* light scheme */
+  --fs-content-fg: #1F1F1F;   /* light scheme */
+  --fs-toc-fg: #1F1F1F;       /* light scheme */
+}
+
+[data-md-color-scheme="slate"]{
+  --fs-leftnav-fg: #C4C7C5;   /* dark scheme */
+  --fs-content-fg: #E3E3E3;   /* dark scheme */
+  --fs-toc-fg: #E3E3E3;       /* dark scheme */
+}
+
+/* Left sidebar base text color (keep existing active/hover behavior) */
+.md-sidebar--primary .md-nav__title,
+.md-sidebar--primary .md-nav__link{
+  color: var(--fs-leftnav-fg) !important;
+}
+
+/* Content body + headings (stop forcing brand accent on headings) */
+.md-typeset{
+  color: var(--fs-content-fg) !important;
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6{
+  color: var(--fs-content-fg) !important;
+}
+
+/* Right TOC: title + links use the same text color; active uses weight only */
+.md-sidebar--secondary .md-nav--secondary .md-nav__title::before{
+  color: var(--fs-toc-fg) !important;
+}
+
+.md-sidebar--secondary .md-nav--secondary .md-nav__link{
+  color: var(--fs-toc-fg) !important;
+}
+
+.md-sidebar--secondary .md-nav--secondary .md-nav__item--active > .md-nav__link,
+.md-sidebar--secondary .md-nav--secondary .md-nav__link--active{
+  color: var(--fs-accent) !important;
+  font-weight: 600 !important;
+}
+
+
+/* ==========================================================================
+   V18.4.2 - Hover highlight (NO nested "container boxes")
+   - Apply highlight ONLY to the clickable link row (not the <li> item)
+   - No shadow / no lift, tiny radius, solid background so it won't bleed into next row
+   ========================================================================== */
+
+/* Hover tokens */
+:root{
+  --fs-nav-hover-bg: rgba(0,0,0,0.06);        /* light default */
+  --fs-nav-hover-bg-strong: rgba(0,0,0,0.08); /* a bit darker for light mode visibility */
+  --fs-toc-hover-bg: rgba(0,0,0,0.06);
+}
+[data-md-color-scheme="slate"]{
+  --fs-nav-hover-bg: rgba(255,255,255,0.06);
+  --fs-nav-hover-bg-strong: rgba(255,255,255,0.08);
+  --fs-toc-hover-bg: rgba(255,255,255,0.06);
+}
+
+/* ---------------- LEFT SIDEBAR hover ---------------- */
+
+/* Make sure the row is the hit-target */
+@media screen and (min-width: 60em){
+  .md-sidebar--primary .md-nav__link{
+    border-radius: 2px !important;
+    background-clip: padding-box;
+  }
+  /* For "index.md containers" the clickable parts are inside */
+  .md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link,
+  .md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link{
+    border-radius: 2px !important;
+    background-clip: padding-box;
+  }
+
+  /* Hover/focus highlight (no shadow) */
+  .md-sidebar--primary .md-nav__link:hover,
+  .md-sidebar--primary .md-nav__link:focus-visible{
+    background: var(--fs-nav-hover-bg-strong) !important;
+  }
+  .md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link:hover,
+  .md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link:focus-visible,
+  .md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link:hover,
+  .md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link:focus-visible{
+    background: var(--fs-nav-hover-bg-strong) !important;
+  }
+
+  /* IMPORTANT: never paint the <li> itself (prevents nested “stacked boxes”) */
+  .md-sidebar--primary .md-nav__item::before,
+  .md-sidebar--primary .md-nav__item::after{
+    content: none !important;
+    display: none !important;
+  }
+}
+
+/* ---------------- RIGHT TOC hover ---------------- */
+
+@media screen and (min-width: 60em){
+  .md-sidebar--secondary .md-nav--secondary .md-nav__link{
+    border-radius: 2px !important;
+    background-clip: padding-box;
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+  .md-sidebar--secondary .md-nav--secondary .md-nav__link:hover,
+  .md-sidebar--secondary .md-nav--secondary .md-nav__link:focus-visible{
+    background: var(--fs-toc-hover-bg) !important;
+  }
+}
+
+
+
+/* ==========================================================================
+   V18.4.3 patch - Fix hover/active background overlap for items that have index.md
+   (Material renders a wrapper: .md-nav__link.md-nav__container containing <a> + <label>)
+   Goal: ONE background spanning the whole row (including chevron), no double blocks.
+   ========================================================================== */
+@media screen and (min-width: 60em){
+  /* Make the container a real flex row so it owns the full-width hover background */
+  .md-sidebar--primary .md-nav__link.md-nav__container{
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.35rem !important;
+  }
+  /* Let the text link take remaining space; keep icon label at the right */
+  .md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link{
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
+  .md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link{
+    flex: 0 0 auto !important;
+    margin: 0 !important;
+    padding: 0 !important; /* container already has padding */
+  }
+
+  /* Background should be applied ONLY once: on the container */
+  .md-sidebar--primary .md-nav__link.md-nav__container:hover{
+    background: var(--fs-nav-hover-bg-strong) !important;
+  }
+  .md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link:hover,
+  .md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link:hover{
+    background: transparent !important;
+  }
+
+  /* Same idea for keyboard focus */
+  .md-sidebar--primary .md-nav__link.md-nav__container:focus-within{
+    background: var(--fs-nav-hover-bg-strong) !important;
+  }
+  .md-sidebar--primary .md-nav__link.md-nav__container > a.md-nav__link:focus,
+  .md-sidebar--primary .md-nav__link.md-nav__container > label.md-nav__link:focus{
+    background: transparent !important;
+  }
+}
+
+/* ==========================================================================
+   V18.4.4 - Mobile drawer logic safety
+   Goal: Keep DESKTOP nav always-expanded + no level-1 chevrons,
+         but let MOBILE/iPad drawer use Material's native collapse/expand logic.
+   (The forced-open + chevron-hiding rules are desktop-only above.)
+   ========================================================================== */
+@media screen and (max-width: 59.9375em){
+  /* Ensure nested nav follows the built-in checkbox/animation behavior */
+  .md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item--nested > .md-nav{
+    display: none;
+  }
+  .md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item--nested > input:checked ~ .md-nav{
+    display: block;
+  }
+  /* Restore level-1 chevrons in the drawer (desktop hides them) */
+  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item > label.md-nav__link > .md-nav__icon,
+  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item > a.md-nav__link > .md-nav__icon{
+    display: inline-flex !important;
+  }
+}
+
+/* ==========================================================================
+   V18.4.5 hotfix - TOC active item must be BRAND color
+   - Some Material builds use aria-current on the TOC link (instead of md-nav__link--active)
+   - Keep hover NOT using brand color; only active should be brand color
+   ========================================================================== */
+
+@media screen and (min-width: 60em){
+  /* Highest specificity against theme defaults */
+  .md-sidebar--secondary [data-md-component="toc"] .md-nav__link--active,
+  .md-sidebar--secondary [data-md-component="toc"] .md-nav__item--active > .md-nav__link,
+  .md-sidebar--secondary [data-md-component="toc"] .md-nav__link[aria-current],
+  .md-sidebar--secondary .md-nav--secondary .md-nav__link[aria-current="true"],
+  .md-sidebar--secondary .md-nav--secondary .md-nav__link[aria-current="location"],
+  .md-sidebar--secondary .md-nav--secondary .md-nav__link[aria-current="page"]{
+    color: var(--fs-accent) !important;
+    font-weight: 600 !important;
+  }
+}
+
+
+/* ==========================================================================
+   V19.0 patch - headings weight
+   Requirement: H1-H6 font-weight 700 (colors follow current rules)
+   ========================================================================== */
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6{
+  font-weight: 700 !important;
+}
+
+
+/* ========================================================================== 
+   GitHub-style callouts (Typora/GitHub alerts) 
+   - Supports: NOTE / TIP / IMPORTANT / WARNING / CAUTION 
+   - NOTE, TIP, WARNING, DANGER are styled by MkDocs Material.
+   - IMPORTANT is a custom admonition type we style here.
+   ========================================================================== */
+
+:root {
+  --fs-callout-important: #a371f7; /* GitHub purple */
+}
+
+/* IMPORTANT (custom type) */
+.md-typeset .admonition.important,
+.md-typeset details.important {
+  border-left-color: var(--fs-callout-important) !important;
+}
+
+.md-typeset .important > .admonition-title,
+.md-typeset details.important > summary {
+  background-color: rgba(163, 113, 247, 0.12) !important;
+  border-bottom-color: rgba(163, 113, 247, 0.25) !important;
+}
+
+.md-typeset .important > .admonition-title,
+.md-typeset details.important > summary,
+.md-typeset .important > .admonition-title::before,
+.md-typeset details.important > summary::before {
+  color: var(--fs-callout-important) !important;
+}
+
+/* Keep the body neutral; only give a very soft tint */
+.md-typeset .admonition.important,
+.md-typeset details.important {
+  background-color: rgba(163, 113, 247, 0.04) !important;
+}
+
+/* ==========================================================================
+   V19.3 - Images
+   1) Center images
+   2) Keep ~100px gutter on BOTH sides (desktop), responsive on small screens inside the content column
+   3) Keep click-to-zoom/lightbox behavior (e.g., glightbox) intact
+   Scope: only content images (paragraph/figure) to avoid touching icons/emoji.
+   ========================================================================== */
+
+
+:root{ --fs-img-gutter: 100px; }
+@media (max-width: 900px){ :root{ --fs-img-gutter: 24px; } }
+
+.md-typeset p > img,
+.md-typeset p > a > img,
+.md-typeset figure > img,
+.md-typeset figure > a > img{
+  display: block !important;
+  height: auto !important;
+  max-width: calc(100% - (var(--fs-img-gutter) * 2)) !important; /* 100px + 100px (desktop) */
+  margin: 0.9rem auto !important;
+}
+
+/* Keep figure captions aligned with the same width/gutter as images */
+.md-typeset figure{
+  text-align: center;
+}
+.md-typeset figure figcaption{
+  text-align: center;
+  max-width: calc(100% - (var(--fs-img-gutter) * 2));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+/* ============================================================
+   V19.3 + Table polish (Seeed-ish, minimal side-effects)
+   - Only affects markdown tables inside content (.md-typeset)
+   - Keep headings/colors/layout untouched
+   ============================================================ */
+
+/* Ensure tables can scroll on small screens without breaking layout */
+.md-typeset__table{
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Core table look */
+.md-typeset table:not([class]){
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--fs-divider);
+  border-radius: 2px;              /* more squared, more “tech” */
+  background: transparent;
+}
+
+/* Cell borders: avoid missing right edge */
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td{
+  padding: 12px 16px;
+  border-right: 1px solid var(--fs-divider);
+  border-bottom: 1px solid var(--fs-divider);
+  vertical-align: top;
+}
+
+/* Remove outer duplicate borders */
+.md-typeset table:not([class]) tr:last-child td{
+  border-bottom: 0;
+}
+.md-typeset table:not([class]) th:last-child,
+.md-typeset table:not([class]) td:last-child{
+  border-right: 0;
+}
+
+/* Header row */
+.md-typeset table:not([class]) thead th{
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Subtle zebra for readability (but not too “web2.0”) */
+.md-typeset table:not([class]) tbody tr:nth-child(2n) td{
+  background: rgba(0,0,0,0.02);
+}
+
+/* Scheme-specific tweaks */
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) thead th{
+  background: rgba(255,255,255,0.04);
+}
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) tbody tr:nth-child(2n) td{
+  background: rgba(255,255,255,0.03);
+}
+[data-md-color-scheme="default"] .md-typeset table:not([class]) thead th{
+  background: rgba(0,0,0,0.03);
+}
+
+/* Keep long values readable */
+.md-typeset table:not([class]) td{
+  word-break: break-word;
+}
+
+
+/* =========================
+   V19.6 – TABLE WIDTH + AUTO COLS (keep typography unchanged)
+   Goal:
+   - tables same visual width as other content blocks (e.g., admonitions)
+   - centered
+   - keep click-to-zoom images etc unchanged
+   ========================= */
+
+/* Make the table wrapper take the full content width */
+.md-typeset .md-typeset__table,
+.md-typeset .md-typeset__scrollwrap {
+  max-width: 100%;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Ensure horizontal overflow scrolls instead of clipping borders */
+.md-typeset .md-typeset__scrollwrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Table itself: fill wrapper width, but keep auto column sizing */
+.md-typeset .md-typeset__table > table,
+.md-typeset .md-typeset__scrollwrap > table,
+.md-typeset table:not([class]) {
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  table-layout: auto; /* auto by content */
+  box-sizing: border-box;
+}
+
+/* Slightly squarer, more "tech" corner + make sure outer border is visible */
+.md-typeset .md-typeset__table > table,
+.md-typeset .md-typeset__scrollwrap > table {
+  border-radius: 4px; /* was 10px */
+  overflow: hidden;   /* keep radius clean */
+}
+
+/* If a cell background goes to the edge, keep the right edge border consistent */
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td {
+  background-clip: padding-box;
+}
+
+
+/* ============================================================
+   V19.7 - Table fill fix (no right-side blank area)
+   Force mkdocs-material scrollwrap tables to actually stretch
+   to the wrapper width, while keeping content-based sizing.
+   ============================================================ */
+
+.md-typeset .md-typeset__scrollwrap > table,
+.md-typeset .md-typeset__table > table,
+.md-typeset .md-typeset__table table {
+  width: 100% !important;
+  min-width: 100% !important;
+  display: table !important;
+}
+
+/* Some versions set tables to max-content for horizontal scroll.
+   Keep scroll ability via wrapper, but don't shrink the table. */
+.md-typeset .md-typeset__scrollwrap {
+  overflow-x: auto;
+}
+
+/* ============================================================
+   V19.8 - Table typography (per spec)
+   - Body text inside tables: 14px (0.875rem)
+   - Header text: 14px + bold (700)
+   - Inline code inside tables: 13px (0.8125rem) monospace
+   Scope: markdown tables only (.md-typeset table:not([class]))
+   ============================================================ */
+
+.md-typeset table:not([class]){
+  font-size: 0.875rem;
+}
+
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td{
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.md-typeset table:not([class]) thead th{
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.md-typeset table:not([class]) th code,
+.md-typeset table:not([class]) td code{
+  font-size: 0.8125rem;
+  font-family: var(--md-code-font-family, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+}
+
+
+
+/* =========================
+   V19.8.1 HOTFIX — Table typography (force px sizes)
+   Reason: previous rem-based sizes inherit a larger root font-size on some breakpoints,
+   resulting in ~17.5px instead of the intended 14px.
+   ========================= */
+.md-typeset table:not([class]),
+.md-typeset .md-typeset__table > table:not([class]),
+.md-typeset .md-typeset__scrollwrap > table:not([class]) {
+  font-size: 14px !important;      /* Table Body */
+  line-height: 1.45;
+}
+
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td {
+  font-size: 14px !important;      /* keep header/body aligned */
+}
+
+.md-typeset table:not([class]) thead th {
+  font-weight: 700 !important;     /* Table Header bold */
+}
+
+
+/* ==========================================================================
+   V21.0 - Tables: prevent mid-word & mid-number line breaks
+   - Words should NOT break across lines (hyphen breaks still allowed if they exist)
+   - Numbers should NOT break across lines
+   Mobile: allow horizontal scrolling instead of wrapping
+   ========================================================================== */
+
+/* Default: do not break inside words/numbers */
+.md-typeset table:not([class]) th,
+.md-typeset table:not([class]) td{
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+  hyphens: manual !important;
+}
+
+/* Make numeric-heavy content feel stable */
+.md-typeset table:not([class]){
+  font-variant-numeric: tabular-nums;
+}
+
+/* Mobile: prefer scroll, so keep each cell on one line */
+@media screen and (max-width: 59.9375em){
+  .md-typeset__scrollwrap > table:not([class]) th,
+  .md-typeset__scrollwrap > table:not([class]) td{
+    white-space: nowrap !important;
+  }
+}
+
+.md-typeset table:not([class]) th code,
+.md-typeset table:not([class]) td code {
+  font-size: 13px !important;      /* Inline Code in table */
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+
+/* ===========================
+   V21.1 – Table: prevent word/number breaking
+   Goal:
+   1) Words should not break into multiple lines (except explicit hyphen '-' / soft-hyphen).
+   2) Numbers should not break.
+   Tables are horizontally scrollable on small screens, so overflow is acceptable.
+   =========================== */
+
+/* Baseline: stop the browser from "emergency wrapping" inside words */
+.md-typeset table td,
+.md-typeset table th {
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: manual !important; /* do not auto-hyphenate */
+}
+
+/* Never break tokens commonly used in specs/protocols */
+.md-typeset table code,
+.md-typeset table kbd,
+.md-typeset table samp {
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  hyphens: manual !important;
+}
+
+/* For common spec tables: keep first columns (names/length/type) on one line.
+   - Works well with horizontal scroll on mobile.
+   - Doesn't affect "Description" column wrapping.
+*/
+.md-typeset table th:nth-child(1),
+.md-typeset table td:nth-child(1),
+.md-typeset table th:nth-child(2),
+.md-typeset table td:nth-child(2),
+.md-typeset table th:nth-child(3),
+.md-typeset table td:nth-child(3) {
+  white-space: nowrap !important;
+}
+
+/* Numbers: discourage line breaks around digits and common separators */
+.md-typeset table td,
+.md-typeset table th {
+  font-variant-numeric: tabular-nums;
+}
+/* =========================
+   V21.2 - Light mode: Sidebar text color unify
+   Requirement: left nav text color #444746 regardless of bold (non-active),
+   keep active (logo) color rules.
+   ========================= */
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav__link,
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav__title,
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav__item .md-nav__link,
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav__item .md-nav__title {
+  color: #444746 !important;
+}
+
+/* Preserve active highlight color (logo) */
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav__link--active,
+[data-md-color-scheme="default"] .md-sidebar--primary .md-nav__item--active > .md-nav__link {
+  color: var(--fs-logo, #8641A9) !important;
+}
+
+
+/* ==========================================================================
+   V21.3 - Sidebar accordion: disable "always expanded" level-2 sections
+   Goal:
+   - Default behavior: click to expand/collapse
+   - If you already use JS to keep only ONE section open, this stays compatible
+   ========================================================================== */
+.md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item--nested > input:not(:checked) ~ .md-nav{
+  display: none !important;
+}
+.md-sidebar--primary .md-nav--primary > .md-nav__list > .md-nav__item--nested > input:checked ~ .md-nav{
+  display: block !important;
+}
+
+/* Mobile drawer header title contrast (light mode only) */
+@media (max-width: 59.9375em) {
+  [data-md-color-scheme="default"] .md-nav--primary .md-nav__title[for="__drawer"] {
+    color: #fff !important;
+  }
+}
+
+
+/* =====================
+   v23.5 node patch
+   - Mobile drawer header title contrast (light mode only)
+   ===================== */
+
+/* v21.3.1 — Mobile drawer “Fashion Star Wiki” title contrast fix (light mode only)
+   Goal: ONLY affect the drawer header title on mobile, keep desktop styles untouched. */
+
+@media screen and (max-width: 76.1875em) {
+  /* Light scheme (default): make drawer header title use the “on-primary” color (same behavior as slate). */
+  [data-md-color-scheme="default"] .md-nav--primary .md-nav__title[for="__drawer"] {
+    color: var(--md-primary-bg-color);
+  }
+
+  /* Title text + icon inside the drawer header */
+  [data-md-color-scheme="default"] .md-nav--primary .md-nav__title[for="__drawer"] a,
+  [data-md-color-scheme="default"] .md-nav--primary .md-nav__title[for="__drawer"] span,
+  [data-md-color-scheme="default"] .md-nav--primary .md-nav__title[for="__drawer"] .md-nav__button {
+    color: var(--md-primary-bg-color);
+  }
+
+  /* Ensure SVG logo/icon follows the same color */
+  [data-md-color-scheme="default"] .md-nav--primary .md-nav__title[for="__drawer"] svg {
+    fill: currentColor;
+  }
+}
+
+/* ===================== V23.15 (B) — Desktop L1 chevrons restore (no width squeeze) ===================== */
+/* Goal:
+   1) Show expand chevrons for 1st-level (desktop) again
+   2) Align L1 chevrons with child chevrons
+   3) Avoid big padding-right like 2.2rem that forces extra wrapping
+*/
+@media screen and (min-width: 60em){
+  /* Re-enable chevrons (overrides earlier "display:none" rules) */
+  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item--nested > label.md-nav__link > .md-nav__icon,
+  .md-sidebar--primary nav.md-nav--primary > ul.md-nav__list > li.md-nav__item--nested > a.md-nav__link > .md-nav__icon{
+    display: inline-flex !important;
+  }
+
+  /* Use a consistent flex layout so the chevron sits at the same right edge across levels */
+  .md-sidebar--primary nav.md-nav--primary .md-nav__item--nested > label.md-nav__link,
+  .md-sidebar--primary nav.md-nav--primary .md-nav__item--nested > a.md-nav__link{
+    display: flex !important;
+    align-items: center;
+    gap: .35rem;
+    padding-right: 16px !important; /* minimal, avoids squeezing titles */
+  }
+
+  .md-sidebar--primary nav.md-nav--primary .md-nav__item--nested > label.md-nav__link > .md-ellipsis,
+  .md-sidebar--primary nav.md-nav--primary .md-nav__item--nested > a.md-nav__link > .md-ellipsis{
+    flex: 1 1 auto;
+    min-width: 0; /* enable ellipsis and prevent weird wrapping */
+  }
+
+  .md-sidebar--primary nav.md-nav--primary .md-nav__item--nested > label.md-nav__link > .md-nav__icon,
+  .md-sidebar--primary nav.md-nav--primary .md-nav__item--nested > a.md-nav__link > .md-nav__icon{
+    margin-left: auto;
+    flex: 0 0 auto;
+  }
+}
+
+/* ==== Mobile TOC patch (known-good) ==== */
+/* Mobile TOC slide-out fix (Material for MkDocs)
+   - Does NOT touch your theme colors / left-nav highlight styles.
+   - Only restores a working TOC panel on small screens using the built-in __toc checkbox.
+*/
+
+@media screen and (max-width: 59.9375em){
+
+  /* Ensure the built-in TOC checkbox isn't accidentally hidden by custom CSS */
+  #__toc.md-toggle{
+    position: fixed;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    clip: rect(0,0,0,0) !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+  }
+
+  /* TOC panel: hidden off-canvas by default */
+  .md-sidebar--secondary{
+    display: block !important;               /* override main.*.css 'display:none' */
+    position: fixed !important;
+    top: var(--md-header-height, 56px) !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: min(82vw, 320px) !important;
+    max-width: 320px !important;
+    height: calc(100vh - var(--md-header-height, 56px)) !important;
+    transform: translateX(110%) !important;  /* keep off-screen */
+    transition: transform 180ms ease !important;
+    z-index: 10020 !important;
+    background: var(--md-default-bg-color, #fff) !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,.25) !important;
+    overflow: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  /* When TOC toggle is checked, slide panel in */
+  #__toc:checked ~ .md-container .md-sidebar--secondary{
+    transform: translateX(0) !important;
+  }
+
+  /* If a TOC overlay label exists, make it behave like a scrim */
+  label.md-overlay[for="__toc"]{
+    display: none;
+  }
+  #__toc:checked ~ label.md-overlay[for="__toc"]{
+    display: block !important;
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 10010 !important;
+    background: rgba(0,0,0,.35) !important;
+  }
+
+  /* Defensive: some custom rules may force translate via 'inset' or 'left' */
+  .md-sidebar--secondary[style*="inset"],
+  .md-sidebar--secondary[style*="left"]{
+    left: auto !important;
+  }
+}
+
+
+/* ==========================================================================
+   Fashion Star Wiki - v25 Mobile TOC + Theme Stabilizer
+   Goal:
+   1) Keep the "mobile TOC drawer" working (the structure you said is OK)
+   2) Restore brand color (#8641A9) + left active vertical bar
+   3) Avoid the "double indicator" problem (icon appears + active ::after block)
+   Notes:
+   - We intentionally DO NOT style `.md-nav__icon::after` globally.
+   - Active indicator uses `::before` (safer; avoids clashing with Material's `::after`).
+   ========================================================================== */
+
+:root{
+  --fs-accent: #8641A9;
+  --fs-accent-weak: rgba(134,65,169,.16);
+}
+
+/* --- Ensure TOC toggle entry exists in primary drawer (mobile) --- */
+@media screen and (max-width: 59.9375em){
+  .md-sidebar--primary label.md-nav__link[for="__toc"]{
+    display:flex !important;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .md-sidebar--primary label.md-nav__link[for="__toc"] .md-nav__icon{
+    color: var(--fs-accent) !important;
+  }
+}
+
+/* --- Primary nav active styles (left drawer) --- */
+.md-sidebar--primary .md-nav__link--active{
   color: var(--fs-accent) !important;
   font-weight: 600;
 }
 
-/* ---------- Vertical accent bar (left) ---------- */
-.md-nav__item--active > .md-nav__link {
-  position: relative;
+/* Remove any competing active indicator that might be defined earlier */
+.md-sidebar--primary .md-nav__link--active::after,
+.md-sidebar--primary .md-nav__item--active > .md-nav__link::after{
+  content: none !important;
 }
 
-.md-nav__item--active > .md-nav__link::before {
+/* Use a single, consistent vertical bar on the left */
+.md-sidebar--primary .md-nav__item--active > .md-nav__link,
+.md-sidebar--primary .md-nav__link--active{
+  position: relative;
+  padding-left: 1rem; /* make room for the bar */
+}
+
+.md-sidebar--primary .md-nav__item--active > .md-nav__link::before,
+.md-sidebar--primary .md-nav__link--active::before{
   content: "";
   position: absolute;
   left: 0;
-  top: 6px;
-  bottom: 6px;
-  width: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 28px;
   border-radius: 2px;
   background: var(--fs-accent);
 }
 
-/* ---------- SINGLE source of active icon ---------- */
-/* Draw icon at the correct position */
-.md-nav__link--active::after {
-  content: "";
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  width: 22px;
-  height: 22px;
-  transform: translateY(-50%);
-  background-color: var(--fs-accent);
-  mask: var(--md-icon--toc) no-repeat center / contain;
-  -webkit-mask: var(--md-icon--toc) no-repeat center / contain;
+/* A subtle background for the active row (optional but matches your previous feel) */
+.md-sidebar--primary .md-nav__item--active > .md-nav__link{
+  background: var(--fs-accent-weak);
+  border-radius: 6px;
 }
 
-/* ---------- Disable duplicate icon source ---------- */
-/* Prevent span.md-nav__icon from drawing anything on active row */
-.md-nav__item--active .md-nav__icon::after,
-.md-nav__item--active .md-nav__icon::before {
-  content: none !important;
-  display: none !important;
+/* Keep non-active items looking clean */
+.md-sidebar--primary .md-nav__link{
+  border-radius: 6px;
 }
 
-/* ---------- Mobile only ---------- */
-@media (max-width: 59.9375em) {
+/* --- Secondary TOC (desktop/right) brand color --- */
+.md-sidebar--secondary [data-md-component="toc"] .md-nav__link--active,
+.md-sidebar--secondary [data-md-component="toc"] .md-nav__link[aria-current="location"]{
+  color: var(--fs-accent) !important;
+  font-weight: 600;
+}
 
-  /* Ensure TOC sidebar visible when toggled */
-  .md-sidebar--secondary {
-    display: block;
-  }
+/* Optional: TOC left border accent */
+.md-sidebar--secondary [data-md-component="toc"]{
+  border-left: 2px solid rgba(134,65,169,.25);
+  padding-left: .75rem;
+}
 
-  /* Keep header height stable */
-  .md-header {
-    min-height: 56px;
+/* --- Guard: if some earlier CSS forced secondary sidebar to display:none, undo on desktop --- */
+@media screen and (min-width: 60em){
+  .md-sidebar--secondary{
+    display:block;
   }
 }
