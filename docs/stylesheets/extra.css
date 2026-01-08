@@ -1602,8 +1602,8 @@ Fashion Star Wiki - V21.0 (Stable Base)
 
 @media screen and (max-width: 59.9375em){
   /* 0) Kill any accidental hamburger glyph that was applied globally */
-  .md-sidebar--primary .md-nav__icon.md-icon::after,
-  .md-sidebar--primary .md-nav__icon.md-icon:after{
+  .md-sidebar--primary label.md-nav__link[for="__toc"] .md-nav__icon.md-icon::after,
+  .md-sidebar--primary label.md-nav__link[for="__toc"] .md-nav__icon.md-icon:after{
     content: none !important;
     -webkit-mask: none !important;
             mask: none !important;
