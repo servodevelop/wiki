@@ -148,14 +148,6 @@ Fashion Star Wiki - V21.0 (Stable Base)
   pointer-events: none;
 }
 
-/* Hide the "Table of contents" toggle that can appear in the LEFT nav */
-.md-sidebar--primary label.md-nav__link[for="__toc"],
-.md-sidebar--primary a.md-nav__link[href="#__toc"],
-.md-sidebar--primary .md-nav__icon--toc,
-.md-sidebar--primary .md-nav__link[for="__toc"],
-.md-sidebar--primary .md-nav__link[href="#__toc"]{
-  display: none !important;
-}
 
 /* Keep nested nav clean (no extra guide lines) */
 .md-sidebar--primary .md-nav__item .md-nav{
@@ -1808,3 +1800,45 @@ Fashion Star Wiki - V21.0 (Stable Base)
     color: var(--md-primary-fg-color, #8641A9) !important;
   }
 }
+
+
+/* ------------------------------
+   Mobile TOC trigger styling (restore & prevent "half icon" clipping)
+   ------------------------------ */
+@media screen and (max-width: 59.9375em){
+
+  /* Ensure the active row can show the TOC icon without clipping */
+  .md-sidebar--primary .md-nav__link.md-nav__container{
+    overflow: visible !important;
+  }
+
+  /* The TOC trigger (label for __toc) that appears on the right side of the active item */
+  .md-sidebar--primary label.md-nav__link[for="__toc"]{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-left: auto !important;
+    padding: 0 10px !important;
+    min-width: 44px !important;       /* comfortable tap target */
+    height: 44px !important;
+    line-height: 44px !important;
+    background: transparent !important;
+    color: var(--fs-accent, #8641A9) !important;
+    position: relative !important;
+    z-index: 2 !important;
+  }
+
+  /* Do NOT draw the active left bar on the TOC icon itself */
+  .md-sidebar--primary label.md-nav__link[for="__toc"]::before,
+  .md-sidebar--primary label.md-nav__link[for="__toc"]::after{
+    content: none !important;
+    display: none !important;
+  }
+
+  /* Some themes wrap icons in svg inside the label; make sure it isn't clipped */
+  .md-sidebar--primary label.md-nav__link[for="__toc"] svg{
+    width: 22px !important;
+    height: 22px !important;
+  }
+}
+
