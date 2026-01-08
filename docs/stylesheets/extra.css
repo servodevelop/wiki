@@ -148,6 +148,14 @@ Fashion Star Wiki - V21.0 (Stable Base)
   pointer-events: none;
 }
 
+/* Hide the "Table of contents" toggle that can appear in the LEFT nav */
+.md-sidebar--primary label.md-nav__link[for="__toc"],
+.md-sidebar--primary a.md-nav__link[href="#__toc"],
+.md-sidebar--primary .md-nav__icon--toc,
+.md-sidebar--primary .md-nav__link[for="__toc"],
+.md-sidebar--primary .md-nav__link[href="#__toc"]{
+  display: none !important;
+}
 
 /* Keep nested nav clean (no extra guide lines) */
 .md-sidebar--primary .md-nav__item .md-nav{
@@ -1700,145 +1708,72 @@ Fashion Star Wiki - V21.0 (Stable Base)
   }
 }
 
-/* Mobile TOC slide-out fix (Material for MkDocs)
-   - Does NOT touch your theme colors / left-nav highlight styles.
-   - Only restores a working TOC panel on small screens using the built-in __toc checkbox.
-*/
+/* ===== Mobile TOC slide-out (v24) ===== */
 
 @media screen and (max-width: 59.9375em){
-
-  /* Ensure the built-in TOC checkbox isn't accidentally hidden by custom CSS */
-  #__toc.md-toggle{
-    position: fixed;
-    width: 1px !important;
-    height: 1px !important;
-    overflow: hidden !important;
-    clip: rect(0,0,0,0) !important;
-    clip-path: inset(50%) !important;
-    white-space: nowrap !important;
-  }
-
-  /* TOC panel: hidden off-canvas by default */
-  .md-sidebar--secondary{
-    display: block !important;               /* override main.*.css 'display:none' */
-    position: fixed !important;
-    top: var(--md-header-height, 56px) !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    width: min(82vw, 320px) !important;
-    max-width: 320px !important;
-    height: calc(100vh - var(--md-header-height, 56px)) !important;
-    transform: translateX(110%) !important;  /* keep off-screen */
-    transition: transform 180ms ease !important;
-    z-index: 10020 !important;
-    background: var(--md-default-bg-color, #fff) !important;
-    box-shadow: 0 8px 30px rgba(0,0,0,.25) !important;
-    overflow: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
-
-  /* When TOC toggle is checked, slide panel in */
-  #__toc:checked ~ .md-container .md-sidebar--secondary{
-    transform: translateX(0) !important;
-  }
-
-  /* If a TOC overlay label exists, make it behave like a scrim */
-  label.md-overlay[for="__toc"]{
-    display: none;
-  }
-  #__toc:checked ~ label.md-overlay[for="__toc"]{
-    display: block !important;
-    position: fixed !important;
-    inset: 0 !important;
-    z-index: 10010 !important;
-    background: rgba(0,0,0,.35) !important;
-  }
-
-  /* Defensive: some custom rules may force translate via 'inset' or 'left' */
-  .md-sidebar--secondary[style*="inset"],
-  .md-sidebar--secondary[style*="left"]{
-    left: auto !important;
-  }
-}
-
-/* === Mobile TOC button: re-enable in left drawer (was hidden by theme tweaks) === */
-@media screen and (max-width: 59.9375em){
-  /* The theme CSS hides the TOC toggle link in the primary (left) sidebar.
-     Bring it back ONLY on mobile so it behaves like Material's native UX. */
-  .md-sidebar--primary label.md-nav__link[for="__toc"],
-  .md-sidebar--primary a.md-nav__link[href="#__toc"],
-  .md-sidebar--primary .md-nav__icon--toc,
-  .md-sidebar--primary .md-nav__link[for="__toc"],
-  .md-sidebar--primary .md-nav__link[href="#__toc"]{
-    display: inline-flex !important;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    padding: 0 !important;
-    margin-left: auto;
-    opacity: 1 !important;
-    pointer-events: auto !important;
-  }
-
-  /* Put the TOC button at the far right of the active page row inside the drawer */
-  .md-sidebar--primary .md-nav__item--active > :is(label.md-nav__link[for="__toc"], a.md-nav__link[href="#__toc"]),
-  .md-sidebar--primary .md-nav__item--active :is(label.md-nav__link[for="__toc"], a.md-nav__link[href="#__toc"]){
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  /* Make sure the active row can host the absolute positioned button */
-  .md-sidebar--primary .md-nav__item--active{
-    position: relative;
-  }
-
-  /* Optional: ensure the icon uses brand color (inherits from link color) */
-  .md-sidebar--primary :is(label.md-nav__link[for="__toc"], a.md-nav__link[href="#__toc"]){
-    color: var(--md-primary-fg-color, #8641A9) !important;
-  }
-}
-
-
-/* ------------------------------
-   Mobile TOC trigger styling (restore & prevent "half icon" clipping)
-   ------------------------------ */
-@media screen and (max-width: 59.9375em){
-
-  /* Ensure the active row can show the TOC icon without clipping */
-  .md-sidebar--primary .md-nav__link.md-nav__container{
-    overflow: visible !important;
-  }
-
-  /* The TOC trigger (label for __toc) that appears on the right side of the active item */
+  /* 1) Ensure the TOC toggle button (label for #__toc) is visible inside the mobile drawer list */
   .md-sidebar--primary label.md-nav__link[for="__toc"]{
     display: flex !important;
     align-items: center !important;
-    justify-content: center !important;
-    margin-left: auto !important;
-    padding: 0 10px !important;
-    min-width: 44px !important;       /* comfortable tap target */
-    height: 44px !important;
-    line-height: 44px !important;
-    background: transparent !important;
-    color: var(--fs-accent, #8641A9) !important;
-    position: relative !important;
-    z-index: 2 !important;
+    justify-content: flex-end !important;
+    gap: 8px !important;
   }
+  /* If previous CSS hid it, force it back */
+  .md-sidebar--primary .md-nav__link[for="__toc"]{ display:flex !important; }
 
-  /* Do NOT draw the active left bar on the TOC icon itself */
-  .md-sidebar--primary label.md-nav__link[for="__toc"]::before,
+  /* Make the icon feel like a real button (no weird extra text) */
   .md-sidebar--primary label.md-nav__link[for="__toc"]::after{
-    content: none !important;
+    content: "☰" !important;
+    font-size: 22px !important;
+    line-height: 1 !important;
+    color: var(--md-primary-fg-color, #8641A9) !important;
+    margin-left: auto !important;
+  }
+  /* Avoid duplicating any existing icon glyphs */
+  .md-sidebar--primary label.md-nav__link[for="__toc"] svg,
+  .md-sidebar--primary label.md-nav__link[for="__toc"] .md-nav__icon{
     display: none !important;
   }
 
-  /* Some themes wrap icons in svg inside the label; make sure it isn't clipped */
-  .md-sidebar--primary label.md-nav__link[for="__toc"] svg{
-    width: 22px !important;
-    height: 22px !important;
+  /* 2) Off-canvas TOC panel (secondary sidebar) */
+  .md-sidebar--secondary{
+    display: block !important;              /* override main.css display:none */
+    position: fixed !important;
+    top: var(--md-header-height, 56px) !important;
+    right: 0 !important;
+    height: calc(100vh - var(--md-header-height, 56px)) !important;
+    width: min(86vw, 320px) !important;
+    max-width: 320px !important;
+    background: var(--md-default-bg-color, #fff) !important;
+    box-shadow: 0 8px 30px rgba(0,0,0,.25) !important;
+    z-index: 10020 !important;
+    overflow: auto !important;
+
+    /* closed by default */
+    transform: translateX(100%) !important;
+    pointer-events: none !important;
+  }
+
+  /* inner spacing */
+  .md-sidebar--secondary .md-sidebar__scrollwrap{
+    padding: 0 !important;
+  }
+  .md-sidebar--secondary .md-nav{
+    margin: 0 !important;
+  }
+  .md-sidebar--secondary .md-nav__title{
+    padding: 16px 16px 8px 16px !important;
+    font-weight: 700 !important;
+  }
+
+  /* 3) Open state when #__toc is checked */
+  #__toc:checked ~ .md-container .md-sidebar--secondary{
+    transform: translateX(0) !important;
+    pointer-events: auto !important;
+  }
+
+  /* 4) Clicking a TOC link should feel tappable */
+  .md-sidebar--secondary a.md-nav__link{
+    padding: 10px 16px !important;
   }
 }
-
