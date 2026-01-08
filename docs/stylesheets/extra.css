@@ -1798,3 +1798,12 @@ span.md-nav__icon.md-icon {
   align-items: center;
   justify-content: center;
 }
+
+/* =========================================================
+   HARD KILL:
+   禁止 md-nav__icon 自己生成任何 ::after 图标
+   ========================================================= */
+
+span.md-nav__icon.md-icon::after {
+  content: none !important;
+}
