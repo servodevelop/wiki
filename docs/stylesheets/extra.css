@@ -1777,3 +1777,24 @@ Fashion Star Wiki - V21.0 (Stable Base)
     padding: 10px 16px !important;
   }
 }
+
+/* =========================================================
+   FIX 1: 禁止 TOC icon 出现在 primary nav 的普通条目
+   只允许它出现在 label[for="__toc"]
+   ========================================================= */
+
+/* 1️⃣ 默认：全部 primary nav 里的 icon 都不显示 */
+.md-sidebar--primary
+.md-nav__link
+span.md-nav__icon.md-icon {
+  display: none !important;
+}
+
+/* 2️⃣ 仅在「TOC toggle 本体」里恢复显示 */
+.md-sidebar--primary
+label.md-nav__link[for="__toc"]
+span.md-nav__icon.md-icon {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+}
