@@ -1668,3 +1668,36 @@ label.md-nav__title[for="__drawer"]::before,
   top: 50% !important;
   transform: translateY(-50%) !important;
 }
+
+
+/* ======================================================================
+   PATCH: Use native TOC button in mobile drawer, disable stray ::after icon
+   - Fix: extra square/after icon showing on Home & other active items
+   - Approach: show the real label[for="__toc"] on mobile, hide any
+     active-link ::after pseudo icons inside PRIMARY nav.
+   ====================================================================== */
+
+@media screen and (max-width: 59.9375em) {
+  /* 1) Kill any pseudo-icon injected on active links in the PRIMARY drawer */
+  .md-sidebar--primary .md-nav__link--active::after,
+  .md-sidebar--primary label.md-nav__link.md-nav__link--active::after,
+  .md-sidebar--primary a.md-nav__link.md-nav__link--active::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  /* 2) Re-enable the native TOC toggle button in the PRIMARY drawer */
+  .md-sidebar--primary label.md-nav__link[for="__toc"]{
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+    padding: 0 !important;
+  }
+  .md-sidebar--primary label.md-nav__link[for="__toc"] .md-nav__icon.md-icon{
+    margin: 0 !important;
+  }
+}
+
