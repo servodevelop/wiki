@@ -1669,35 +1669,51 @@ label.md-nav__title[for="__drawer"]::before,
   transform: translateY(-50%) !important;
 }
 
-
 /* ======================================================================
-   PATCH: Use native TOC button in mobile drawer, disable stray ::after icon
-   - Fix: extra square/after icon showing on Home & other active items
-   - Approach: show the real label[for="__toc"] on mobile, hide any
-     active-link ::after pseudo icons inside PRIMARY nav.
+   FS Hotfix — Icon consistency & stable positioning (2026-01-09)
+   Goal:
+     - Stop custom TOC icon hacks from fighting Material's native icons
+     - Ensure nav icons don't "run away" when padding/active bars change
    ====================================================================== */
 
-@media screen and (max-width: 59.9375em) {
-  /* 1) Kill any pseudo-icon injected on active links in the PRIMARY drawer */
-  .md-sidebar--primary .md-nav__link--active::after,
-  .md-sidebar--primary label.md-nav__link.md-nav__link--active::after,
-  .md-sidebar--primary a.md-nav__link.md-nav__link--active::after {
-    content: none !important;
-    display: none !important;
-  }
+/* 1) Restore Material native md-icon rendering for nav icons (some old patches disabled it) */
+.md-nav__link:not([for="__toc"]) .md-nav__icon.md-icon::after{
+  content: "" !important;
+}
 
-  /* 2) Re-enable the native TOC toggle button in the PRIMARY drawer */
+/* The TOC toggle label should also use the native icon; kill the custom pseudo-element icon */
+label.md-nav__link[for="__toc"]::after{
+  content: none !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+  background: none !important;
+}
+
+/* Re-enable the native icon for TOC toggle (an old patch set it to none) */
+label.md-nav__link[for="__toc"] .md-nav__icon.md-icon::after{
+  content: "" !important;
+}
+
+/* 2) Only hide duplicate TOC *in desktop* if you still want that behavior.
+      On mobile we must keep it visible for the drawer TOC button. */
+@media screen and (min-width: 60em){
   .md-sidebar--primary label.md-nav__link[for="__toc"]{
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    margin-left: auto;
-    padding: 0 !important;
-  }
-  .md-sidebar--primary label.md-nav__link[for="__toc"] .md-nav__icon.md-icon{
-    margin: 0 !important;
+    display: none !important;
   }
 }
 
+/* 3) Mobile: lock icon position (right aligned) so it won't drift with text/padding/active-bar */
+@media screen and (max-width: 59.9375em){
+  .md-sidebar--primary .md-nav__link{
+    position: relative;
+    padding-right: 3.25rem; /* reserve space for right-side icon */
+  }
+
+  .md-sidebar--primary .md-nav__icon{
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 !important;
+  }
+}
