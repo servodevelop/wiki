@@ -1,5 +1,4 @@
 mkdocs-material==9.5.34
-mkdocs-sitemap
 mkdocs-static-i18n
 mkdocs-minify-plugin
 mkdocs-git-revision-date-localized-plugin
