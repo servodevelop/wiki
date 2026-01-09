@@ -1,3 +1,13 @@
+/* ======================================================================
+   FashionStar Wiki — extra.css (Engineering Final v2)
+   Based on: extra_FIXED_download_v2.css (known-good visual + behavior)
+   Date: 2026-01-09
+   Notes:
+     - This file keeps ALL existing working rules (desktop + mobile).
+     - Only adds a safe fix: drawer title vertical centering for mobile.
+     - Do not scatter new patches; add them near related sections.
+   ====================================================================== */
+
 /*
 Fashion Star Wiki - V21.0 (Stable Base)
 - Left nav: level-1 bold 600, level-2 always visible (desktop); mobile keeps original drawer logic
@@ -1642,4 +1652,19 @@ Fashion Star Wiki - V21.0 (Stable Base)
   .md-sidebar--primary .md-nav__link:not([for="__toc"]) .md-nav__icon.md-icon::after{
     content: none !important;
   }
+}
+
+/* --- Mobile drawer title: force vertical centering (safe) --- */
+label.md-nav__title[for="__drawer"],
+.md-nav__title[for="__drawer"]{
+  display: flex;
+  align-items: center;
+  min-height: 56px;
+}
+
+/* keep the back-arrow pseudo element vertically centered */
+label.md-nav__title[for="__drawer"]::before,
+.md-nav__title[for="__drawer"]::before{
+  top: 50% !important;
+  transform: translateY(-50%) !important;
 }
