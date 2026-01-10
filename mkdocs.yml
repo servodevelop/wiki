@@ -91,9 +91,9 @@ plugins:
           default: false
           build: true
   
-  # 必须放在 i18n 后面，确保它能抓取到所有语言子目录下的页面，生成完整的地图
-  - sitemap:
-      hostname: https://wiki.fashionstar.com.hk/
+  # 暂时注释掉 sitemap，先让 Build 通过！
+  # - sitemap:
+  #     hostname: https://wiki.fashionstar.com.hk/
 
 nav:
   - Home: index.md
