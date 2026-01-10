@@ -21,6 +21,7 @@ theme:
     - content.tabs.link    # 联动 Tab 标签页
     # - content.action.edit  # 页面右上角显示“编辑此页”图标
     - navigation.expand    # 自动展开左侧菜单
+    - navigation.sections  # 将一级菜单变成不占空间的“标题栏”
 
   palette:
     # dark
