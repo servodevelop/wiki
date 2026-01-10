@@ -1,9 +1,11 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V31.1 (Nav Font-Size Priority Fix)
-- 修正：通过提高选择器优先级，确保“非一级下拉目录”物理锁定为 16px
-- 逻辑：一级(Home) 16px加粗 -> 非一级下拉 16px不加粗 -> 文章 14.5px不加粗
-- 表格：延续 V29.2 原始对齐基准，0.5px 极细线
+Fashion Star Wiki - V31.2 (Active Parent Highlight)
+- 导航一级：[16px + 700] 顶级项目（含 Home）保持加粗
+- 导航非一级(下拉)：[16px + 400] 默认不加粗
+- [新增] 激活状态：当子页面处于活动状态时，其父级目录强制加粗 700 + 紫色
+- 导航文章：[14.5px + 400] 末级文章标题维持 14.5px
+- 表格：延续 V29.2 对齐基准，0.5px 极细线
 - 风格：H1-H6 统一 700 字重正文色，去紫色化
 ==========================================================================
 */
@@ -44,28 +46,18 @@ Fashion Star Wiki - V31.1 (Nav Font-Size Priority Fix)
 ::-webkit-scrollbar-thumb { background-color: var(--fs-divider); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background-color: var(--fs-accent); }
 
-/* 4. 左侧导航 (层级逻辑重构 - V31.1) */
+/* 4. 左侧导航 (层级逻辑 - V31.2) */
 
-/* 基础通用：默认 14.5px (文章字号) */
+/* 基础设置 */
 .md-sidebar--primary .md-nav__link {
   color: var(--fs-leftnav-fg) !important;
   position: relative;
   padding-left: 20px !important; 
   font-size: 14.5px;
-  font-weight: 400 !important; 
+  font-weight: 400; 
 }
 
-/* [核心修正] 只要有下拉的项目 (Nested)：强制锁定 16px */
-/* 这里的优先级高于普通文章链接 */
-.md-nav__item--nested > .md-nav__link,
-.md-nav__item--nested > .md-nav__link span,
-.md-nav__item--nested > label.md-nav__link {
-  font-size: 16px !important;
-  font-weight: 400 !important; /* 默认深层下拉不加粗 */
-}
-
-/* [一级目录] Home 和顶级项目：16px + 700加粗 */
-/* 这里通过 > 选择器确保只影响第一层 */
+/* [一级目录] Home 和顶级项目：16px + 700 加粗 */
 .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link,
 .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link span,
 .md-nav--primary > .md-nav__list > .md-nav__item > label.md-nav__link {
@@ -73,8 +65,25 @@ Fashion Star Wiki - V31.1 (Nav Font-Size Priority Fix)
   font-size: 16px !important;
 }
 
-/* 选中状态 */
-.md-sidebar--primary .md-nav__item--active > .md-nav__link {
+/* [非一级下拉] 默认：16px + 400 不加粗 */
+.md-nav__item--nested > .md-nav__link,
+.md-nav__item--nested > .md-nav__link span,
+.md-nav__item--nested > label.md-nav__link {
+  font-size: 16px !important;
+  font-weight: 400;
+}
+
+/* [核心修正] 被选中的父级目录：强制加粗 700 + 颜色 */
+/* 当父级 item 带有 --active 类名时，其直接关联的链接文字加粗 */
+.md-nav__item--nested.md-nav__item--active > .md-nav__link,
+.md-nav__item--nested.md-nav__item--active > .md-nav__link span,
+.md-nav__item--nested.md-nav__item--active > label.md-nav__link {
+  font-weight: 700 !important;
+  color: var(--fs-accent) !important;
+}
+
+/* 选中状态（最末级文章） */
+.md-sidebar--primary .md-nav__item--active > .md-nav__link:not([for]) {
   color: var(--fs-accent) !important;
   font-weight: 700 !important;
 }
