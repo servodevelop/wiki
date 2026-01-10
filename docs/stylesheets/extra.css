@@ -1,107 +1,99 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V26.8 (Logical Bold & Universal Clean)
-- 策略：使用逻辑选择器锁定一级目录，绕过 JS 动态干扰
-- 修复：全端（桌面+移动端）物理级移除默认 Logo
-- 优化：确保 Home 在任何层级嵌套下只要是一级菜单就加粗
+Fashion Star Wiki - V27.1 (Elegant Scrollbar Focus)
+- 继承：V26.8 完美的导航加粗与 Logo 清理逻辑
+- 专项：极致简约滚动条（极细、淡紫色滑块、自动隐现）
+- 优化：确保在深色模式下滚动条背景保持深邃，不跳色
 ==========================================================================
 */
 
 /* 1. 核心变量 (Variables) */
 :root {
   --fs-accent: #8641A9;
+  --fs-accent-light: rgba(134, 65, 169, 0.4); /* 淡紫色滑块 */
   --fs-divider: rgba(0,0,0,0.12);
   --md-primary-fg-color: var(--fs-accent);
   --md-accent-fg-color: var(--fs-accent);
   --fs-leftnav-fg: #444746;
-  --fs-content-fg: #1F1F1F;
 }
 
 [data-md-color-scheme="slate"] {
   --fs-divider: rgba(255,255,255,0.10);
   --md-default-bg-color: #131314;
-  --md-default-bg-color--light: #1e1f20;
-  --md-default-fg-color: #e3e3e3;
   --fs-leftnav-fg: #C4C7C5;
-  --fs-content-fg: #E3E3E3;
 }
 
-/* 2. 顶部导航与 Logo 清理 (暴力物理移除) */
-/* 锁定所有可能的 Logo 容器，彻底归零空间 */
-.md-logo, 
-[class*="md-logo"],
-.md-header__button.md-logo,
-.md-nav__title .md-logo,
-.md-nav__title[for="__drawer"] .md-icon,
-[class*="md-logo"] svg,
-[class*="md-logo"] img {
-  display: none !important;
-  width: 0 !important;
-  height: 0 !important;
-  position: absolute !important;
-  pointer-events: none !important;
-  opacity: 0 !important;
+/* 2. 顶部导航与 Logo 清理 (保持 V26.8 成功逻辑) */
+.md-logo, [class*="md-logo"], .md-header__button.md-logo, 
+.md-nav__title .md-logo, .md-nav__title[for="__drawer"] .md-icon {
+  display: none !important; width: 0 !important; height: 0 !important;
+  position: absolute !important; pointer-events: none !important; opacity: 0 !important;
 }
-
 .md-header__title { margin-left: 0 !important; }
 .md-header__ellipsis { padding-left: 0.5rem !important; }
 
-/* 3. 布局 (Layout) */
-@media screen and (min-width: 60em) {
-  .md-grid { max-width: 1380px !important; }
-  .md-content { box-shadow: inset 1px 0 0 var(--fs-divider) !important; }
+/* 3. 极简自定义滚动条 (Custom Elegant Scrollbar) */
+/* 定义滚动条整体宽度 */
+::-webkit-scrollbar {
+  width: 5px;  /* 极细宽度 */
+  height: 5px; /* 横向滚动条高度 */
 }
 
-/* 4. 左侧导航 (Navigation) - 逻辑穿透加粗 */
+/* 定义滚动条轨道 (Track) - 保持透明以实现隐形感 */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* 定义滑块 (Thumb) */
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1); /* 默认几乎不可见 */
+  border-radius: 10px;
+  border: 1px solid transparent; /* 增加透明边框让视觉更细 */
+  background-clip: content-box;
+}
+
+/* 悬浮在页面内容上或滚动时，滑块变色 */
+:hover::-webkit-scrollbar-thumb {
+  background-color: var(--fs-accent-light); /* 变为淡紫色 */
+}
+
+/* 当鼠标直接悬浮在滑块上时，颜色加深 */
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--fs-accent) !important;
+}
+
+/* 深色模式下的适配 */
+[data-md-color-scheme="slate"] ::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 4. 左侧导航 (保持 V26.8 成功的逻辑) */
 .md-sidebar--primary .md-nav__link {
-  font-size: 16px !important;
-  color: var(--fs-leftnav-fg) !important;
-  position: relative;
-  padding-left: 20px !important; 
+  font-size: 16px !important; color: var(--fs-leftnav-fg) !important;
+  position: relative; padding-left: 20px !important; 
 }
-
-/* 核心逻辑：锁定顶级列表下的每一个直接子项。
-   不管它是 Home 还是带箭头的文件夹，只要在第一层，全部强制加粗。
-*/
 .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link,
 .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link span,
 .md-nav__item--level--1 .md-nav__link,
 .md-nav__item--level--1 .md-nav__link .md-ellipsis {
-  font-weight: 800 !important; /* 使用 800 增强对比，防止被 700 抵消 */
-}
-
-/* 选中状态：紫色 + 无背景 */
-.md-sidebar--primary .md-nav__item--active > .md-nav__link {
-  color: var(--fs-accent) !important;
   font-weight: 800 !important;
+}
+.md-sidebar--primary .md-nav__item--active > .md-nav__link {
+  color: var(--fs-accent) !important; font-weight: 800 !important;
   background-color: transparent !important;
 }
-
-/* 3px 满高竖线实现 */
 .md-sidebar--primary .md-nav__item--active > .md-nav__link::before {
-  content: "";
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 3px;
-  background: var(--fs-accent);
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px; background: var(--fs-accent);
 }
 
-/* 5. 右侧目录 (TOC) */
+/* 5. 右侧目录 (TOC) 与其他基础排版 */
 .md-sidebar--secondary .md-nav__title[for="__toc"] {
-  font-size: 0 !important;
-  color: transparent !important;
+  font-size: 0 !important; color: transparent !important;
 }
 .md-sidebar--secondary .md-nav__title[for="__toc"]::after {
-  font-size: 12.8px !important;
-  font-weight: 700 !important;
+  font-size: 12.8px !important; font-weight: 700 !important;
   color: var(--md-default-fg-color--light) !important;
-  content: "On this page";
-  display: block;
+  content: "On this page"; display: block;
 }
-
-/* 6. 正文排版 */
 .md-typeset h1 { color: var(--fs-accent) !important; font-weight: 700; }
-.md-typeset table:not([class]) {
-  font-size: 14px !important;
-  border: 1px solid var(--fs-divider) !important;
-}
