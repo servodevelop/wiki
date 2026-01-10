@@ -20,6 +20,7 @@ theme:
     - toc.follow             # right TOC follows scroll
     - content.tabs.link    # 联动 Tab 标签页
     # - content.action.edit  # 页面右上角显示“编辑此页”图标
+    - navigation.expand    # 自动展开左侧菜单
 
   palette:
     # dark
