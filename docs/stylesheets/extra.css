@@ -1636,3 +1636,13 @@ Fashion Star Wiki - V21.0 (Stable Base)
     opacity: 1 !important;
 }
 
+/* --- 强制修复右侧目录标题 --- */
+.md-sidebar--secondary .md-nav__title {
+  font-size: 0.64rem !important;      /* 恢复标准比例字号 */
+  visibility: visible !important;     /* 确保文字没被隐藏 */
+  color: var(--md-default-fg-color--light) !important;
+}
+
+.md-sidebar--secondary .md-nav__title::before {
+  content: none !important;           /* 杀掉旧的 CSS 硬编码英文 */
+}
