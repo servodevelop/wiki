@@ -1,0 +1,4 @@
+{% extends "partials/languages/ja.html" %}
+{% block translations %}{{ super() }}
+  {% do translations.update({ "toc.title": "このページの内容" }) %}
+{% endblock %}
