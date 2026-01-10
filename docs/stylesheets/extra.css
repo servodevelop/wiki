@@ -1,23 +1,26 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V25.1 (Refined)
-找回 V21.0 灵魂细节：1380px 宽度、3px 悬浮竖线、FS 专属深色模式
+Fashion Star Wiki - V25.2 (Integrated)
+- 整合：1380px 宽度、3px 悬浮竖线、FS 专属深黑模式
+- 增强：深浅色文字对比度、右侧 TOC 多语言联动
 ==========================================================================
 */
 
-/* 1. 核心变量与深浅色适配 */
+/* 1. 核心变量与多模式适配 (Variables) */
 :root {
   --fs-accent: #8641A9;
   --fs-divider: rgba(0,0,0,0.12);
   --md-primary-fg-color: var(--fs-accent);
   --md-accent-fg-color: var(--fs-accent);
   
-  /* 找回 V21.0 浅色文字色 */
-  --fs-leftnav-fg: #1A1A1A;
-  --fs-content-fg: #1F1F1F;
+  /* 浅色模式文字颜色 */
+  --fs-leftnav-fg: #1A1A1A;     /* 左侧：深灰黑 */
+  --fs-content-fg: #1F1F1F;     /* 正文：纯深黑 */
+  --fs-toc-fg: #616161;         /* 右侧：中灰 */
+  --fs-bg-active: rgba(134, 65, 169, 0.05); 
 }
 
-/* 找回：FS 专属深色模式色号 */
+/* 深色模式 (Slate Scheme) 变量覆盖 */
 [data-md-color-scheme="slate"] {
   --fs-divider: rgba(255,255,255,0.10);
   --md-default-bg-color: #131314;        /* 极黑背景 */
@@ -25,49 +28,55 @@ Fashion Star Wiki - V25.1 (Refined)
   --md-default-fg-color: #e3e3e3;
   --md-default-fg-color--light: #8e918f;
   --md-code-bg-color: #1e1f20;
-  --fs-leftnav-fg: #C4C7C5;
-  --fs-content-fg: #E3E3E3;
+  
+  /* 深色模式文字颜色 */
+  --fs-leftnav-fg: #C4C7C5;     /* 左侧：浅灰 */
+  --fs-content-fg: #E3E3E3;     /* 正文：近白 */
+  --fs-toc-fg: #8E918F;         /* 右侧：中灰 */
+  --fs-bg-active: rgba(134, 65, 169, 0.15);
 }
 
-/* 2. 布局：找回 1380px 黄金宽度 */
+/* 2. 布局 (Layout) - 1380px 黄金宽度与分割线 */
 @media screen and (min-width: 60em) {
   .md-grid {
     max-width: 1380px !important;
   }
   
-  /* 找回：内容区左侧的微阴影分割线 */
+  /* 内容区左侧微阴影分割线 - 增强空间感 */
   .md-content {
     box-shadow: inset 1px 0 0 var(--fs-divider) !important;
   }
 }
 
-/* 3. 左侧导航：找回 3px 悬浮圆角竖线 */
+/* 3. 左侧导航 (Navigation) - 3px 悬浮圆角竖线 */
 .md-sidebar--primary .md-nav__link {
   font-size: 16px !important;
   color: var(--fs-leftnav-fg) !important;
   position: relative;
-  padding-left: 20px !important; /* 为竖线留出空间 */
+  padding-left: 20px !important; 
+  transition: background-color 0.25s, color 0.25s;
 }
 
-/* 实现原理：使用伪元素绘制不占位的竖线 */
+/* 选中状态文字高亮与背景 */
+.md-sidebar--primary .md-nav__item--active > .md-nav__link {
+  color: var(--fs-accent) !important;
+  font-weight: 700 !important;
+  background-color: var(--fs-bg-active);
+}
+
+/* 3px 悬浮竖线实现 */
 .md-sidebar--primary .md-nav__item--active > .md-nav__link::before {
   content: "";
   position: absolute;
-  left: 8px;      /* 距离文字左侧 8px */
-  top: 0.2rem;
-  bottom: 0.2rem;
-  width: 3px;     /* 3px 粗细 */
+  left: 8px;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  width: 3px;
   background: var(--fs-accent);
   border-radius: 2px;
 }
 
-/* 选中状态文字加粗 */
-.md-sidebar--primary .md-nav__item--active > .md-nav__link {
-  color: var(--fs-accent) !important;
-  font-weight: 700 !important;
-}
-
-/* 4. 右侧目录 (TOC)：多语言修复 + 12.8px 规范 */
+/* 4. 右侧目录 (TOC) - 多语言标题修复 */
 .md-sidebar--secondary .md-nav__title[for="__toc"] {
   font-size: 0 !important;
   line-height: 0 !important;
@@ -75,32 +84,51 @@ Fashion Star Wiki - V25.1 (Refined)
   padding: 0.8rem 0 !important;
 }
 
+/* 彻底隐藏怪符号 */
 .md-sidebar--secondary .md-nav__title[for="__toc"] .md-nav__icon {
   display: none !important;
 }
 
+/* 注入伪元素标题文本 */
 .md-sidebar--secondary .md-nav__title[for="__toc"]::after {
-  font-size: 12.8px !important; /* V21.0 规范 */
+  font-size: 12.8px !important;
   font-weight: 700 !important;
   color: var(--md-default-fg-color--light) !important;
   display: block !important;
   visibility: visible !important;
 }
 
-/* 多语言映射保持不变 */
+/* 多语言映射 */
 [lang="en"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "On this page"; }
 [lang="es"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "En esta página"; }
 [lang="ja"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "このページの内容"; }
 
-/* 5. 找回：正文 H1-H6 粗体与颜色 */
+/* 右侧 TOC 链接颜色控制 */
+.md-sidebar--secondary .md-nav__link {
+  color: var(--fs-toc-fg);
+  font-size: 12.8px;
+}
+.md-sidebar--secondary .md-nav__link--active {
+  color: var(--fs-accent) !important;
+  font-weight: 600;
+}
+
+/* 5. 正文排版 (Typography) - H1-H6 细节 */
+.md-typeset {
+  color: var(--fs-content-fg);
+}
+
 .md-typeset h1, .md-typeset h2, .md-typeset h3, 
 .md-typeset h4, .md-typeset h5, .md-typeset h6 {
   font-weight: 700 !important;
   color: var(--fs-content-fg) !important;
 }
-.md-typeset h1 { color: var(--fs-accent) !important; } /* H1 保持品牌色 */
 
-/* 6. 找回：Seeed 风格表格 (14px + 禁止换行) */
+.md-typeset h1 { 
+  color: var(--fs-accent) !important; 
+}
+
+/* 6. 表格 (Tables) - Seeed 风格优化 */
 .md-typeset table:not([class]) {
   font-size: 14px !important;
   border: 1px solid var(--fs-divider) !important;
@@ -109,8 +137,12 @@ Fashion Star Wiki - V25.1 (Refined)
 
 .md-typeset table:not([class]) th, 
 .md-typeset table:not([class]) td {
-  word-break: keep-all !important; /* 找回禁止数字/单词中途断开 */
+  word-break: keep-all !important; 
   overflow-wrap: normal !important;
   padding: 10px 12px !important;
   border-right: 1px solid var(--fs-divider) !important;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--md-default-bg-color--lightest);
 }
