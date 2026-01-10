@@ -5,3 +5,42 @@
   font-size: 0.64rem !important;
   padding-top: 0.5rem;
 }
+
+/* --- 终极多语言标题替换方案 --- */
+
+/* 1. 针对所有语言：先隐藏原始的文字节点 */
+.md-nav--secondary .md-nav__title[for="__toc"] {
+    font-size: 0 !important; /* 隐藏原始文本节点 */
+}
+
+/* 2. 保持图标 span 可见 */
+.md-nav--secondary .md-nav__title[for="__toc"] .md-nav__icon {
+    font-size: 1.2rem !important; /* 恢复图标大小 */
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+
+/* 3. 注入通用的新文字（默认英文） */
+.md-nav--secondary .md-nav__title[for="__toc"]::after {
+    content: "On this page";
+    font-size: 0.64rem; /* 恢复文字大小 */
+    font-weight: 700;
+    vertical-align: middle;
+}
+
+/* 4. 根据 HTML 的 lang 属性自动切换翻译 */
+[lang="es"] .md-nav--secondary .md-nav__title[for="__toc"]::after {
+    content: "En esta página";
+}
+
+[lang="fr"] .md-nav--secondary .md-nav__title[for="__toc"]::after {
+    content: "Sur cette page";
+}
+
+[lang="de"] .md-nav--secondary .md-nav__title[for="__toc"]::after {
+    content: "Auf dieser Seite";
+}
+
+[lang="ja"] .md-nav--secondary .md-nav__title[for="__toc"]::after {
+    content: "このページの内容";
+}
