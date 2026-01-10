@@ -7,8 +7,7 @@ theme:
   name: material
   # language: en（注释掉为了On this Page可以跟着语系调整显示）
   favicon: assets/favicon.png
-  # Theme overrides directory (keep it under /docs so Actions sparse-checkout won't miss it)
-  custom_dir: docs/overrides
+  custom_dir: docs/overrides  # Theme overrides directory (keep it under /docs so Actions sparse-checkout won't miss it)
 
   features:
     - navigation.path        # breadcrumb
