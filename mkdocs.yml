@@ -44,7 +44,7 @@ extra_css:
   - stylesheets/extra.css
   
 
-  # 将 sitemap 移出 plugins 列表，放在这里作为 extra 配置（部分版本支持这样降级处理）
+# 将 sitemap 移出 plugins 列表，放在这里作为 extra 配置（部分版本支持这样降级处理）
 extra:
   sitemap:
     filename: sitemap.xml
@@ -54,7 +54,6 @@ markdown_extensions:
   - admonition
   - pymdownx.details
   - pymdownx.superfences
-  - pymdownx.snippets
 
 hooks:
   - docs/hooks/gh_alerts.py
