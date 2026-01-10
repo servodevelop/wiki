@@ -1,9 +1,10 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V26.4 (Aggressive Logo Removal)
+Fashion Star Wiki - V26.5 (Bold Navigation & Precise Home Fix)
 - 整合：1380px 宽度、3px 满高选中竖线、FS 专属深黑模式
-- 修复：采用 Aggressive 策略强制抹除桌面及移动端所有形式的 Logo 占位
-- 优化：所有一级导航标题（含 Home 及父目录）强制加粗
+- 修复：通过 .md-ellipsis 锁定并加粗 Home 及所有一级导航标题
+- 修复：全端（桌面+移动端）强制爆破默认 Logo 图标
+- 优化：左侧导航选中项无背景，仅保留 100% 高度紫色竖线
 - 翻译：右侧 TOC 多语言自动修复
 ==========================================================================
 */
@@ -33,10 +34,7 @@ Fashion Star Wiki - V26.4 (Aggressive Logo Removal)
   --fs-toc-fg: #8E918F;
 }
 
-/* 2. 顶部导航栏与移动端抽屉清理 (Aggressive Clean-up) */
-/* 针对所有包含 md-logo 类的 A 标签、SPAN 标签及其内部所有后代 (SVG, IMG, PATH)
-   进行物理级的隐藏和空间归零。
-*/
+/* 2. 顶部导航栏与移动端抽屉清理 (Aggressive Logo Removal) */
 [class*="md-logo"], 
 [class*="md-logo"] *,
 .md-nav__title .md-logo,
@@ -52,28 +50,17 @@ Fashion Star Wiki - V26.4 (Aggressive Logo Removal)
 }
 
 /* 强制让标题文字贴左 */
-.md-header__title {
-  margin-left: 0 !important;
-}
-.md-header__ellipsis {
-  padding-left: 0.5rem !important; 
-}
-/* 移除移动端侧边栏标题前的间距 */
-.md-nav__title {
-  padding-left: 16px !important;
-}
+.md-header__title { margin-left: 0 !important; }
+.md-header__ellipsis { padding-left: 0.5rem !important; }
+.md-nav__title { padding-left: 16px !important; }
 
 /* 3. 布局 (Layout) - 1380px 黄金宽度与分割线 */
 @media screen and (min-width: 60em) {
-  .md-grid {
-    max-width: 1380px !important;
-  }
-  .md-content {
-    box-shadow: inset 1px 0 0 var(--fs-divider) !important;
-  }
+  .md-grid { max-width: 1380px !important; }
+  .md-content { box-shadow: inset 1px 0 0 var(--fs-divider) !important; }
 }
 
-/* 4. 左侧导航 (Navigation) - 3px 满高选中竖线 & 根目录+父级加粗 */
+/* 4. 左侧导航 (Navigation) - 3px 满高竖线 & 根目录+父级加粗 */
 .md-sidebar--primary .md-nav__link {
   font-size: 16px !important;
   color: var(--fs-leftnav-fg) !important;
@@ -82,14 +69,15 @@ Fashion Star Wiki - V26.4 (Aggressive Logo Removal)
   transition: color 0.25s;
 }
 
-/* 加粗所有一级菜单项（包含 Home 以及带子目录的父标题） */
+/* 重点优化：加粗包含 .md-ellipsis 的一级导航项（Home）及所有父目录标题 */
+.md-sidebar--primary .md-nav > .md-nav__item > .md-nav__link .md-ellipsis,
 .md-sidebar--primary .md-nav > .md-nav__item > .md-nav__link,
 .md-sidebar--primary .md-nav__link[for],
 .md-sidebar--primary .md-nav__item--nested > .md-nav__link {
   font-weight: 700 !important;
 }
 
-/* 选中状态：颜色变为紫色（Logo色），无背景 */
+/* 选中状态：颜色变为紫色，无背景 */
 .md-sidebar--primary .md-nav__item--active > .md-nav__link {
   color: var(--fs-accent) !important;
   font-weight: 700 !important;
@@ -105,7 +93,6 @@ Fashion Star Wiki - V26.4 (Aggressive Logo Removal)
   bottom: 0;
   width: 3px;
   background: var(--fs-accent);
-  border-radius: 0; 
 }
 
 /* 5. 右侧目录 (TOC) - 多语言标题修复 */
@@ -115,9 +102,7 @@ Fashion Star Wiki - V26.4 (Aggressive Logo Removal)
   color: transparent !important;
   padding: 0.8rem 0 !important;
 }
-.md-sidebar--secondary .md-nav__title[for="__toc"] .md-nav__icon {
-  display: none !important;
-}
+.md-sidebar--secondary .md-nav__title[for="__toc"] .md-nav__icon { display: none !important; }
 .md-sidebar--secondary .md-nav__title[for="__toc"]::after {
   font-size: 12.8px !important;
   font-weight: 700 !important;
@@ -129,27 +114,17 @@ Fashion Star Wiki - V26.4 (Aggressive Logo Removal)
 [lang="es"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "En esta página"; }
 [lang="ja"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "このページの内容"; }
 
-.md-sidebar--secondary .md-nav__link {
-  color: var(--fs-toc-fg);
-  font-size: 12.8px;
-}
-.md-sidebar--secondary .md-nav__link--active {
-  color: var(--fs-accent) !important;
-  font-weight: 600;
-}
+.md-sidebar--secondary .md-nav__link { color: var(--fs-toc-fg); font-size: 12.8px; }
+.md-sidebar--secondary .md-nav__link--active { color: var(--fs-accent) !important; font-weight: 600; }
 
-/* 6. 正文排版 (Typography) - H1-H6 细节 */
-.md-typeset {
-  color: var(--fs-content-fg);
-}
+/* 6. 正文排版 (Typography) */
+.md-typeset { color: var(--fs-content-fg); }
 .md-typeset h1, .md-typeset h2, .md-typeset h3, 
 .md-typeset h4, .md-typeset h5, .md-typeset h6 {
   font-weight: 700 !important;
   color: var(--fs-content-fg) !important;
 }
-.md-typeset h1 { 
-  color: var(--fs-accent) !important; 
-}
+.md-typeset h1 { color: var(--fs-accent) !important; }
 
 /* 7. 表格 (Tables) - Seeed 风格优化 */
 .md-typeset table:not([class]) {
@@ -160,10 +135,5 @@ Fashion Star Wiki - V26.4 (Aggressive Logo Removal)
 .md-typeset table:not([class]) th, 
 .md-typeset table:not([class]) td {
   word-break: keep-all !important; 
-  overflow-wrap: normal !important;
   padding: 10px 12px !important;
-  border-right: 1px solid var(--fs-divider) !important;
-}
-.md-typeset table:not([class]) th {
-  background-color: var(--md-default-bg-color--lightest);
-}
+  border-right: 1px solid
