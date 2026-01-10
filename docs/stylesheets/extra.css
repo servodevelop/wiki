@@ -1,10 +1,10 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V29.8 (Full - Padded Images & No-Wrap Tables)
-- 专项：图片保持 100px padding 并强制居中
-- 表格：取消左右 padding，恢复满幅对齐，并强制单元格内容禁止换行
-- 交互：当表格过长时将自动启用横向滚动，确保单词与数字的完整性
-- 风格：H1-H6 延续 700 字重正文色，边框维持 0.5px 精密感
+Fashion Star Wiki - V29.9 (Full - Precision Left Alignment)
+- 专项：强制表格左边缘与正文及标题严格对齐，移除所有潜在偏移
+- 表格：取消 padding，锁定 margin-left: 0，并维持单词防换行 (Nowrap)
+- 图片：维持 100px 呼吸间距并物理居中
+- 风格：H1-H6 延续 700 字重正文色，边框维持 0.5px 精密细线
 ==========================================================================
 */
 
@@ -82,34 +82,33 @@ Fashion Star Wiki - V29.8 (Full - Padded Images & No-Wrap Tables)
 .md-typeset h4, .md-typeset h5, .md-typeset h6 {
   color: var(--fs-content-fg) !important; 
   font-weight: 700 !important;
-  margin-top: 1.6rem !important;
+  margin-left: 0 !important; /* 确保标题左边距为 0 */
+  padding-left: 0 !important;
 }
 
-/* 7. 图片 100px Padding + 居中优化 */
+/* 7. 图片 100px Padding + 居中 */
 .md-typeset img {
   padding: 0 100px !important;
   box-sizing: border-box !important;
   display: block !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
+  margin: 1.5rem auto !important;
 }
 
-/* 移动端恢复 */
+/* 移动端恢复小边距 */
 @media screen and (max-width: 44.9375em) {
   .md-typeset img { padding: 0 10px !important; }
 }
 
-/* 8. 表格满幅对齐 + 单词防换行建议 */
+/* 8. 表格精准左对齐 (Absolute Alignment) */
 .md-typeset__table {
-  padding: 0 !important; /* 取消表格容器 padding */
-  overflow-x: auto !important; /* 当内容过宽时启用横向滚动 */
+  padding: 0 !important; /* 彻底移除容器 padding */
   margin: 1.5rem 0 !important;
+  overflow-x: auto !important;
 }
 
 .md-typeset table:not([class]) {
   width: 100% !important;
-  min-width: 100% !important;
-  display: table !important;
+  margin-left: 0 !important; /* 物理锁定左侧 0 距离 */
   border-collapse: collapse !important;
   border: 0.5px solid var(--fs-divider) !important; 
   font-size: 14px !important;
@@ -120,8 +119,7 @@ Fashion Star Wiki - V29.8 (Full - Padded Images & No-Wrap Tables)
 .md-typeset table:not([class]) td {
   border: 0.5px solid var(--fs-divider) !important;
   padding: 10px 15px !important;
-  /* 建议：强制不换行，确保单词和数字完整 */
-  white-space: nowrap !important; 
+  white-space: nowrap !important; /* 单词防换行 */
 }
 
 .md-typeset table:not([class]) th {
