@@ -43,19 +43,14 @@ theme:
 
 extra:
   translations:
-    # 英语 (English)
     en:
       toc.title: "On this page"
-    # 西班牙语 (Español)
     es:
       toc.title: "En esta página"
-    # 法语 (Français)
     fr:
       toc.title: "Sur cette page"
-    # 德语 (Deutsch)
     de:
       toc.title: "Auf dieser Seite"
-    # 日语 (日本語)
     ja:
       toc.title: "このページの内容"
 
