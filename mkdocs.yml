@@ -40,7 +40,9 @@ theme:
         icon: fashion/tech-moon
         name: Switch to dark mode
 
-        
+extra_javascript:
+  - js/translate_toc.js
+  
 
 extra_css:
   - stylesheets/extra.css
