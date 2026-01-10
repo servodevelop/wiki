@@ -1618,23 +1618,20 @@ Fashion Star Wiki - V21.0 (Stable Base)
   }
 }
 
-/* 1. 彻底移除所有可能存在的伪元素干扰 */
-.md-nav--secondary .md-nav__title::before,
-.md-nav--secondary .md-nav__title::after {
+/* 1. 彻底杀掉所有 CSS 伪元素注入的文字，让位给 YAML 翻译 */
+.md-sidebar--secondary .md-nav__title::before,
+.md-sidebar--secondary .md-nav__title::after {
     content: none !important;
     display: none !important;
 }
 
-/* 2. 恢复原生文字的可见性与样式 */
-.md-nav--secondary .md-nav__title {
-    font-size: 0.64rem !important; /* 标准 Material 侧边栏字号 */
+/* 2. 强制显示原生 HTML 翻译文本 */
+.md-sidebar--secondary .md-nav__title {
+    font-size: 0.64rem !important;      /* 恢复字号 */
     font-weight: 700 !important;
     color: var(--md-default-fg-color--light) !important;
-    visibility: visible !important;
+    visibility: visible !important;     /* 确保不是隐藏的 */
     display: block !important;
-    height: auto !important;
+    text-transform: none !important;    /* 避免强制大写 */
     opacity: 1 !important;
-    text-transform: uppercase; /* 可选：让标题大写，显得更专业 */
-    letter-spacing: 0.05em;
-    padding-top: 0.5rem;
 }
