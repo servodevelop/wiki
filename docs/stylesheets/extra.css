@@ -1,8 +1,8 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V27.5 (Full - Scrollbar Pixel Alignment)
-- 整合：1380px 宽度、3px 满高选中竖线、FS 专属深黑模式
-- 专项：通过透明边框欺骗法，将滚动条视觉紫色部分强压至严格 3px 直角
+Fashion Star Wiki - V27.6 (Full - Strict 3px Visual Alignment)
+- 版本策略：全量提供，版本号严格递增
+- 专项：利用 content-box 剪裁技术，强行将滚动条视觉宽度锁定为 3px 直角
 - 修复：全一级目录（含 Home）加粗，且全端 Logo 暴力清理
 - 包含：右侧 TOC 多语言修复、表格 Seeed 风格优化、正文阅读感提升
 ==========================================================================
@@ -45,9 +45,9 @@ Fashion Star Wiki - V27.5 (Full - Scrollbar Pixel Alignment)
 .md-header__title { margin-left: 0 !important; }
 .md-header__ellipsis { padding-left: 0.5rem !important; }
 
-/* 3. 极简 3px 直角滚动条 (Scrollbar Logic Fix) */
+/* 3. 极简 3px 直角滚动条 (Scrollbar content-box Fix) */
 ::-webkit-scrollbar {
-  width: 6px !important;    /* 物理宽度设大一点方便系统渲染 */
+  width: 6px !important;    /* 物理总宽度 */
   height: 6px !important;
 }
 ::-webkit-scrollbar-track {
@@ -56,7 +56,7 @@ Fashion Star Wiki - V27.5 (Full - Scrollbar Pixel Alignment)
 ::-webkit-scrollbar-thumb {
   background-color: transparent; 
   border-radius: 0 !important; 
-  /* 核心欺骗法：1.5px 透明边框，中间剩下的紫色就是严格 3px */
+  /* 核心逻辑：通过 1.5px 透明边框，将中间 3px 的内容区“挤”出来 */
   border: 1.5px solid transparent !important;
   background-clip: content-box !important;
 }
