@@ -54,6 +54,7 @@ extra:
     ja:
       toc.title: "このページの内容"
 
+
 extra_css:
   - stylesheets/extra.css
 
