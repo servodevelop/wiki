@@ -1,24 +1,20 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V28.1 (Full - Pixel-Perfect Scrollbar)
-- 版本策略：全量提供，版本号严格递增
-- 专项：收窄轨道至 6px，通过 inset 阴影强制在右侧压出严格 3px 实色线
-- 对标：确保滚动条视觉宽度与左侧导航 3px 竖线在物理像素上完全一致
-- 包含：一级加粗、Logo 物理移除、多语言 TOC、Seeed 表格优化
+Fashion Star Wiki - V26.8 (Logical Bold & Universal Clean)
+- 策略：使用逻辑选择器锁定一级目录，绕过 JS 动态干扰
+- 修复：全端（桌面+移动端）物理级移除默认 Logo
+- 优化：确保 Home 在任何层级嵌套下只要是一级菜单就加粗
 ==========================================================================
 */
 
-/* 1. 核心变量与多模式适配 (Variables) */
+/* 1. 核心变量 (Variables) */
 :root {
   --fs-accent: #8641A9;
-  --fs-accent-light: rgba(134, 65, 169, 0.45); 
   --fs-divider: rgba(0,0,0,0.12);
   --md-primary-fg-color: var(--fs-accent);
   --md-accent-fg-color: var(--fs-accent);
-  
   --fs-leftnav-fg: #444746;
   --fs-content-fg: #1F1F1F;
-  --fs-toc-fg: #616161;
 }
 
 [data-md-color-scheme="slate"] {
@@ -26,137 +22,86 @@ Fashion Star Wiki - V28.1 (Full - Pixel-Perfect Scrollbar)
   --md-default-bg-color: #131314;
   --md-default-bg-color--light: #1e1f20;
   --md-default-fg-color: #e3e3e3;
-  --md-default-fg-color--light: #8e918f;
-  --md-code-bg-color: #1e1f20;
-  
   --fs-leftnav-fg: #C4C7C5;
   --fs-content-fg: #E3E3E3;
-  --fs-toc-fg: #8E918F;
 }
 
-/* 2. 顶部导航栏与 Logo 暴力清理 (Aggressive Removal) */
-.md-logo, [class*="md-logo"], .md-header__button.md-logo, 
-.md-nav__title .md-logo, .md-nav__title[for="__drawer"] .md-icon,
-[class*="md-logo"] svg, [class*="md-logo"] img {
-  display: none !important; width: 0 !important; height: 0 !important;
-  position: absolute !important; pointer-events: none !important; 
-  opacity: 0 !important; margin: 0 !important; padding: 0 !important;
+/* 2. 顶部导航与 Logo 清理 (暴力物理移除) */
+/* 锁定所有可能的 Logo 容器，彻底归零空间 */
+.md-logo, 
+[class*="md-logo"],
+.md-header__button.md-logo,
+.md-nav__title .md-logo,
+.md-nav__title[for="__drawer"] .md-icon,
+[class*="md-logo"] svg,
+[class*="md-logo"] img {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  position: absolute !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
 }
+
 .md-header__title { margin-left: 0 !important; }
 .md-header__ellipsis { padding-left: 0.5rem !important; }
 
-/* 3. 极简 3px 滚动条视觉对标 (The "Precise Shadow" Fix) */
-
-::-webkit-scrollbar {
-  width: 6px !important;    /* 缩小物理宽度，限制渲染冗余 */
-  height: 6px !important;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent !important;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: transparent !important; 
-  border-radius: 0 !important;
-  border: none !important;
-  /* 核心逻辑：在 6px 的滑块容器内，只在右侧 3px 处画一道无模糊的阴影 */
-  /* 参数：内阴影，向左偏移 3px，不扩散，不模糊，颜色实色 */
-  box-shadow: inset -3px 0 0 0 var(--fs-accent-light) !important;
-}
-
-/* 交互状态：进入页面显现 */
-body:hover ::-webkit-scrollbar-thumb {
-  box-shadow: inset -3px 0 0 0 var(--fs-accent-light) !important;
-}
-
-/* 鼠标直触滑块：高亮品牌紫 */
-::-webkit-scrollbar-thumb:hover {
-  box-shadow: inset -3px 0 0 0 var(--fs-accent) !important;
-}
-
-/* 4. 左侧导航 (Navigation) - 3px 满高竖线 & 根目录加粗 */
-.md-sidebar--primary .md-nav__link {
-  font-size: 16px !important;
-  color: var(--fs-leftnav-fg) !important;
-  position: relative;
-  padding-left: 20px !important; 
-  transition: color 0.25s;
-}
-
-/* 顶级目录（Home等）强力加粗逻辑 */
-.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link,
-.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link span,
-.md-nav__item--level--1 .md-nav__link,
-.md-nav__item--level--1 .md-nav__link .md-ellipsis {
-  font-weight: 800 !important;
-}
-
-/* 选中状态：紫色 + 3px 满高直角竖线 */
-.md-sidebar--primary .md-nav__item--active > .md-nav__link {
-  color: var(--fs-accent) !important;
-  font-weight: 800 !important;
-  background-color: transparent !important;
-}
-.md-sidebar--primary .md-nav__item--active > .md-nav__link::before {
-  content: "";
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 3px; 
-  background: var(--fs-accent);
-}
-
-/* 5. 布局与分割线 (Layout) */
+/* 3. 布局 (Layout) */
 @media screen and (min-width: 60em) {
   .md-grid { max-width: 1380px !important; }
   .md-content { box-shadow: inset 1px 0 0 var(--fs-divider) !important; }
 }
 
-/* 6. 右侧目录 (TOC) - 多语言支持 */
+/* 4. 左侧导航 (Navigation) - 逻辑穿透加粗 */
+.md-sidebar--primary .md-nav__link {
+  font-size: 16px !important;
+  color: var(--fs-leftnav-fg) !important;
+  position: relative;
+  padding-left: 20px !important; 
+}
+
+/* 核心逻辑：锁定顶级列表下的每一个直接子项。
+   不管它是 Home 还是带箭头的文件夹，只要在第一层，全部强制加粗。
+*/
+.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link,
+.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link span,
+.md-nav__item--level--1 .md-nav__link,
+.md-nav__item--level--1 .md-nav__link .md-ellipsis {
+  font-weight: 800 !important; /* 使用 800 增强对比，防止被 700 抵消 */
+}
+
+/* 选中状态：紫色 + 无背景 */
+.md-sidebar--primary .md-nav__item--active > .md-nav__link {
+  color: var(--fs-accent) !important;
+  font-weight: 800 !important;
+  background-color: transparent !important;
+}
+
+/* 3px 满高竖线实现 */
+.md-sidebar--primary .md-nav__item--active > .md-nav__link::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--fs-accent);
+}
+
+/* 5. 右侧目录 (TOC) */
 .md-sidebar--secondary .md-nav__title[for="__toc"] {
   font-size: 0 !important;
-  line-height: 0 !important;
   color: transparent !important;
-  padding: 0.8rem 0 !important;
 }
 .md-sidebar--secondary .md-nav__title[for="__toc"]::after {
   font-size: 12.8px !important;
   font-weight: 700 !important;
   color: var(--md-default-fg-color--light) !important;
-  display: block !important;
-}
-[lang="en"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "On this page"; }
-[lang="zh"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "本页目录"; }
-[lang="ja"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "このページの内容"; }
-
-.md-sidebar--secondary .md-nav__link {
-  color: var(--fs-toc-fg);
-  font-size: 12.8px;
-}
-.md-sidebar--secondary .md-nav__link--active {
-  color: var(--fs-accent) !important;
-  font-weight: 600;
+  content: "On this page";
+  display: block;
 }
 
-/* 7. 正文排版 (Typography) */
-.md-typeset { color: var(--fs-content-fg); line-height: 1.65; }
-.md-typeset h1, .md-typeset h2, .md-typeset h3 {
-  font-weight: 700 !important;
-  color: var(--fs-content-fg) !important;
-}
-.md-typeset h1 { color: var(--fs-accent) !important; }
-
-/* 8. 表格优化 (Tables) */
+/* 6. 正文排版 */
+.md-typeset h1 { color: var(--fs-accent) !important; font-weight: 700; }
 .md-typeset table:not([class]) {
   font-size: 14px !important;
   border: 1px solid var(--fs-divider) !important;
-  width: 100%;
-}
-.md-typeset table:not([class]) th, 
-.md-typeset table:not([class]) td {
-  padding: 10px 12px !important;
-  border-right: 1px solid var(--fs-divider) !important;
-}
-.md-typeset table:not([class]) th {
-  background-color: var(--md-default-bg-color--lightest);
 }
