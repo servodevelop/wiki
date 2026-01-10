@@ -1,11 +1,11 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V30.0 (Perfect Flush Alignment)
-- 核心修复：通过重置 .md-typeset__table 确保表格外框与标题橙色对齐边界严格对齐
-- 布局：标题、正文、表格左侧基准线全部锁定为 0px 偏移
-- 图片：维持 100px 左右 padding 并物理居中，增强设计感
-- 表格：0.5px 极细边框，禁止单词/数字换行 (Nowrap)，自动触发横向滚动
+Fashion Star Wiki - V30.1 (Base Table Reset)
+- 专项：彻底删除表格所有复杂约束，重置为最基础的工业细线模式
+- 对齐：通过重置 margin/padding 确保表格外框与正文标题严格左对齐
+- 图片：维持桌面端 100px padding 并物理居中
 - 风格：H1-H6 统一 700 字重正文色，彻底去紫色化
+- 版本：全量提供，方便一键覆盖
 ==========================================================================
 */
 
@@ -29,7 +29,7 @@ Fashion Star Wiki - V30.0 (Perfect Flush Alignment)
   --fs-content-fg: #E3E3E3;
 }
 
-/* 2. 顶部导航与 Logo 清理 (根据历史需求保持暴力清理) */
+/* 2. 顶部导航与 Logo 清理 (物理移除) */
 .md-logo, [class*="md-logo"], .md-header__button.md-logo, 
 .md-nav__title .md-logo, .md-nav__title[for="__drawer"] .md-icon,
 [class*="md-logo"] svg, [class*="md-logo"] img {
@@ -45,7 +45,7 @@ Fashion Star Wiki - V30.0 (Perfect Flush Alignment)
 ::-webkit-scrollbar-thumb { background-color: var(--fs-divider); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background-color: var(--fs-accent); }
 
-/* 4. 左侧导航 (对标 Gemini 700 字重) */
+/* 4. 左侧导航 (700 字重) */
 .md-sidebar--primary .md-nav__link {
   font-size: 16px !important;
   color: var(--fs-leftnav-fg) !important;
@@ -77,7 +77,7 @@ Fashion Star Wiki - V30.0 (Perfect Flush Alignment)
 [lang="en"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "On this page"; }
 [lang="zh"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "本页目录"; }
 
-/* 6. 正文与标题 (全量对齐) */
+/* 6. 正文与标题 (彻底左对齐) */
 .md-typeset { color: var(--fs-content-fg); }
 .md-typeset h1, .md-typeset h2, .md-typeset h3, 
 .md-typeset h4, .md-typeset h5, .md-typeset h6 {
@@ -98,28 +98,26 @@ Fashion Star Wiki - V30.0 (Perfect Flush Alignment)
   .md-typeset img { padding: 0 10px !important; }
 }
 
-/* 8. 表格终极对齐 (精准解决图片 image_987d4c.jpg 中的错位) */
+/* 8. 表格基础回归 (删除所有宽度和换行约束) */
 .md-typeset__table {
-  padding: 0 !important;        /* 移除内部边距 */
-  margin: 1.5rem 0 !important;  /* 仅保留上下间距 */
-  overflow-x: auto !important;  /* 溢出滚动 */
-  border: none !important;      /* 移除容器可能存在的边框线 */
+  padding: 0 !important;
+  margin: 1.5rem 0 !important;
+  overflow-x: auto !important;
 }
 
 .md-typeset table:not([class]) {
-  width: 100% !important;
-  margin: 0 !important;         /* 强制外边距归零，实现物理对齐 */
+  /* 仅保留最基础的对齐和边框 */
+  margin: 0 !important;
   border-collapse: collapse !important;
   border: 0.5px solid var(--fs-divider) !important; 
   font-size: 14px !important;
-  table-layout: auto !important; 
 }
 
 .md-typeset table:not([class]) th, 
 .md-typeset table:not([class]) td {
   border: 0.5px solid var(--fs-divider) !important;
   padding: 10px 15px !important;
-  white-space: nowrap !important; /* 单词数字禁止换行 */
+  /* 恢复默认换行逻辑 */
 }
 
 .md-typeset table:not([class]) th {
@@ -128,7 +126,7 @@ Fashion Star Wiki - V30.0 (Perfect Flush Alignment)
   text-align: left !important;
 }
 
-/* 奇偶行背景 */
+/* 偶数行极淡背景 */
 .md-typeset table:not([class]) tr:nth-child(even) {
   background-color: rgba(0, 0, 0, 0.015) !important;
 }
@@ -136,7 +134,7 @@ Fashion Star Wiki - V30.0 (Perfect Flush Alignment)
   background-color: rgba(255, 255, 255, 0.025) !important;
 }
 
-/* 9. 布局平衡 (1380px) */
+/* 9. 布局平衡 */
 @media screen and (min-width: 60em) {
   .md-grid { max-width: 1380px !important; }
   .md-content { box-shadow: inset 1px 0 0 var(--fs-divider) !important; }
