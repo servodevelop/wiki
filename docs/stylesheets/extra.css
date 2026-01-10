@@ -1,10 +1,10 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V27.8 (Full - Linear Gradient Precision)
+Fashion Star Wiki - V27.9 (Full - Standard Override Edition)
 - 版本策略：全量提供，版本号严格递增
-- 专项：使用 linear-gradient 视觉欺骗法，强行在滑块中心渲染 3px 直角细线
-- 修复：全一级目录（含 Home）加粗，且全端 Logo 暴力清理
-- 包含：右侧 TOC 多语言修复、表格 Seeed 风格优化、正文阅读感提升
+- 专项：禁用标准 scrollbar 属性，强制使用 webkit 渲染 3px 极细直角滑块
+- 修复：解决滑块圆角胶囊感，确保视觉对标左侧导航 3px 竖线
+- 包含：一级加粗、Logo 物理移除、多语言 TOC、Seeed 表格优化
 ==========================================================================
 */
 
@@ -45,35 +45,39 @@ Fashion Star Wiki - V27.8 (Full - Linear Gradient Precision)
 .md-header__title { margin-left: 0 !important; }
 .md-header__ellipsis { padding-left: 0.5rem !important; }
 
-/* 3. 极简 3px 直角滚动条 (Gradient Deception Fix) */
-::-webkit-scrollbar {
-  width: 10px !important;    /* 物理宽度放大，确保护栏稳定 */
+/* 3. 极简 3px 滚动条终极版 (Final Standard Override) */
+
+/* 屏蔽标准属性，防止干涉自定义渲染 */
+html, body, .md-sidebar__scrollwrap, .md-content__inner {
+  scrollbar-width: none !important; /* 核心：关闭 Firefox 和新版 Chrome 的默认渲染 */
 }
+
+::-webkit-scrollbar {
+  width: 3px !important;    /* 强制物理宽度 3px */
+  height: 3px !important;
+}
+
 ::-webkit-scrollbar-track {
   background: transparent !important;
 }
+
 ::-webkit-scrollbar-thumb {
-  background-color: transparent !important; /* 滑块背景全透明 */
-  border-radius: 0 !important;
-  /* 核心逻辑：利用渐变色在 10px 的滑块中间画一条 3px 的实色线 */
-  background-image: linear-gradient(
-    to right, 
-    transparent 0px, 
-    transparent 7px, 
-    var(--fs-accent-light) 7px, 
-    var(--fs-accent-light) 10px
-  ) !important;
+  background-color: rgba(0, 0, 0, 0.05) !important; 
+  border-radius: 0 !important; /* 物理直角 */
+  border: none !important;
+  box-shadow: none !important;
 }
 
-/* 交互状态：鼠标直触滑块时，颜色变深 */
+/* 交互状态：进入页面显现淡紫色 */
+body:hover::-webkit-scrollbar-thumb,
+.md-sidebar__scrollwrap:hover::-webkit-scrollbar-thumb,
+.md-content__inner:hover::-webkit-scrollbar-thumb {
+  background-color: var(--fs-accent-light) !important;
+}
+
+/* 鼠标直触滑块：高亮紫色 */
 ::-webkit-scrollbar-thumb:hover {
-  background-image: linear-gradient(
-    to right, 
-    transparent 0px, 
-    transparent 7px, 
-    var(--fs-accent) 7px, 
-    var(--fs-accent) 10px
-  ) !important;
+  background-color: var(--fs-accent) !important;
 }
 
 /* 4. 左侧导航 (Navigation) - 3px 满高竖线 & 根目录加粗 */
