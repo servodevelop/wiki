@@ -1,9 +1,9 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V27.9 (Full - Standard Override Edition)
+Fashion Star Wiki - V28.0 (Full - Visual Reconstruction Edition)
 - 版本策略：全量提供，版本号严格递增
-- 专项：禁用标准 scrollbar 属性，强制使用 webkit 渲染 3px 极细直角滑块
-- 修复：解决滑块圆角胶囊感，确保视觉对标左侧导航 3px 竖线
+- 专项：利用 box-shadow 视觉重建法，在全透明滑块中心强制投影出 3px 直角细线
+- 修复：恢复滚动条显示，解决 V27.9 导致的彻底消失问题
 - 包含：一级加粗、Logo 物理移除、多语言 TOC、Seeed 表格优化
 ==========================================================================
 */
@@ -45,16 +45,12 @@ Fashion Star Wiki - V27.9 (Full - Standard Override Edition)
 .md-header__title { margin-left: 0 !important; }
 .md-header__ellipsis { padding-left: 0.5rem !important; }
 
-/* 3. 极简 3px 滚动条终极版 (Final Standard Override) */
+/* 3. 极简 3px 滚动条视觉重建 (The "Box-Shadow" Trick) */
 
-/* 屏蔽标准属性，防止干涉自定义渲染 */
-html, body, .md-sidebar__scrollwrap, .md-content__inner {
-  scrollbar-width: none !important; /* 核心：关闭 Firefox 和新版 Chrome 的默认渲染 */
-}
-
+/* 撤销导致消失的指令，恢复 webkit 渲染 */
 ::-webkit-scrollbar {
-  width: 3px !important;    /* 强制物理宽度 3px */
-  height: 3px !important;
+  width: 12px !important;    /* 物理宽度放大，给阴影留空间 */
+  height: 12px !important;
 }
 
 ::-webkit-scrollbar-track {
@@ -62,22 +58,21 @@ html, body, .md-sidebar__scrollwrap, .md-content__inner {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.05) !important; 
-  border-radius: 0 !important; /* 物理直角 */
-  border: none !important;
-  box-shadow: none !important;
+  background-color: transparent !important; /* 物理滑块全透明 */
+  border-radius: 0 !important;
+  /* 核心逻辑：利用内阴影在滑块最右侧“切”出一根 3px 的紫色实线 */
+  /* 阴影向左偏移 9px，宽度 3px，颜色淡紫 */
+  box-shadow: inset -3px 0 0 0 var(--fs-accent-light) !important;
 }
 
-/* 交互状态：进入页面显现淡紫色 */
-body:hover::-webkit-scrollbar-thumb,
-.md-sidebar__scrollwrap:hover::-webkit-scrollbar-thumb,
-.md-content__inner:hover::-webkit-scrollbar-thumb {
-  background-color: var(--fs-accent-light) !important;
+/* 交互状态：鼠标进入页面显现 */
+body:hover ::-webkit-scrollbar-thumb {
+  box-shadow: inset -3px 0 0 0 var(--fs-accent-light) !important;
 }
 
-/* 鼠标直触滑块：高亮紫色 */
+/* 鼠标直触滑块：高亮品牌紫 */
 ::-webkit-scrollbar-thumb:hover {
-  background-color: var(--fs-accent) !important;
+  box-shadow: inset -3px 0 0 0 var(--fs-accent) !important;
 }
 
 /* 4. 左侧导航 (Navigation) - 3px 满高竖线 & 根目录加粗 */
