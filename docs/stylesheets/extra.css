@@ -1,9 +1,9 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V31.3 (Navigation Logic Refined)
-- 一级目录：[16px + 700] 始终加粗，但激活时不显示紫色和竖线
-- 下拉目录：[16px + 400] 平时常规，子项活跃时变紫色加粗，无竖线
-- 末级文章：[14.5px + 400] 激活时显示紫色加粗 + 3px 标志性左竖线
+Fashion Star Wiki - V31.5 (Top Section Title Color Fix)
+- 顶部标题：[16px + 700] 左侧栏最上方 Section 标题加粗，颜色锁定为非选中文字色
+- 下拉目录：[16px + 400] 默认不加粗；子项活跃时 [700 + 紫色] 
+- 末级文章：[14.5px + 400] 激活时 [700 + 紫色 + 3px 左竖线]
 - 表格与图片：维持 V29.2 工业基准对齐
 ==========================================================================
 */
@@ -14,7 +14,7 @@ Fashion Star Wiki - V31.3 (Navigation Logic Refined)
   --fs-divider: rgba(0,0,0,0.15); 
   --md-primary-fg-color: var(--fs-accent);
   --md-accent-fg-color: var(--fs-accent);
-  --fs-leftnav-fg: #444746;
+  --fs-leftnav-fg: #444746; /* 浅色模式非选中文字色 */
   --fs-content-fg: #1F1F1F;
 }
 
@@ -23,7 +23,7 @@ Fashion Star Wiki - V31.3 (Navigation Logic Refined)
   --md-default-bg-color: #131314;
   --md-default-bg-color--light: #1e1f20;
   --md-default-fg-color: #e3e3e3;
-  --fs-leftnav-fg: #C4C7C5;
+  --fs-leftnav-fg: #C4C7C5; /* 深色模式非选中文字色 */
   --fs-content-fg: #E3E3E3;
 }
 
@@ -43,28 +43,29 @@ Fashion Star Wiki - V31.3 (Navigation Logic Refined)
 ::-webkit-scrollbar-thumb { background-color: var(--fs-divider); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background-color: var(--fs-accent); }
 
-/* 4. 左侧导航 (层级逻辑 - V31.3) */
+/* 4. 左侧导航 (V31.5 精确控制) */
 
-/* 基础通用样式 */
+/* 基础设置 */
 .md-sidebar--primary .md-nav__link {
   color: var(--fs-leftnav-fg) !important;
   position: relative;
   padding-left: 20px !important; 
   font-size: 14.5px;
   font-weight: 400; 
-  transition: color 0.25s;
 }
 
-/* [一级目录] 16px + 700 加粗，激活时保持黑色/灰色，不加紫色 */
-.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link,
-.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link span,
-.md-nav--primary > .md-nav__list > .md-nav__item > label.md-nav__link {
-  font-weight: 700 !important;
+/* [A] 左侧栏最顶部的 Section 标题 */
+/* 锁定颜色为变量 --fs-leftnav-fg，确保在深浅模式下都与普通文字一致 */
+.md-sidebar--primary .md-nav__title {
   font-size: 16px !important;
-  color: var(--fs-leftnav-fg) !important; /* 激活也不变色 */
+  font-weight: 700 !important;
+  color: var(--fs-leftnav-fg) !important; 
+  padding-left: 20px !important;
+  line-height: 1.2 !important;
+  margin-bottom: 0.5rem !important;
 }
 
-/* [非一级下拉] 默认：16px + 400 不加粗 */
+/* [B] 下拉父目录 (Nested)：默认 16px + 400 不加粗 */
 .md-nav__item--nested > .md-nav__link,
 .md-nav__item--nested > .md-nav__link span,
 .md-nav__item--nested > label.md-nav__link {
@@ -72,15 +73,15 @@ Fashion Star Wiki - V31.3 (Navigation Logic Refined)
   font-weight: 400;
 }
 
-/* [激活状态 - 非一级父目录] 变紫色加粗，无竖线 */
-.md-nav__item--nested.md-nav__item--active:not(.md-nav__item--level--1) > .md-nav__link,
-.md-nav__item--nested.md-nav__item--active:not(.md-nav__item--level--1) > .md-nav__link span,
-.md-nav__item--nested.md-nav__item--active:not(.md-nav__item--level--1) > label.md-nav__link {
+/* [C] 激活状态的父目录：强制加粗 700 + 紫色 */
+.md-nav__item--nested.md-nav__item--active > .md-nav__link,
+.md-nav__item--nested.md-nav__item--active > .md-nav__link span,
+.md-nav__item--nested.md-nav__item--active > label.md-nav__link {
   font-weight: 700 !important;
   color: var(--fs-accent) !important;
 }
 
-/* [激活状态 - 末级文章] 紫色加粗 + 3px 竖线 */
+/* [D] 激活状态的末级文章：紫色加粗 + 3px 竖线 */
 .md-nav__item:not(.md-nav__item--nested).md-nav__item--active > .md-nav__link {
   color: var(--fs-accent) !important;
   font-weight: 700 !important;
@@ -90,7 +91,7 @@ Fashion Star Wiki - V31.3 (Navigation Logic Refined)
   width: 3px; background: var(--fs-accent);
 }
 
-/* 5. 右侧目录 (TOC) */
+/* 5. 右侧目录 (TOC) 多语言 */
 .md-sidebar--secondary .md-nav__title[for="__toc"] {
   font-size: 0 !important; color: transparent !important;
 }
@@ -117,7 +118,7 @@ Fashion Star Wiki - V31.3 (Navigation Logic Refined)
   margin: 1.5rem auto !important;
 }
 
-/* 8. 表格细节 (回归 V29.2 对齐) */
+/* 8. 表格细节 (回归 V29.2) */
 .md-typeset__table { overflow-x: auto !important; }
 .md-typeset table:not([class]) {
   border-collapse: collapse !important;
