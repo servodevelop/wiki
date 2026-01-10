@@ -90,8 +90,11 @@ plugins:
           name: "🇯🇵 日本語"
           default: false
           build: true
-  - sitemap:
-    hostname: https://wiki.fashionstar.com.hk/
+
+# 将 sitemap 移出 plugins 列表，放在这里作为 extra 配置（部分版本支持这样降级处理）
+extra:
+  sitemap:
+    filename: sitemap.xml
 
 nav:
   - Home: index.md
