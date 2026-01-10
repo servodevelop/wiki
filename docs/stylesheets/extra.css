@@ -1,10 +1,10 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V29.2 (Unified Industrial Style)
-- 专项：H1 颜色修正，不再使用品牌紫，对齐各模式下的正文颜色
-- 策略：H1-H6 统一使用 700 字重，保持视觉上的工业冷静感
-- 包含：V26.8 验证通过的 Logo 清理、一级导航加粗、3px 选中竖线
-- 修复：右侧 TOC 多语言显示支持
+Fashion Star Wiki - V29.3 (Full - Industrial Table & Typography)
+- 专项：H1 颜色去紫化，正文所有标题 (H1-H6) 统一为正文色 + 700 字重
+- 表格：整合 Seeed 风格，包含奇偶行变色、强制换行 (Break-all) 及 100% 宽度
+- 导航：维持 700 字重与 3px 满高选中竖线，保持 Gemini 风格一致性
+- 清理：全端 Logo 暴力清理，右侧 TOC 多语言支持
 ==========================================================================
 */
 
@@ -39,42 +39,29 @@ Fashion Star Wiki - V29.2 (Unified Industrial Style)
 .md-header__title { margin-left: 0 !important; }
 .md-header__ellipsis { padding-left: 0.5rem !important; }
 
-/* 3. 极简自定义滚动条 (V29 稳健版) */
-::-webkit-scrollbar {
-  width: 6px; 
-  height: 6px;
-}
-::-webkit-scrollbar-thumb {
-  background-color: var(--fs-divider);
-  border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--fs-accent);
-}
+/* 3. 稳健版滚动条 (V29 风格) */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-thumb { background-color: var(--fs-divider); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background-color: var(--fs-accent); }
 
-/* 4. 左侧导航 (Navigation) - 700 字重 */
+/* 4. 左侧导航 (Navigation) - 700 字重 & 3px 竖线 */
 .md-sidebar--primary .md-nav__link {
   font-size: 16px !important;
   color: var(--fs-leftnav-fg) !important;
   position: relative;
   padding-left: 20px !important; 
 }
-
-/* 顶级目录（Home等）加粗锁定为 700 */
 .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link,
 .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link span,
 .md-nav__item--level--1 .md-nav__link,
 .md-nav__item--level--1 .md-nav__link .md-ellipsis {
   font-weight: 700 !important;
 }
-
-/* 选中状态：紫色 + 3px 满高竖线 */
 .md-sidebar--primary .md-nav__item--active > .md-nav__link {
   color: var(--fs-accent) !important;
   font-weight: 700 !important;
   background-color: transparent !important;
 }
-
 .md-sidebar--primary .md-nav__item--active > .md-nav__link::before {
   content: ""; position: absolute; left: 0; top: 0; bottom: 0;
   width: 3px; background: var(--fs-accent);
@@ -92,30 +79,54 @@ Fashion Star Wiki - V29.2 (Unified Industrial Style)
 [lang="en"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "On this page"; }
 [lang="zh"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "本页目录"; }
 
-/* 6. 正文排版 (Typography - Pure Industrial) */
-.md-typeset {
-  color: var(--fs-content-fg);
-}
+/* 6. 正文排版 (Industrial Typography Upgrade) */
+.md-typeset { color: var(--fs-content-fg); }
 
-/* H1-H6 全部锁定为正文色，字重 700 */
+/* H1-H6 统一正文色 + 700 字重 */
 .md-typeset h1, .md-typeset h2, .md-typeset h3, 
 .md-typeset h4, .md-typeset h5, .md-typeset h6 {
   color: var(--fs-content-fg) !important; 
   font-weight: 700 !important;
   margin-top: 1.6rem !important;
 }
+.md-typeset h1 { margin-top: 2rem !important; }
 
-/* H1 稍微增加顶部间距，区分文章开始 */
-.md-typeset h1 { 
-  margin-top: 2rem !important;
+/* 7. 表格规范化 (Seeed Studio Style) */
+.md-typeset table:not([class]) {
+  display: table !important; /* 强制表格行为 */
+  width: 100% !important;   /* 铺满正文 */
+  border-collapse: collapse !important;
+  border: 1px solid var(--fs-divider) !important;
+  font-size: 14px !important;
+  margin: 1rem 0 !important;
+  overflow: hidden !important;
+  word-break: break-all !important; /* 强制长字符换行，保护布局 */
 }
 
-/* 7. 表格与布局 */
+/* 表头强化 */
+.md-typeset table:not([class]) th {
+  background-color: var(--md-default-bg-color--light) !important;
+  font-weight: 700 !important;
+  padding: 12px !important;
+  border: 1px solid var(--fs-divider) !important;
+}
+
+/* 单元格及奇偶行变色 */
+.md-typeset table:not([class]) td {
+  padding: 10px 12px !important;
+  border: 1px solid var(--fs-divider) !important;
+  line-height: 1.5 !important;
+}
+
+.md-typeset table:not([class]) tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.02) !important; /* 浅色模式偶数行极淡背景 */
+}
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.03) !important; /* 深色模式偶数行极淡背景 */
+}
+
+/* 8. 布局 */
 @media screen and (min-width: 60em) {
   .md-grid { max-width: 1380px !important; }
   .md-content { box-shadow: inset 1px 0 0 var(--fs-divider) !important; }
-}
-.md-typeset table:not([class]) {
-  font-size: 14px !important;
-  border: 1px solid var(--fs-divider) !important;
 }
