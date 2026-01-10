@@ -1617,3 +1617,17 @@ Fashion Star Wiki - V21.0 (Stable Base)
     content: none !important;
   }
 }
+
+/* 强制关闭所有目录标题的伪元素，恢复原生文字显示 */
+.md-nav__title::before, 
+.md-nav__title::after {
+  display: none !important;
+  content: "" !important;
+}
+
+/* 确保原始文字颜色不是透明的，且字体大小正常 */
+.md-nav__title {
+  font-size: 14px !important;
+  color: var(--md-default-fg-color--light) !important;
+  visibility: visible !important;
+}
