@@ -5,7 +5,7 @@ use_directory_urls: true
 
 theme:
   name: material
-  language: en
+  # language: en（注释掉为了On this Page可以跟着语系调整显示）
   favicon: assets/favicon.png
 
   # Theme overrides directory (keep it under /docs so Actions sparse-checkout won't miss it)
