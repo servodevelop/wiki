@@ -1,9 +1,9 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V28.0 (Full - Visual Reconstruction Edition)
+Fashion Star Wiki - V28.1 (Full - Pixel-Perfect Scrollbar)
 - 版本策略：全量提供，版本号严格递增
-- 专项：利用 box-shadow 视觉重建法，在全透明滑块中心强制投影出 3px 直角细线
-- 修复：恢复滚动条显示，解决 V27.9 导致的彻底消失问题
+- 专项：收窄轨道至 6px，通过 inset 阴影强制在右侧压出严格 3px 实色线
+- 对标：确保滚动条视觉宽度与左侧导航 3px 竖线在物理像素上完全一致
 - 包含：一级加粗、Logo 物理移除、多语言 TOC、Seeed 表格优化
 ==========================================================================
 */
@@ -11,7 +11,7 @@ Fashion Star Wiki - V28.0 (Full - Visual Reconstruction Edition)
 /* 1. 核心变量与多模式适配 (Variables) */
 :root {
   --fs-accent: #8641A9;
-  --fs-accent-light: rgba(134, 65, 169, 0.4); 
+  --fs-accent-light: rgba(134, 65, 169, 0.45); 
   --fs-divider: rgba(0,0,0,0.12);
   --md-primary-fg-color: var(--fs-accent);
   --md-accent-fg-color: var(--fs-accent);
@@ -45,12 +45,11 @@ Fashion Star Wiki - V28.0 (Full - Visual Reconstruction Edition)
 .md-header__title { margin-left: 0 !important; }
 .md-header__ellipsis { padding-left: 0.5rem !important; }
 
-/* 3. 极简 3px 滚动条视觉重建 (The "Box-Shadow" Trick) */
+/* 3. 极简 3px 滚动条视觉对标 (The "Precise Shadow" Fix) */
 
-/* 撤销导致消失的指令，恢复 webkit 渲染 */
 ::-webkit-scrollbar {
-  width: 12px !important;    /* 物理宽度放大，给阴影留空间 */
-  height: 12px !important;
+  width: 6px !important;    /* 缩小物理宽度，限制渲染冗余 */
+  height: 6px !important;
 }
 
 ::-webkit-scrollbar-track {
@@ -58,14 +57,15 @@ Fashion Star Wiki - V28.0 (Full - Visual Reconstruction Edition)
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: transparent !important; /* 物理滑块全透明 */
+  background-color: transparent !important; 
   border-radius: 0 !important;
-  /* 核心逻辑：利用内阴影在滑块最右侧“切”出一根 3px 的紫色实线 */
-  /* 阴影向左偏移 9px，宽度 3px，颜色淡紫 */
+  border: none !important;
+  /* 核心逻辑：在 6px 的滑块容器内，只在右侧 3px 处画一道无模糊的阴影 */
+  /* 参数：内阴影，向左偏移 3px，不扩散，不模糊，颜色实色 */
   box-shadow: inset -3px 0 0 0 var(--fs-accent-light) !important;
 }
 
-/* 交互状态：鼠标进入页面显现 */
+/* 交互状态：进入页面显现 */
 body:hover ::-webkit-scrollbar-thumb {
   box-shadow: inset -3px 0 0 0 var(--fs-accent-light) !important;
 }
