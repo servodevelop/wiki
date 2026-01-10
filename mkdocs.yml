@@ -62,7 +62,13 @@ hooks:
   - docs/hooks/gh_alerts.py
 
 plugins:
-  - search
+  - search：
+      lang: 
+        - en
+        - es
+        - fr
+        - de
+        - ja
   - glightbox
   - include-markdown:
       rewrite_relative_urls: true
@@ -97,6 +103,7 @@ plugins:
           name: "🇯🇵 日本語"
           default: false
           build: true
+
 
 
 nav:
