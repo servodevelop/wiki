@@ -1,10 +1,10 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V29.4 (Full - Precise Table Border & Alignment)
-- 专项：修复表格边框缺失问题，强制表格宽度与正文文字 100% 对齐
-- 表格：增加实线边框 (1px solid)、奇偶行变色、以及强制换行保护
-- 标题：H1-H6 统一为正文色 + 700 字重，彻底去紫色化
-- 版本：全量提供，版本号严格递增
+Fashion Star Wiki - V29.5 (Full - Padded Industrial Tables)
+- 专项：桌面端表格增加左右 50px 边距，并强制 100% 满幅填充
+- 布局：H1-H6 延续 700 字重正文色，彻底去紫色化
+- 表格：强化实线边框，奇偶行变色，解决内容过少导致的缩窄问题
+- 包含：全端 Logo 物理级清理及右侧 TOC 多语言逻辑
 ==========================================================================
 */
 
@@ -12,7 +12,7 @@ Fashion Star Wiki - V29.4 (Full - Precise Table Border & Alignment)
 :root {
   --fs-accent: #8641A9;
   --fs-accent-light: rgba(134, 65, 169, 0.4); 
-  --fs-divider: rgba(0,0,0,0.15); /* 稍微加深分割线颜色 */
+  --fs-divider: rgba(0,0,0,0.15);
   --md-primary-fg-color: var(--fs-accent);
   --md-accent-fg-color: var(--fs-accent);
   --fs-leftnav-fg: #444746;
@@ -28,7 +28,7 @@ Fashion Star Wiki - V29.4 (Full - Precise Table Border & Alignment)
   --fs-content-fg: #E3E3E3;
 }
 
-/* 2. 顶部导航与 Logo 清理 */
+/* 2. 顶部导航与 Logo 清理 (暴力物理移除) */
 .md-logo, [class*="md-logo"], .md-header__button.md-logo, 
 .md-nav__title .md-logo, .md-nav__title[for="__drawer"] .md-icon,
 [class*="md-logo"] svg, [class*="md-logo"] img {
@@ -39,12 +39,12 @@ Fashion Star Wiki - V29.4 (Full - Precise Table Border & Alignment)
 .md-header__title { margin-left: 0 !important; }
 .md-header__ellipsis { padding-left: 0.5rem !important; }
 
-/* 3. 稳健版滚动条 */
+/* 3. 稳健版滚动条 (V29 风格) */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-thumb { background-color: var(--fs-divider); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background-color: var(--fs-accent); }
 
-/* 4. 左侧导航 (700 字重) */
+/* 4. 左侧导航 (Navigation) - 700 字重 & 3px 竖线 */
 .md-sidebar--primary .md-nav__link {
   font-size: 16px !important;
   color: var(--fs-leftnav-fg) !important;
@@ -67,7 +67,7 @@ Fashion Star Wiki - V29.4 (Full - Precise Table Border & Alignment)
   width: 3px; background: var(--fs-accent);
 }
 
-/* 5. 右侧目录 (TOC) 多语言支持 */
+/* 5. 右侧目录 (TOC) - 多语言 */
 .md-sidebar--secondary .md-nav__title[for="__toc"] {
   font-size: 0 !important; color: transparent !important;
 }
@@ -79,7 +79,10 @@ Fashion Star Wiki - V29.4 (Full - Precise Table Border & Alignment)
 [lang="en"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "On this page"; }
 [lang="zh"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "本页目录"; }
 
-/* 6. 正文标题 (Industrial 700) */
+/* 6. 正文排版 (Industrial Typography Upgrade) */
+.md-typeset { color: var(--fs-content-fg); }
+
+/* H1-H6 统一正文色 + 700 字重 */
 .md-typeset h1, .md-typeset h2, .md-typeset h3, 
 .md-typeset h4, .md-typeset h5, .md-typeset h6 {
   color: var(--fs-content-fg) !important; 
@@ -88,27 +91,41 @@ Fashion Star Wiki - V29.4 (Full - Precise Table Border & Alignment)
 }
 .md-typeset h1 { margin-top: 2rem !important; }
 
-/* 7. 表格终极优化 (Strict Border & Full Width) */
+/* 7. 表格高级优化 (Desktop Padding & Full-Width Strategy) */
+
+/* 表格容器层级优化 */
+.md-typeset__table {
+  overflow: auto;
+  /* 桌面端左右加 50px padding */
+  padding: 0 50px !important; 
+}
+
+/* 移动端自动取消 Padding 防止挤压 */
+@media screen and (max-width: 44.9375em) {
+  .md-typeset__table { padding: 0 10px !important; }
+}
+
 .md-typeset table:not([class]) {
-  width: 100% !important;        /* 强制与正文等宽 */
+  width: 100% !important;        /* 强制 100% 满幅 */
+  display: table !important;     /* 确保其行为是标准表格 */
   border-collapse: collapse !important; 
-  border: 1px solid var(--fs-divider) !important; /* 外部大边框 */
+  border: 1px solid var(--fs-divider) !important;
   font-size: 14px !important;
-  margin: 1.5rem 0 !important;
-  table-layout: auto !important;
+  margin: 1rem 0 !important;
+  table-layout: fixed !important; /* 核心：强制平分或撑满，不随内容缩放 */
 }
 
 .md-typeset table:not([class]) th, 
 .md-typeset table:not([class]) td {
-  border: 1px solid var(--fs-divider) !important; /* 内部单元格边框 */
+  border: 1px solid var(--fs-divider) !important;
   padding: 12px 15px !important;
-  word-break: break-all !important; /* 防止撑破 */
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
 }
 
 .md-typeset table:not([class]) th {
   background-color: var(--md-default-bg-color--light) !important;
   font-weight: 700 !important;
-  text-align: left !important;
 }
 
 /* 奇偶行背景 */
