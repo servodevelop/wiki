@@ -1,9 +1,9 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V29.6 (Full - Ultra-thin Borders & Padded Images)
-- 专项：表格边框与分隔线统一弱化至 0.5px，追求极致的工业精密感
-- 专项：正文图片同步增加左右 50px padding，确保与表格对齐
-- 布局：维持桌面端表格 50px padding 与 100% 满幅 (Fixed Layout)
+Fashion Star Wiki - V29.7 (Full - Intelligent Table & 100px Padded Images)
+- 专项：图片左右 padding 增加至 100px，对齐工业视觉中轴
+- 表格：移除 fixed 布局，恢复 auto 宽度分配，解决单元格异常换行问题
+- 细节：表头 (th) 禁止换行，边框维持 0.5px 极细精密感
 - 风格：H1-H6 延续 700 字重正文色，彻底去紫色化
 ==========================================================================
 */
@@ -12,7 +12,7 @@ Fashion Star Wiki - V29.6 (Full - Ultra-thin Borders & Padded Images)
 :root {
   --fs-accent: #8641A9;
   --fs-accent-light: rgba(134, 65, 169, 0.4); 
-  --fs-divider: rgba(0,0,0,0.2); /* 稍微加深透明度，配合 0.5px 细线 */
+  --fs-divider: rgba(0,0,0,0.2); 
   --md-primary-fg-color: var(--fs-accent);
   --md-accent-fg-color: var(--fs-accent);
   --fs-leftnav-fg: #444746;
@@ -28,7 +28,7 @@ Fashion Star Wiki - V29.6 (Full - Ultra-thin Borders & Padded Images)
   --fs-content-fg: #E3E3E3;
 }
 
-/* 2. 顶部导航与 Logo 清理 (暴力物理移除) */
+/* 2. 顶部导航与 Logo 清理 */
 .md-logo, [class*="md-logo"], .md-header__button.md-logo, 
 .md-nav__title .md-logo, .md-nav__title[for="__drawer"] .md-icon,
 [class*="md-logo"] svg, [class*="md-logo"] img {
@@ -39,12 +39,12 @@ Fashion Star Wiki - V29.6 (Full - Ultra-thin Borders & Padded Images)
 .md-header__title { margin-left: 0 !important; }
 .md-header__ellipsis { padding-left: 0.5rem !important; }
 
-/* 3. 稳健版滚动条 (V29 风格) */
+/* 3. 稳健版滚动条 */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-thumb { background-color: var(--fs-divider); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background-color: var(--fs-accent); }
 
-/* 4. 左侧导航 (Navigation) - 700 字重 */
+/* 4. 左侧导航 (700 字重) */
 .md-sidebar--primary .md-nav__link {
   font-size: 16px !important;
   color: var(--fs-leftnav-fg) !important;
@@ -66,7 +66,7 @@ Fashion Star Wiki - V29.6 (Full - Ultra-thin Borders & Padded Images)
   width: 3px; background: var(--fs-accent);
 }
 
-/* 5. 右侧目录 (TOC) - 多语言 */
+/* 5. 右侧目录 (TOC) 多语言 */
 .md-sidebar--secondary .md-nav__title[for="__toc"] {
   font-size: 0 !important; color: transparent !important;
 }
@@ -78,29 +78,31 @@ Fashion Star Wiki - V29.6 (Full - Ultra-thin Borders & Padded Images)
 [lang="en"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "On this page"; }
 [lang="zh"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "本页目录"; }
 
-/* 6. 正文排版 (Typography) */
+/* 6. 正文排版 (Industrial 700) */
 .md-typeset { color: var(--fs-content-fg); }
-
 .md-typeset h1, .md-typeset h2, .md-typeset h3, 
 .md-typeset h4, .md-typeset h5, .md-typeset h6 {
   color: var(--fs-content-fg) !important; 
   font-weight: 700 !important;
+  margin-top: 1.6rem !important;
 }
 
-/* 7. 图片 Padding 优化 (Image Padding) */
+/* 7. 图片 100px Padding 优化 */
 .md-typeset img {
-  padding: 0 50px !important;
+  padding: 0 100px !important;
   box-sizing: border-box !important;
+  display: block;
+  margin: 1.5rem auto !important;
 }
 
-/* 移动端缩小图片边距 */
+/* 移动端恢复小边距 */
 @media screen and (max-width: 44.9375em) {
   .md-typeset img { padding: 0 10px !important; }
 }
 
-/* 8. 表格极致优化 (0.5px Ultra-thin Borders) */
+/* 8. 表格智能布局 (Auto Width Strategy) */
 .md-typeset__table {
-  padding: 0 50px !important; 
+  padding: 0 100px !important; /* 同步图片边距 */
   overflow: auto;
 }
 
@@ -112,27 +114,29 @@ Fashion Star Wiki - V29.6 (Full - Ultra-thin Borders & Padded Images)
   width: 100% !important;
   display: table !important;
   border-collapse: collapse !important;
-  /* 统一极细外框 */
   border: 0.5px solid var(--fs-divider) !important; 
   font-size: 14px !important;
   margin: 1rem 0 !important;
-  table-layout: fixed !important; 
+  table-layout: auto !important; /* 关键：让浏览器根据内容自动调整列宽 */
 }
 
 .md-typeset table:not([class]) th, 
 .md-typeset table:not([class]) td {
-  /* 统一极细内部线 */
   border: 0.5px solid var(--fs-divider) !important;
   padding: 10px 15px !important;
-  word-wrap: break-word !important;
 }
 
 .md-typeset table:not([class]) th {
   background-color: var(--md-default-bg-color--light) !important;
   font-weight: 700 !important;
+  white-space: nowrap !important; /* 强制表头标题不换行 */
 }
 
-/* 奇偶行变色 */
+.md-typeset table:not([class]) td {
+  word-break: normal !important; /* 恢复正常换行，配合 auto 布局 */
+}
+
+/* 奇偶行背景 */
 .md-typeset table:not([class]) tr:nth-child(even) {
   background-color: rgba(0, 0, 0, 0.015) !important;
 }
