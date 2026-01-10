@@ -1,8 +1,8 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V26.2 (Bold Parent Navigation)
+Fashion Star Wiki - V26.3 (Full Level-1 Bold)
 - 整合：1380px 宽度、3px 满高选中竖线、FS 专属深黑模式
-- 优化：所有带下拉菜单（子目录）的标题强制加粗 (Level-1 & Parent labels)
+- 优化：所有一级导航标题（含 Home 及带下拉的父目录）全部强制加粗
 - 适配：顶部 Tabs 开启后的布局对齐
 - 修复：全端彻底爆破默认 Logo 图标
 ==========================================================================
@@ -59,7 +59,7 @@ Fashion Star Wiki - V26.2 (Bold Parent Navigation)
   .md-content { box-shadow: inset 1px 0 0 var(--fs-divider) !important; }
 }
 
-/* 4. 左侧导航 (Navigation) - 3px 满高竖线 & 父级加粗 */
+/* 4. 左侧导航 (Navigation) - 3px 满高竖线 & 根目录+父级加粗 */
 .md-sidebar--primary .md-nav__link {
   font-size: 16px !important;
   color: var(--fs-leftnav-fg) !important;
@@ -68,8 +68,9 @@ Fashion Star Wiki - V26.2 (Bold Parent Navigation)
   transition: color 0.25s;
 }
 
-/* 重点：让带有下拉箭头的目录标题（label）默认加粗 */
-.md-sidebar--primary .md-nav__link[for], 
+/* 重点优化：加粗所有一级菜单项（包含 Home 以及带子目录的父标题） */
+.md-sidebar--primary .md-nav > .md-nav__item > .md-nav__link,
+.md-sidebar--primary .md-nav__link[for],
 .md-sidebar--primary .md-nav__item--nested > .md-nav__link {
   font-weight: 700 !important;
 }
@@ -129,10 +130,4 @@ Fashion Star Wiki - V26.2 (Bold Parent Navigation)
   border: 1px solid var(--fs-divider) !important;
   width: 100%;
 }
-.md-typeset table:not([class]) th, 
-.md-typeset table:not([class]) td {
-  word-break: keep-all !important; 
-  padding: 10px 12px !important;
-  border-right: 1px solid var(--fs-divider) !important;
-}
-.md-typeset table:not([class]) th { background-color: var(--md-default-bg-color--lightest); }
+.md-types
