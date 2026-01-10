@@ -1,10 +1,10 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V26.3 (Full Level-1 Bold)
+Fashion Star Wiki - V26.4 (Aggressive Logo Removal)
 - 整合：1380px 宽度、3px 满高选中竖线、FS 专属深黑模式
-- 优化：所有一级导航标题（含 Home 及带下拉的父目录）全部强制加粗
-- 适配：顶部 Tabs 开启后的布局对齐
-- 修复：全端彻底爆破默认 Logo 图标
+- 修复：采用 Aggressive 策略强制抹除桌面及移动端所有形式的 Logo 占位
+- 优化：所有一级导航标题（含 Home 及父目录）强制加粗
+- 翻译：右侧 TOC 多语言自动修复
 ==========================================================================
 */
 
@@ -33,33 +33,47 @@ Fashion Star Wiki - V26.3 (Full Level-1 Bold)
   --fs-toc-fg: #8E918F;
 }
 
-/* 2. 顶部导航栏与移动端抽屉清理 */
-.md-header__button.md-logo,
-.md-header__button.md-logo svg,
-.md-header__button.md-logo path,
-.md-nav__title[for="__drawer"] .md-nav__icon,
-.md-nav__title .md-logo svg,
-.md-nav__title .md-logo img,
-.md-nav__title .md-logo {
+/* 2. 顶部导航栏与移动端抽屉清理 (Aggressive Clean-up) */
+/* 针对所有包含 md-logo 类的 A 标签、SPAN 标签及其内部所有后代 (SVG, IMG, PATH)
+   进行物理级的隐藏和空间归零。
+*/
+[class*="md-logo"], 
+[class*="md-logo"] *,
+.md-nav__title .md-logo,
+.md-nav__title[for="__drawer"] .md-icon {
   display: none !important;
   visibility: hidden !important;
+  opacity: 0 !important;
   width: 0 !important;
   height: 0 !important;
   margin: 0 !important;
   padding: 0 !important;
+  pointer-events: none !important;
 }
 
-.md-header__title { margin-left: 0 !important; }
-.md-header__ellipsis { padding-left: 0.5rem !important; }
-.md-tabs__link--active { color: #fff !important; }
+/* 强制让标题文字贴左 */
+.md-header__title {
+  margin-left: 0 !important;
+}
+.md-header__ellipsis {
+  padding-left: 0.5rem !important; 
+}
+/* 移除移动端侧边栏标题前的间距 */
+.md-nav__title {
+  padding-left: 16px !important;
+}
 
-/* 3. 布局 (Layout) - 1380px 黄金宽度 */
+/* 3. 布局 (Layout) - 1380px 黄金宽度与分割线 */
 @media screen and (min-width: 60em) {
-  .md-grid { max-width: 1380px !important; }
-  .md-content { box-shadow: inset 1px 0 0 var(--fs-divider) !important; }
+  .md-grid {
+    max-width: 1380px !important;
+  }
+  .md-content {
+    box-shadow: inset 1px 0 0 var(--fs-divider) !important;
+  }
 }
 
-/* 4. 左侧导航 (Navigation) - 3px 满高竖线 & 根目录+父级加粗 */
+/* 4. 左侧导航 (Navigation) - 3px 满高选中竖线 & 根目录+父级加粗 */
 .md-sidebar--primary .md-nav__link {
   font-size: 16px !important;
   color: var(--fs-leftnav-fg) !important;
@@ -68,7 +82,7 @@ Fashion Star Wiki - V26.3 (Full Level-1 Bold)
   transition: color 0.25s;
 }
 
-/* 重点优化：加粗所有一级菜单项（包含 Home 以及带子目录的父标题） */
+/* 加粗所有一级菜单项（包含 Home 以及带子目录的父标题） */
 .md-sidebar--primary .md-nav > .md-nav__item > .md-nav__link,
 .md-sidebar--primary .md-nav__link[for],
 .md-sidebar--primary .md-nav__item--nested > .md-nav__link {
@@ -91,6 +105,7 @@ Fashion Star Wiki - V26.3 (Full Level-1 Bold)
   bottom: 0;
   width: 3px;
   background: var(--fs-accent);
+  border-radius: 0; 
 }
 
 /* 5. 右侧目录 (TOC) - 多语言标题修复 */
@@ -100,7 +115,9 @@ Fashion Star Wiki - V26.3 (Full Level-1 Bold)
   color: transparent !important;
   padding: 0.8rem 0 !important;
 }
-.md-sidebar--secondary .md-nav__title[for="__toc"] .md-nav__icon { display: none !important; }
+.md-sidebar--secondary .md-nav__title[for="__toc"] .md-nav__icon {
+  display: none !important;
+}
 .md-sidebar--secondary .md-nav__title[for="__toc"]::after {
   font-size: 12.8px !important;
   font-weight: 700 !important;
@@ -112,17 +129,27 @@ Fashion Star Wiki - V26.3 (Full Level-1 Bold)
 [lang="es"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "En esta página"; }
 [lang="ja"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "このページの内容"; }
 
-.md-sidebar--secondary .md-nav__link { color: var(--fs-toc-fg); font-size: 12.8px; }
-.md-sidebar--secondary .md-nav__link--active { color: var(--fs-accent) !important; font-weight: 600; }
+.md-sidebar--secondary .md-nav__link {
+  color: var(--fs-toc-fg);
+  font-size: 12.8px;
+}
+.md-sidebar--secondary .md-nav__link--active {
+  color: var(--fs-accent) !important;
+  font-weight: 600;
+}
 
-/* 6. 正文排版 (Typography) */
-.md-typeset { color: var(--fs-content-fg); }
+/* 6. 正文排版 (Typography) - H1-H6 细节 */
+.md-typeset {
+  color: var(--fs-content-fg);
+}
 .md-typeset h1, .md-typeset h2, .md-typeset h3, 
 .md-typeset h4, .md-typeset h5, .md-typeset h6 {
   font-weight: 700 !important;
   color: var(--fs-content-fg) !important;
 }
-.md-typeset h1 { color: var(--fs-accent) !important; }
+.md-typeset h1 { 
+  color: var(--fs-accent) !important; 
+}
 
 /* 7. 表格 (Tables) - Seeed 风格优化 */
 .md-typeset table:not([class]) {
@@ -130,4 +157,13 @@ Fashion Star Wiki - V26.3 (Full Level-1 Bold)
   border: 1px solid var(--fs-divider) !important;
   width: 100%;
 }
-.md-types
+.md-typeset table:not([class]) th, 
+.md-typeset table:not([class]) td {
+  word-break: keep-all !important; 
+  overflow-wrap: normal !important;
+  padding: 10px 12px !important;
+  border-right: 1px solid var(--fs-divider) !important;
+}
+.md-typeset table:not([class]) th {
+  background-color: var(--md-default-bg-color--lightest);
+}
