@@ -61,28 +61,23 @@ plugins:
       dedent: true
   - i18n:
       default_language: en
-      reconfigure_material: true  # <--- 核心修复：修正 JS/CSS 路径请求
-      link_to_preferred_support: true  # <--- 添加这一行
+      reconfigure_material: true
+      # 暂时保持 fallback 为 true，直到我们确认 404 消失
+      fallback_to_default: true
       languages:
         - locale: en
           name: "🇺🇸 English"
-          default: true
+          default: true   # 显式指定 en 为默认
           build: true
           icon: material/alpha-e-box
         - locale: es
           name: "🇪🇸 Español"
+          default: false  # 显式指定 es 不是默认
           build: true
           icon: material/alpha-s-box
-        - locale: fr
-          name: "🇫🇷 Français"
-          build: true
-          icon: material/alpha-f-box
-        - locale: de
-          name: "🇩🇪 Deutsch"
-          build: true
-          icon: material/alpha-d-box
         - locale: ja
           name: "🇯🇵 日本語"
+          default: false
           build: true
           icon: material/alpha-j-box
 
