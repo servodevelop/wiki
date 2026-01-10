@@ -1,131 +1,116 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V25.0 (Reconstructed)
-- Logic: Modular, Clean, Multi-language Support
-- Compatibility: MkDocs Material 9.x + i18n Plugin
+Fashion Star Wiki - V25.1 (Refined)
+找回 V21.0 灵魂细节：1380px 宽度、3px 悬浮竖线、FS 专属深色模式
 ==========================================================================
 */
 
-/* 1. 核心变量定义 - 品牌统一色调 */
+/* 1. 核心变量与深浅色适配 */
 :root {
   --fs-accent: #8641A9;
+  --fs-divider: rgba(0,0,0,0.12);
   --md-primary-fg-color: var(--fs-accent);
   --md-accent-fg-color: var(--fs-accent);
-  --md-accent-fg-color--transparent: rgba(134, 65, 169, 0.1);
-  --md-typeset-a-color: var(--fs-accent);
   
-  /* 字号标准化 */
-  --fs-font-size-main: 16px;
-  --fs-font-size-nav: 15px;      /* 左侧导航 */
-  --fs-font-size-toc: 12.8px;    /* 右侧目录标题 (0.64rem) */
-  --fs-font-size-table: 14px;
+  /* 找回 V21.0 浅色文字色 */
+  --fs-leftnav-fg: #1A1A1A;
+  --fs-content-fg: #1F1F1F;
 }
 
-/* 2. 基础布局与排版优化 */
-.md-typeset {
-  font-size: var(--fs-font-size-main);
-  line-height: 1.6;
+/* 找回：FS 专属深色模式色号 */
+[data-md-color-scheme="slate"] {
+  --fs-divider: rgba(255,255,255,0.10);
+  --md-default-bg-color: #131314;        /* 极黑背景 */
+  --md-default-bg-color--light: #1e1f20;
+  --md-default-fg-color: #e3e3e3;
+  --md-default-fg-color--light: #8e918f;
+  --md-code-bg-color: #1e1f20;
+  --fs-leftnav-fg: #C4C7C5;
+  --fs-content-fg: #E3E3E3;
 }
 
-.md-typeset h1, .md-typeset h2, .md-typeset h3 {
-  font-weight: 700;
-  color: var(--md-default-fg-color);
+/* 2. 布局：找回 1380px 黄金宽度 */
+@media screen and (min-width: 60em) {
+  .md-grid {
+    max-width: 1380px !important;
+  }
+  
+  /* 找回：内容区左侧的微阴影分割线 */
+  .md-content {
+    box-shadow: inset 1px 0 0 var(--fs-divider) !important;
+  }
 }
 
-/* 图片居中方案 */
-.md-typeset img {
-  display: block;
-  margin: 1.5rem auto;
-  border-radius: 4px;
+/* 3. 左侧导航：找回 3px 悬浮圆角竖线 */
+.md-sidebar--primary .md-nav__link {
+  font-size: 16px !important;
+  color: var(--fs-leftnav-fg) !important;
+  position: relative;
+  padding-left: 20px !important; /* 为竖线留出空间 */
 }
 
-/* 3. 左侧导航栏 (Navigation) 优化 */
-/* 保持层级清晰，Active 状态高亮 */
-.md-nav__link {
-  font-size: var(--fs-font-size-nav);
-  transition: color 0.25s;
+/* 实现原理：使用伪元素绘制不占位的竖线 */
+.md-sidebar--primary .md-nav__item--active > .md-nav__link::before {
+  content: "";
+  position: absolute;
+  left: 8px;      /* 距离文字左侧 8px */
+  top: 0.2rem;
+  bottom: 0.2rem;
+  width: 3px;     /* 3px 粗细 */
+  background: var(--fs-accent);
+  border-radius: 2px;
 }
 
-/* 选中的菜单项左侧紫色侧边条 */
-.md-nav__item--active > .md-nav__link {
+/* 选中状态文字加粗 */
+.md-sidebar--primary .md-nav__item--active > .md-nav__link {
   color: var(--fs-accent) !important;
-  font-weight: 700;
-  border-left: 3px solid var(--fs-accent);
-  padding-left: 0.6rem;
-  margin-left: -0.8rem;
+  font-weight: 700 !important;
 }
 
-/* 4. 右侧目录 (TOC) 深度修复 - 解决翻译与怪符号 */
-/* 隐藏原生文本和导致乱码的图标 */
+/* 4. 右侧目录 (TOC)：多语言修复 + 12.8px 规范 */
 .md-sidebar--secondary .md-nav__title[for="__toc"] {
   font-size: 0 !important;
   line-height: 0 !important;
   color: transparent !important;
-  padding: 0.8rem 0.6rem !important;
-  cursor: default;
+  padding: 0.8rem 0 !important;
 }
 
 .md-sidebar--secondary .md-nav__title[for="__toc"] .md-nav__icon {
-  display: none !important; /* 彻底移除怪符号 */
+  display: none !important;
 }
 
-/* 注入伪元素文本 */
 .md-sidebar--secondary .md-nav__title[for="__toc"]::after {
-  font-size: var(--fs-font-size-toc) !important;
+  font-size: 12.8px !important; /* V21.0 规范 */
   font-weight: 700 !important;
   color: var(--md-default-fg-color--light) !important;
   display: block !important;
   visibility: visible !important;
-  text-transform: none !important;
 }
 
-/* 基于 HTML lang 属性的多语言自动翻译 */
+/* 多语言映射保持不变 */
 [lang="en"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "On this page"; }
 [lang="es"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "En esta página"; }
-[lang="fr"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "Sur cette page"; }
-[lang="de"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "Auf dieser Seite"; }
 [lang="ja"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "このページの内容"; }
 
-/* 5. 表格优化 (Seeed 风格精简版) */
+/* 5. 找回：正文 H1-H6 粗体与颜色 */
+.md-typeset h1, .md-typeset h2, .md-typeset h3, 
+.md-typeset h4, .md-typeset h5, .md-typeset h6 {
+  font-weight: 700 !important;
+  color: var(--fs-content-fg) !important;
+}
+.md-typeset h1 { color: var(--fs-accent) !important; } /* H1 保持品牌色 */
+
+/* 6. 找回：Seeed 风格表格 (14px + 禁止换行) */
 .md-typeset table:not([class]) {
-  font-size: var(--fs-font-size-table);
-  display: table;
-  width: auto;
-  min-width: 60%;
-  border: 1px solid var(--md-default-fg-color--lightest);
-  border-collapse: collapse;
+  font-size: 14px !important;
+  border: 1px solid var(--fs-divider) !important;
+  width: 100%;
 }
 
-.md-typeset table:not([class]) th {
-  background-color: var(--md-default-bg-color--lightest);
-  font-weight: 700;
-  padding: 12px;
-}
-
+.md-typeset table:not([class]) th, 
 .md-typeset table:not([class]) td {
-  padding: 10px 12px;
-  border-top: 1px solid var(--md-default-fg-color--lightest);
-}
-
-/* 6. GitHub 风格提示框 (Admonitions) 细节优化 */
-.md-typeset .admonition, .md-typeset details {
-  border-radius: 6px;
-  border-left-width: 0.2rem;
-  box-shadow: none;
-  background-color: var(--md-default-bg-color);
-  border: 1px solid var(--md-default-fg-color--lightest);
-  border-left: 4px solid var(--fs-accent); /* 默认边框色 */
-}
-
-/* 针对不同类型的 GitHub Alert 色彩微调 */
-.md-typeset .admonition.note { border-left-color: #0969da; }
-.md-typeset .admonition.tip { border-left-color: #1a7f37; }
-.md-typeset .admonition.warning { border-left-color: #9a6700; }
-.md-typeset .admonition.danger { border-left-color: #d1242f; }
-
-/* 7. 移动端适配补丁 */
-@media screen and (max-width: 76.25em) {
-  .md-nav--primary .md-nav__title {
-    display: block !important; /* 确保移动端侧边栏标题可见 */
-  }
+  word-break: keep-all !important; /* 找回禁止数字/单词中途断开 */
+  overflow-wrap: normal !important;
+  padding: 10px 12px !important;
+  border-right: 1px solid var(--fs-divider) !important;
 }
