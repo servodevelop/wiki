@@ -4,7 +4,7 @@ use_directory_urls: true
 
 # 添加以下内容：for the feature content.action.edit
 repo_url: https://github.com/servodevelop/wiki
-repo_name: GitHub  # 图标旁显示的名称（可选）
+repo_name: Servodevelop  # 图标旁显示的名称（可选）
 edit_uri: edit/main/docs/  # 指向你的 docs 文件夹路径
 
 theme:
