@@ -1,13 +1,13 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V40.16 (TOC Compact UI & Stability Fix)
-- 核心基座：V40.15 (表格优化 + Section 物理隔离)。
-- TOC 优化：大幅缩小右侧目录行间距，提升信息密度。
-- 视觉调整：TOC 字号维持 12.8px，padding 压缩至 0.15rem。
+Fashion Star Wiki - V40.17 (TOC Precision Compression)
+- 核心基座：V40.15 (2.5px 竖线 + Section 屏蔽 + 正文表格优化)。
+- 目标：物理级压缩右侧 TOC (On this page) 的行高，使其紧凑。
+- 逻辑：通过 secondary 侧边栏限定符，确保完全不影响左侧导航。
 ==========================================================================
 */
 
-/* 1. 核心变量 (略，保持 V40.15) */
+/* 1. 核心变量 (保持 V40.15) */
 :root {
   --fs-accent: #8641A9;
   --fs-divider: rgba(0,0,0,0.15); 
@@ -28,7 +28,7 @@ Fashion Star Wiki - V40.16 (TOC Compact UI & Stability Fix)
   --fs-nav-inactive: #C4C7C5;
 }
 
-/* 2-4. 导航栏逻辑 (保持 V40.15 稳定版：Home 16px, 2.5px 竖线, Section 屏蔽) */
+/* 2-4. 左侧导航栏 - 锁定 14.5px 字号与 2.5px 竖线 (保持不变) */
 .md-logo, [class*="md-logo"], .md-header__button.md-logo, .md-nav__title .md-logo, .md-nav__title[for="__drawer"] .md-icon, [class*="md-logo"] svg, [class*="md-logo"] img { display: none !important; }
 .md-header__title { margin-left: 0 !important; }
 .md-header__ellipsis { padding-left: 0.5rem !important; }
@@ -43,11 +43,14 @@ li.md-nav__item--active > .md-nav__link::after, li.md-nav__item--active > label.
 nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__link::after { display: none !important; }
 .md-nav__item--section > .md-nav__link::after, .md-nav__item--section > label::after, .md-nav__item--section > .md-nav__link--active::after, .md-nav__title::after, [for="__drawer"]::after { display: none !important; content: none !important; width: 0 !important; opacity: 0 !important; }
 
-/* 5. 右侧目录 (TOC) - 紧凑化深度定制 */
+/* 5. 右侧目录 (TOC) - 深度暴力压缩区 */
+
+/* [A] TOC 标题控制 */
 .md-sidebar--secondary .md-nav__title[for="__toc"] {
   font-size: 0 !important;
   color: transparent !important;
-  margin-bottom: 0.5rem !important;
+  padding: 0 !important;
+  margin: 0 0 0.4rem 0 !important; /* 标题与内容的距离 */
 }
 .md-sidebar--secondary .md-nav__title[for="__toc"]::after {
   font-size: 12.8px !important;
@@ -58,12 +61,18 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 [lang="en"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "On this page"; }
 [lang="zh"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "本页目录"; }
 
-/* [TOC 核心紧凑代码] */
+/* [B] 核心：右侧链接垂直间距压缩 */
 .md-sidebar--secondary .md-nav__link {
-  padding-top: 0.15rem !important;    /* 压缩上间距 */
-  padding-bottom: 0.15rem !important; /* 压缩下间距 */
-  font-size: 12px !important;         /* 稍微缩小字号 */
-  line-height: 1.4 !important;
+  padding-top: 0.1rem !important;    /* 极窄上边距 */
+  padding-bottom: 0.1rem !important; /* 极窄下边距 */
+  margin: 0 !important;              /* 消除可能存在的 margin */
+  line-height: 1.3 !important;       /* 压缩行高 */
+  font-size: 12.5px !important;      /* 字体稍微缩小 */
+}
+
+/* [C] TOC 选中状态不显示任何线，保持纯净 */
+.md-sidebar--secondary .md-nav__link::after {
+  display: none !important;
 }
 
 @media screen and (min-width: 60em) {
@@ -71,7 +80,6 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
     position: relative;
     padding-left: 16px !important;
   }
-  /* TOC 左侧分割线 */
   .md-sidebar--secondary nav.md-nav--secondary::before {
     content: ""; position: absolute; left: 0; top: 0; bottom: 0;
     width: 1px; background-color: var(--fs-divider); z-index: 1;
@@ -86,7 +94,7 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 .md-typeset table:not([class]) th { background-color: var(--fs-table-header-bg) !important; font-weight: 700 !important; border-bottom: 2px solid var(--fs-divider) !important; }
 .md-typeset table:not([class]) tr:nth-child(even) { background-color: rgba(0, 0, 0, 0.01); }
 
-/* 6-7/9. 其余布局 */
+/* 6-7/9. 正文/图片/布局 (保持稳定) */
 .md-typeset { color: var(--fs-content-fg); }
 .md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4 { color: var(--fs-content-fg) !important; font-weight: 700 !important; margin-top: 1.6rem !important; }
 .md-typeset img { display: block !important; margin: 2rem auto !important; max-width: 80% !important; border-radius: 4px !important; box-shadow: none !important; }
