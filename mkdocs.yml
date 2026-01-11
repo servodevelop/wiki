@@ -54,7 +54,9 @@ hooks:
   - docs/hooks/gh_alerts.py
 
 plugins:
-  - search
+  - search:
+      # 必须包含 \u200b
+      separator: '[\s\u200b\-]'
   - glightbox
   - include-markdown:
       rewrite_relative_urls: true
