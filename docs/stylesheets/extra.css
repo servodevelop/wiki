@@ -1,13 +1,15 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V34.3 (Global Alignment & Path Line Fix)
-- 基础：结合 V31.6 的全局 Padding 对齐与 V34.2 的路径隔离逻辑
-- 对齐逻辑 [动作]：
-  1. 给所有导航链接 (.md-nav__link) 统一设置 padding-left: 20px。
-  2. 竖线绝对定位在 left: 0，完全不挤压文字，且所有标题水平对齐。
-- 高亮逻辑：
-  1. 父目录 + 文章：选中路径 [加粗 700 + Logo 紫 + 竖线]。
-  2. Section 标题：[16px + 原生字重] 颜色随 Tab，绝对无竖线。
+Fashion Star Wiki - V34.4 (Sidebar Final Perfection)
+- 借鉴 V31.6 成功经验：全局 Padding 统一对齐，解决抖动与压字
+- 竖线逻辑 [动作]：
+  1. 高度对齐：top/bottom 设为 0，确保竖线与容器同高
+  2. 宽度与位置：3.5px 宽，绝对定位在最左侧 (left: 0)
+  3. 路径范围：[li.active] 路径下的父目录 + 文章，全部显示竖线
+- 隔离逻辑：
+  1. Section 标题：强制锁定 16px + 原生字重，严禁出现竖线
+  2. Home/Index：严禁出现竖线
+- 样式：全路径 [加粗 700 + Logo 紫色]
 ==========================================================================
 */
 
@@ -46,45 +48,51 @@ Fashion Star Wiki - V34.3 (Global Alignment & Path Line Fix)
 ::-webkit-scrollbar-thumb { background-color: var(--fs-divider); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background-color: var(--fs-accent); }
 
-/* 4. 左侧导航栏 - 全局对齐版 (V34.3) */
+/* 4. 左侧导航栏 - 最终修正版 (V34.4) */
 
-/* [A] 全局统一对齐：参考 V31.6，给所有链接预留竖线空间 */
+/* [A] 全局统一对齐：所有导航链接预留 24px 空间 */
 .md-nav__link {
-  padding-left: 20px !important;
+  padding-left: 24px !important;
   color: var(--fs-nav-inactive);
   position: relative;
+  transition: color 0.2s, font-weight 0.2s;
 }
 
-/* [B] Section 标题：字号 16px，隔离竖线 */
+/* [B] Section 标题：绝对隔离区 */
+/* 使用极高权重，确保 Section 标题不被路径高亮逻辑捕获 */
 .md-nav .md-nav__title,
 .md-nav__title {
   font-size: 16px !important;
-  padding-left: 20px !important;
-  /* 颜色和字重不加 !important，允许随原生系统变化 */
+  padding-left: 24px !important;
+  font-weight: initial !important; /* 维持原生字重 */
+  color: var(--fs-nav-inactive);  /* 默认保持灰色，除非它是激活的 Tab */
 }
-.md-nav__title::before { display: none !important; }
+/* 物理切断 Section 的伪元素，防止竖线出现 */
+.md-nav__title::before, .md-nav__title::after {
+  display: none !important;
+  content: none !important;
+}
 
-/* [C] 激活路径：文章 + 父目录 [加粗 + 紫色 + 竖线] */
-/* 利用 li.active 确保不误伤顶层 Section */
-li.md-nav__item--active > .md-nav__link:not(.md-nav__title),
-li.md-nav__item--active > label.md-nav__link:not(.md-nav__title) {
+/* [C] 激活路径：[加粗 700 + 紫色] */
+/* 仅针对 li.active 内部的链接，且排除掉可能被误认的 title */
+li.md-nav__item--active > .md-nav__link:not(.md-nav__title) {
   color: var(--fs-accent) !important;
   font-weight: 700 !important;
 }
 
-/* [D] 竖线渲染：位于 20px 预留空间的最左侧 */
-li.md-nav__item--active > .md-nav__link:not(.md-nav__title)::before,
-li.md-nav__item--active > label.md-nav__link:not(.md-nav__title)::before {
+/* [D] 竖线渲染：全路径显示 + 高度顶满 */
+li.md-nav__item--active > .md-nav__link:not(.md-nav__title)::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 0.2rem;
-  bottom: 0.2rem;
-  width: 3px;
+  top: 0;         /* 竖线顶天 */
+  bottom: 0;      /* 竖线立地 */
+  width: 3.5px;
   background-color: var(--fs-accent);
+  display: block !important;
 }
 
-/* [E] 排除 Home 页面的竖线 */
+/* [E] 首页/索引页黑名单：不显示竖线 */
 .md-nav__link[href*="index.html"]::before,
 .md-nav__link[href$="/"]::before {
   display: none !important;
@@ -99,7 +107,7 @@ li.md-nav__item--active > label.md-nav__link:not(.md-nav__title)::before {
   font-size: 14.5px !important;
 }
 
-/* [G] Hover 效果保持 */
+/* [G] Hover 效果 */
 .md-nav__link:hover {
   color: var(--fs-accent);
 }
