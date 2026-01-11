@@ -1,12 +1,15 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V34.7 (Nuclear Section Isolation)
-- 核心修复：针对 navigation.indexes 模式下的 Section 标题进行属性级隔离。
-- 逻辑更新：
-  1. 深度归位：利用 [data-md-level="0"] 属性锁定最顶层 Section，强制 0 偏移。
-  2. 竖线清除：对所有属于 .md-nav__title 范畴的容器及其伪元素执行 display: none。
-  3. 竖线增强：保持 3.5px 宽度，top/bottom: 0 贯穿整行。
-- 视觉表现：全路径 [加粗 700 + 紫色]，Section [原生字重 + 紧贴左侧 + 无线]。
+Fashion Star Wiki - V34.8 (Nuclear Fix: Section Protection)
+- 借鉴 32.0 逻辑：将 Section 标题从导航样式中彻底剥离，防止挤压。
+- 核心修改 [动作]：
+  1. 空间隔离：强制 .md-nav__title 及其内部所有链接 padding-left 为 0。
+  2. 竖线封锁：对 .md-nav__title 区域严禁生成任何 ::before 伪元素。
+  3. 正常对齐：仅对普通列表项 (li .md-nav__link) 启用 24px 缩进以放置竖线。
+- 样式表现：
+  1. 竖线：3.5px 宽，top/bottom 为 0（容器等高垂直贯穿）。
+  2. 颜色：全路径 [紫色 + 加粗 700]。
+  3. Section：[原生字重 + 16px + 紧贴左侧 + 无竖线]。
 ==========================================================================
 */
 
@@ -45,66 +48,58 @@ Fashion Star Wiki - V34.7 (Nuclear Section Isolation)
 ::-webkit-scrollbar-thumb { background-color: var(--fs-divider); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background-color: var(--fs-accent); }
 
-/* 4. 左侧导航栏 - 终极隔离版 (V34.7) */
+/* 4. 左侧导航栏 - Section 物理隔离版 (V34.8) */
 
-/* [A] 全局链接基础颜色 */
-.md-nav__link {
-  color: var(--fs-nav-inactive);
-}
-
-/* [B] Section 强制归位与去线 (最关键修复) */
-/* 锁定 data-md-level="0" 的顶层容器和所有带 title 类的标题 */
-.md-nav__item[data-md-level="0"] > .md-nav__link,
-.md-nav__item[data-md-level="0"] > label,
-.md-nav__title,
+/* [A] Section 标题：强制 0 偏移 + 0 竖线 */
+/* 增加 .md-nav 级别权重，确保优先级高于普通链接 */
+.md-nav .md-nav__title,
+.md-nav__link--active:not(li .md-nav__link),
 .md-nav__title .md-nav__link {
   padding-left: 0 !important;
   font-size: 16px !important;
-  font-weight: 700 !important; /* 维持你喜欢的 Section 加粗感 */
-  color: var(--fs-nav-inactive); /* 除非激活，否则默认灰色 */
+  font-weight: initial !important; /* 锁定原生字重，不跟随路径加粗 */
+  color: var(--fs-nav-inactive) !important; /* 强制灰色，避开紫色误伤 */
 }
 
-/* 针对上述所有 Section 容器，暴力抹除伪元素竖线 */
-.md-nav__item[data-md-level="0"] > .md-nav__link::before,
-.md-nav__item[data-md-level="0"] > label::before,
-.md-nav__title::before,
-.md-nav__title::after {
+/* 彻底禁止 Section 产生任何伪元素 */
+.md-nav__title::before, 
+.md-nav__title::after,
+.md-nav__title .md-nav__link::before {
   display: none !important;
   content: none !important;
 }
 
-/* [C] 目录与文章：只有 Level > 0 的项才允许缩进 24px 并显示竖线 */
-.md-nav__item[data-md-level]:not([data-md-level="0"]) > .md-nav__link,
-.md-nav__item[data-md-level]:not([data-md-level="0"]) > label {
+/* [B] 正常导航项：只有在 li 内的链接才允许 24px 缩进 */
+li .md-nav__link {
   padding-left: 24px !important;
   position: relative;
 }
 
-/* [D] 激活路径：[加粗 + 紫色] (排除最顶层 Section) */
-li.md-nav__item--active > .md-nav__link:not([data-md-level="0"] .md-nav__title),
-li.md-nav__item--active > label:not([data-md-level="0"] .md-nav__title) {
+/* [C] 激活路径高亮：[加粗 + 紫色] (仅限 li 内项目) */
+li.md-nav__item--active > .md-nav__link {
   color: var(--fs-accent) !important;
   font-weight: 700 !important;
 }
 
-/* [E] 竖线实体：仅在 Level > 0 的 Active 项显示，且高度填满 */
-li.md-nav__item--active:not([data-md-level="0"]) > .md-nav__link::before,
-li.md-nav__item--active:not([data-md-level="0"]) > label::before {
+/* [D] 竖线实体：容器等高垂直贯穿 */
+li.md-nav__item--active > .md-nav__link::before {
   content: "";
   position: absolute;
-  left: 0; top: 0; bottom: 0;
+  left: 0;
+  top: 0;      /* 竖线顶天 */
+  bottom: 0;   /* 竖线立地 */
   width: 3.5px;
   background-color: var(--fs-accent);
   display: block !important;
 }
 
-/* [F] 排除 Home / 索引页 */
+/* [E] 首页/索引页黑名单 */
 .md-nav__link[href*="index.html"]::before,
 .md-nav__link[href$="/"]::before {
   display: none !important;
 }
 
-/* [G] 字号细化 */
+/* [F] 目录与文章字号定义 */
 .md-nav__item--nested > .md-nav__link {
   font-size: 16px !important;
 }
@@ -112,7 +107,7 @@ li.md-nav__item--active:not([data-md-level="0"]) > label::before {
   font-size: 14.5px !important;
 }
 
-/* [H] Hover 效果 */
+/* [G] Hover 效果 */
 .md-nav__link:hover {
   color: var(--fs-accent);
 }
