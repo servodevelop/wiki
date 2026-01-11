@@ -1,9 +1,9 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V31.7 (Active Path Highlight)
-- Section：[回归] 移除 Section 标题约束，交还 Material 原生控制
-- 激活链路：[700 + 紫色] 选中的文章及其所有上级父目录全部加粗并变紫色
-- 竖条：[精准] 仅当前选中的文章标题左侧显示 3px 标志性竖条
+Fashion Star Wiki - V31.8 (Full Path Highlight with Vertical Line)
+- Section：移除约束，由 Material 原生控制颜色
+- 激活链路：[700 + 紫色 + 竖线] 选中文章及其向上所有父级目录全部加粗、变色并显示竖线
+- 视觉修正：确保带下拉箭头的父级目录（如 Specifications）在激活时也能正确显示竖线
 - 字号：一级/父级 16px，文章 14.5px
 - 表格与图片：维持 V29.2 工业基准对齐
 ==========================================================================
@@ -44,41 +44,40 @@ Fashion Star Wiki - V31.7 (Active Path Highlight)
 ::-webkit-scrollbar-thumb { background-color: var(--fs-divider); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background-color: var(--fs-accent); }
 
-/* 4. 左侧导航 (V31.7 链路追踪) */
+/* 4. 左侧导航 (V31.8 链路全路径高亮) */
 
-/* 基础设置 */
+/* [A] 基础链接样式 */
 .md-sidebar--primary .md-nav__link {
   color: var(--fs-leftnav-fg);
   position: relative;
   padding-left: 20px !important; 
   font-weight: 400;
-  transition: color 0.2s, font-weight 0.2s;
 }
 
-/* [A] 字号规范 */
-/* 一级及父级目录 16px */
+/* [B] 字号规范 */
+/* 只要有下拉或者是第一层级：16px */
 .md-nav__item--level--1 > .md-nav__link,
 .md-nav__item--nested > .md-nav__link,
 .md-nav__item--nested > label.md-nav__link {
   font-size: 16px !important;
 }
-/* 文章 14.5px */
+/* 纯文章链接：14.5px */
 .md-nav__item:not(.md-nav__item--nested):not(.md-nav__item--level--1) > .md-nav__link {
   font-size: 14.5px !important;
 }
 
-/* [B] 激活链路（核心）：选中项的所有父级项目 */
-/* 只要 item 处于 active 状态，其下方的 link 全部加粗变紫 */
+/* [C] 激活链路高亮 (加粗 + 变紫) */
+/* 只要父容器 md-nav__item 带有 --active，其直接子元素 link/label 就变色加粗 */
 .md-nav__item--active > .md-nav__link,
 .md-nav__item--active > label.md-nav__link {
   color: var(--fs-accent) !important;
   font-weight: 700 !important;
 }
 
-/* [C] 竖条规则：仅给当前最末级的选中文章加竖条 */
-/* 排除掉那些作为父容器的 active 项，只给真正被点击的 link 加 before */
-.md-nav__link--active::before,
-.md-nav__item:not(.md-nav__item--nested).md-nav__item--active > .md-nav__link::before {
+/* [D] 竖线显示逻辑 (全路径覆盖) */
+/* 给处于激活路径上的所有 link 和 label 添加左侧竖线 */
+.md-nav__item--active > .md-nav__link::before,
+.md-nav__item--active > label.md-nav__link::before {
   content: "";
   position: absolute;
   left: 0; top: 0; bottom: 0;
