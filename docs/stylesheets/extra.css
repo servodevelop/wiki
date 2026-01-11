@@ -1,9 +1,9 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V39.2 (James V33.8 Base + Precise TOC Line)
-- 核心基准：完全保留 James V33.8 的左侧 Section 隔离与高亮逻辑。
-- 修复目标：根据截图，将 TOC 分割线精准挂载在 nav.md-nav--secondary 上。
-- 对齐逻辑：利用 border-left 实现线效，确保与截图中的绿色 padding 边沿重合。
+Fashion Star Wiki - V39.3 (James V33.8 Base + Force TOC Line)
+- 核心基准：完全保留 James V33.8 的左侧 Section 隔离与高亮路径。
+- 修复目标：使用伪元素 (::before) 强行在右侧 TOC 容器左侧绘制分割线。
+- 视觉位置：线将精准出现在截图所示的绿色 padding 区域最左侧。
 ==========================================================================
 */
 
@@ -48,11 +48,9 @@ Fashion Star Wiki - V39.2 (James V33.8 Base + Precise TOC Line)
   color: var(--fs-nav-inactive);
   transition: color 125ms, font-weight 125ms;
 }
-
 .md-nav__title {
   font-size: 16px !important;
 }
-
 .md-nav__item--nested > .md-nav__link,
 .md-nav__item--nested > label.md-nav__link {
   font-size: 16px !important;
@@ -60,20 +58,18 @@ Fashion Star Wiki - V39.2 (James V33.8 Base + Precise TOC Line)
 .md-nav__item:not(.md-nav__item--nested) > .md-nav__link {
   font-size: 14.5px !important;
 }
-
 li.md-nav__item--active > .md-nav__link,
 li.md-nav__item--active > label.md-nav__link {
   color: var(--fs-accent) !important;
   font-weight: 700 !important;
 }
-
 .md-nav__link:hover {
   color: var(--fs-accent);
 }
 
-/* 5. 右侧目录 (TOC) - 精准挂载 */
+/* 5. 右侧目录 (TOC) - 强效分割线实现 */
 
-/* [A] 隐藏原标题并替换 */
+/* [A] TOC 标题展示 */
 .md-sidebar--secondary .md-nav__title[for="__toc"] {
   font-size: 0 !important;
   color: transparent !important;
@@ -87,14 +83,24 @@ li.md-nav__item--active > label.md-nav__link {
 [lang="en"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "On this page"; }
 [lang="zh"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "本页目录"; }
 
-/* [B] 分割线精准实现 - 针对截图中的 nav.md-nav--secondary */
+/* [B] 伪元素绘制分割线：确保可见性 */
 @media screen and (min-width: 60em) {
-  /* 仅针对右侧 aside 下的 secondary 导航容器 */
-  aside.md-sidebar--secondary nav.md-nav--secondary {
-    border-left: 1px solid var(--fs-divider) !important;
-    /* 截图显示原生是 16px，我们用 12px padding + 线宽 + margin 微调实现完美视觉 */
-    padding-left: 12px !important;
-    margin-left: 4px !important;
+  /* 针对截图中的 secondary 容器 */
+  .md-sidebar--secondary nav.md-nav--secondary {
+    position: relative; /* 为伪元素提供定位基准 */
+    padding-left: 16px !important; /* 维持截图中的 16px 原生间距 */
+  }
+
+  /* 手动绘制 1px 垂直线 */
+  .md-sidebar--secondary nav.md-nav--secondary::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: var(--fs-divider);
+    z-index: 1;
   }
 }
 
