@@ -6,4 +6,3 @@ pymdown-extensions
 mkdocs-minify-plugin
 mkdocs-git-revision-date-localized-plugin
 mkdocs-redirects
-mkdocs-sitemap
