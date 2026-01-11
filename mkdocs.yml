@@ -72,27 +72,7 @@ plugins:
           name: "🇨🇳 中文"
           default: false
           build: true
-      nav_translations:
-        zh:
-          Home: 首页
-          Uart Bus Servo: 串口总线舵机
-          RS485 Bus Servo: RS485总线舵机
-          CAN Bus Servo: CAN总线舵机
-          Protocol: 通讯协议
-          Specifications: 规格参数
-          CAD Files: CAD文件
-          Software: 配套软件
-          SDK: 开发库
-          PLC: 工业PLC
-          Document: 官方文档
-          Robotic Arm: 机械臂
-          StarAI Arm: StarAI机械臂
-          Piper Mate: Piper Mate机械臂
-          Quick Start: 快速入门
-          Get Ready: 准备工作
-          PC Configuration Tool: PC端调试软件
-          Web Configuration Tool: 网页版调试工具
-          "C#": "C#"
+      nav_translations: false
 
 # 终极修复方案：在 nav 内部直接使用 i18n 语法
 # 格式为：- 标题 (语言代码): 路径
