@@ -17,18 +17,23 @@ theme:
     - i18n.languages
 
   palette:
+    # light
     - scheme: default
       primary: custom
       accent: custom
       toggle:
+        # uses docs/overrides/.icons/fashion/tech-moon.svg
         icon: fashion/tech-moon
         name: Switch to dark mode
+
+    # dark
     - scheme: slate
       primary: custom
       accent: custom
       toggle:
+        # uses docs/overrides/.icons/fashion/tech-sun.svg
         icon: fashion/tech-sun
-        name: Switch to light mode
+        name: Switch to light mode        
 
 extra_css:
   - stylesheets/extra.css
