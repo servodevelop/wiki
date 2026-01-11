@@ -1,9 +1,9 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V40.2 (Path Highlight + 3px Absolute Line)
-- 核心基座：James V33.8 (Section 隔离 + 图片 80% + TOC 分割线)。
-- 修复目标：使用 ::after 绝对定位强行绘制 3px 紫色路径竖线。
-- 逻辑优势：绝对定位线不会被容器 padding 挤掉，且 3px 极具辨识度。
+Fashion Star Wiki - V40.3 (Final Path Highlighting & Section Guard)
+- 核心基座：James V33.8 (Section 逻辑隔离 + 图片 80% + TOC 分割线)。
+- 修复目标：保留 3px 路径竖线，但通过精准排除逻辑，禁止 Section 左侧出现线。
+- 逻辑：强制将 .md-nav__title（Section 专用类）的伪元素设为 none。
 ==========================================================================
 */
 
@@ -42,7 +42,7 @@ Fashion Star Wiki - V40.2 (Path Highlight + 3px Absolute Line)
 ::-webkit-scrollbar-thumb { background-color: var(--fs-divider); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background-color: var(--fs-accent); }
 
-/* 4. 左侧导航栏 - James V33.8 增强版 */
+/* 4. 左侧导航栏 - James V33.8 完美隔离版 */
 
 /* [A] 基础颜色与字号 */
 .md-nav__link, .md-nav__title {
@@ -66,8 +66,7 @@ li.md-nav__item--active > label.md-nav__link {
   font-weight: 700 !important;
 }
 
-/* [C] 全路径左侧竖线 (修复版：3px 绝对定位线) */
-/* 逻辑：只在 active 路径的 li 层级下，针对其直属 link 画线 */
+/* [C] 全路径左侧竖线 (3px 绝对定位) */
 li.md-nav__item--active > .md-nav__link {
   position: relative;
 }
@@ -75,12 +74,21 @@ li.md-nav__item--active > .md-nav__link {
 li.md-nav__item--active > .md-nav__link::after {
   content: "";
   position: absolute;
-  left: -12px; /* 向左偏移，确保不挡住文字 */
+  left: -12px;
   top: 0.2rem;
   bottom: 0.2rem;
-  width: 3px; /* 3px 宽度 */
+  width: 3px;
   background-color: var(--fs-accent);
   border-radius: 2px;
+}
+
+/* [D] Section 竖线屏蔽逻辑 - 核心修复点 */
+/* 强制屏蔽 Section 标题、抽屉标题等非文章/目录项的伪元素 */
+.md-nav__title::after, 
+.md-nav__title--site::after,
+[for="__drawer"]::after {
+  display: none !important;
+  content: none !important;
 }
 
 .md-nav__link:hover { color: var(--fs-accent); }
