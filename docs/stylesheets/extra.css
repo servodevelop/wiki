@@ -1,9 +1,9 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V40.0 (Path Highlight with Section Guard)
+Fashion Star Wiki - V40.1 (Path Highlight + Border Line Guard)
 - 核心基座：James V33.8 (Section 隔离 + 图片 80% + TOC 分割线)。
-- 新增功能：左侧导航激活路径竖线。
-- 隔离逻辑：仅在 li 内部的 nav 容器上绘制 ::before 线，物理上无法到达 Section。
+- 修复目标：改用 border-left 实现左侧路径竖线，增强可见性。
+- 物理隔离：仅作用于 li 内的容器，绝对不触碰外层 Section。
 ==========================================================================
 */
 
@@ -49,7 +49,6 @@ Fashion Star Wiki - V40.0 (Path Highlight with Section Guard)
   color: var(--fs-nav-inactive);
   transition: color 125ms, font-weight 125ms;
 }
-
 .md-nav__title { font-size: 16px !important; }
 
 .md-nav__item--nested > .md-nav__link,
@@ -67,18 +66,18 @@ li.md-nav__item--active > label.md-nav__link {
   font-weight: 700 !important;
 }
 
-/* [C] 全路径左侧竖线实现 (关键点) */
-/* 我们只在 li 内部的 nested 容器上加线，这样最顶层的 Section 永远不会有线 */
+/* [C] 全路径左侧竖线 (修复版：改用 border-left) */
+/* 逻辑：只给激活路径下的 nav 容器左侧加 1px 紫色实线 */
 .md-nav__item--active > .md-nav__container > .md-nav {
-  position: relative;
-  /* 为线留出微小空间，不改变 padding 防止影响 Section 排版 */
-  box-shadow: inset 1px 0 0 var(--fs-accent); 
-  margin-left: 1px;
+  border-left: 1px solid var(--fs-accent) !important;
+  margin-left: 1px !important;
+  padding-left: 0 !important; /* 维持 James 版的紧凑感 */
 }
 
+/* 兼容性处理：防止线段过长，确保只在内容区域 */
 .md-nav__link:hover { color: var(--fs-accent); }
 
-/* 5. 右侧目录 (TOC) - 伪元素分割线 */
+/* 5. 右侧目录 (TOC) - 伪元素分割线 (V39.3 验证成功版) */
 .md-sidebar--secondary .md-nav__title[for="__toc"] {
   font-size: 0 !important;
   color: transparent !important;
