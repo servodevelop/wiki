@@ -1,9 +1,9 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V40.1 (Path Highlight + Border Line Guard)
+Fashion Star Wiki - V40.2 (Path Highlight + 3px Absolute Line)
 - 核心基座：James V33.8 (Section 隔离 + 图片 80% + TOC 分割线)。
-- 修复目标：改用 border-left 实现左侧路径竖线，增强可见性。
-- 物理隔离：仅作用于 li 内的容器，绝对不触碰外层 Section。
+- 修复目标：使用 ::after 绝对定位强行绘制 3px 紫色路径竖线。
+- 逻辑优势：绝对定位线不会被容器 padding 挤掉，且 3px 极具辨识度。
 ==========================================================================
 */
 
@@ -66,18 +66,26 @@ li.md-nav__item--active > label.md-nav__link {
   font-weight: 700 !important;
 }
 
-/* [C] 全路径左侧竖线 (修复版：改用 border-left) */
-/* 逻辑：只给激活路径下的 nav 容器左侧加 1px 紫色实线 */
-.md-nav__item--active > .md-nav__container > .md-nav {
-  border-left: 1px solid var(--fs-accent) !important;
-  margin-left: 1px !important;
-  padding-left: 0 !important; /* 维持 James 版的紧凑感 */
+/* [C] 全路径左侧竖线 (修复版：3px 绝对定位线) */
+/* 逻辑：只在 active 路径的 li 层级下，针对其直属 link 画线 */
+li.md-nav__item--active > .md-nav__link {
+  position: relative;
 }
 
-/* 兼容性处理：防止线段过长，确保只在内容区域 */
+li.md-nav__item--active > .md-nav__link::after {
+  content: "";
+  position: absolute;
+  left: -12px; /* 向左偏移，确保不挡住文字 */
+  top: 0.2rem;
+  bottom: 0.2rem;
+  width: 3px; /* 3px 宽度 */
+  background-color: var(--fs-accent);
+  border-radius: 2px;
+}
+
 .md-nav__link:hover { color: var(--fs-accent); }
 
-/* 5. 右侧目录 (TOC) - 伪元素分割线 (V39.3 验证成功版) */
+/* 5. 右侧目录 (TOC) - 伪元素分割线 */
 .md-sidebar--secondary .md-nav__title[for="__toc"] {
   font-size: 0 !important;
   color: transparent !important;
