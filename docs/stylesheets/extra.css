@@ -1,11 +1,12 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V37.3 (Stable Base + Precision Vertical Line)
-- 核心进展：维持 V33.8 颜色/字重逻辑；修复竖线重叠文字问题。
-- 本版目标：
-  1. 竖线左移：通过 padding-left: 12px 为竖线腾出空间，解决“压到文字”。
-  2. 范围修正：开启文章与目录竖线，精准屏蔽 Section 与 Home。
-  3. 顶格渲染：竖线保持 top:0; bottom:0 的贯穿效果。
+Fashion Star Wiki - V37.4 (Stable Base + Precision Alignment)
+- 核心进展：维持 V33.8 颜色/字重逻辑。
+- 逻辑更新：
+  1. 解决挤压：撤销全局 padding，仅对“有资格显示竖线”的项开启位移。
+  2. 竖线回归：将文章标题包含在竖线规则内。
+  3. 彻底屏蔽：利用 :not 选择器组合，物理切断 Home 和 Section 的一切伪元素。
+- 视觉：Section/Home 顶格对齐；文章/父目录带竖线且整体向右缩进 12px。
 ==========================================================================
 */
 
@@ -44,23 +45,22 @@ Fashion Star Wiki - V37.3 (Stable Base + Precision Vertical Line)
 ::-webkit-scrollbar-thumb { background-color: var(--fs-divider); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background-color: var(--fs-accent); }
 
-/* 4. 左侧导航栏 - 竖线定位优化版 (V37.3) */
+/* 4. 左侧导航栏 - 像素级对齐版 (V37.4) */
 
-/* [A] 全局非选中颜色与字号基础 (继承 V33.8) */
-.md-nav__link, 
-.md-nav__title {
+/* [A] 基础颜色与字号 (继承 V33.8) */
+.md-nav__link, .md-nav__title {
   color: var(--fs-nav-inactive);
   transition: color 125ms, font-weight 125ms;
 }
 
-/* [B] Section 标题：完全隔离 (继承 V33.8) */
+/* [B] Section 标题：完全隔离区 (继承 V33.8) */
 .md-nav__title {
   font-size: 16px !important;
   padding-left: 0 !important;
-  position: relative;
+  margin-left: 0 !important;
 }
 
-/* [C] 目录层级字号定义 (继承 V33.8) */
+/* [C] 目录与文章层级字号定义 */
 .md-nav__item--nested > .md-nav__link,
 .md-nav__item--nested > label.md-nav__link {
   font-size: 16px !important;
@@ -69,25 +69,26 @@ Fashion Star Wiki - V37.3 (Stable Base + Precision Vertical Line)
   font-size: 14.5px !important;
 }
 
-/* [D] 选中路径高亮逻辑 (继承 V33.8) */
+/* [D] 选中路径高亮颜色 (继承 V33.8) */
 li.md-nav__item--active > .md-nav__link,
 li.md-nav__item--active > label.md-nav__link {
   color: var(--fs-accent) !important;
   font-weight: 700 !important;
 }
 
-/* [E] 竖线方案：精准定位与防重叠 */
-/* 1. 为所有激活项开启相对定位 */
-li.md-nav__item--active > .md-nav__link,
-li.md-nav__item--active > label.md-nav__link {
+/* [E] 竖线方案：按需分配位移与线条 */
+
+/* 1. 只有激活的文章或目录，才允许显示竖线并向右位移 */
+/* 增加 :not([href*="index"]) 等逻辑排除首页 */
+li.md-nav__item--active:not(.md-nav__item--section) > .md-nav__link:not([href$="/"]):not([href*="index"]),
+li.md-nav__item--active:not(.md-nav__item--section) > label.md-nav__link {
   position: relative;
-  /* 增加左内边距，确保竖线不压文字 */
-  padding-left: 12px !important; 
+  padding-left: 12px !important; /* 只有这时候才缩进 */
 }
 
-/* 2. 统一生成紫色竖线 */
-li.md-nav__item--active > .md-nav__link::before,
-li.md-nav__item--active > label.md-nav__link::before {
+/* 2. 生成紫色竖线 (排除首页和 Section) */
+li.md-nav__item--active:not(.md-nav__item--section) > .md-nav__link:not([href$="/"]):not([href*="index"])::before,
+li.md-nav__item--active:not(.md-nav__item--section) > label.md-nav__link::before {
   content: "";
   position: absolute;
   left: 0;
@@ -98,33 +99,21 @@ li.md-nav__item--active > label.md-nav__link::before {
   display: block;
 }
 
-/* 3. 精准爆破：物理删除 Section 和 Home 的竖线 */
-/* 针对 Section 标题 */
-.md-nav__title::before,
-.md-nav__item--section > .md-nav__link::before,
-.md-nav__item--section > label::before,
-.md-nav__item--section .md-nav__container::before {
-  display: none !important;
-  content: none !important;
-}
-
-/* 针对 Home (首页) */
-.md-nav__link[href$="/"]::before,
-.md-nav__link[href*="index.html"]::before,
-.md-nav__link[href$="/"] {
-  padding-left: 0 !important; /* 首页恢复左对齐 */
-}
-.md-nav__link[href$="/"]::before,
-.md-nav__link[href*="index.html"]::before {
-  display: none !important;
-}
-
-/* 针对不需要缩进的顶级项恢复 Padding */
+/* 3. 首页与 Section 强制归零 (防止任何可能的继承) */
+.md-nav__link[href$="/"], 
+.md-nav__link[href*="index.html"],
+.md-nav__item--section .md-nav__link,
 .md-nav__title {
   padding-left: 0 !important;
 }
+.md-nav__link[href$="/"]::before,
+.md-nav__link[href*="index.html"]::before,
+.md-nav__item--section .md-nav__link::before,
+.md-nav__title::before {
+  display: none !important;
+}
 
-/* [F] Hover 效果 */
+/* [F] Hover */
 .md-nav__link:hover { color: var(--fs-accent); }
 
 /* 5. 右侧目录 / 6. 正文 / 7. 图片 / 8. 表格 (保持稳定) */
