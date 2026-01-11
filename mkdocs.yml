@@ -24,14 +24,6 @@ theme:
     - i18n.languages         # [已添加] 语言切换图标
 
   palette:
-    # dark
-    - scheme: slate
-      primary: custom
-      accent: custom
-      toggle:
-        icon: fashion/tech-sun
-        name: Switch to light mode
-
     # light
     - scheme: default
       primary: custom
@@ -39,6 +31,14 @@ theme:
       toggle:
         icon: fashion/tech-moon
         name: Switch to dark mode
+        
+    # dark
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: fashion/tech-sun
+        name: Switch to light mode
 
 extra_css:
   - stylesheets/extra.css
