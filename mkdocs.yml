@@ -72,9 +72,8 @@ plugins:
           name: "🇨🇳 中文"
           default: false
           build: true
-      nav_translations:
-        zh:
-          Home: 首页
+          nav:
+            - 首页: index.md
 
 
 # 终极修复方案：在 nav 内部直接使用 i18n 语法
