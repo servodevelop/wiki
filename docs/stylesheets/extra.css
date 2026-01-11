@@ -1,11 +1,11 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V38.0 (New Phase - Full Height Divider)
-- 核心进展：基于 V33.8 稳定逻辑，开启 V38 系列版本号。
-- 逻辑更新：
-  1. 视觉：将正文左侧分割线改为由侧边栏容器承载，实现 100% 页面高度贯穿。
-  2. 颜色：维持 V33.8 的紫色高亮与 Section 标题不连带变色逻辑。
-  3. 结构：物理取消所有竖线尝试，确保 Home 项位置顶格不挤压。
+Fashion Star Wiki - V38.1 (V33.8 Base + Right TOC Divider)
+- 核心进展：维持 V33.8 所有左侧导航与 Section 逻辑。
+- 本版目标：
+  1. 在右侧 TOC（本页目录）左侧增加一条分割线。
+  2. 样式对齐：颜色与粗细同步左侧 (--fs-divider, 1px)。
+  3. 长度逻辑：线仅随目录内容长度变化，不强制贯穿到底。
 ==========================================================================
 */
 
@@ -44,22 +44,16 @@ Fashion Star Wiki - V38.0 (New Phase - Full Height Divider)
 ::-webkit-scrollbar-thumb { background-color: var(--fs-divider); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background-color: var(--fs-accent); }
 
-/* 4. 左侧导航栏 (V38.0 稳定版) */
+/* 4. 左侧导航栏 (回归 V33.8 稳定逻辑 - 严禁修改) */
 
-/* [A] 颜色与字号基础 */
-.md-nav__link, 
-.md-nav__title {
+.md-nav__link, .md-nav__title {
   color: var(--fs-nav-inactive);
   transition: color 125ms, font-weight 125ms;
 }
-
-/* [B] Section 标题隔离：不参与高亮 */
 .md-nav__title {
   font-size: 16px !important;
   font-weight: normal !important;
 }
-
-/* [C] 目录与文章层级字号 */
 .md-nav__item--nested > .md-nav__link,
 .md-nav__item--nested > .md-nav__container > .md-nav__link {
   font-size: 16px !important;
@@ -67,63 +61,58 @@ Fashion Star Wiki - V38.0 (New Phase - Full Height Divider)
 .md-nav__item:not(.md-nav__item--nested) > .md-nav__link {
   font-size: 14.5px !important;
 }
-
-/* [D] 选中高亮逻辑 (继承 V33.8) */
 li.md-nav__item--active > .md-nav__link,
 li.md-nav__item--active > .md-nav__container > .md-nav__link,
 li.md-nav__item--active > label.md-nav__link {
   color: var(--fs-accent) !important;
   font-weight: 700 !important;
 }
-
-/* [E] 物理消除所有竖线与缩进 */
-.md-nav__link::before,
-.md-nav__container::before,
-label::before,
-.md-nav__title::before {
+.md-nav__link::before, .md-nav__container::before, label::before, .md-nav__title::before {
   display: none !important;
   content: none !important;
 }
 .md-nav__link, .md-nav__container, .md-nav__title {
   padding-left: 0 !important;
 }
-
-/* [F] Hover 效果 */
 .md-nav__link:hover { color: var(--fs-accent); }
 
-/* 5. 右侧目录 / 6. 正文 / 7. 表格 (维持稳定) */
-.md-sidebar--secondary .md-nav__title[for="__toc"] { font-size: 0 !important; color: transparent !important; }
-.md-sidebar--secondary .md-nav__title[for="__toc"]::after { font-size: 12.8px !important; font-weight: 700 !important; color: var(--md-default-fg-color--light) !important; display: block; }
+/* 5. 右侧 TOC 栏位 (新逻辑) */
+
+/* [A] TOC 标题清理与自定义 */
+.md-sidebar--secondary .md-nav__title[for="__toc"] {
+  font-size: 0 !important;
+  color: transparent !important;
+}
+.md-sidebar--secondary .md-nav__title[for="__toc"]::after {
+  font-size: 12.8px !important;
+  font-weight: 700 !important;
+  color: var(--md-default-fg-color--light) !important;
+  display: block;
+}
 [lang="en"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "On this page"; }
 [lang="zh"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "本页目录"; }
-.md-typeset { color: var(--fs-content-fg); }
-.md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4, .md-typeset h5, .md-typeset h6 { color: var(--fs-content-fg) !important; font-weight: 700 !important; margin-top: 1.6rem !important; }
 
-/* 7. 图片全局样式 */
-.md-typeset img { 
-  display: block !important; 
-  margin: 1.5rem auto !important; 
+/* [B] 右侧分割线：长度随目录长度变化 */
+@media screen and (min-width: 60em) {
+  /* 针对右侧 TOC 容器添加左边框 */
+  .md-sidebar--secondary .md-nav {
+    border-left: 1px solid var(--fs-divider);
+    padding-left: 0.8rem; /* 给线和目录文字留一点呼吸感 */
+    margin-left: -0.2rem;
+  }
 }
 
-/* 8. 表格样式 */
+/* 6. 正文样式 / 7. 图片 / 8. 表格 */
+.md-typeset { color: var(--fs-content-fg); }
+.md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4, .md-typeset h5, .md-typeset h6 { color: var(--fs-content-fg) !important; font-weight: 700 !important; margin-top: 1.6rem !important; }
+.md-typeset img { display: block !important; margin: 1.5rem auto !important; }
 .md-typeset__table { overflow-x: auto !important; }
 .md-typeset table:not([class]) { border-collapse: collapse !important; border: 0.5px solid var(--fs-divider) !important; font-size: 14px !important; }
 .md-typeset table:not([class]) th, .md-typeset table:not([class]) td { border: 0.5px solid var(--fs-divider) !important; padding: 10px 15px !important; }
 .md-typeset table:not([class]) th { background-color: var(--md-default-bg-color--light) !important; font-weight: 700 !important; }
 
-/* 9. 布局平衡：全贯穿分割线实现 */
+/* 9. 布局平衡 (左侧线维持现状) */
 @media screen and (min-width: 60em) {
-  .md-grid {
-    max-width: 1380px !important;
-  }
-  
-  /* 移除正文容器的影子线 */
-  .md-content {
-    box-shadow: none !important;
-  }
-  
-  /* 分割线改由侧边栏右边框实现，确保顶天立地 */
-  .md-sidebar--primary {
-    border-right: 1px solid var(--fs-divider);
-  }
+  .md-grid { max-width: 1380px !important; }
+  .md-content { box-shadow: inset 1px 0 0 var(--fs-divider) !important; }
 }
