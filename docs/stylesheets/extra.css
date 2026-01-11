@@ -1,9 +1,9 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V39.3 (James V33.8 Base + Force TOC Line)
-- 核心基准：完全保留 James V33.8 的左侧 Section 隔离与高亮路径。
-- 修复目标：使用伪元素 (::before) 强行在右侧 TOC 容器左侧绘制分割线。
-- 视觉位置：线将精准出现在截图所示的绿色 padding 区域最左侧。
+Fashion Star Wiki - V39.4 (James V33.8 Base + Optimized Images)
+- 核心基座：100% 沿用 James V33.8 侧边栏隔离逻辑。
+- TOC 逻辑：沿用 V39.3 验证成功的伪元素分割线。
+- 图片优化：宽度 80%，4px 圆角，无阴影，全局居中。
 ==========================================================================
 */
 
@@ -67,9 +67,7 @@ li.md-nav__item--active > label.md-nav__link {
   color: var(--fs-accent);
 }
 
-/* 5. 右侧目录 (TOC) - 强效分割线实现 */
-
-/* [A] TOC 标题展示 */
+/* 5. 右侧目录 (TOC) - V39.3 验证版线 */
 .md-sidebar--secondary .md-nav__title[for="__toc"] {
   font-size: 0 !important;
   color: transparent !important;
@@ -83,15 +81,11 @@ li.md-nav__item--active > label.md-nav__link {
 [lang="en"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "On this page"; }
 [lang="zh"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "本页目录"; }
 
-/* [B] 伪元素绘制分割线：确保可见性 */
 @media screen and (min-width: 60em) {
-  /* 针对截图中的 secondary 容器 */
   .md-sidebar--secondary nav.md-nav--secondary {
-    position: relative; /* 为伪元素提供定位基准 */
-    padding-left: 16px !important; /* 维持截图中的 16px 原生间距 */
+    position: relative;
+    padding-left: 16px !important;
   }
-
-  /* 手动绘制 1px 垂直线 */
   .md-sidebar--secondary nav.md-nav--secondary::before {
     content: "";
     position: absolute;
@@ -104,14 +98,23 @@ li.md-nav__item--active > label.md-nav__link {
   }
 }
 
-/* 6. 正文 / 7. 图片 / 8. 表格 (James V33.8 原版) */
+/* 6. 正文 / 7. 图片优化 / 8. 表格 */
 .md-typeset { color: var(--fs-content-fg); }
 .md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4, .md-typeset h5, .md-typeset h6 {
   color: var(--fs-content-fg) !important;
   font-weight: 700 !important;
   margin-top: 1.6rem !important;
 }
-.md-typeset img { display: block !important; margin: 1.5rem auto !important; }
+
+/* [核心修改：图片样式] */
+.md-typeset img { 
+  display: block !important; 
+  margin: 2rem auto !important;  /* 居中并增加呼吸感 */
+  max-width: 80% !important;     /* 宽度约束 80% */
+  border-radius: 4px !important; /* 4px 倒角 */
+  box-shadow: none !important;   /* 彻底移除阴影 */
+}
+
 .md-typeset__table { overflow-x: auto !important; }
 .md-typeset table:not([class]) {
   border-collapse: collapse !important;
@@ -127,7 +130,7 @@ li.md-nav__item--active > label.md-nav__link {
   font-weight: 700 !important;
 }
 
-/* 9. 布局平衡 (James V33.8 原版) */
+/* 9. 布局平衡 */
 @media screen and (min-width: 60em) {
   .md-grid { max-width: 1380px !important; }
   .md-content { box-shadow: inset 1px 0 0 var(--fs-divider) !important; }
