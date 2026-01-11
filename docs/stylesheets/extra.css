@@ -1,9 +1,9 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V38.3 (V33.8 Base + Precise TOC Container Line)
-- 核心进展：100% 还原 V33.8 左侧导航逻辑（不触碰 Section）。
-- 逻辑修正：根据 F12 截图，将分割线挂载在 nav.md-nav--secondary 容器上。
-- 视觉目标：线与 TOC 绿色内边距左侧对齐，长度随内容动态变化。
+Fashion Star Wiki - V39.0 (V33.8 Base + Strong Isolated TOC Line)
+- 核心逻辑：从 V33.8 回归，确保左侧 Section 逻辑绝对纯净。
+- 技术突破：使用 aside.md-sidebar--secondary 强行锁定右侧物理容器。
+- 视觉效果：在右侧目录左侧增加 1px 分割线，长度随目录内容变化，不影响左侧。
 ==========================================================================
 */
 
@@ -42,7 +42,7 @@ Fashion Star Wiki - V38.3 (V33.8 Base + Precise TOC Container Line)
 ::-webkit-scrollbar-thumb { background-color: var(--fs-divider); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background-color: var(--fs-accent); }
 
-/* 4. 左侧导航栏 (严格锁定 V33.8 逻辑) */
+/* 4. 左侧导航栏 (完全复制 V33.8 - 严禁改动任何字符) */
 .md-nav__link, .md-nav__title {
   color: var(--fs-nav-inactive);
   transition: color 125ms, font-weight 125ms;
@@ -73,28 +73,28 @@ li.md-nav__item--active > label.md-nav__link {
 }
 .md-nav__link:hover { color: var(--fs-accent); }
 
-/* 5. 右侧 TOC 栏位 (精准容器挂载) */
+/* 5. 右侧 TOC 栏位 (采用强隔离选择器) */
 
-/* [A] TOC 标题展示 */
-.md-sidebar--secondary .md-nav__title[for="__toc"] {
+/* 修正：使用 aside 标签前缀，确保样式只作用于右侧侧边栏区域 */
+aside.md-sidebar--secondary .md-nav__title[for="__toc"] {
   font-size: 0 !important;
   color: transparent !important;
 }
-.md-sidebar--secondary .md-nav__title[for="__toc"]::after {
+aside.md-sidebar--secondary .md-nav__title[for="__toc"]::after {
   font-size: 12.8px !important;
   font-weight: 700 !important;
   color: var(--md-default-fg-color--light) !important;
   display: block;
 }
-[lang="en"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "On this page"; }
-[lang="zh"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "本页目录"; }
+[lang="en"] aside.md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "On this page"; }
+[lang="zh"] aside.md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "本页目录"; }
 
-/* [B] 核心：在截图所示的 nav.md-nav--secondary 容器上加线 */
+/* [核心改动]：利用 aside 容器实现强隔离分割线 */
 @media screen and (min-width: 60em) {
-  nav.md-nav--secondary {
-    border-left: 1px solid var(--fs-divider);
-    /* 这里的 padding 会覆盖原有的 16px，保持文字间距并给线留位 */
-    padding-left: 12px !important; 
+  /* 仅在右侧 aside 内部的 nav 标签上加线 */
+  aside.md-sidebar--secondary nav.md-nav--secondary {
+    border-left: 1px solid var(--fs-divider) !important;
+    padding-left: 12px !important;
     margin-left: 4px !important;
   }
 }
@@ -108,7 +108,7 @@ li.md-nav__item--active > label.md-nav__link {
 .md-typeset table:not([class]) th, .md-typeset table:not([class]) td { border: 0.5px solid var(--fs-divider) !important; padding: 10px 15px !important; }
 .md-typeset table:not([class]) th { background-color: var(--md-default-bg-color--light) !important; font-weight: 700 !important; }
 
-/* 9. 布局平衡 (左侧线维持现状) */
+/* 9. 布局平衡 (维持 V33.8 现状) */
 @media screen and (min-width: 60em) {
   .md-grid { max-width: 1380px !important; }
   .md-content { box-shadow: inset 1px 0 0 var(--fs-divider) !important; }
