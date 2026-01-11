@@ -1,11 +1,9 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V31.8 (Full Path Highlight with Vertical Line)
-- Section：移除约束，由 Material 原生控制颜色
-- 激活链路：[700 + 紫色 + 竖线] 选中文章及其向上所有父级目录全部加粗、变色并显示竖线
-- 视觉修正：确保带下拉箭头的父级目录（如 Specifications）在激活时也能正确显示竖线
-- 字号：一级/父级 16px，文章 14.5px
-- 表格与图片：维持 V29.2 工业基准对齐
+Fashion Star Wiki - V32.0 (Clean Slate Reset)
+- 状态：已删除所有左侧导航栏自定义 CSS，完全交由原生 Material 接管。
+- 目的：适配 navigation.indexes 并消除代码补丁冲突。
+- 保留项：顶部隐藏、滚动条、正文/表格工业风、布局平衡。
 ==========================================================================
 */
 
@@ -15,7 +13,6 @@ Fashion Star Wiki - V31.8 (Full Path Highlight with Vertical Line)
   --fs-divider: rgba(0,0,0,0.15); 
   --md-primary-fg-color: var(--fs-accent);
   --md-accent-fg-color: var(--fs-accent);
-  --fs-leftnav-fg: #444746;
   --fs-content-fg: #1F1F1F;
 }
 
@@ -24,11 +21,10 @@ Fashion Star Wiki - V31.8 (Full Path Highlight with Vertical Line)
   --md-default-bg-color: #131314;
   --md-default-bg-color--light: #1e1f20;
   --md-default-fg-color: #e3e3e3;
-  --fs-leftnav-fg: #C4C7C5;
   --fs-content-fg: #E3E3E3;
 }
 
-/* 2. 顶部导航清理 */
+/* 2. 顶部导航与 Logo 清理 */
 .md-logo, [class*="md-logo"], .md-header__button.md-logo, 
 .md-nav__title .md-logo, .md-nav__title[for="__drawer"] .md-icon,
 [class*="md-logo"] svg, [class*="md-logo"] img {
@@ -44,49 +40,12 @@ Fashion Star Wiki - V31.8 (Full Path Highlight with Vertical Line)
 ::-webkit-scrollbar-thumb { background-color: var(--fs-divider); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background-color: var(--fs-accent); }
 
-/* 4. 左侧导航 (V31.8 链路全路径高亮) */
+/* 4. 左侧导航栏 - 已归零 (完全交由原生控制) */
+/* 此处之前的所有 .md-nav__link, .md-nav__title, .md-nav__item 自定义已删除。
+   如果后续需要调整，我们将从原生表现开始按需添加。
+*/
 
-/* [A] 基础链接样式 */
-.md-sidebar--primary .md-nav__link {
-  color: var(--fs-leftnav-fg);
-  position: relative;
-  padding-left: 20px !important; 
-  font-weight: 400;
-}
-
-/* [B] 字号规范 */
-/* 只要有下拉或者是第一层级：16px */
-.md-nav__item--level--1 > .md-nav__link,
-.md-nav__item--nested > .md-nav__link,
-.md-nav__item--nested > label.md-nav__link {
-  font-size: 16px !important;
-}
-/* 纯文章链接：14.5px */
-.md-nav__item:not(.md-nav__item--nested):not(.md-nav__item--level--1) > .md-nav__link {
-  font-size: 14.5px !important;
-}
-
-/* [C] 激活链路高亮 (加粗 + 变紫) */
-/* 只要父容器 md-nav__item 带有 --active，其直接子元素 link/label 就变色加粗 */
-.md-nav__item--active > .md-nav__link,
-.md-nav__item--active > label.md-nav__link {
-  color: var(--fs-accent) !important;
-  font-weight: 700 !important;
-}
-
-/* [D] 竖线显示逻辑 (全路径覆盖) */
-/* 给处于激活路径上的所有 link 和 label 添加左侧竖线 */
-.md-nav__item--active > .md-nav__link::before,
-.md-nav__item--active > label.md-nav__link::before {
-  content: "";
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 3px;
-  background: var(--fs-accent);
-  display: block;
-}
-
-/* 5. 右侧目录 (TOC) */
+/* 5. 右侧目录 (TOC) 多语言 */
 .md-sidebar--secondary .md-nav__title[for="__toc"] {
   font-size: 0 !important; color: transparent !important;
 }
@@ -113,7 +72,7 @@ Fashion Star Wiki - V31.8 (Full Path Highlight with Vertical Line)
   margin: 1.5rem auto !important;
 }
 
-/* 8. 表格细节 */
+/* 8. 表格细节 (回归 V29.2 工业基准) */
 .md-typeset__table { overflow-x: auto !important; }
 .md-typeset table:not([class]) {
   border-collapse: collapse !important;
