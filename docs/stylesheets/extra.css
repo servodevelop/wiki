@@ -1,9 +1,9 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V40.6 (James V33.8 Base + Precision 3px Line)
+Fashion Star Wiki - V40.7 (Precision Path Line + Nested Label Recovery)
 - 核心基座：James V33.8 (Section 逻辑隔离 + 图片 80% + TOC 分割线)。
-- 逻辑调整：将竖线仅挂载在 a.md-nav__link 上，避开 Section 的标签结构。
-- 效果目标：找回全路径 3px 紫色竖线，同时尝试物理隔离 Section。
+- 修复目标：找回全路径父目录(label)的竖线，同时确保 Section 绝对无连接。
+- 物理逻辑：仅允许 .md-nav__item--nested 内部的元素生成竖线。
 ==========================================================================
 */
 
@@ -42,9 +42,9 @@ Fashion Star Wiki - V40.6 (James V33.8 Base + Precision 3px Line)
 ::-webkit-scrollbar-thumb { background-color: var(--fs-divider); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background-color: var(--fs-accent); }
 
-/* 4. 左侧导航栏 - James V33.8 增强版 */
+/* 4. 左侧导航栏 - James V33.8 完美版 */
 
-/* [A] 基础颜色与字号 */
+/* [A] 颜色与字号 */
 .md-nav__link, .md-nav__title {
   color: var(--fs-nav-inactive);
   transition: color 125ms, font-weight 125ms;
@@ -59,20 +59,22 @@ Fashion Star Wiki - V40.6 (James V33.8 Base + Precision 3px Line)
   font-size: 14.5px !important;
 }
 
-/* [B] 选中路径高亮 (紫色+加粗) */
+/* [B] 选中高亮 (紫色+加粗) */
 li.md-nav__item--active > .md-nav__link,
 li.md-nav__item--active > label.md-nav__link {
   color: var(--fs-accent) !important;
   font-weight: 700 !important;
 }
 
-/* [C] 全路径左侧竖线 (找回 3px 绝对定位线) */
-/* 核心改动：仅针对 a 标签挂载竖线，不再针对 label 挂载 */
-li.md-nav__item--active > a.md-nav__link {
+/* [C] 全路径竖线实现 - 仅针对嵌套目录和文章 */
+/* 激活状态下的 a 标签 (文章) 和 label 标签 (目录) */
+li.md-nav__item--active > .md-nav__link,
+li.md-nav__item--active > label.md-nav__link {
   position: relative;
 }
 
-li.md-nav__item--active > a.md-nav__link::after {
+li.md-nav__item--active > .md-nav__link::after,
+li.md-nav__item--active > label.md-nav__link::after {
   content: "";
   position: absolute;
   left: -12px;
@@ -84,12 +86,15 @@ li.md-nav__item--active > a.md-nav__link::after {
   display: block !important;
 }
 
-/* [D] 强制干掉 Section 和 Title 的伪元素 */
-.md-nav__title::after, 
+/* [D] 核心物理隔离：干掉 Section 的竖线 */
+/* 明确禁止 .md-nav__item--section 及其内部所有伪元素线 */
 .md-nav__item--section > .md-nav__link::after,
-.md-nav__item--section > label::after {
+.md-nav__item--section > label::after,
+.md-nav__title::after,
+[for="__drawer"]::after {
   display: none !important;
   content: none !important;
+  width: 0 !important;
 }
 
 .md-nav__link:hover { color: var(--fs-accent); }
@@ -119,7 +124,7 @@ li.md-nav__item--active > a.md-nav__link::after {
   }
 }
 
-/* 6. 正文 / 7. 图片优化 / 8. 表格 */
+/* 6. 正文 / 7. 图片优化 / 8. 表格 (James V33.8) */
 .md-typeset { color: var(--fs-content-fg); }
 .md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4, .md-typeset h5, .md-typeset h6 {
   color: var(--fs-content-fg) !important;
