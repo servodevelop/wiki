@@ -1,13 +1,11 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V33.3 (Logic Correction)
-- 基础：基于 V32.0 归零版
-- 字号：Section & 父目录 [16px]，文章 [原生]
-- 非选中颜色：[#444746 / #C4C7C5] 
-- 选中变色逻辑修正：
-  1. Section 标题：选中时跟随原生变 Logo 色，非选中为锁定灰。
-  2. 文章：仅选中的那篇文章变 Logo 色，父目录保持锁定灰（不随文章变紫）。
-  3. Hover：遵循原生，不被锁定颜色覆盖。
+Fashion Star Wiki - V33.4 (Weight Stress Test)
+- 基础：基于 V33.3 逻辑修正版
+- Section 标题：[16px] 锁定字号，字重/颜色遵循原生。
+- 父目录(带下拉)：[16px] 字重显式设定为 550 [动作 - 逻辑验证项]。
+- 文章标题：[14.5px] 保持默认，颜色锁定。
+- 非选中颜色：[#444746 / #C4C7C5]。
 ==========================================================================
 */
 
@@ -46,37 +44,42 @@ Fashion Star Wiki - V33.3 (Logic Correction)
 ::-webkit-scrollbar-thumb { background-color: var(--fs-divider); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background-color: var(--fs-accent); }
 
-/* 4. 左侧导航栏逻辑修正 (V33.3) */
+/* 4. 左侧导航栏逻辑 (V33.4) */
 
-/* [A] 全局非选中颜色：Section、目录、文章全覆盖 */
+/* [A] 全局非选中颜色 */
 .md-nav__link, 
 .md-nav__title {
-  color: var(--fs-nav-inactive); /* 不加 important，允许原生 hover 和 active 覆盖 */
+  color: var(--fs-nav-inactive);
 }
 
-/* [B] 字号定义 */
-.md-nav__title,
+/* [B] Section 标题：仅字号 16px，不干涉字重 */
+.md-nav__title {
+  font-size: 16px !important;
+}
+
+/* [C] 父目录（带下拉箭头）：字号 16px + 字重 550 */
+/* 精准锁定包含子项的目录项 */
 .md-nav__item--nested > .md-nav__link,
 .md-nav__item--nested > label.md-nav__link {
   font-size: 16px !important;
+  font-weight: 550 !important; 
 }
+
+/* [D] 文章标题（末级链接）：字号 14.5px */
 .md-nav__item:not(.md-nav__item--nested) > .md-nav__link {
   font-size: 14.5px !important;
 }
 
-/* [C] Section 标题变色逻辑：选中时(active)变紫，非选中为锁定灰 */
+/* [E] 变色逻辑：Section 激活 & 文章当前页 */
 .md-nav__title--active {
   color: var(--fs-accent) !important;
 }
-
-/* [D] 文章变色逻辑：仅针对“当前页面”变紫，父目录不随之变紫 */
-/* 利用 aria-current 属性精准锁定当前页链接 */
 .md-nav__link[aria-current="page"] {
   color: var(--fs-accent) !important;
   font-weight: 700;
 }
 
-/* [E] 确保 Hover 时遵循原生紫色反馈 */
+/* [F] 确保 Hover 遵循原生紫色 */
 .md-nav__link:hover {
   color: var(--fs-accent);
 }
