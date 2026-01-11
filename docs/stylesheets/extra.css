@@ -1,9 +1,9 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V40.5 (Final Path Highlighting & Physical Section Guard)
+Fashion Star Wiki - V40.6 (James V33.8 Base + Precision 3px Line)
 - 核心基座：James V33.8 (Section 逻辑隔离 + 图片 80% + TOC 分割线)。
-- 核心修复：利用 .md-nav__item--section 类名物理屏蔽 Section 竖线。
-- 逻辑：即使 Section 内部包含 .md-nav__link，也因为父级黑名单而被禁止生成线。
+- 逻辑调整：将竖线仅挂载在 a.md-nav__link 上，避开 Section 的标签结构。
+- 效果目标：找回全路径 3px 紫色竖线，同时尝试物理隔离 Section。
 ==========================================================================
 */
 
@@ -42,7 +42,7 @@ Fashion Star Wiki - V40.5 (Final Path Highlighting & Physical Section Guard)
 ::-webkit-scrollbar-thumb { background-color: var(--fs-divider); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background-color: var(--fs-accent); }
 
-/* 4. 左侧导航栏 - James V33.8 完美隔离版 */
+/* 4. 左侧导航栏 - James V33.8 增强版 */
 
 /* [A] 基础颜色与字号 */
 .md-nav__link, .md-nav__title {
@@ -66,14 +66,13 @@ li.md-nav__item--active > label.md-nav__link {
   font-weight: 700 !important;
 }
 
-/* [C] 全路径左侧竖线 (3px 绝对定位) */
-li.md-nav__item--active > .md-nav__link,
-li.md-nav__item--active > label.md-nav__link {
+/* [C] 全路径左侧竖线 (找回 3px 绝对定位线) */
+/* 核心改动：仅针对 a 标签挂载竖线，不再针对 label 挂载 */
+li.md-nav__item--active > a.md-nav__link {
   position: relative;
 }
 
-li.md-nav__item--active > .md-nav__link::after,
-li.md-nav__item--active > label.md-nav__link::after {
+li.md-nav__item--active > a.md-nav__link::after {
   content: "";
   position: absolute;
   left: -12px;
@@ -82,13 +81,13 @@ li.md-nav__item--active > label.md-nav__link::after {
   width: 3px;
   background-color: var(--fs-accent);
   border-radius: 2px;
+  display: block !important;
 }
 
-/* [D] 核心修复：Section 竖线终极物理屏蔽 */
-/* 只要父级 li 带有 .md-nav__item--section 类，其内部所有元素绝对不显示竖线 */
-li.md-nav__item--section .md-nav__link::after,
-li.md-nav__item--section label::after,
-.md-nav__title::after {
+/* [D] 强制干掉 Section 和 Title 的伪元素 */
+.md-nav__title::after, 
+.md-nav__item--section > .md-nav__link::after,
+.md-nav__item--section > label::after {
   display: none !important;
   content: none !important;
 }
