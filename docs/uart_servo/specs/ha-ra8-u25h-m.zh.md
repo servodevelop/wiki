@@ -14,6 +14,7 @@
 - Three stop modes: **Free / Lock / Damping**
 - Five protections: **temperature / voltage / stall / power / current**
 - PC configuration tool; firmware upgradable
+- 泡饭
 
 ## 2. Model definition
 
