@@ -1,10 +1,10 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V32.1 (Navigation Precision Refinement)
-- 颜色：深浅模式非选中色精准控制 [#444746 / #C4C7C5]
-- Section 标题：[16px] 激活时 [700 + 紫色]，无竖线
-- 父目录(带下拉)：[16px] 激活时 [700 + 紫色 + 左侧竖线]
-- 文章：激活时 [700 + 紫色 + 左侧竖线]
+Fashion Star Wiki - V32.2 (Navigation Selection Logic Fix)
+- 颜色：非选中态锁定 [#444746 / #C4C7C5]
+- Section 标题：完全回归原生，绝不显示竖线
+- 导航链路：[16px] 父目录与 [14.5px] 文章在选中时统一 [700 + 紫色 + 左竖线]
+- 兼容性：适配 navigation.indexes 模式下的目录点击高亮
 ==========================================================================
 */
 
@@ -14,7 +14,7 @@ Fashion Star Wiki - V32.1 (Navigation Precision Refinement)
   --fs-divider: rgba(0,0,0,0.15); 
   --md-primary-fg-color: var(--fs-accent);
   --md-accent-fg-color: var(--fs-accent);
-  --fs-leftnav-fg: #444746; /* 浅色模式非选中色 */
+  --fs-leftnav-fg: #444746;
   --fs-content-fg: #1F1F1F;
 }
 
@@ -23,7 +23,7 @@ Fashion Star Wiki - V32.1 (Navigation Precision Refinement)
   --md-default-bg-color: #131314;
   --md-default-bg-color--light: #1e1f20;
   --md-default-fg-color: #e3e3e3;
-  --fs-leftnav-fg: #C4C7C5; /* 深色模式非选中色 */
+  --fs-leftnav-fg: #C4C7C5;
   --fs-content-fg: #E3E3E3;
 }
 
@@ -43,32 +43,32 @@ Fashion Star Wiki - V32.1 (Navigation Precision Refinement)
 ::-webkit-scrollbar-thumb { background-color: var(--fs-divider); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background-color: var(--fs-accent); }
 
-/* 4. 左侧导航栏精修 (V32.1) */
+/* 4. 左侧导航栏精修 (V32.2) */
 
-/* A. 基础颜色与字号 */
+/* [A] 基础颜色控制 */
 .md-nav__link {
   color: var(--fs-leftnav-fg) !important;
-  font-weight: 400;
 }
 
-/* B. Section 标题与父目录 (16px) */
-.md-nav__title,
+/* [B] 字号定义：父目录 16px，文章 14.5px */
 .md-nav__item--nested > .md-nav__link,
 .md-nav__item--nested > label.md-nav__link {
   font-size: 16px !important;
 }
+.md-nav__item:not(.md-nav__item--nested) > .md-nav__link {
+  font-size: 14.5px !important;
+}
 
-/* C. 激活状态通用：加粗 700 + 紫色 */
-/* 涵盖 Section 标题、父目录、文章 */
+/* [C] 激活态高亮：只要处于激活路径，文字变紫加粗 */
+/* 这里排除了 .md-nav__title 确保 Section 标题不被强制变紫色 */
 .md-nav__item--active > .md-nav__link,
-.md-nav__item--active > label.md-nav__link,
-.md-nav__title--active {
+.md-nav__item--active > label.md-nav__link {
   color: var(--fs-accent) !important;
   font-weight: 700 !important;
 }
 
-/* D. 竖线显示逻辑 */
-/* 规则：激活项显示竖线，但排除 Section 标题 (.md-nav__title) */
+/* [D] 竖线逻辑：核心修正 */
+/* 仅针对 nav__item 内的链接显示竖线，这会自动避开 Section 标题 (.md-nav__title) */
 .md-nav__item--active > .md-nav__link::before,
 .md-nav__item--active > label.md-nav__link::before {
   content: "";
@@ -77,11 +77,6 @@ Fashion Star Wiki - V32.1 (Navigation Precision Refinement)
   width: 3px;
   background: var(--fs-accent);
   display: block;
-}
-
-/* 明确取消 Section 标题的竖线（以防继承） */
-.md-nav__title::before {
-  display: none !important;
 }
 
 /* 5. 右侧目录 (TOC) */
@@ -96,7 +91,7 @@ Fashion Star Wiki - V32.1 (Navigation Precision Refinement)
 [lang="en"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "On this page"; }
 [lang="zh"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "本页目录"; }
 
-/* 6. 正文排版 */
+/* 6. 正文排版与表格 */
 .md-typeset { color: var(--fs-content-fg); }
 .md-typeset h1, .md-typeset h2, .md-typeset h3, 
 .md-typeset h4, .md-typeset h5, .md-typeset h6 {
@@ -104,31 +99,19 @@ Fashion Star Wiki - V32.1 (Navigation Precision Refinement)
   font-weight: 700 !important;
   margin-top: 1.6rem !important;
 }
-
-/* 7. 图片居中 */
-.md-typeset img {
-  display: block !important;
-  margin: 1.5rem auto !important;
-}
-
-/* 8. 表格细节 */
+.md-typeset img { display: block !important; margin: 1.5rem auto !important; }
 .md-typeset__table { overflow-x: auto !important; }
 .md-typeset table:not([class]) {
   border-collapse: collapse !important;
   border: 0.5px solid var(--fs-divider) !important; 
   font-size: 14px !important;
 }
-.md-typeset table:not([class]) th, 
-.md-typeset table:not([class]) td {
-  border: 0.5px solid var(--fs-divider) !important;
-  padding: 10px 15px !important;
+.md-typeset table:not([class]) th, .md-typeset table:not([class]) td {
+  border: 0.5px solid var(--fs-divider) !important; padding: 10px 15px !important;
 }
-.md-typeset table:not([class]) th {
-  background-color: var(--md-default-bg-color--light) !important;
-  font-weight: 700 !important;
-}
+.md-typeset table:not([class]) th { background-color: var(--md-default-bg-color--light) !important; font-weight: 700 !important; }
 
-/* 9. 布局平衡 */
+/* 7. 布局平衡 */
 @media screen and (min-width: 60em) {
   .md-grid { max-width: 1380px !important; }
   .md-content { box-shadow: inset 1px 0 0 var(--fs-divider) !important; }
