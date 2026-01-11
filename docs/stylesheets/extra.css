@@ -1,11 +1,10 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V32.5 (Pure Logic Verification - NO BORDERS)
-- 竖线：彻底移除所有 ::before 伪元素及相关竖线代码，确保视觉无干扰。
-- Section 标题：回归原生 Material 样式。
-- 父目录(16px)：[骨架增强] 始终保持 700 加粗，确保层级清晰。
-- 文章(14.5px)：默认常规字重，选中后 [700 加粗 + 紫色]。
-- 颜色：非选中态锁定 [#444746 / #C4C7C5]，选中链路 [紫色]。
+Fashion Star Wiki - V32.6 (Typography Refinement - NO BORDERS)
+- Section 标题：完全回归原生 Material 逻辑，不干预。
+- 一级父目录：字号 [16px]，取消始终加粗，回归常规字重 [动作]。
+- 激活态：[紫色 + 700 加粗] 仅在选中路径时触发变色与加粗。
+- 竖线：保持完全禁用，确保视觉逻辑纯净。
 ==========================================================================
 */
 
@@ -28,7 +27,7 @@ Fashion Star Wiki - V32.5 (Pure Logic Verification - NO BORDERS)
   --fs-content-fg: #E3E3E3;
 }
 
-/* 2. 顶部导航与 Logo 清理 */
+/* 2. 顶部导航清理 */
 .md-logo, [class*="md-logo"], .md-header__button.md-logo, 
 .md-nav__title .md-logo, .md-nav__title[for="__drawer"] .md-icon,
 [class*="md-logo"] svg, [class*="md-logo"] img {
@@ -44,36 +43,34 @@ Fashion Star Wiki - V32.5 (Pure Logic Verification - NO BORDERS)
 ::-webkit-scrollbar-thumb { background-color: var(--fs-divider); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background-color: var(--fs-accent); }
 
-/* 4. 左侧导航栏逻辑 (V32.5) */
+/* 4. 左侧导航栏逻辑 (V32.6) */
 
-/* [A] 基础颜色控制：非选中态颜色 */
+/* [A] 基础颜色控制 */
 .md-nav__link {
   color: var(--fs-leftnav-fg) !important;
+  font-weight: 400; /* 默认回归常规字重 */
 }
 
-/* [B] 导航骨架：父目录始终 16px + 700 加粗 */
-/* 包含带下拉的项目和开启 indexes 后的目录链接 */
+/* [B] 字号定义 */
+/* 父目录/带下拉项：16px */
 .md-nav__item--nested > .md-nav__link,
 .md-nav__item--nested > label.md-nav__link {
   font-size: 16px !important;
-  font-weight: 700 !important;
 }
-
-/* [C] 文章页面：14.5px 字号 */
+/* 文章页面：14.5px */
 .md-nav__item:not(.md-nav__item--nested) > .md-nav__link {
   font-size: 14.5px !important;
-  font-weight: 400; /* 默认不加粗 */
 }
 
-/* [D] 激活链路高亮：紫色 + 全路径加粗 */
-/* 排除 .md-nav__title (Section 标题)，只针对具体的 nav 项 */
+/* [C] 激活态：紫色 + 700 加粗 (排除 Section 标题) */
+/* 仅针对 nav__item 内部的激活路径进行高亮 */
 .md-nav__item--active > .md-nav__link,
 .md-nav__item--active > label.md-nav__link {
   color: var(--fs-accent) !important;
   font-weight: 700 !important;
 }
 
-/* [E] 竖线彻底禁用：全局清理所有潜在竖线 */
+/* [D] 彻底禁用所有竖线 */
 .md-nav__link::before,
 .md-nav__link::after,
 label.md-nav__link::before,
