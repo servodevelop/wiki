@@ -151,7 +151,7 @@ nav:
           - Ros: uart_servo/sdk/ros_sdk.md
       - Document: uart_servo/documents/uc01_instruction_manual.md
   - RS485 Bus Servo:
-      - /rs485_servo/index.md
+      - rs485_servo/index.md
       - Protocol: rs485_servo/protocols/uart_rs485_protocol.md
       - Specifications:
           - HX8-R28H-M: rs485_servo/specs/hx8-r28h-m.md
