@@ -64,23 +64,131 @@ plugins:
       reconfigure_material: true
       fallback_to_default: true 
       languages:
+        # 英文默认配置
         - locale: en
           name: "🇺🇸 English"
           default: true
           build: true
+        # 中文配置：直接在这里覆盖整个 Nav 结构
         - locale: zh
           name: "🇨🇳 中文"
           default: false
           build: true
           nav:
             - 首页: index.md
+            - 串口总线舵机:
+              - uart_servo/index.md
+              - 通讯协议: uart_servo/protocols/uart_rs485_protocol.md
+              - 规格参数:
+                - RP6-U12H-M: uart_servo/specs/rp6-u12h-m.md
+                - RX6-U12H-M: uart_servo/specs/rx6-u12h-m.md
+                - HP6/RP6-U15H-M: uart_servo/specs/hp-rp6-u15h-m.md
+                - RP6-U18H-M: uart_servo/specs/rp6-u18h-m.md
+                - HA8/RA8-U25(H)-M: uart_servo/specs/ha-ra8-u25h-m.md
+                - HX8/RX8-U28H-M: uart_servo/specs/hx-rx8-u28h-m.md
+                - HX8/RX8-U29H-M: uart_servo/specs/hx-rx8-u29h-m.md
+                - HA8/RA8-U35(H)-M: uart_servo/specs/ha-ra8-u35h-m.md
+                - HA8/RA8-U45(H)-M: uart_servo/specs/ha-ra8-u45h-m.md
+                - HX8/RX8-U50H-M: uart_servo/specs/hx-rx8-u50h-m.md
+                - HX8/RX8-U51H-M: uart_servo/specs/hx-rx8-u51h-m.md
+                - RX18-U100H-M: uart_servo/specs/rx18-u100h-m.md
+                - RX18-U101H-M: uart_servo/specs/rx18-u101h-m.md
+              - CAD文件:
+                - RA8/RP8/RX8 系列: uart_servo/cad_files/ra8-rp8-rx8-series.md
+                - RP6/RX6-U12 系列: uart_servo/cad_files/rp6-rx6-u12-series.md
+                - RX6-U15 系列: uart_servo/cad_files/rx6-u15-series.md
+                - RP6-U18 系列: uart_servo/cad_files/rp6-u18-series.md
+                - RX18 系列: uart_servo/cad_files/rx18-series.md
+              - 配套软件:
+                - PC端调试软件: uart_servo/software/pc_configuration_tool.md
+                - 网页版调试工具: uart_servo/software/web_configuration_tool.md
+              - 开发库:
+                - 工业PLC: 
+                  - Sinamics: uart_servo/sdk/plc/sinamics_tia_portal_v19.md
+                  - Codesys: uart_servo/sdk/plc/codesys.md
+                  - Inovance: uart_servo/sdk/plc/inovance.md
+                  - Inoproshop: uart_servo/sdk/plc/inovance_inoproshop.md
+                  - GX Works: uart_servo/sdk/plc/mitsubishi_gx_works2.md
+                  - Step7 MicroWin: uart_servo/sdk/plc/step7_microwin_smart.md
+                - Stm32f103: uart_servo/sdk/stm32f103_sdk.md
+                - Stm32f407: uart_servo/sdk/stm32f407_sdk.md
+                - Arduino: uart_servo/sdk/arduino_sdk.md
+                - Python: uart_servo/sdk/python_sdk.md
+                - Micro Python: uart_servo/sdk/micropython_sdk.md
+                - C++: "uart_servo/sdk/cpp_sdk.md"
+                - "C#": "uart_servo/sdk/csharp_sdk.md"
+                - Ros: uart_servo/sdk/ros_sdk.md
+              - 官方文档: uart_servo/documents/uc01_instruction_manual.md
+            - RS485总线舵机:
+              - rs485_servo/index.md
+              - 通讯协议: rs485_servo/protocols/uart_rs485_protocol.md
+              - 规格参数:
+                - HX8-R28H-M: rs485_servo/specs/hx8-r28h-m.md
+                - HX8-R29H-M: rs485_servo/specs/hx8-r29h-m.md
+                - HX8-R50H-M: rs485_servo/specs/hx8-r50h-m.md
+                - HX8-R51H-M: rs485_servo/specs/hx8-r51h-m.md
+                - RX18-R100H-M: rs485_servo/specs/rx18-r100h-m.md
+                - RX18-R101H-M: rs485_servo/specs/rx18-r101h-m.md
+              - CAD文件:
+                - HX8/RX8 R 系列: rs485_servo/cad_files/hx8-rx8-r-series.md
+                - HX18 R 系列: rs485_servo/cad_files/hx18-r-series.md
+              - 配套软件:
+                - PC端调试软件: rs485_servo/software/pc_configuration_tool.md
+                - 网页版调试工具: rs485_servo/software/web_configuration_tool.md
+              - 开发库:
+                - 工业PLC:
+                  - Sinamics: rs485_servo/sdk/plc/sinamics_tia_portal_v19.md
+                  - Codesys: rs485_servo/sdk/plc/codesys.md
+                  - Inovance: rs485_servo/sdk/plc/inovance.md
+                  - Inoproshop: rs485_servo/sdk/plc/inovance_inoproshop.md
+                  - GX Works: rs485_servo/sdk/plc/mitsubishi_gx_works2.md
+                  - Step7 MicroWin: rs485_servo/sdk/plc/step7_microwin_smart.md
+                - Stm32f103: rs485_servo/sdk/stm32f103_sdk.md
+                - Stm32f407: rs485_servo/sdk/stm32f407_sdk.md
+                - Arduino: rs485_servo/sdk/arduino_sdk.md
+                - Python: rs485_servo/sdk/python_sdk.md
+                - Micro Python: rs485_servo/sdk/micropython_sdk.md
+                - C++: rs485_servo/sdk/cpp_sdk.md
+                - "C#": rs485_servo/sdk/csharp_sdk.md
+                - Ros: rs485_servo/sdk/ros_sdk.md
+              - 官方文档: rs485_servo/documents/uc01_instruction_manual.md
+            - CAN总线舵机:
+              - 通讯协议: can_servo/protocols/can_protocol.md
+              - 规格参数:
+                - HX8-C100H-M: can_servo/specs/hx8-c100h-m.md
+                - HX8-C100W-M: can_servo/specs/hx8-c100w-m.md
+              - CAD文件:
+                - HX8/RX8 C 系列: can_servo/cad_files/hx8-rx8-c-series.md
+                - HX18 C 系列: can_servo/cad_files/hx18-c-series.md
+              - 配套软件:
+                - PC端调试软件: can_servo/software/pc_configuration_tool.md
+                - 网页版调试工具: can_servo/software/web_configuration_tool.md
+              - 开发库:
+                - 工业PLC:
+                  - Sinamics: can_servo/sdk/plc/sinamics_tia_portal_v19.md
+                  - Codesys: can_servo/sdk/plc/codesys.md
+                  - Inovance: can_servo/sdk/plc/inovance.md
+                  - Inoproshop: can_servo/sdk/plc/inovance_inoproshop.md
+                  - GX Works: can_servo/sdk/plc/mitsubishi_gx_works2.md
+                  - Step7 MicroWin: can_servo/sdk/plc/step7_microwin_smart.md
+                - Stm32f103: can_servo/sdk/stm32f103_sdk.md
+                - Stm32f407: can_servo/sdk/stm32f407_sdk.md
+                - Arduino: can_servo/sdk/arduino_sdk.md
+                - Python: can_servo/sdk/python_sdk.md
+                - Micro Python: can_servo/sdk/micropython_sdk.md
+                - C++: can_servo/sdk/cpp_sdk.md
+                - "C#": can_servo/sdk/csharp_sdk.md
+                - Ros: can_servo/sdk/ros_sdk.md
+              - 官方文档: can_servo/documents/uc01_instruction_manual.md
+            - 机械臂:
+              - StarAI机械臂:
+                - 快速入门: robotic_arm/starai_arm/quick_start.md
+              - Piper Mate:
+                - 准备工作: robotic_arm/piper_mate/get_ready.md
 
-
-# 终极修复方案：在 nav 内部直接使用 i18n 语法
-# 格式为：- 标题 (语言代码): 路径
+# 根导航定义（主要用于默认语言，即英文）
 nav:
   - Home: index.md
-  
   - Uart Bus Servo:
     - uart_servo/index.md
     - Protocol: uart_servo/protocols/uart_rs485_protocol.md
