@@ -1,12 +1,11 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V37.5 (Stable Base + Deep Structure Fix)
-- 核心进展：维持 V33.8 颜色/字重逻辑。
-- 逻辑更新：
-  1. 父目录捕捉：针对 div.md-nav__container 这种复合结构植入竖线。
-  2. 文章捕捉：确保最末端的 a.md-nav__link 也能正确触发。
-  3. Home 免疫：通过 href 精确匹配排除 Home，撤销其缩进与伪元素。
-  4. 缩进修复：仅在竖线显示的元素上应用 padding-left。
+Fashion Star Wiki - V37.6 (Stable Base + Section Color Fix)
+- 核心进展：维持 V33.8 逻辑；解决 Section 颜色连带变色的 Bug。
+- 本版目标：
+  1. 颜色修复：只有当前真正 Active 的项加粗变色，解决 Section 标题误选。
+  2. 竖线回归：恢复文章与父目录的紫色竖线。
+  3. Home 净化：利用位置选择器彻底移除 Home 的竖线和挤压感。
 ==========================================================================
 */
 
@@ -45,22 +44,15 @@ Fashion Star Wiki - V37.5 (Stable Base + Deep Structure Fix)
 ::-webkit-scrollbar-thumb { background-color: var(--fs-divider); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background-color: var(--fs-accent); }
 
-/* 4. 左侧导航栏 - 深度结构版 (V37.5) */
+/* 4. 左侧导航栏 - 结构化修正版 (V37.6) */
 
-/* [A] 基础颜色与字号 (继承 V33.8) */
-.md-nav__link, .md-nav__title {
+/* [A] 全局非选中颜色基础 */
+.md-nav__link {
   color: var(--fs-nav-inactive);
   transition: color 125ms, font-weight 125ms;
 }
 
-/* [B] Section 标题：完全隔离 (继承 V33.8) */
-.md-nav__title {
-  font-size: 16px !important;
-  padding-left: 0 !important;
-  margin-left: 0 !important;
-}
-
-/* [C] 目录与文章层级字号定义 */
+/* [B] 目录层级字号定义 */
 .md-nav__item--nested > .md-nav__link,
 .md-nav__item--nested > .md-nav__container > .md-nav__link {
   font-size: 16px !important;
@@ -69,52 +61,60 @@ Fashion Star Wiki - V37.5 (Stable Base + Deep Structure Fix)
   font-size: 14.5px !important;
 }
 
-/* [D] 选中路径高亮颜色 (继承 V33.8) */
-li.md-nav__item--active > .md-nav__link,
-li.md-nav__item--active > .md-nav__container > .md-nav__link,
-li.md-nav__item--active > .md-nav__container > label {
+/* [C] 选中路径高亮逻辑 (修复 Section 连带变色) */
+/* 只有真正被选中的 a 标签或 label 才变色，不使用 li.active 级联 */
+.md-nav__link--active,
+.md-nav__item--active > .md-nav__link,
+.md-nav__item--active > .md-nav__container > .md-nav__link {
   color: var(--fs-accent) !important;
   font-weight: 700 !important;
 }
 
-/* [E] 竖线方案：区分 Container 和 Link */
+/* [D] 竖线方案：排除法逻辑 */
 
-/* 1. 捕捉父目录 (Container 结构) 和 文章 (Link 结构) */
-/* 同时排除 Section 和 Home */
-li.md-nav__item--active:not(.md-nav__item--section) .md-nav__container,
-li.md-nav__item--active:not(.md-nav__item--section) > .md-nav__link:not([href$="/"]):not([href*="index"]) {
+/* 1. 默认给所有激活的 Link 开启竖线和位移 */
+.md-nav__item--active > .md-nav__link,
+.md-nav__item--active > .md-nav__container > .md-nav__link,
+.md-nav__item--active > .md-nav__container > label {
   position: relative;
   padding-left: 12px !important;
 }
 
-/* 2. 渲染竖线 */
-li.md-nav__item--active:not(.md-nav__item--section) .md-nav__container::before,
-li.md-nav__item--active:not(.md-nav__item--section) > .md-nav__link:not([href$="/"]):not([href*="index"])::before {
+.md-nav__item--active > .md-nav__link::before,
+.md-nav__item--active > .md-nav__container > .md-nav__link::before,
+.md-nav__item--active > .md-nav__container > label::before {
   content: "";
   position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
-  width: 4px;
+  width: 3.5px;
   background-color: var(--fs-accent);
   display: block;
 }
 
-/* 3. Home 和 Section 深度清理 (撤销缩进，隐藏线条) */
+/* 2. 精准排除：Home (通常是第一个 nav item) */
+/* 如果 Home 的链接包含 index 或只有斜杠，强制清除 */
+.md-nav__list > .md-nav__item:first-child > .md-nav__link,
 .md-nav__link[href$="/"], 
-.md-nav__link[href*="index.html"],
-.md-nav__item--section > .md-nav__link,
-.md-nav__item--section .md-nav__container {
+.md-nav__link[href*="index.html"] {
   padding-left: 0 !important;
 }
+.md-nav__list > .md-nav__item:first-child > .md-nav__link::before,
 .md-nav__link[href$="/"]::before, 
-.md-nav__link[href*="index.html"]::before,
-.md-nav__item--section .md-nav__container::before,
-.md-nav__item--section .md-nav__link::before {
+.md-nav__link[href*="index.html"]::before {
   display: none !important;
 }
 
-/* [F] Hover */
+/* 3. Section 标题（顶级 Nav Title）去线 */
+.md-nav__title {
+  padding-left: 0 !important;
+}
+.md-nav__title::before {
+  display: none !important;
+}
+
+/* [E] Hover */
 .md-nav__link:hover { color: var(--fs-accent); }
 
 /* 5. 右侧目录 / 6. 正文 / 7. 图片 / 8. 表格 (保持稳定) */
