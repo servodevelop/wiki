@@ -1,14 +1,14 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V34.5 (Absolute Section Isolation & Alignment)
-- 核心修复：解决 Section 标题被挤压和误伤竖线的问题
-- 动作 [隔离]：
-  1. 归位：强制 Section 标题 (.md-nav__title) 的 padding-left 为 0。
-  2. 避让：仅对处于 <li> 列表内的链接应用 24px 的缩进和竖线逻辑。
-- 动作 [对齐]：
-  1. 竖线：top/bottom 设为 0，实现容器等高垂直贯穿。
-  2. 字体：维持文章 14.5px，目录 16px，Section 16px 原生字重。
-- 样式：全路径 [加粗 700 + Logo 紫色 + 3.5px 竖线]
+Fashion Star Wiki - V34.6 (Absolute Navigation Isolation)
+- 核心修复：通过深度选择器排除，彻底解决 Section 标题位移与竖线误伤。
+- 隔离逻辑 [动作]：
+  1. Section 归位：针对 .md-nav__title 及其内部所有元素强制 padding-left: 0。
+  2. 竖线封禁：对 .md-nav__title 及其内部链接强制 content: none。
+  3. 链接生效：仅当 .md-nav__link 属于 li 且不在 .md-nav__title 内时，启用 24px 偏移。
+- 视觉表现：
+  1. 竖线：3.5px 宽，容器等高 (top:0, bottom:0)，Logo 紫色。
+  2. 路径：全路径 [加粗 700 + 紫色]。
 ==========================================================================
 */
 
@@ -47,43 +47,46 @@ Fashion Star Wiki - V34.5 (Absolute Section Isolation & Alignment)
 ::-webkit-scrollbar-thumb { background-color: var(--fs-divider); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background-color: var(--fs-accent); }
 
-/* 4. 左侧导航栏 - 结构化隔离版 (V34.5) */
+/* 4. 左侧导航栏 - 深度隔离版 (V34.6) */
 
-/* [A] 基础颜色与 Section 强制归位 */
+/* [A] 基础颜色 */
 .md-nav__link {
   color: var(--fs-nav-inactive);
 }
 
-/* 核心：Section 标题强制 0 位移，确保不被挤压 */
+/* [B] Section 标题：绝对禁止位移与竖线 */
+/* 强制覆盖所有可能导致 Section 偏移的属性 */
 .md-nav__title, 
 .md-nav__title .md-nav__link,
-.md-nav__link.md-nav__link--active:not(li *) {
+.md-nav__link--active:not(li .md-nav__link) {
   padding-left: 0 !important;
   font-size: 16px !important;
-  font-weight: initial !important; /* 维持原生字重 */
+  font-weight: initial !important; /* 锁定原生字重 */
 }
 
-/* 核心：Section 标题严禁出现竖线伪元素 */
+/* 彻底抹除 Section 区域的所有伪元素 */
 .md-nav__title::before, 
 .md-nav__title::after,
-.md-nav__title .md-nav__link::before {
+.md-nav__title .md-nav__link::before,
+.md-nav__title .md-nav__link::after {
   display: none !important;
   content: none !important;
 }
 
-/* [B] 只有在列表项 li 里的链接，才允许缩进 24px 存放竖线 */
+/* [C] 正常链接：仅在 li 列表项内的链接启用 24px 偏移 */
+/* 这能有效避开处于 nav__title 里的特殊链接 */
 li .md-nav__link {
   padding-left: 24px !important;
   position: relative;
 }
 
-/* [C] 激活路径高亮：[加粗 + 紫色] (仅限 li 内) */
+/* [D] 激活路径：[加粗 + 紫色] (仅限 li 内项目) */
 li.md-nav__item--active > .md-nav__link {
   color: var(--fs-accent) !important;
   font-weight: 700 !important;
 }
 
-/* [D] 竖线渲染：仅在激活的 li 链接前绘制，高度顶满 */
+/* [E] 竖线渲染：仅对 li.active 内部链接绘制，且避开 Home */
 li.md-nav__item--active > .md-nav__link::before {
   content: "";
   position: absolute;
@@ -95,13 +98,13 @@ li.md-nav__item--active > .md-nav__link::before {
   display: block !important;
 }
 
-/* [E] 首页/索引页黑名单：不显示竖线 */
+/* [F] 排除 Home / 索引页的竖线 */
 .md-nav__link[href*="index.html"]::before,
 .md-nav__link[href$="/"]::before {
   display: none !important;
 }
 
-/* [F] 目录与文章字号定义 */
+/* [G] 目录与文章字号定义 */
 .md-nav__item--nested > .md-nav__link {
   font-size: 16px !important;
 }
@@ -109,7 +112,7 @@ li.md-nav__item--active > .md-nav__link::before {
   font-size: 14.5px !important;
 }
 
-/* [G] Hover 效果 */
+/* [H] Hover 效果 */
 .md-nav__link:hover {
   color: var(--fs-accent);
 }
