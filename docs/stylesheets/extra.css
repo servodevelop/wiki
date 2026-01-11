@@ -1,13 +1,13 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V40.15 (Table Refined + Section Forced Isolation)
-- 核心基座：V40.12 (2.5px 宽度 + Home 16px 无线)。
-- 表格专项：去紫色、灰阶 UI、禁止数字/型号意外换行。
-- 修复重点：重写 Section 屏蔽逻辑，解决 V40.14 可能导致的竖线反弹。
+Fashion Star Wiki - V40.16 (TOC Compact UI & Stability Fix)
+- 核心基座：V40.15 (表格优化 + Section 物理隔离)。
+- TOC 优化：大幅缩小右侧目录行间距，提升信息密度。
+- 视觉调整：TOC 字号维持 12.8px，padding 压缩至 0.15rem。
 ==========================================================================
 */
 
-/* 1. 核心变量 */
+/* 1. 核心变量 (略，保持 V40.15) */
 :root {
   --fs-accent: #8641A9;
   --fs-divider: rgba(0,0,0,0.15); 
@@ -28,142 +28,66 @@ Fashion Star Wiki - V40.15 (Table Refined + Section Forced Isolation)
   --fs-nav-inactive: #C4C7C5;
 }
 
-/* 2. 顶部清理 (保持 V40.12) */
-.md-logo, [class*="md-logo"], .md-header__button.md-logo, 
-.md-nav__title .md-logo, .md-nav__title[for="__drawer"] .md-icon,
-[class*="md-logo"] svg, [class*="md-logo"] img {
-  display: none !important; width: 0 !important; height: 0 !important;
-  position: absolute !important; pointer-events: none !important; 
-  opacity: 0 !important; margin: 0 !important; padding: 0 !important;
-}
+/* 2-4. 导航栏逻辑 (保持 V40.15 稳定版：Home 16px, 2.5px 竖线, Section 屏蔽) */
+.md-logo, [class*="md-logo"], .md-header__button.md-logo, .md-nav__title .md-logo, .md-nav__title[for="__drawer"] .md-icon, [class*="md-logo"] svg, [class*="md-logo"] img { display: none !important; }
 .md-header__title { margin-left: 0 !important; }
 .md-header__ellipsis { padding-left: 0.5rem !important; }
-
-/* 3. 滚动条 */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-thumb { background-color: var(--fs-divider); border-radius: 10px; }
+.md-nav__link, .md-nav__title { color: var(--fs-nav-inactive); transition: color 125ms, font-weight 125ms; }
+.md-nav__title, .md-nav__item--nested > .md-nav__link, .md-nav__item--nested > label.md-nav__link { font-size: 16px !important; }
+nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__link { font-size: 16px !important; }
+.md-nav__item:not(.md-nav__item--nested) > .md-nav__link { font-size: 14.5px !important; }
+li.md-nav__item--active > .md-nav__link, li.md-nav__item--active > label.md-nav__link { color: var(--fs-accent) !important; font-weight: 700 !important; position: relative; }
+li.md-nav__item--active > .md-nav__link::after, li.md-nav__item--active > label.md-nav__link::after { content: ""; position: absolute; left: -12px; top: 0; bottom: 0; width: 2.5px; background-color: var(--fs-accent); display: block !important; }
+nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__link::after { display: none !important; }
+.md-nav__item--section > .md-nav__link::after, .md-nav__item--section > label::after, .md-nav__item--section > .md-nav__link--active::after, .md-nav__title::after, [for="__drawer"]::after { display: none !important; content: none !important; width: 0 !important; opacity: 0 !important; }
 
-/* 4. 左侧导航栏 - 严控版 */
-
-/* [A] 颜色与字号基础 */
-.md-nav__link, .md-nav__title {
-  color: var(--fs-nav-inactive);
-  transition: color 125ms, font-weight 125ms;
+/* 5. 右侧目录 (TOC) - 紧凑化深度定制 */
+.md-sidebar--secondary .md-nav__title[for="__toc"] {
+  font-size: 0 !important;
+  color: transparent !important;
+  margin-bottom: 0.5rem !important;
 }
-
-/* [B] 顶级目录与 Home 的 16px 规范 */
-.md-nav__title,
-.md-nav__item--nested > .md-nav__link,
-.md-nav__item--nested > label.md-nav__link {
-  font-size: 16px !important;
-}
-
-nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__link {
-  font-size: 16px !important;
-}
-
-/* [C] 普通文章字号 14.5px */
-.md-nav__item:not(.md-nav__item--nested) > .md-nav__link {
-  font-size: 14.5px !important;
-}
-
-/* [D] 选中高亮 (2.5px 竖线基础) */
-li.md-nav__item--active > .md-nav__link,
-li.md-nav__item--active > label.md-nav__link {
-  color: var(--fs-accent) !important;
+.md-sidebar--secondary .md-nav__title[for="__toc"]::after {
+  font-size: 12.8px !important;
   font-weight: 700 !important;
-  position: relative;
+  color: var(--md-default-fg-color--light) !important;
+  display: block;
 }
-
-li.md-nav__item--active > .md-nav__link::after,
-li.md-nav__item--active > label.md-nav__link::after {
-  content: "";
-  position: absolute;
-  left: -12px;
-  top: 0;
-  bottom: 0;
-  width: 2.5px;
-  background-color: var(--fs-accent);
-  display: block !important;
-}
-
-/* [F] 物理隔离屏蔽 (核心修复区) */
-
-/* 1. 屏蔽 Home 竖线 */
-nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__link::after {
-  display: none !important;
-  content: none !important;
-}
-
-/* 2. 强制屏蔽 Section 标题及其 Label 的竖线 (使用最高优先级) */
-.md-nav__item--section > .md-nav__link::after,
-.md-nav__item--section > label::after,
-.md-nav__item--section > .md-nav__link--active::after,
-.md-nav__title::after,
-[for="__drawer"]::after {
-  display: none !important;
-  content: none !important;
-  width: 0 !important;
-  opacity: 0 !important;
-}
-
-.md-nav__link:hover { color: var(--fs-accent); }
-
-/* 8. 正文表格深度优化 (基于 V40.14 修正) */
-
-.md-typeset__table {
-  margin: 1.5rem 0 !important;
-  overflow-x: auto !important; /* 移动端滚动 */
-}
-
-.md-typeset table:not([class]) {
-  width: auto !important;
-  min-width: 100%;
-  border-collapse: collapse !important;
-  border: 1px solid var(--fs-divider) !important;
-  font-size: 14.5px !important;
-}
-
-/* 单元格：禁止数字、型号换行 */
-.md-typeset table:not([class]) th, 
-.md-typeset table:not([class]) td {
-  padding: 12px 16px !important;
-  border: 1px solid var(--fs-divider) !important;
-  text-align: left;
-}
-
-/* 锁定单词与数字不被截断 */
-.md-typeset table:not([class]) td code,
-.md-typeset table:not([class]) td strong,
-.md-typeset table:not([class]) th {
-  white-space: nowrap !important;
-}
-
-/* 表头：纯净灰阶 */
-.md-typeset table:not([class]) th {
-  background-color: var(--fs-table-header-bg) !important;
-  font-weight: 700 !important;
-  border-bottom: 2px solid var(--fs-divider) !important;
-}
-
-/* 隔行变色 */
-.md-typeset table:not([class]) tr:nth-child(even) {
-  background-color: rgba(0, 0, 0, 0.01);
-}
-
-/* 5/6/7/9 部分 (完全继承 V40.12) */
-.md-sidebar--secondary .md-nav__title[for="__toc"] { font-size: 0 !important; color: transparent !important; }
-.md-sidebar--secondary .md-nav__title[for="__toc"]::after { font-size: 12.8px !important; font-weight: 700 !important; color: var(--md-default-fg-color--light) !important; display: block; }
 [lang="en"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "On this page"; }
 [lang="zh"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "本页目录"; }
 
-@media screen and (min-width: 60em) {
-  .md-sidebar--secondary nav.md-nav--secondary { position: relative; padding-left: 16px !important; }
-  .md-sidebar--secondary nav.md-nav--secondary::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background-color: var(--fs-divider); z-index: 1; }
-  .md-grid { max-width: 1380px !important; }
-  .md-content { box-shadow: inset 1px 0 0 var(--fs-divider) !important; }
+/* [TOC 核心紧凑代码] */
+.md-sidebar--secondary .md-nav__link {
+  padding-top: 0.15rem !important;    /* 压缩上间距 */
+  padding-bottom: 0.15rem !important; /* 压缩下间距 */
+  font-size: 12px !important;         /* 稍微缩小字号 */
+  line-height: 1.4 !important;
 }
 
+@media screen and (min-width: 60em) {
+  .md-sidebar--secondary nav.md-nav--secondary {
+    position: relative;
+    padding-left: 16px !important;
+  }
+  /* TOC 左侧分割线 */
+  .md-sidebar--secondary nav.md-nav--secondary::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 1px; background-color: var(--fs-divider); z-index: 1;
+  }
+}
+
+/* 8. 正文表格深度优化 (保持 V40.15) */
+.md-typeset__table { margin: 1.5rem 0 !important; overflow-x: auto !important; }
+.md-typeset table:not([class]) { width: auto !important; min-width: 100%; border-collapse: collapse !important; border: 1px solid var(--fs-divider) !important; font-size: 14.5px !important; }
+.md-typeset table:not([class]) th, .md-typeset table:not([class]) td { padding: 12px 16px !important; border: 1px solid var(--fs-divider) !important; text-align: left; }
+.md-typeset table:not([class]) td code, .md-typeset table:not([class]) td strong, .md-typeset table:not([class]) th { white-space: nowrap !important; }
+.md-typeset table:not([class]) th { background-color: var(--fs-table-header-bg) !important; font-weight: 700 !important; border-bottom: 2px solid var(--fs-divider) !important; }
+.md-typeset table:not([class]) tr:nth-child(even) { background-color: rgba(0, 0, 0, 0.01); }
+
+/* 6-7/9. 其余布局 */
 .md-typeset { color: var(--fs-content-fg); }
 .md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4 { color: var(--fs-content-fg) !important; font-weight: 700 !important; margin-top: 1.6rem !important; }
 .md-typeset img { display: block !important; margin: 2rem auto !important; max-width: 80% !important; border-radius: 4px !important; box-shadow: none !important; }
+@media screen and (min-width: 60em) { .md-grid { max-width: 1380px !important; } .md-content { box-shadow: inset 1px 0 0 var(--fs-divider) !important; } }
