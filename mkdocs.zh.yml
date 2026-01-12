@@ -43,9 +43,11 @@ extra:
     - name: 🇺🇸 English
       link: /
       lang: en
+      icon: fashion/language
     - name: 🇨🇳 中文
       link: /zh/
       lang: zh
+      icon: fashion/language
 
 extra_css:
   - stylesheets/extra.css
