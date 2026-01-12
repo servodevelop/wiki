@@ -71,11 +71,11 @@ plugins:
 
 # 中文的导航目录
 nav:
-  - Home: index.md
-  - Uart Bus Servo:
+  - 首页: index.md
+  - Uart 总线舵机:
     - uart_servo/index.md
-    - Protocol: uart_servo/protocols/uart_rs485_protocol.md
-    - Specifications:
+    - 通讯协议: uart_servo/protocols/uart_rs485_protocol.md
+    - 规格参数:
       - RP6-U12H-M: uart_servo/specs/rp6-u12h-m.md
       - RX6-U12H-M: uart_servo/specs/rx6-u12h-m.md
       - HP6/RP6-U15H-M: uart_servo/specs/hp-rp6-u15h-m.md
@@ -89,23 +89,16 @@ nav:
       - HX8/RX8-U51H-M: uart_servo/specs/hx-rx8-u51h-m.md
       - RX18-U100H-M: uart_servo/specs/rx18-u100h-m.md
       - RX18-U101H-M: uart_servo/specs/rx18-u101h-m.md
-    - CAD Files:
+    - 图纸与模型下载:
       - RA8/RP8/RX8 Series: uart_servo/cad_files/ra8-rp8-rx8-series.md
       - RP6/RX6-U12 Series: uart_servo/cad_files/rp6-rx6-u12-series.md
       - RX6-U15 Series: uart_servo/cad_files/rx6-u15-series.md
       - RP6-U18 Series: uart_servo/cad_files/rp6-u18-series.md
       - RX18 Series: uart_servo/cad_files/rx18-series.md
-    - Software:
+    - 软件与工具:
       - PC Configuration Tool: uart_servo/software/pc_configuration_tool.md
       - Web Configuration Tool: uart_servo/software/web_configuration_tool.md
-    - SDK:
-      - PLC: 
-        - Sinamics: uart_servo/sdk/plc/sinamics_tia_portal_v19.md
-        - Codesys: uart_servo/sdk/plc/codesys.md
-        - Inovance: uart_servo/sdk/plc/inovance.md
-        - Inoproshop: uart_servo/sdk/plc/inovance_inoproshop.md
-        - GX Works: uart_servo/sdk/plc/mitsubishi_gx_works2.md
-        - Step7 MicroWin: uart_servo/sdk/plc/step7_microwin_smart.md
+    - 软件开发工具包 (SDK):
       - Stm32f103: uart_servo/sdk/stm32f103_sdk.md
       - Stm32f407: uart_servo/sdk/stm32f407_sdk.md
       - Arduino: uart_servo/sdk/arduino_sdk.md
@@ -114,24 +107,24 @@ nav:
       - C++: "uart_servo/sdk/cpp_sdk.md"
       - "C#": "uart_servo/sdk/csharp_sdk.md"
       - Ros: uart_servo/sdk/ros_sdk.md
-    - Document: uart_servo/documents/uc01_instruction_manual.md
-  - RS485 Bus Servo:
+    - 技术文档: uart_servo/documents/uc01_instruction_manual.md
+  - RS485 总线舵机:
     - rs485_servo/index.md
-    - Protocol: rs485_servo/protocols/uart_rs485_protocol.md
-    - Specifications:
+    - 通讯协议: rs485_servo/protocols/uart_rs485_protocol.md
+    - 规格参数:
       - HX8-R28H-M: rs485_servo/specs/hx8-r28h-m.md
       - HX8-R29H-M: rs485_servo/specs/hx8-r29h-m.md
       - HX8-R50H-M: rs485_servo/specs/hx8-r50h-m.md
       - HX8-R51H-M: rs485_servo/specs/hx8-r51h-m.md
       - RX18-R100H-M: rs485_servo/specs/rx18-r100h-m.md
       - RX18-R101H-M: rs485_servo/specs/rx18-r101h-m.md
-    - CAD Files:
+    - 图纸与模型下载:
       - HX8/RX8 R Series: rs485_servo/cad_files/hx8-rx8-r-series.md
       - HX18 R Series: rs485_servo/cad_files/hx18-r-series.md
-    - Software:
+    - 软件与工具:
       - PC Configuration Tool: rs485_servo/software/pc_configuration_tool.md
       - Web Configuration Tool: rs485_servo/software/web_configuration_tool.md
-    - SDK:
+    - 软件开发工具包 (SDK):
       - PLC:
         - Sinamics: rs485_servo/sdk/plc/sinamics_tia_portal_v19.md
         - Codesys: rs485_servo/sdk/plc/codesys.md
@@ -147,19 +140,19 @@ nav:
       - C++: rs485_servo/sdk/cpp_sdk.md
       - "C#": rs485_servo/sdk/csharp_sdk.md
       - Ros: rs485_servo/sdk/ros_sdk.md
-    - Document: rs485_servo/documents/uc01_instruction_manual.md
-  - CAN Bus Servo:
-    - Protocol: can_servo/protocols/can_protocol.md
-    - Specifications:
+    - 技术文档: rs485_servo/documents/uc01_instruction_manual.md
+  - CAN 总线舵机:
+    - 通讯协议: can_servo/protocols/can_protocol.md
+    - 规格参数:
       - HX8-C100H-M: can_servo/specs/hx8-c100h-m.md
       - HX8-C100W-M: can_servo/specs/hx8-c100w-m.md
-    - CAD Files:
+    - 图纸与模型下载:
       - HX8/RX8 C Series: can_servo/cad_files/hx8-rx8-c-series.md
       - HX18 C Series: can_servo/cad_files/hx18-c-series.md
-    - Software:
+    - 软件与工具:
       - PC Configuration Tool: can_servo/software/pc_configuration_tool.md
       - Web Configuration Tool: can_servo/software/web_configuration_tool.md
-    - SDK:
+    - 软件开发工具包 (SDK):
       - PLC:
         - Sinamics: can_servo/sdk/plc/sinamics_tia_portal_v19.md
         - Codesys: can_servo/sdk/plc/codesys.md
@@ -175,7 +168,7 @@ nav:
       - C++: can_servo/sdk/cpp_sdk.md
       - "C#": can_servo/sdk/csharp_sdk.md
       - Ros: can_servo/sdk/ros_sdk.md
-    - Document: can_servo/documents/uc01_instruction_manual.md
+    - 技术文档: can_servo/documents/uc01_instruction_manual.md
   - Robotic Arm:
     - StarAI Arm:
       - Quick 
