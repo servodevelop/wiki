@@ -42,11 +42,11 @@ extra:
     - name: 🇺🇸 English
       link: /
       lang: en
-      icon: fashion/language
+      icon: fashion/lan-switch
     - name: 🇨🇳 中文
       link: /zh/
       lang: zh
-      icon: fashion/language
+      icon: fashion/lan-switch
 
 extra_css:
   - stylesheets/extra.css
