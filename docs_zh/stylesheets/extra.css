@@ -1,19 +1,20 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V41.7
+Fashion Star Wiki - V41.8
 ==========================================================================
 [1. 界面精简]
-- 全平台仓库隐藏：完美屏蔽桌面端与手机端抽屉菜单的仓库入口 (V41.6.1 验证通过)。
+- 全平台仓库隐藏：屏蔽桌面端与手机端抽屉菜单的仓库入口。
 - Section 屏蔽：强制移除 Section 标题左侧竖线。
 
 [2. 右侧 TOC 优化]
 - 选中加粗：正在阅读的标题 (active) 设为 font-weight: 700。
 
-[3. 表格智能布局 - V41.7 重大修正]
+[3. 表格智能布局 - V41.8 语义化断行]
 - 宽度锁定：width: 100% 强制与正文宽度对齐。
-- 文字约束：强制 td/th 文本不换行 (white-space: nowrap)，直到撑满容器。
-- 智能列宽：table-layout: auto 允许浏览器根据内容长度自动分配宽度。
-- 溢出处理：当内容超过正文总宽度时，启用优雅的横向滚动。
+- 智能断行：移除 white-space: nowrap。改用 word-break: keep-all，
+  保护中文词组完整，但允许在括号、冒号、分号等标点处自然换行。
+- 优先级控制：table-layout: auto 确保浏览器优先挤压空余空间。
+- 视觉优化：padding 微调为 10px 14px，提升可读性。
 
 [4. 静态资源]
 - 国旗图标：适配矩形 PNG/SVG，支持圆角与垂直对齐。
@@ -84,11 +85,11 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 .md-sidebar--secondary .md-nav__link--active { font-weight: 700 !important; color: var(--fs-accent) !important; }
 .md-sidebar--secondary .md-nav__link::after { display: none !important; }
 
-/* 6. 表格智能布局 (V41.7 核心修正) */
+/* 6. 表格智能布局 (V41.8 语义化断行修正) */
 .md-typeset__table { 
   margin: 1.5rem 0 !important; 
   width: 100%; 
-  overflow-x: auto !important; /* 允许横向滚动防止内容挤压 */
+  overflow-x: auto !important;
 }
 
 .md-typeset table:not([class]) {
@@ -97,23 +98,32 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   border-collapse: collapse !important;
   border: 0.5px solid var(--fs-divider) !important;
   font-size: 14px !important; 
-  table-layout: auto !important; /* 核心：让列宽根据内容自动调整 */
+  table-layout: auto !important; 
 }
 
 .md-typeset table:not([class]) th, 
 .md-typeset table:not([class]) td {
-  padding: 10px 12px !important; /* 稍微压缩 padding 给文字留空间 */
+  padding: 10px 14px !important; 
   border: 0.5px solid var(--fs-divider) !important;
-  line-height: 1.4 !important;
+  line-height: 1.5 !important;
   text-align: left;
-  /* 核心约束：强制不换行，直到撑满表格 */
-  white-space: nowrap !important; 
+  
+  /* V41.8 核心逻辑： */
+  word-break: keep-all;         /* 尽量不拆散中文词组 */
+  overflow-wrap: break-word;    /* 允许在必要时断行 */
+  white-space: normal !important; /* 允许换行，但浏览器会自动识别标点符号作为换行点 */
 }
 
 .md-typeset table:not([class]) th {
   background-color: var(--fs-table-header-bg) !important;
   font-weight: 700 !important;
   border-bottom: 1.2px solid var(--fs-divider) !important;
+  white-space: nowrap !important; /* 表头通常较短，强制不换行保持整齐 */
+}
+
+/* 针对代码块列的特殊保护 */
+.md-typeset table:not([class]) td code {
+  white-space: nowrap !important;
 }
 
 /* 7. 语言切换器图标 */
