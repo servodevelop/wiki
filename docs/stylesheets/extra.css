@@ -196,7 +196,7 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   .md-content { box-shadow: inset 1px 0 0 var(--fs-divider) !important; }
 }
 
-/* 导航栏语言切换器中的国旗样式 */
+/* 10. 导航栏语言切换器中的国旗样式 */
 img.flag-icon {
   height: 15px;               /* 高度设定，略小于文字高度更精致 */
   width: auto;                /* 宽度自动，保持矩形比例 */
