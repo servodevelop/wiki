@@ -1,4 +1,4 @@
-# UART Bus Servo 25KG
+# UART Bus Servo 25KG 0000
 
 ![U25产品图片](image/U25产品图片.png)
 
