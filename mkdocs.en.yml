@@ -87,11 +87,14 @@ nav:
       - RX6-U12H-M: uart_servo/specs/rx6-u12h-m.md
       - HP6/RP6-U15H-M: uart_servo/specs/hp-rp6-u15h-m.md
       - RP6-U18H-M: uart_servo/specs/rp6-u18h-m.md
-      - HA8/RA8-U25(H)-M: uart_servo/specs/ha-ra8-u25h-m.md
+      - HA8/RA8-U25-M: uart_servo/specs/ha-ra8-u25-m.md
+      - HA8/RA8-U25H-M: uart_servo/specs/ha-ra8-u25h-m.md
       - HX8/RX8-U28H-M: uart_servo/specs/hx-rx8-u28h-m.md
       - HX8/RX8-U29H-M: uart_servo/specs/hx-rx8-u29h-m.md
-      - HA8/RA8-U35(H)-M: uart_servo/specs/ha-ra8-u35h-m.md
-      - HA8/RA8-U45(H)-M: uart_servo/specs/ha-ra8-u45h-m.md
+      - HA8/RA8-U35H-M: uart_servo/specs/ha-ra8-u35-m.md
+      - HA8/RA8-U35H-M: uart_servo/specs/ha-ra8-u35h-m.md
+      - HA8/RA8-U45-M: uart_servo/specs/ha-ra8-u45-m.md
+      - HA8/RA8-U45H-M: uart_servo/specs/ha-ra8-u45h-m.md
       - HX8/RX8-U50H-M: uart_servo/specs/hx-rx8-u50h-m.md
       - HX8/RX8-U51H-M: uart_servo/specs/hx-rx8-u51h-m.md
       - RX18-U100H-M: uart_servo/specs/rx18-u100h-m.md
