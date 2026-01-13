@@ -1,4 +1,4 @@
-# UART Bus Servo 25KG Test
+# UART Bus Servo 25KG
 
 ![U25产品图片](image/U25产品图片.png)
 
