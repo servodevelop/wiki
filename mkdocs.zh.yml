@@ -1,6 +1,8 @@
 site_name: 华馨京科技 Wiki
 site_url: https://wiki.fashionstar.com.hk/zh/
 use_directory_urls: true
+repo_url: https://github.com/servodevelop/wiki
+edit_uri: edit/main/docs_zh/  # 根据你的分支和目录微调
 
 docs_dir: docs_zh
 site_dir: site/zh
@@ -26,6 +28,7 @@ theme:
     - toc.follow
     - content.tabs.link
     - navigation.tabs
+    - content.action.edit  # 必须开启，才会出现铅笔图标
 
 
   palette:
