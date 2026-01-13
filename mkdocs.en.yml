@@ -42,10 +42,10 @@ theme:
 
 extra:
   alternate:            # 语言切换器，必须用绝对路径  [oai_citation:4‡squidfunk.github.io](https://squidfunk.github.io/mkdocs-material/setup/changing-the-language/)
-    - name: "<img src='/assets/flags/us.png' class='flag-icon' /> English"
+    - name: "<img src='/assets/flags/us.svg' class='flag-icon' /> English"
       link: /
       lang: en
-    - name: "<img src='/assets/flags/cn.png' class='flag-icon' /> 中文"
+    - name: "<img src='/assets/flags/cn.svg' class='flag-icon' /> 中文"
       link: /zh/
       lang: zh
 
