@@ -1,6 +1,6 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V41.11
+Fashion Star Wiki - V41.12
 ==========================================================================
 [1. 核心视觉 - V41.0 物理对齐]
 - 标题加粗：正文 h1-h4 锁定 700 加粗。
@@ -11,16 +11,17 @@ Fashion Star Wiki - V41.11
 - 全平台仓库隐藏：桌面端与手机抽屉内的 GitHub 链接彻底屏蔽。
 - Section 屏蔽：Section 标题禁止产生左侧竖线。
 
-[3. 表格性能优化 - 恢复 41.7/41.10]
-- 高度恢复：padding 回归 8px 16px 紧凑规格 (针对 V41.10 修正)。
+[3. 表格性能优化]
+- 高度恢复：padding 保持 8px 16px 紧凑规格。
 - 0.5px 边框：全表极细边框，table-layout: auto 智能分配列宽。
 - 文字约束：white-space: nowrap 强制型号不换行。
 
-[4. 右侧 TOC - 极致紧凑]
-- 物理压缩：padding (0.05rem 0)，line-height (1.2)。
+[4. 右侧 TOC - 极致效率 (V41.12 再次确认)]
+- 物理压缩：padding (0.05rem 0)，line-height (1.2)，margin (0)。
+- 视觉：保持 12.5px 字号， active 状态加粗。
 
-[5. 静态资源 - 恢复第 10 点]
-- 国旗图标：圆角、阴影、垂直对齐约束补全。
+[5. 静态资源]
+- 国旗图标：圆角、阴影、垂直对齐约束。
 ==========================================================================
 */
 
@@ -83,7 +84,7 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 .md-nav__item--section > label::after,
 .md-nav__title::after, [for="__drawer"]::after { display: none !important; content: none !important; }
 
-/* 5. 右侧目录 (TOC) */
+/* 5. 右侧目录 (TOC) - 效率强化版 */
 .md-sidebar--secondary .md-nav__title[for="__toc"] {
   font-size: 0 !important; color: transparent !important; margin-bottom: 0.4rem !important;
 }
@@ -94,7 +95,12 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 [lang="en"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "On this page"; }
 [lang="zh"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "本页目录"; }
 
-.md-sidebar--secondary .md-nav__link { padding: 0.05rem 0 !important; line-height: 1.2 !important; font-size: 12.5px !important; }
+.md-sidebar--secondary .md-nav__link { 
+  padding: 0.05rem 0 !important; 
+  margin: 0 !important;
+  line-height: 1.2 !important; 
+  font-size: 12.5px !important; 
+}
 .md-sidebar--secondary .md-nav__link--active { font-weight: 700 !important; color: var(--fs-accent) !important; }
 .md-sidebar--secondary .md-nav__link::after { display: none !important; }
 
@@ -112,7 +118,7 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   max-width: 80% !important; border-radius: 4px !important; box-shadow: none !important; 
 }
 
-/* 8. 表格优化 (回归紧凑高度与 0.5px 规格) */
+/* 8. 表格优化 */
 .md-typeset__table { margin: 1.5rem 0 !important; overflow-x: auto !important; width: 100%; }
 .md-typeset table:not([class]) {
   width: 100% !important; 
@@ -124,7 +130,7 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 }
 .md-typeset table:not([class]) th, 
 .md-typeset table:not([class]) td {
-  padding: 8px 16px !important; /* 恢复紧凑高度 */
+  padding: 8px 16px !important; 
   border: 0.5px solid var(--fs-divider) !important;
   line-height: 1.4 !important;
   text-align: left;
@@ -139,7 +145,7 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   background-color: rgba(0, 0, 0, 0.01);
 }
 
-/* 9. 响应式与国旗约束 (补全第 10 点) */
+/* 9. 静态资源 */
 img.flag-icon {
   height: 15px; width: auto; border-radius: 2px;
   vertical-align: middle; margin-right: 8px; margin-bottom: 2px;
