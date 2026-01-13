@@ -85,7 +85,7 @@
 <img src="image/U35_3D图.png" alt="U35_3D图" style="zoom:50%;" />
 
 ### 接口定义
-<img src="image/U35接口图.png" alt="U35接口图" style="zoom:50%;" />
+<img src="image/U35.png" alt="U35" style="zoom:50%;" />
 
 ### 连线说明 
 **串联**
