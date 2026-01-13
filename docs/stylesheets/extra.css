@@ -1,10 +1,11 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V41.5
+Fashion Star Wiki - V41.6
 ==========================================================================
-[1. 界面精简 - V41.5 修正]
-- Section 屏蔽：强制移除 Section 标题左侧的竖线，解决 V41.4 的反弹问题。
-- 仓库隐藏：继续屏蔽顶部导航栏仓库链接 (.md-header__source)。
+[1. 界面精简 - 深度修正]
+- 全平台仓库隐藏：同时屏蔽桌面端 (.md-header__source) 与 手机端菜单 (.md-nav__source)。
+- ！！！注意：此操作仅针对仓库链接卡片，不影响文档 Section 标题！！！
+- Section 屏蔽：强制移除 Section 标题左侧竖线。
 
 [2. 右侧 TOC 优化]
 - 选中加粗：正在阅读的标题 (active) 设为 font-weight: 700。
@@ -13,10 +14,6 @@ Fashion Star Wiki - V41.5
 [3. 正文表格优化]
 - 行高压缩：line-height 1.4，padding 8px。
 - 宽度锁定：width: 100% 强制与正文宽度对齐。
-- 换行控制：锁定 <th>、<code>、<strong> 禁止断行。
-
-[4. 静态资源]
-- 国旗图标：适配矩形 PNG/SVG，支持圆角与垂直对齐。
 ==========================================================================
 */
 
@@ -41,13 +38,17 @@ Fashion Star Wiki - V41.5
   --fs-nav-inactive: #C4C7C5;
 }
 
-/* 2. 顶部导航清理 */
+/* 2. 顶部导航与菜单清理 */
 .md-logo, [class*="md-logo"], .md-header__button.md-logo {
   display: none !important;
 }
-.md-header__source {
+
+/* 精准切除 GitHub/GitLab 入口，不伤及导航菜单内容 */
+.md-header__source, 
+.md-nav__source {
   display: none !important;
 }
+
 .md-header__title { margin-left: 0 !important; }
 .md-header__ellipsis { padding-left: 0.5rem !important; }
 
@@ -90,12 +91,12 @@ li.md-nav__item--active > label.md-nav__link::after {
 }
 
 /* [C] 关键屏蔽逻辑：针对 Section 和 Home */
-/* 屏蔽顶级 Home 竖线 */
+/* 屏蔽一级 Home 竖线 */
 nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__link::after {
   display: none !important;
 }
 
-/* 强制屏蔽 Section 标题及一切非内容文章项的竖线 (解决 V41.4 反弹) */
+/* 强制屏蔽 Section 标题及一切非内容文章项的竖线 */
 .md-nav__item--section > .md-nav__link::after,
 .md-nav__item--section > label::after,
 .md-nav__title::after,
@@ -105,16 +106,6 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 }
 
 /* 5. 右侧目录 (TOC) */
-.md-sidebar--secondary .md-nav__title[for="__toc"] {
-  font-size: 0 !important; color: transparent !important; margin-bottom: 0.4rem !important;
-}
-.md-sidebar--secondary .md-nav__title[for="__toc"]::after {
-  font-size: 12.8px !important; font-weight: 700 !important;
-  color: var(--md-default-fg-color--light) !important; display: block;
-}
-[lang="en"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "On this page"; }
-[lang="zh"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "本页目录"; }
-
 .md-sidebar--secondary .md-nav__link {
   padding: 0.1rem 0 !important; 
   line-height: 1.3 !important;
@@ -124,47 +115,4 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   font-weight: 700 !important;
   color: var(--fs-accent) !important;
 }
-.md-sidebar--secondary .md-nav__link::after { display: none !important; }
-
-@media screen and (min-width: 60em) {
-  .md-sidebar--secondary nav.md-nav--secondary { position: relative; padding-left: 16px !important; }
-  .md-sidebar--secondary nav.md-nav--secondary::before {
-    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
-    width: 1px; background-color: var(--fs-divider); z-index: 1;
-  }
-}
-
-/* 6. 表格深度优化 (V41.5) */
-.md-typeset__table { margin: 1.5rem 0 !important; overflow-x: auto !important; width: 100%; }
-.md-typeset table:not([class]) {
-  width: 100% !important; 
-  display: table;
-  border-collapse: collapse !important;
-  border: 0.5px solid var(--fs-divider) !important;
-  font-size: 14.5px !important;
-}
-.md-typeset table:not([class]) th, 
-.md-typeset table:not([class]) td {
-  padding: 8px 16px !important; 
-  border: 0.5px solid var(--fs-divider) !important;
-  line-height: 1.4 !important;
-  text-align: left;
-}
-.md-typeset table:not([class]) td code, 
-.md-typeset table:not([class]) td strong, 
-.md-typeset table:not([class]) th {
-  white-space: nowrap !important;
-}
-.md-typeset table:not([class]) th {
-  background-color: var(--fs-table-header-bg) !important;
-  font-weight: 700 !important;
-  border-bottom: 1.5px solid var(--fs-divider) !important;
-}
-
-/* 7. 语言切换器图标 */
-img.flag-icon {
-  height: 15px; width: auto; border-radius: 2px;
-  vertical-align: middle; margin-right: 8px; margin-bottom: 2px;
-  display: inline-block; border: 0.5px solid rgba(0,0,0,0.05); 
-}
-.md-select__link img.flag-icon { max-width: none; }
+.md-sidebar--secondary .md-nav__link::after { display
