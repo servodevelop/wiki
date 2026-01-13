@@ -1,18 +1,18 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V41.2
+Fashion Star Wiki - V41.3
 ==========================================================================
 [1. 核心导航优化]
 - 竖线规格：全路径高亮，宽度 2.5px，上下顶满。
 - Home 专项：锁定顶级 Home 16px，屏蔽竖线。
-- Section 隔离：强制屏蔽 Section 标题竖线。
 
-[2. 右侧 TOC 优化]
-- 极致紧凑：压缩 padding (0.1rem) 与 line-height (1.3)，字号 12.5px。
+[2. 右侧 TOC 优化 - V41.3 修正]
+- 选中加粗：正在阅读的标题 (active) 设为 font-weight: 700，提升定位感。
+- 极致紧凑：保持 padding (0.1rem) 与 line-height (1.3)，字号 12.5px。
 
-[3. 正文表格优化 - V41.2 重大变更]
-- 行高压缩：line-height 降至 1.4，padding 降至 8pxx16px，提升阅读效率。
-- 宽度锁定：width: 100% 强制与正文宽度对齐，确保视觉一致性。
+[3. 正文表格优化]
+- 行高压缩：line-height 1.4，padding 8px，提升阅读效率。
+- 宽度锁定：width: 100% 强制与正文宽度对齐。
 - 换行控制：锁定 <th>、<code>、<strong> 禁止断行。
 
 [4. 静态资源]
@@ -101,7 +101,7 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   width: 0 !important;
 }
 
-/* 5. 右侧目录 (TOC) */
+/* 5. 右侧目录 (TOC) - V41.3 修正：选中加粗 */
 .md-sidebar--secondary .md-nav__title[for="__toc"] {
   font-size: 0 !important; color: transparent !important; margin-bottom: 0.4rem !important;
 }
@@ -117,7 +117,15 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   margin: 0 !important;
   line-height: 1.3 !important;
   font-size: 12.5px !important;
+  transition: all 125ms;
 }
+
+/* 关键修正：当前阅读项加粗 */
+.md-sidebar--secondary .md-nav__link--active {
+  font-weight: 700 !important;
+  color: var(--fs-accent) !important;
+}
+
 .md-sidebar--secondary .md-nav__link::after { display: none !important; }
 
 @media screen and (min-width: 60em) {
@@ -142,21 +150,20 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   max-width: 80% !important; border-radius: 4px !important; box-shadow: none !important; 
 }
 
-/* 8. 表格深度优化 (V41.2 宽度锁定与行高降低) */
+/* 8. 表格深度优化 (V41.3) */
 .md-typeset__table { margin: 1.5rem 0 !important; overflow-x: auto !important; width: 100%; }
 .md-typeset table:not([class]) {
-  width: 100% !important; /* 强制总宽度与正文一致 */
-  display: table;        /* 确保 table 行为 */
+  width: 100% !important; 
+  display: table;
   border-collapse: collapse !important;
   border: 0.5px solid var(--fs-divider) !important;
   font-size: 14.5px !important;
-  table-layout: auto;
 }
 .md-typeset table:not([class]) th, 
 .md-typeset table:not([class]) td {
-  padding: 8px 16px !important; /* 行高降低：从 12px 压缩至 8px */
+  padding: 8px 16px !important; 
   border: 0.5px solid var(--fs-divider) !important;
-  line-height: 1.4 !important;  /* 显式行高控制 */
+  line-height: 1.4 !important;
   text-align: left;
 }
 .md-typeset table:not([class]) td code, 
