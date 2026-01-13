@@ -28,6 +28,7 @@ theme:
     - content.tabs.link
     - navigation.tabs
     - content.action.edit  # 必须开启，才会出现铅笔图标
+    - navigation.footer
 
   palette:
     - scheme: default
@@ -51,6 +52,10 @@ extra:
     - name: "<img src='/assets/flags/cn.svg' class='flag-icon' /> 中文"
       link: /zh/
       lang: zh
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/servodevelop  
+      
 
 extra_css:
   - stylesheets/extra.css
