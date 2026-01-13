@@ -1,18 +1,22 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V41.6.1
+Fashion Star Wiki - V41.7
 ==========================================================================
-[1. 界面精简 - 核心修正]
-- 深度屏蔽仓库：同时锁定桌面端 (.md-header__source) 与 手机侧边栏抽屉内的仓库项。
-- 手机端专项：通过锁定特定的导航项结构，确保抽屉菜单顶部的 GitHub 卡片彻底消失。
-- Section 屏蔽：保持 Section 标题左侧无竖线。
+[1. 界面精简]
+- 全平台仓库隐藏：完美屏蔽桌面端与手机端抽屉菜单的仓库入口 (V41.6.1 验证通过)。
+- Section 屏蔽：强制移除 Section 标题左侧竖线。
 
 [2. 右侧 TOC 优化]
 - 选中加粗：正在阅读的标题 (active) 设为 font-weight: 700。
-- 极致紧凑：padding (0.1rem)，line-height (1.3)，字号 12.5px。
 
-[3. 正文表格优化]
-- 继承 V41.5 逻辑：line-height 1.4，padding 8px，width: 100%。
+[3. 表格智能布局 - V41.7 重大修正]
+- 宽度锁定：width: 100% 强制与正文宽度对齐。
+- 文字约束：强制 td/th 文本不换行 (white-space: nowrap)，直到撑满容器。
+- 智能列宽：table-layout: auto 允许浏览器根据内容长度自动分配宽度。
+- 溢出处理：当内容超过正文总宽度时，启用优雅的横向滚动。
+
+[4. 静态资源]
+- 国旗图标：适配矩形 PNG/SVG，支持圆角与垂直对齐。
 ==========================================================================
 */
 
@@ -37,24 +41,9 @@ Fashion Star Wiki - V41.6.1
   --fs-nav-inactive: #C4C7C5;
 }
 
-/* 2. 顶部导航与菜单清理 (V41.6.1 强制隐藏仓库) */
-.md-logo, [class*="md-logo"], .md-header__button.md-logo {
-  display: none !important;
-}
-
-/* [核心修正] 同时隐藏桌面端 Header 和 移动端 Drawer 里的仓库入口 */
-.md-header__source, 
-.md-nav__source,
-.md-nav__item--site .md-nav__link--active[href*="github.com"], /* 针对部分主题版本的特殊定位 */
-[data-md-component="source"] { 
-  display: none !important;
-  visibility: hidden !important;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow: hidden !important;
-}
-
+/* 2. 顶部导航与菜单清理 */
+.md-logo, [class*="md-logo"], .md-header__button.md-logo { display: none !important; }
+.md-header__source, .md-nav__source, [data-md-component="source"] { display: none !important; }
 .md-header__title { margin-left: 0 !important; }
 .md-header__ellipsis { padding-left: 0.5rem !important; }
 
@@ -68,13 +57,8 @@ Fashion Star Wiki - V41.6.1
   color: var(--fs-nav-inactive);
   transition: color 125ms, font-weight 125ms;
 }
-.md-nav__title,
-.md-nav__item--nested > .md-nav__link {
-  font-size: 16px !important;
-}
-.md-nav__item:not(.md-nav__item--nested) > .md-nav__link {
-  font-size: 14.5px !important;
-}
+.md-nav__title, .md-nav__item--nested > .md-nav__link { font-size: 16px !important; }
+.md-nav__item:not(.md-nav__item--nested) > .md-nav__link { font-size: 14.5px !important; }
 
 li.md-nav__item--active > .md-nav__link,
 li.md-nav__item--active > label.md-nav__link {
@@ -85,52 +69,51 @@ li.md-nav__item--active > label.md-nav__link {
 
 li.md-nav__item--active > .md-nav__link::after,
 li.md-nav__item--active > label.md-nav__link::after {
-  content: "";
-  position: absolute;
-  left: -12px; top: 0; bottom: 0;
-  width: 2.5px;
-  background-color: var(--fs-accent);
-  display: block !important;
+  content: ""; position: absolute; left: -12px; top: 0; bottom: 0;
+  width: 2.5px; background-color: var(--fs-accent); display: block !important;
 }
 
-/* 屏蔽逻辑：针对 Section 和 Home */
-nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__link::after {
-  display: none !important;
-}
-
+/* 屏蔽逻辑 */
+nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__link::after { display: none !important; }
 .md-nav__item--section > .md-nav__link::after,
 .md-nav__item--section > label::after,
-.md-nav__title::after,
-[for="__drawer"]::after {
-  display: none !important;
-  content: none !important;
-}
+.md-nav__title::after, [for="__drawer"]::after { display: none !important; content: none !important; }
 
 /* 5. 右侧目录 (TOC) */
-.md-sidebar--secondary .md-nav__link {
-  padding: 0.1rem 0 !important; 
-  line-height: 1.3 !important;
-  font-size: 12.5px !important;
-}
-.md-sidebar--secondary .md-nav__link--active {
-  font-weight: 700 !important;
-  color: var(--fs-accent) !important;
-}
+.md-sidebar--secondary .md-nav__link { padding: 0.1rem 0 !important; line-height: 1.3 !important; font-size: 12.5px !important; }
+.md-sidebar--secondary .md-nav__link--active { font-weight: 700 !important; color: var(--fs-accent) !important; }
 .md-sidebar--secondary .md-nav__link::after { display: none !important; }
 
-/* 6. 表格深度优化 (V41.5 规格) */
-.md-typeset__table { margin: 1.5rem 0 !important; width: 100%; }
+/* 6. 表格智能布局 (V41.7 核心修正) */
+.md-typeset__table { 
+  margin: 1.5rem 0 !important; 
+  width: 100%; 
+  overflow-x: auto !important; /* 允许横向滚动防止内容挤压 */
+}
+
 .md-typeset table:not([class]) {
   width: 100% !important; 
+  display: table !important;
   border-collapse: collapse !important;
   border: 0.5px solid var(--fs-divider) !important;
-  font-size: 14.5px !important;
+  font-size: 14px !important; 
+  table-layout: auto !important; /* 核心：让列宽根据内容自动调整 */
 }
+
 .md-typeset table:not([class]) th, 
 .md-typeset table:not([class]) td {
-  padding: 8px 16px !important; 
-  line-height: 1.4 !important;
+  padding: 10px 12px !important; /* 稍微压缩 padding 给文字留空间 */
   border: 0.5px solid var(--fs-divider) !important;
+  line-height: 1.4 !important;
+  text-align: left;
+  /* 核心约束：强制不换行，直到撑满表格 */
+  white-space: nowrap !important; 
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--fs-table-header-bg) !important;
+  font-weight: 700 !important;
+  border-bottom: 1.2px solid var(--fs-divider) !important;
 }
 
 /* 7. 语言切换器图标 */
