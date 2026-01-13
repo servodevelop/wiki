@@ -1,7 +1,5 @@
 # UART总线伺服舵机35KG系列
 
-<img src="./image/U35产品图片.png" alt="U35产品图片" style="max-width: 45%; height: auto;" />
-
 ![U35产品图片](image/U35产品图片.png)
 
 ## 产品特点
@@ -40,7 +38,7 @@
 
 | 参 数                    | 规 格                                |
 | ------------------------ | ------------------------------------ |
-| **工作电压**             | 6.0-8.4v                             |
+| **工作电压**             | 9.0-12.6v                            |
 | **马达类型**             | 铁芯马达                             |
 | **位置传感器**           | 12bit 非接触式绝对值编码器（磁编码） |
 | **有效角度（行程范围）** | ±180°（单圈角度）                    |
@@ -76,36 +74,36 @@
 
 ### 特性曲线
 
-<img src="image/U35特性曲线.png" alt="U35特性曲线"  />
+![U35特性曲线](./image/U35特性曲线.png)
 
 ### 过载曲线
-<img src="image/U35过载曲线.png" alt="U35过载曲线" style="zoom:50%;" />
+![U35过载曲线](./image/U35过载曲线.png)
 
 ## 图纸及安装说明
 
 ### 尺寸图
-<img src="image/U35_3D图.png" alt="U35_3D图" style="zoom:50%;" />
+![U35_3D图](./image/U35_3D图.png)
 
 ### 接口定义
-<img src="image/U35.png" alt="U35" style="zoom:50%;" />
+![U35](./image/U35.png)
 
 ### 连线说明 
 **串联**
 
-<img src="image/U35串联.png" alt="U35串联" style="zoom:50%;" />
+![U35串联](./image/U35串联.png)
 
 **并联**
 
-<img src="./image/U35并联.png" alt="U35并联" style="zoom:50%;" />
+![U35并联](./image/U35并联.png)
 
 ### 安装说明
 
 - **单轴**
 
-  <img src="./image/U35单轴安装.png" alt="U35单轴安装" style="zoom:50%;" />
+  ![U35单轴安装](./image/U35单轴安装.png)
 
 - **双轴**
-<img src="image/U35双轴安装.png" alt="U35双轴安装" style="zoom:50%;" />
+![U35双轴安装](./image/U35双轴安装.png)
 
 ## 开发与兼容性
 
@@ -119,14 +117,14 @@
 
 欢迎访问官方网站 www.fashionrobo.com 获取更多技术资料。
 
-<img src="image/development environment.png" alt="development environment" style="zoom:50%;" />
+![development environment](./image/development environment.png)
 
 ## 保护功能
 
 - 所有保护参数都可以通过上位机设定修改。
 - 状态标志位定义如下：1为进入保护，0为工作正常。
 
-<img src="image/protection.png" alt="protection" style="zoom:50%;" />
+![protection](./image/protection.png)
 
 > [!WARNING]
 > 任何参数的修改都可能对产品造成损害或影响其正常运行。请谨慎操作，并在更改前确保已充分评估可能的风险。
@@ -218,7 +216,7 @@
 
 示例：ID2舵机 以最大功率，500ms时间旋转到90度的位置
 
-<img src="./image/transmit_command.png" alt="transmit_command" style="zoom:50%;" />
+![transmit_command](./image/transmit_command.png)
 
 - **响应协议格式**
 
@@ -228,7 +226,7 @@
 
 *解包：0x86 0x03是当前的舵机角度，解包后是902，转换为角度制就是90.2度。*
 
-<img src="./image/respond_command.png" alt="respond_command" style="zoom:50%;" />
+![respond_command](./image/respond_command.png)
 
 ### 指令间隔建议
 
@@ -258,7 +256,7 @@
 | 高级单圈角度控制  (基于时间) [11] | 目标角度、运动时间、加速时间、减速时间、运行功率 |
 | 高级单圈角度控制  (基于速度) [12] | 目标角度、运动速度、加速时间、减速时间、运行功率 |
 
-<img src="./image/Velocity Profile.png" alt="Velocity Profile" style="zoom:50%;" />
+![Velocity Profile](./image/Velocity Profile.png)
 
 **角度回读**[10]:向指定ID的伺服舵机发送单圈角度读取指令，可以收到当前位置的角度数据。
 
@@ -276,7 +274,7 @@
 | 高级多圈角度控制  (基于时间) [14] | 目标角度、运动时间、加速时间、减速时间、运行功率 |
 | 高级多圈角度控制  (基于速度) [15] | 目标角度、运动速度、加速时间、减速时间、运行功率 |
 
-<img src="./image/Velocity Profile.png" alt="Velocity Profile" style="zoom:50%;" />
+![Velocity Profile](./image/Velocity Profile.png)
 
 **多圈角度读取**[16]:向指定ID的伺服舵机发送多圈角度读取指令，可以收到当前位置的角度数据。
 
@@ -288,7 +286,7 @@
 
   例如：如图所示，A1 点当前角度为 6,880°，重设后的角度为 θ1。A2 点当前角度为 6,800°，重设后的角度为 -θ2。
 
-<img src="./image/多圈重置.png" alt="多圈重置" style="zoom:50%;" />
+![多圈重置](./image/多圈重置.png)
 
 **断电角度记忆**
 
@@ -302,7 +300,7 @@
 
   例如：如图所示，A 点为断电前的角度 6,800°。若断电期间舵机被外力转动，最终停在 B1 点，则上电后读取角度为 6,920°；若停在 B2 点，则读取角度为 6,680°。
 
-<img src="./image/掉电记忆.png" alt="掉电记忆" style="zoom:50%;" />
+![掉电记忆](./image/掉电记忆.png)
 
 ### 阻尼模式[9]
 
@@ -391,7 +389,7 @@
 
 - **舵机状态**
 
-  <img src="./image/protection.png" alt="protection" style="zoom:50%;" />
+  ![protection](./image/protection.png)
 
 ### 任意原点设定[23]
 
