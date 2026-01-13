@@ -111,6 +111,13 @@ nav:
     - 软件与工具:
       - PC Configuration Tool: uart_servo/software/pc_configuration_tool.md
       - Web Configuration Tool: uart_servo/software/web_configuration_tool.md
+    - PLC应用:
+      - 西门子博途V19: uart_servo/plc/sinamics_tia_portal_v19.md
+      - 西门子Step7 MicroWin: uart_servo/plc/step7_microwin_smart.md
+      - 汇川AutoShop: uart_servo/plc/autoshop.md
+      - 汇川Inoproshop: uart_servo/plc/inovance_inoproshop.md
+      - GX Works: uart_servo/plc/mitsubishi_gx_works2.md
+      - Codesys: uart_servo/plc/codesys.md
     - 软件开发工具包 (SDK):
       - Stm32f103: uart_servo/sdk/stm32f103_sdk.md
       - Stm32f407: uart_servo/sdk/stm32f407_sdk.md
@@ -137,14 +144,14 @@ nav:
     - 软件与工具:
       - PC Configuration Tool: rs485_servo/software/pc_configuration_tool.md
       - Web Configuration Tool: rs485_servo/software/web_configuration_tool.md
+    - PLC应用:
+      - 西门子博途V19: rs485_servo/plc/sinamics_tia_portal_v19.md
+      - 西门子Step7 MicroWin: rs485_servo/plc/step7_microwin_smart.md
+      - 汇川AutoShop: rs485_servo/plc/autoshop.md
+      - 汇川Inoproshop: rs485_servo/plc/inovance_inoproshop.md
+      - GX Works: rs485_servo/plc/mitsubishi_gx_works2.md
+      - Codesys: rs485_servo/plc/codesys.md
     - 软件开发工具包 (SDK):
-      - PLC:
-        - Sinamics: rs485_servo/sdk/plc/sinamics_tia_portal_v19.md
-        - Codesys: rs485_servo/sdk/plc/codesys.md
-        - Inovance: rs485_servo/sdk/plc/inovance.md
-        - Inoproshop: rs485_servo/sdk/plc/inovance_inoproshop.md
-        - GX Works: rs485_servo/sdk/plc/mitsubishi_gx_works2.md
-        - Step7 MicroWin: rs485_servo/sdk/plc/step7_microwin_smart.md
       - Stm32f103: rs485_servo/sdk/stm32f103_sdk.md
       - Stm32f407: rs485_servo/sdk/stm32f407_sdk.md
       - Arduino: rs485_servo/sdk/arduino_sdk.md
@@ -165,14 +172,14 @@ nav:
     - 软件与工具:
       - PC Configuration Tool: can_servo/software/pc_configuration_tool.md
       - Web Configuration Tool: can_servo/software/web_configuration_tool.md
+    - PLC应用:
+      - 西门子博途V19: can_servo/plc/sinamics_tia_portal_v19.md
+      - 西门子Step7 MicroWin: can_servo/plc/step7_microwin_smart.md
+      - 汇川AutoShop: can_servo/plc/autoshop.md
+      - 汇川Inoproshop: can_servo/plc/inovance_inoproshop.md
+      - GX Works: can_servo/plc/mitsubishi_gx_works2.md
+      - Codesys: can_servo/plc/codesys.md
     - 软件开发工具包 (SDK):
-      - PLC:
-        - Sinamics: can_servo/sdk/plc/sinamics_tia_portal_v19.md
-        - Codesys: can_servo/sdk/plc/codesys.md
-        - Inovance: can_servo/sdk/plc/inovance.md
-        - Inoproshop: can_servo/sdk/plc/inovance_inoproshop.md
-        - GX Works: can_servo/sdk/plc/mitsubishi_gx_works2.md
-        - Step7 MicroWin: can_servo/sdk/plc/step7_microwin_smart.md
       - Stm32f103: can_servo/sdk/stm32f103_sdk.md
       - Stm32f407: can_servo/sdk/stm32f407_sdk.md
       - Arduino: can_servo/sdk/arduino_sdk.md
