@@ -1,6 +1,8 @@
 site_name: Fashion Star Wiki
 site_url: https://wiki.fashionstar.com.hk/
 use_directory_urls: true
+repo_url: https://github.com/servodevelop/wiki
+edit_uri: main/docs/  # 根据你的分支和目录微调
 
 docs_dir: docs
 site_dir: site
@@ -25,6 +27,7 @@ theme:
     - toc.follow
     - content.tabs.link
     - navigation.tabs
+    - content.action.edit  # 必须开启，才会出现铅笔图标
 
   palette:
     - scheme: default
