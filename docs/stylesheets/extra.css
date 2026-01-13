@@ -196,3 +196,20 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   .md-content { box-shadow: inset 1px 0 0 var(--fs-divider) !important; }
 }
 
+/* 导航栏语言切换器中的国旗样式 */
+img.flag-icon {
+  height: 15px;               /* 高度设定，略小于文字高度更精致 */
+  width: auto;                /* 宽度自动，保持矩形比例 */
+  border-radius: 2px;         /* 关键：给矩形加上微小圆角，符合现代UI风格 */
+  vertical-align: middle;     /* 垂直居中对齐文字 */
+  margin-right: 8px;          /* 国旗与文字的间距 */
+  margin-bottom: 2px;         /* 微调下边距，防止图标偏高 */
+  display: inline-block;
+  /* 针对白色较多的国旗（如美国国旗白条），加一个极其浅的边框防止在浅色模式下消失 */
+  border: 0.5px solid rgba(0,0,0,0.05); 
+}
+
+/* 鼠标悬停在下拉菜单时，确保图片不会变形 */
+.md-select__link img.flag-icon {
+  max-width: none;
+}
