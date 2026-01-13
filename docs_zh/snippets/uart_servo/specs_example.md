@@ -1,9 +1,3 @@
-# UART总线伺服舵机35KG系列
-
-<img src="./image/U35产品图片.png" alt="U35产品图片" style="width: 50%; height: auto;" />
-
-![U35产品图片](image/U35产品图片.png)
-
 ## 产品特点
 
 - 有刷电机、减速器、位置编码器与控制器一体化设计
@@ -76,7 +70,7 @@
 
 ### 特性曲线
 
-<img src="image/U35特性曲线.png" alt="U35特性曲线"  />
+<img src="image/U35特性曲线.png" alt="U35特性曲线" style="width: 50%; height: auto;" />
 
 ### 过载曲线
 <img src="image/U35过载曲线.png" alt="U35过载曲线" style="zoom:50%;" />
