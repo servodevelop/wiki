@@ -54,7 +54,9 @@ extra:
       lang: zh
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/servodevelop  
+      link: https://github.com/servodevelop
+    - icon: fontawesome/solid/paper-plane
+      link: mailto:<james@fashionstar.com.hk>  
       
 
 extra_css:
