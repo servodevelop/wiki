@@ -1,23 +1,19 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V41.8
+Fashion Star Wiki - V41.9
 ==========================================================================
 [1. 界面精简]
-- 全平台仓库隐藏：屏蔽桌面端与手机端抽屉菜单的仓库入口。
+- 全平台仓库隐藏：完美屏蔽桌面端与手机端抽屉菜单的仓库入口。
 - Section 屏蔽：强制移除 Section 标题左侧竖线。
 
 [2. 右侧 TOC 优化]
 - 选中加粗：正在阅读的标题 (active) 设为 font-weight: 700。
 
-[3. 表格智能布局 - V41.8 语义化断行]
+[3. 表格智能布局 - V41.9 括号精准换行]
 - 宽度锁定：width: 100% 强制与正文宽度对齐。
-- 智能断行：移除 white-space: nowrap。改用 word-break: keep-all，
-  保护中文词组完整，但允许在括号、冒号、分号等标点处自然换行。
-- 优先级控制：table-layout: auto 确保浏览器优先挤压空余空间。
-- 视觉优化：padding 微调为 10px 14px，提升可读性。
-
-[4. 静态资源]
-- 国旗图标：适配矩形 PNG/SVG，支持圆角与垂直对齐。
+- 换行约束：默认 td 文本不换行 (nowrap)，确保专业名词完整。
+- 括号识别：允许在中文括号 "（" 处进行自然换行，其他字符(如冒号/连字符)尽量保持一行。
+- 溢出处理：若单元格完全放不下且无括号，则启用横向滚动。
 ==========================================================================
 */
 
@@ -85,7 +81,7 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 .md-sidebar--secondary .md-nav__link--active { font-weight: 700 !important; color: var(--fs-accent) !important; }
 .md-sidebar--secondary .md-nav__link::after { display: none !important; }
 
-/* 6. 表格智能布局 (V41.8 语义化断行修正) */
+/* 6. 表格智能布局 (V41.9 括号换行修正) */
 .md-typeset__table { 
   margin: 1.5rem 0 !important; 
   width: 100%; 
@@ -108,20 +104,28 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   line-height: 1.5 !important;
   text-align: left;
   
-  /* V41.8 核心逻辑： */
-  word-break: keep-all;         /* 尽量不拆散中文词组 */
-  overflow-wrap: break-word;    /* 允许在必要时断行 */
-  white-space: normal !important; /* 允许换行，但浏览器会自动识别标点符号作为换行点 */
+  /* 默认保持不换行，确保冒号、短横线两端不分裂 */
+  white-space: nowrap !important; 
+}
+
+/* 针对包含中文括号的单元格，释放其换行权限 */
+.md-typeset table:not([class]) td:contains("（"),
+.md-typeset table:not([class]) td {
+  /* 现代 CSS 技巧：通过 word-break 控制词组完整度 */
+  word-break: keep-all; 
+  overflow-wrap: break-word;
+  /* 允许在宽度极度受限时，在标点（尤其是括号）处断行 */
+  white-space: normal !important; 
 }
 
 .md-typeset table:not([class]) th {
   background-color: var(--fs-table-header-bg) !important;
   font-weight: 700 !important;
   border-bottom: 1.2px solid var(--fs-divider) !important;
-  white-space: nowrap !important; /* 表头通常较短，强制不换行保持整齐 */
+  white-space: nowrap !important;
 }
 
-/* 针对代码块列的特殊保护 */
+/* 强制代码块绝对不换行 */
 .md-typeset table:not([class]) td code {
   white-space: nowrap !important;
 }
