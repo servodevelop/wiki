@@ -1,6 +1,6 @@
 # UART总线伺服舵机35KG系列
 
-<img src="./image/U35产品图片.png" alt="U35产品图片" style="width: 50%; height: auto;" />
+<img src="./image/U35产品图片.png" alt="U35产品图片" style="max-width: 45%; height: auto;" />
 
 ![U35产品图片](image/U35产品图片.png)
 
