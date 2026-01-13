@@ -2,7 +2,7 @@ site_name: Fashion Star Wiki
 site_url: https://wiki.fashionstar.com.hk/
 use_directory_urls: true
 repo_url: https://github.com/servodevelop/wiki
-edit_uri: blob/main/docs/  # 根据你的分支和目录微调
+edit_uri: edit/main/docs/  # 根据你的分支和目录微调
 
 docs_dir: docs
 site_dir: site
