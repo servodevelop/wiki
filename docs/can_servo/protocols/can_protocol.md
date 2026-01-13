@@ -1,1 +1,5 @@
-can
+---
+hide:
+  - footer
+---
+# can bus servo
