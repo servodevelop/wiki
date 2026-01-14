@@ -162,6 +162,7 @@ nav:
       - Ros: rs485-servo/sdk/ros-sdk.md
     - 技术文档: rs485-servo/documents/uc01-instruction-manual.md
   - CAN 总线舵机:
+    - can-servo/index.md
     - 通讯协议: can-servo/protocols/can-protocol.md
     - 规格参数:
       - HX8-C100H-M: can-servo/specs/hx8-c100h-m.md
@@ -190,5 +191,6 @@ nav:
       - Ros: can-servo/sdk/ros-sdk.md
     - 技术文档: can-servo/documents/uc01-instruction-manual.md
   - Robotic Arm:
+    - robotic-arm/index.md
     - StarAI Arm:
       - Quick 
