@@ -57,7 +57,7 @@ extra:
       link: https://github.com/servodevelop
     - icon: fontawesome/solid/paper-plane
       link: mailto:<james@fashionstar.com.hk>  
-      
+      copyright: Copyright &copy; 2026 - 2027 Fashion Star Technology Limited
 
 extra_css:
   - stylesheets/extra.css
