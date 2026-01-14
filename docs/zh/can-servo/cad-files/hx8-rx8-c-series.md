@@ -1,3 +1,0 @@
-- pdf
-- step
-- DWG

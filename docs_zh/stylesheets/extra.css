@@ -1,6 +1,6 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V41.31
+Fashion Star Wiki - V41.32
 ==========================================================================
 [1. 核心视觉 - V41.0 物理对齐]
 - 标题加粗：正文 h1-h4 锁定 700 加粗。
@@ -109,9 +109,9 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 [lang="zh"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "本页目录"; }
 
 .md-sidebar--secondary .md-nav__link { 
-  padding: 0.1rem 0 !important; 
+  padding: 0.15rem 0 !important; 
   margin: 0 !important;
-  line-height: 1.3 !important; 
+  line-height: 1.5 !important; 
   font-size: 12.5px !important; 
 }
 .md-sidebar--secondary .md-nav__link--active { font-weight: 700 !important; color: var(--fs-accent) !important; }
