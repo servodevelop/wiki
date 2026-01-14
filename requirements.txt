@@ -1,7 +1,6 @@
 mkdocs-material==9.7.1
 mkdocs-glightbox
 mkdocs-include-markdown-plugin
-mkdocs-static-i18n
 pymdown-extensions
 mkdocs-minify-plugin
 mkdocs-git-revision-date-localized-plugin

@@ -1,3 +1,4 @@
+
 site_name: 华馨京科技 Wiki
 site_url: https://wiki.fashionstar.com.hk/zh/
 use_directory_urls: true
@@ -96,8 +97,8 @@ nav:
       - HX8/RX8-U29H-M: uart-servo/specs/hx-rx8-u29h-m.md
       - HA8/RA8-U35-M: uart-servo/specs/ha-ra8-u35-m.md
       - HA8/RA8-U35H-M: uart-servo/specs/ha-ra8-u35h-m.md
-      - HA8/RA8-U45-M: uart-servo/specs/ha-ra8-u45-m.md
-      - HA8/RA8-U45H-M: uart-servo/specs/ha-ra8-u45h-m.md
+      - HP8/RP8-U45-M: uart-servo/specs/hp-rp8-u45-m.md
+      - HP8/RP8-U45H-M: uart-servo/specs/hp-rp8-u45h-m.md
       - HX8/RX8-U50H-M: uart-servo/specs/hx-rx8-u50h-m.md
       - HX8/RX8-U51H-M: uart-servo/specs/hx-rx8-u51h-m.md
       - RX18-U100H-M: uart-servo/specs/rx18-u100h-m.md
