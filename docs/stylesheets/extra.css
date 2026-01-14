@@ -1,6 +1,6 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V41.16
+Fashion Star Wiki - V41.18
 ==========================================================================
 [1. 核心视觉 - V41.0 物理对齐]
 - 标题加粗：正文 h1-h4 锁定 700 加粗。
@@ -10,7 +10,7 @@ Fashion Star Wiki - V41.16
 [2. 界面清理]
 - 全平台仓库隐藏：彻底屏蔽 GitHub 入口。
 - Section 屏蔽：Section 标题禁止产生左侧竖线。
-- 底部清理：全局隐藏“上一页/下一页”导航按钮 (V41.16 新增)。
+- 底部清理：彻底移除 Previous/Next 导航条 (V41.17 已验证)。
 
 [3. 表格性能优化]
 - 高度恢复：padding 保持 8px 16px 紧凑规格。
@@ -52,9 +52,16 @@ Fashion Star Wiki - V41.16
 .md-header__title { margin-left: 0 !important; }
 .md-header__ellipsis { padding-left: 0.5rem !important; }
 
-/* [V41.16] 全局隐藏底部“上一页/下一页”导航按钮 */
-.md-footer__nav {
+/* 彻底屏蔽底部 Previous/Next 导航 */
+.md-footer-nav, 
+.md-footer__nav,
+nav.md-footer__inner[aria-label="Footer"],
+nav.md-footer__inner[aria-label="页脚"] {
   display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
 }
 
 /* 3. 滚动条美化 */
