@@ -1,0 +1,9 @@
+<!-- tech-moon.svg (原创，适合做深浅色切换图标) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+  <path fill="currentColor" fill-rule="evenodd" d="
+    M14.9 2.3
+    A9.7 9.7 0 1 0 21.7 17.8
+    A8.0 8.0 0 1 1 14.9 2.3
+    Z
+  " clip-rule="evenodd"/>
+</svg>

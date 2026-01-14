@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# 明确指路，防止爬虫在 /es/ 下乱撞
+Sitemap: https://wiki.fashionstar.com.hk/sitemap.xml

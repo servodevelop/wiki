@@ -1,0 +1,180 @@
+/*
+==========================================================================
+Fashion Star Wiki - V41.31
+==========================================================================
+[1. 核心视觉 - V41.0 物理对齐]
+- 标题加粗：正文 h1-h4 锁定 700 加粗。
+- 图片优化：居中对齐、80% 宽度、4px 圆角。
+- 导航标准：2.5px 竖线，顶级 16px，文章 14.5px。
+
+[2. 界面清理]
+- 全平台仓库隐藏：彻底屏蔽 GitHub 入口。·
+- Section 屏蔽：Section 标题禁止产生左侧竖线。
+- 底部清理：彻底移除 Previous/Next 导航条。
+
+[3. 表格性能优化]
+- 高度恢复：padding 保持 8px 16px 紧凑规格。
+- 0.5px 边框：全表极细边框，table-layout: auto 智能分配列宽。
+- 文字约束：white-space: nowrap 强制型号不换行。
+
+[4. 右侧 TOC - 用户自定义舒适度]
+- 物理规格：padding (0.1rem 0)，line-height: 1.3，margin: 0。
+- 视觉状态：这是用户手动调试后最满意的间距版本。
+
+[5. 静态资源与交互]
+- 国旗图标：圆角、垂直对齐、15px 高度锁定。
+==========================================================================
+*/
+
+/* 1. 核心变量 */
+:root {
+  --fs-accent: #8641A9;
+  --fs-divider: rgba(0,0,0,0.15); 
+  --fs-table-header-bg: #F8F9FA; 
+  --md-primary-fg-color: var(--fs-accent);
+  --md-accent-fg-color: var(--fs-accent);
+  --fs-content-fg: #1F1F1F;
+  --fs-nav-inactive: #444746;
+}
+
+[data-md-color-scheme="slate"] {
+  --fs-divider: rgba(255,255,255,0.15);
+  --fs-table-header-bg: #202124;
+  --md-default-bg-color: #131314;
+  --md-default-bg-color--light: #1e1f20;
+  --md-default-fg-color: #e3e3e3;
+  --fs-content-fg: #E3E3E3;
+  --fs-nav-inactive: #C4C7C5;
+}
+
+/* 2. 顶部导航与组件清理 */
+.md-logo, [class*="md-logo"], .md-header__button.md-logo { display: none !important; }
+.md-header__source, .md-nav__source, [data-md-component="source"] { display: none !important; }
+.md-header__title { margin-left: 0 !important; }
+.md-header__ellipsis { padding-left: 0.5rem !important; }
+
+/* 彻底屏蔽底部 Previous/Next 导航 */
+.md-footer-nav, 
+.md-footer__nav,
+nav.md-footer__inner[aria-label="Footer"],
+nav.md-footer__inner[aria-label="页脚"] {
+  display: none !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+/* 3. 滚动条美化 */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-thumb { background-color: var(--fs-divider); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background-color: var(--fs-accent); }
+
+/* 4. 左侧侧边栏 (Navigation) */
+.md-nav__link, .md-nav__title {
+  color: var(--fs-nav-inactive);
+  transition: color 125ms, font-weight 125ms;
+}
+.md-nav__title, .md-nav__item--nested > .md-nav__link { font-size: 16px !important; }
+nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__link { font-size: 16px !important; }
+.md-nav__item:not(.md-nav__item--nested) > .md-nav__link { font-size: 14.5px !important; }
+
+li.md-nav__item--active > .md-nav__link,
+li.md-nav__item--active > label.md-nav__link {
+  color: var(--fs-accent) !important;
+  font-weight: 700 !important;
+  position: relative;
+}
+li.md-nav__item--active > .md-nav__link::after,
+li.md-nav__item--active > label.md-nav__link::after {
+  content: ""; position: absolute; left: -12px; top: 0; bottom: 0;
+  width: 2.5px; background-color: var(--fs-accent); display: block !important;
+}
+
+/* 屏蔽逻辑 (Home & Section) */
+nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__link::after { display: none !important; }
+.md-nav__item--section > .md-nav__link::after,
+.md-nav__item--section > label::after,
+.md-nav__title::after, [for="__drawer"]::after { display: none !important; content: none !important; }
+
+/* 5. 右侧目录 (TOC) */
+.md-sidebar--secondary .md-nav__title[for="__toc"] {
+  font-size: 0 !important; color: transparent !important; margin-bottom: 0.4rem !important;
+}
+.md-sidebar--secondary .md-nav__title[for="__toc"]::after {
+  font-size: 12.8px !important; font-weight: 700 !important;
+  color: var(--md-default-fg-color--light) !important; display: block;
+}
+[lang="en"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "On this page"; }
+[lang="zh"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "本页目录"; }
+
+.md-sidebar--secondary .md-nav__link { 
+  padding: 0.1rem 0 !important; 
+  margin: 0 !important;
+  line-height: 1.3 !important; 
+  font-size: 12.5px !important; 
+}
+.md-sidebar--secondary .md-nav__link--active { font-weight: 700 !important; color: var(--fs-accent) !important; }
+.md-sidebar--secondary .md-nav__link::after { display: none !important; }
+
+/* 6. 正文通用 */
+.md-typeset { color: var(--fs-content-fg); }
+.md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4 {
+  color: var(--fs-content-fg) !important;
+  font-weight: 700 !important;
+  margin-top: 1.6rem !important;
+}
+
+/* 7. 图片优化 */
+.md-typeset img { 
+  display: block !important; margin: 2rem auto !important; 
+  max-width: 80% !important; border-radius: 4px !important; box-shadow: none !important; 
+}
+
+/* 8. 表格优化 */
+.md-typeset__table { margin: 1.5rem 0 !important; overflow-x: auto !important; width: 100%; }
+.md-typeset table:not([class]) {
+  width: 100% !important; 
+  display: table !important;
+  border-collapse: collapse !important;
+  border: 0.5px solid var(--fs-divider) !important;
+  font-size: 14.5px !important;
+  table-layout: auto !important;
+}
+.md-typeset table:not([class]) th, 
+.md-typeset table:not([class]) td {
+  padding: 8px 16px !important; 
+  border: 0.5px solid var(--fs-divider) !important;
+  line-height: 1.4 !important;
+  text-align: left;
+  white-space: nowrap !important;
+}
+.md-typeset table:not([class]) th {
+  background-color: var(--fs-table-header-bg) !important;
+  font-weight: 700 !important;
+  border-bottom: 1.5px solid var(--fs-divider) !important;
+}
+.md-typeset table:not([class]) tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.01);
+}
+
+/* 9. 静态资源 */
+img.flag-icon {
+  height: 15px; width: auto; border-radius: 2px;
+  vertical-align: middle; margin-right: 8px; margin-bottom: 2px;
+  display: inline-block; border: 0.5px solid rgba(0,0,0,0.05); 
+}
+.md-select__link:hover {
+  background-color: rgba(134, 65, 169, 0.05);
+}
+
+/* 10. 布局平衡 */
+@media screen and (min-width: 60em) {
+  .md-grid { max-width: 1380px !important; }
+  .md-content { box-shadow: inset 1px 0 0 var(--fs-divider) !important; }
+  .md-sidebar--secondary nav.md-nav--secondary { position: relative; padding-left: 16px !important; }
+  .md-sidebar--secondary nav.md-nav--secondary::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 1px; background-color: var(--fs-divider); z-index: 1;
+  }
+}
