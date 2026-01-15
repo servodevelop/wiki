@@ -62,8 +62,9 @@
 
 
 
-SP<iframe src="https://player.bilibili.com/player.html?bvid=BV1318uzBEGK&as_wide=1&v=0" width="100%" height="500" frameborder="0" scrolling="no" allowfullscreen></iframe>
+<iframe src="https://player.bilibili.com/player.html?bvid=BV1318uzBEGK&as_wide=1&v=0" width="100%" height="500" frameborder="0" scrolling="no" allowfullscreen></iframe>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/LWCDjRbzSFg" 
-frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
+
+
+<iframe src="https://www.youtube.com/embed/LWCDjRbzSFg" width="100%" height="500" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
