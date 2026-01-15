@@ -1,22 +1,34 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V41.33
+Fashion Star Wiki - V42.0
 ==========================================================================
-- 导航优化：左侧侧边栏目录标题与文章标题统一调整为 16px。
-- TOC 优化：保持 V41.32 的 1.5 行高与 0.15rem 紧凑间距。
-- 逻辑继承：保留所有屏蔽逻辑、表格 0.5px 极细边框及资源补丁。
+- Design System: Variable-driven vertical rhythm (VS Code Inspired).
+- Header Strategy: H1 individual logic; H2-H4 unified (Top 1.5, Bottom 0.5).
+- Content Flow: Paragraphs locked at Bottom 0.5rem for high info density.
+- Nav Specs: Left sidebar 16px; Right TOC 14.5px.
+- Border Spec: 0.5px ultra-fine borders for tables and dividers.
 ==========================================================================
 */
 
-/* 1. 核心变量 */
+/* 1. Core Variables - 中央调度站 */
 :root {
+  /* 品牌色 */
   --fs-accent: #8641A9;
   --fs-divider: rgba(0,0,0,0.15); 
   --fs-table-header-bg: #F8F9FA; 
-  --md-primary-fg-color: var(--fs-accent);
-  --md-accent-fg-color: var(--fs-accent);
   --fs-content-fg: #1F1F1F;
   --fs-nav-inactive: #444746;
+
+  /* Material Design 3 基础色彩覆盖 */
+  --md-primary-fg-color: var(--fs-accent);
+  --md-accent-fg-color: var(--fs-accent);
+
+  /* 垂直节奏刻度尺 (Vertical Rhythm Scale) */
+  --fs-space-zero: 0;            /* 0px */
+  --fs-space-small: 0.5rem;      /* 8px: 标题下方、正文下方 */
+  --fs-space-base: 1.0rem;       /* 16px: 标准间隔 */
+  --fs-space-medium: 1.5rem;     /* 24px: 核心块间距 (VS Code 节奏) */
+  --fs-space-large: 2.0rem;      /* 32px: 强力切割感 */
 }
 
 [data-md-color-scheme="slate"] {
@@ -29,42 +41,31 @@ Fashion Star Wiki - V41.33
   --fs-nav-inactive: #C4C7C5;
 }
 
-/* 2. 顶部导航与组件清理 */
+/* 2. Component Cleanup */
 .md-logo, [class*="md-logo"], .md-header__button.md-logo { display: none !important; }
 .md-header__source, .md-nav__source, [data-md-component="source"] { display: none !important; }
 .md-header__title { margin-left: 0 !important; }
 .md-header__ellipsis { padding-left: 0.5rem !important; }
 
-/* 彻底屏蔽底部 Previous/Next 导航 */
-.md-footer-nav, 
-.md-footer__nav,
+/* 隐藏页脚导航 */
+.md-footer-nav, .md-footer__nav,
 nav.md-footer__inner[aria-label="Footer"],
 nav.md-footer__inner[aria-label="页脚"] {
-  display: none !important;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: none !important;
+  display: none !important; height: 0 !important; margin: 0 !important; padding: 0 !important; border: none !important;
 }
 
-/* 3. 滚动条美化 */
+/* 3. Scrollbar Aesthetics */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-thumb { background-color: var(--fs-divider); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background-color: var(--fs-accent); }
 
-/* 4. 左侧侧边栏 (Navigation) */
-.md-nav__link, .md-nav__title {
+/* 4. Left Sidebar (Navigation) - Locked at 16px */
+.md-nav--primary .md-nav__link, 
+.md-nav--primary .md-nav__title {
   color: var(--fs-nav-inactive);
   transition: color 125ms, font-weight 125ms;
-}
-
-/* 修改点：将所有左侧导航链接和标题统一为 16px */
-.md-nav__title, 
-.md-nav__item--nested > .md-nav__link,
-.md-nav__item:not(.md-nav__item--nested) > .md-nav__link { 
   font-size: 16px !important; 
 }
-
 li.md-nav__item--active > .md-nav__link,
 li.md-nav__item--active > label.md-nav__link {
   color: var(--fs-accent) !important;
@@ -76,14 +77,13 @@ li.md-nav__item--active > label.md-nav__link::after {
   content: ""; position: absolute; left: -12px; top: 0; bottom: 0;
   width: 2.5px; background-color: var(--fs-accent); display: block !important;
 }
-
-/* 屏蔽逻辑 (Home & Section) */
+/* Section & Home Marker Suppression */
 nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__link::after { display: none !important; }
 .md-nav__item--section > .md-nav__link::after,
 .md-nav__item--section > label::after,
 .md-nav__title::after, [for="__drawer"]::after { display: none !important; content: none !important; }
 
-/* 5. 右侧目录 (TOC) */
+/* 5. Right Sidebar (TOC) - 14.5px */
 .md-sidebar--secondary .md-nav__title[for="__toc"] {
   font-size: 0 !important; color: transparent !important; margin-bottom: 0.4rem !important;
 }
@@ -95,66 +95,138 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 [lang="zh"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "本页目录"; }
 
 .md-sidebar--secondary .md-nav__link { 
-  padding: 0.15rem 0 !important; 
-  margin: 0 !important;
-  line-height: 1.5 !important; 
-  font-size: 12.5px !important; 
+  padding: 0.15rem 0 !important; margin: 0 !important;
+  line-height: 1.5 !important; font-size: 14.5px !important; 
 }
 .md-sidebar--secondary .md-nav__link--active { font-weight: 700 !important; color: var(--fs-accent) !important; }
 .md-sidebar--secondary .md-nav__link::after { display: none !important; }
 
-/* 6. 正文通用 */
-.md-typeset { color: var(--fs-content-fg); }
-.md-typeset h1, .md-typeset h2, .md-typeset h3, .md-typeset h4 {
-  color: var(--fs-content-fg) !important;
+/* 6. Content Typography - 核心垂直节奏控制 */
+.md-typeset { 
+  color: var(--fs-content-fg);
+  line-height: 1.6;
+}
+
+/* 统一 H2-H4: 上 1.5rem (24px) / 下 0.5rem (8px) */
+.md-typeset h2, 
+.md-typeset h3, 
+.md-typeset h4 {
   font-weight: 700 !important;
-  margin-top: 1.6rem !important;
+  color: var(--fs-content-fg) !important;
+  margin-top: var(--fs-space-medium) !important;
+  margin-bottom: var(--fs-space-small) !important;
 }
 
-/* 7. 图片优化 */
+/* H1 单独处理：顶部归零，底部 1.5rem (24px) */
+.md-typeset h1 {
+  font-weight: 700 !important;
+  color: var(--fs-content-fg) !important;
+  margin-top: var(--fs-space-zero) !important;
+  margin-bottom: var(--fs-space-medium) !important;
+}
+
+/* 正文段落: 上 0 / 下 0.5rem (8px) */
+.md-typeset p {
+  margin-top: var(--fs-space-zero) !important;
+  margin-bottom: var(--fs-space-small) !important;
+}
+
+/* 列表间距: 上 0 / 下 0.5rem (8px) */
+.md-typeset ul, 
+.md-typeset ol {
+  margin-top: var(--fs-space-zero) !important;
+  margin-bottom: var(--fs-space-small) !important;
+  padding-left: 1.2rem !important; /* 保持标准的缩进距离 */
+}
+
+/* 列表项内部微调：让列表看起来更紧凑 */
+.md-typeset li {
+  margin-bottom: 0.1rem !important;
+}
+.md-typeset li p {
+  margin-bottom: 0 !important; /* 防止列表内的段落产生二次间距 */
+}
+
+/* 处理文章开头第一个标题的顶距 */
+.md-typeset h1:first-child,
+.md-typeset h2:first-child {
+  margin-top: 0 !important;
+}
+
+/* 7. Image Optimization */
 .md-typeset img { 
-  display: block !important; margin: 2rem auto !important; 
-  max-width: 80% !important; border-radius: 4px !important; box-shadow: none !important; 
+  display: block !important; 
+  /* 修改为：上 0，下 0.5rem (8px) */
+  margin-top: var(--fs-space-zero) !important; 
+  margin-bottom: var(--fs-space-small) !important; 
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 85% !important; 
+  border-radius: 4px !important; 
 }
 
-/* 8. 表格优化 */
-.md-typeset__table { margin: 1.5rem 0 !important; overflow-x: auto !important; width: 100%; }
+/* 7.1 Video & Media Optimization */
+/* 针对原生 <video> 标签和 MkDocs 的视频容器 */
+.md-typeset video,
+.md-typeset .video-wrapper { 
+  display: block !important; 
+  /* 统一节奏：上 0，下 0.5rem (8px) */
+  margin-top: var(--fs-space-zero) !important; 
+  margin-bottom: var(--fs-space-small) !important; 
+  margin-left: auto !important;
+  margin-right: auto !important;
+  /* 宽度建议与图片对齐 (85%) 或 撑满 (100%) */
+  max-width: 85% !important; 
+  border-radius: 4px !important; 
+}
+
+/* 针对外部嵌入视频 (如 YouTube/Bilibili iframe) */
+.md-typeset iframe {
+  margin-top: var(--fs-space-zero) !important;
+  margin-bottom: var(--fs-space-small) !important;
+  border-radius: 4px !important;
+  width: 100% !important; /* 强制撑满 */
+}
+
+/* 8. Table Optimization (0.5px Borders) */
+.md-typeset__table { 
+  margin-top: var(--fs-space-zero) !important;      
+  margin-bottom: var(--fs-space-small) !important;   
+  /* 强制容器撑开 */
+  display: block !important;
+  width: 100% !important;
+  overflow-x: auto; 
+}
+
 .md-typeset table:not([class]) {
   width: 100% !important; 
-  display: table !important;
+  display: table !important; 
   border-collapse: collapse !important;
   border: 0.5px solid var(--fs-divider) !important;
   font-size: 14.5px !important;
-  table-layout: auto !important;
 }
+
 .md-typeset table:not([class]) th, 
 .md-typeset table:not([class]) td {
-  padding: 8px 16px !important; 
+  padding: 10px 16px !important; 
   border: 0.5px solid var(--fs-divider) !important;
   line-height: 1.4 !important;
-  text-align: left;
-  white-space: nowrap !important;
 }
+
 .md-typeset table:not([class]) th {
   background-color: var(--fs-table-header-bg) !important;
   font-weight: 700 !important;
   border-bottom: 1.5px solid var(--fs-divider) !important;
 }
-.md-typeset table:not([class]) tr:nth-child(even) {
-  background-color: rgba(0, 0, 0, 0.01);
-}
 
-/* 9. 静态资源 */
+/* 9. Assets & Icons */
 img.flag-icon {
   height: 15px; width: auto; border-radius: 2px;
   vertical-align: middle; margin-right: 8px; margin-bottom: 2px;
   display: inline-block; border: 0.5px solid rgba(0,0,0,0.05); 
 }
-.md-select__link:hover {
-  background-color: rgba(134, 65, 169, 0.05);
-}
 
-/* 10. 布局平衡 */
+/* 10. Layout Balance & TOC Border */
 @media screen and (min-width: 60em) {
   .md-grid { max-width: 1380px !important; }
   .md-content { box-shadow: inset 1px 0 0 var(--fs-divider) !important; }
