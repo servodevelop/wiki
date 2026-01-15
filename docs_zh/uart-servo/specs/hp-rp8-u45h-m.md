@@ -62,6 +62,8 @@
 
 
 
-[LeRobot Star Arm-Cello 具身智能机械臂 | 产品介绍](https://www.bilibili.com/video/BV1318uzBEGK/?share_source=copy_web&vd_source=74f79ef56a1bc445c47cffa44917980a)
+SP<iframe src="https://player.bilibili.com/player.html?bvid=BV1318uzBEGK&as_wide=1&v=0" width="100%" height="500" frameborder="0" scrolling="no" allowfullscreen></iframe>
 
-[youtube视频测试](https://www.youtube.com/watch?v=LWCDjRbzSFg)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/LWCDjRbzSFg" 
+frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+allowfullscreen></iframe>
