@@ -2,7 +2,7 @@
 
 # UART/RS-485 Bus Servo Communication Protocol
 
-**v1.0.25**
+**v1.0.25-test**
 
 ## 1. Introduction
 
