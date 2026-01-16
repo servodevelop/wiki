@@ -54,6 +54,24 @@ extra:
     - name: "<img src='/assets/flags/cn.svg' class='flag-icon' /> 中文"
       link: /zh/
       lang: zh
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/servodevelop
+      name: GitHub
+    - icon: fontawesome/brands/bilibili
+      link: https://space.bilibili.com/312208268
+      name: Bilibili
+    - icon: fontawesome/brands/reddit
+      link: https://www.reddit.com/user/fashionstartech
+      name: Reddit
+    - icon: fontawesome/brands/weixin
+      link: https://wiki.fashionstar.com.hk/assets/wechat_qrcode.png
+      name: WeChat
+    - icon: fontawesome/solid/paper-plane
+      link: mailto:<james@fashionstar.com.hk>  
+      name: Email
+
+copyright: Copyright &copy; 2026 - 2027 Fashion Star Technology Limited
 
 extra_css:
   - stylesheets/extra.css
