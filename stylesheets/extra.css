@@ -1,0 +1,251 @@
+/*
+==========================================================================
+Fashion Star Wiki - V42.2
+==========================================================================
+- Design System: Variable-driven vertical rhythm (VS Code Inspired).
+- Header Strategy: H1 individual logic; H2-H4 unified (Top 1.5, Bottom 0.5).
+- Content Flow: Paragraphs locked at Bottom 0.5rem for high info density.
+- Nav Specs: Left sidebar 16px; Right TOC 14.5px.
+- Border Spec: 0.5px ultra-fine borders for tables and dividers.
+==========================================================================
+*/
+
+/* 1. Core Variables - 中央调度站 */
+:root {
+  /* 品牌色 */
+  --fs-accent: #8641A9;
+  --fs-divider: rgba(0,0,0,0.15); 
+  --fs-table-header-bg: #F8F9FA; 
+  --fs-content-fg: #1F1F1F;
+  --fs-nav-inactive: #444746;
+
+  /* Material Design 3 基础色彩覆盖 */
+  --md-primary-fg-color: var(--fs-accent);
+  --md-accent-fg-color: var(--fs-accent);
+
+  /* 垂直节奏刻度尺 (Vertical Rhythm Scale) */
+  --fs-space-zero: 0;            /* 0px */
+  --fs-space-small: 0.5rem;      /* 8px: 标题下方、正文下方 */
+  --fs-space-base: 1.0rem;       /* 16px: 标准间隔 */
+  --fs-space-medium: 1.5rem;     /* 24px: 核心块间距 (VS Code 节奏) */
+  --fs-space-large: 2.0rem;      /* 32px: 强力切割感 */
+}
+
+[data-md-color-scheme="slate"] {
+  --fs-divider: rgba(255,255,255,0.15);
+  --fs-table-header-bg: #202124;
+  --md-default-bg-color: #131314;
+  --md-default-bg-color--light: #1e1f20;
+  --md-default-fg-color: #e3e3e3;
+  --fs-content-fg: #E3E3E3;
+  --fs-nav-inactive: #C4C7C5;
+}
+
+/* 2. Component Cleanup */
+.md-logo, [class*="md-logo"], .md-header__button.md-logo { display: none !important; }
+.md-header__source, .md-nav__source, [data-md-component="source"] { display: none !important; }
+.md-header__title { margin-left: 0 !important; }
+.md-header__ellipsis { padding-left: 0.5rem !important; }
+
+/* 隐藏页脚导航 */
+.md-footer-nav, .md-footer__nav,
+nav.md-footer__inner[aria-label="Footer"],
+nav.md-footer__inner[aria-label="页脚"] {
+  display: none !important; height: 0 !important; margin: 0 !important; padding: 0 !important; border: none !important;
+}
+
+/* 3. Scrollbar Aesthetics */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-thumb { background-color: var(--fs-divider); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background-color: var(--fs-accent); }
+
+/* 4. Left Sidebar (Navigation) - Locked at 16px */
+.md-nav--primary .md-nav__link, 
+.md-nav--primary .md-nav__title {
+  color: var(--fs-nav-inactive);
+  transition: color 125ms, font-weight 125ms;
+  font-size: 16px !important; 
+}
+li.md-nav__item--active > .md-nav__link,
+li.md-nav__item--active > label.md-nav__link {
+  color: var(--fs-accent) !important;
+  font-weight: 700 !important;
+  position: relative;
+}
+li.md-nav__item--active > .md-nav__link::after,
+li.md-nav__item--active > label.md-nav__link::after {
+  content: ""; position: absolute; left: -12px; top: 0; bottom: 0;
+  width: 2.5px; background-color: var(--fs-accent); display: block !important;
+}
+/* Section & Home Marker Suppression */
+nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__link::after { display: none !important; }
+.md-nav__item--section > .md-nav__link::after,
+.md-nav__item--section > label::after,
+.md-nav__title::after, [for="__drawer"]::after { display: none !important; content: none !important; }
+
+/* 5. Right Sidebar (TOC) - 14.5px */
+.md-sidebar--secondary .md-nav__title[for="__toc"] {
+  font-size: 0 !important; color: transparent !important; margin-bottom: 0.4rem !important;
+}
+.md-sidebar--secondary .md-nav__title[for="__toc"]::after {
+  font-size: 12.8px !important; font-weight: 700 !important;
+  color: var(--md-default-fg-color--light) !important; display: block;
+}
+[lang="en"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "On this page"; }
+[lang="zh"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "本页目录"; }
+
+.md-sidebar--secondary .md-nav__link { 
+  padding: 0.15rem 0 !important; margin: 0 !important;
+  line-height: 1.5 !important; font-size: 14.5px !important; 
+}
+.md-sidebar--secondary .md-nav__link--active { font-weight: 700 !important; color: var(--fs-accent) !important; }
+.md-sidebar--secondary .md-nav__link::after { display: none !important; }
+
+/* 6. Content Typography - 核心垂直节奏控制 */
+.md-typeset { 
+  color: var(--fs-content-fg);
+  line-height: 1.6;
+}
+
+/* 统一 H2-H4: 上 1.5rem (24px) / 下 0.5rem (8px) */
+.md-typeset h2, 
+.md-typeset h3, 
+.md-typeset h4 {
+  font-weight: 700 !important;
+  color: var(--fs-content-fg) !important;
+  margin-top: var(--fs-space-medium) !important;
+  margin-bottom: var(--fs-space-small) !important;
+}
+
+/* H1 单独处理：顶部归零，底部 1.5rem (24px) */
+.md-typeset h1 {
+  font-weight: 700 !important;
+  color: var(--fs-content-fg) !important;
+  margin-top: var(--fs-space-zero) !important;
+  margin-bottom: var(--fs-space-medium) !important;
+}
+
+/* 正文段落: 上 0 / 下 0.5rem (8px) */
+.md-typeset p {
+  margin-top: var(--fs-space-zero) !important;
+  margin-bottom: var(--fs-space-small) !important;
+}
+
+/* 列表间距: 上 0 / 下 0.5rem (8px) */
+.md-typeset ul, 
+.md-typeset ol {
+  margin-top: var(--fs-space-zero) !important;
+  margin-bottom: var(--fs-space-small) !important;
+  padding-left: 1.2rem !important; /* 保持标准的缩进距离 */
+}
+
+/* 列表项内部微调：让列表看起来更紧凑 */
+.md-typeset li {
+  margin-bottom: 0.1rem !important;
+}
+.md-typeset li p {
+  margin-bottom: 0 !important; /* 防止列表内的段落产生二次间距 */
+}
+
+/* 处理文章开头第一个标题的顶距 */
+.md-typeset h1:first-child,
+.md-typeset h2:first-child {
+  margin-top: 0 !important;
+}
+
+/* 7. Image Optimization */
+.md-typeset img { 
+  display: block !important; 
+  /* 修改为：上 0，下 0.5rem (8px) */
+  margin-top: var(--fs-space-zero) !important; 
+  margin-bottom: var(--fs-space-small) !important; 
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 85% !important; 
+  border-radius: 4px !important; 
+}
+
+/* 7.1 Video & Media Optimization */
+/* 针对原生 <video> 标签和 MkDocs 的视频容器 */
+.md-typeset video,
+.md-typeset .video-wrapper { 
+  display: block !important; 
+  /* 统一节奏：上 0，下 0.5rem (8px) */
+  margin-top: var(--fs-space-zero) !important; 
+  margin-bottom: var(--fs-space-small) !important; 
+  /* 核心：左右 auto 实现居中 */
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 85% !important; 
+  border-radius: 4px !important; 
+}
+
+/* 针对外部嵌入视频 (如 YouTube/Bilibili iframe) */
+.md-typeset iframe {
+  display: block !important; /* 1. 必须转为 block 才能应用 margin auto */
+  margin-top: var(--fs-space-zero) !important;
+  margin-bottom: var(--fs-space-small) !important;
+  /* 2. 左右 auto 实现居中 */
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: 85% !important; 
+  border-radius: 4px !important;
+}
+
+/* 8. Table Optimization (0.5px Borders) */
+.md-typeset__table { 
+  margin-top: var(--fs-space-zero) !important;      
+  margin-bottom: var(--fs-space-small) !important;   
+  /* 强制容器撑开 */
+  display: block !important;
+  width: 100% !important;
+  overflow-x: auto; 
+}
+
+.md-typeset table:not([class]) {
+  width: 100% !important; 
+  display: table !important; 
+  border-collapse: collapse !important;
+  border: 0.5px solid var(--fs-divider) !important;
+  font-size: 14.5px !important;
+}
+
+.md-typeset table:not([class]) th, 
+.md-typeset table:not([class]) td {
+  padding: 10px 16px !important; 
+  border: 0.5px solid var(--fs-divider) !important;
+  line-height: 1.4 !important;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--fs-table-header-bg) !important;
+  font-weight: 700 !important;
+  border-bottom: 1.5px solid var(--fs-divider) !important;
+}
+
+/* 仅解决奇偶显示问题：增加以下部分 */
+.md-typeset table:not([class]) tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.012) !important;
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* 9. Assets & Icons */
+img.flag-icon {
+  height: 15px; width: auto; border-radius: 2px;
+  vertical-align: middle; margin-right: 8px; margin-bottom: 2px;
+  display: inline-block; border: 0.5px solid rgba(0,0,0,0.05); 
+}
+
+/* 10. Layout Balance & TOC Border */
+@media screen and (min-width: 60em) {
+  .md-grid { max-width: 1380px !important; }
+  .md-content { box-shadow: inset 1px 0 0 var(--fs-divider) !important; }
+  .md-sidebar--secondary nav.md-nav--secondary { position: relative; padding-left: 16px !important; }
+  .md-sidebar--secondary nav.md-nav--secondary::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 1px; background-color: var(--fs-divider); z-index: 1;
+  }
+}
