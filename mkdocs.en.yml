@@ -55,9 +55,24 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/servodevelop
+      name: GitHub
+    - icon: fontawesome/brands/x-twitter
+      link: https://twitter.com/fashionstar_tech
+      name: Twitter
+    - icon: fontawesome/brands/youtube
+      link: https://www.youtube.com/@fashionstartech
+      name: YouTube
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/company/fashionstartech
+      name: LinkedIn
+    - icon: fontawesome/brands/whatsapp
+      link: https://wa.me/85269960687
+      name: WhatsApp
     - icon: fontawesome/solid/paper-plane
       link: mailto:<james@fashionstar.com.hk>  
-  copyright: Copyright &copy; 2026 - 2027 Fashion Star Technology Limited
+      name: Email
+
+copyright: Copyright &copy; 2026 - 2027 Fashion Star Technology Limited
 
 extra_css:
   - stylesheets/extra.css
