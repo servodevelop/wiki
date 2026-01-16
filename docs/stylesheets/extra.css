@@ -1,6 +1,6 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V42.0
+Fashion Star Wiki - V42.2
 ==========================================================================
 - Design System: Variable-driven vertical rhythm (VS Code Inspired).
 - Header Strategy: H1 individual logic; H2-H4 unified (Top 1.5, Bottom 0.5).
@@ -173,19 +173,23 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   /* 统一节奏：上 0，下 0.5rem (8px) */
   margin-top: var(--fs-space-zero) !important; 
   margin-bottom: var(--fs-space-small) !important; 
+  /* 核心：左右 auto 实现居中 */
   margin-left: auto !important;
   margin-right: auto !important;
-  /* 宽度建议与图片对齐 (85%) 或 撑满 (100%) */
   max-width: 85% !important; 
   border-radius: 4px !important; 
 }
 
 /* 针对外部嵌入视频 (如 YouTube/Bilibili iframe) */
 .md-typeset iframe {
+  display: block !important; /* 1. 必须转为 block 才能应用 margin auto */
   margin-top: var(--fs-space-zero) !important;
   margin-bottom: var(--fs-space-small) !important;
+  /* 2. 左右 auto 实现居中 */
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: 85% !important; 
   border-radius: 4px !important;
-  width: 100% !important; /* 强制撑满 */
 }
 
 /* 8. Table Optimization (0.5px Borders) */
@@ -217,6 +221,15 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   background-color: var(--fs-table-header-bg) !important;
   font-weight: 700 !important;
   border-bottom: 1.5px solid var(--fs-divider) !important;
+}
+
+/* 仅解决奇偶显示问题：增加以下部分 */
+.md-typeset table:not([class]) tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.012) !important;
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02) !important;
 }
 
 /* 9. Assets & Icons */
