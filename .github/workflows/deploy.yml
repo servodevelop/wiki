@@ -19,13 +19,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: 3.x    
-      # 在构建前，手动把根目录的 assets 拷贝进各自的文档目录
+      # 在构建前，手动把根目录的 assets & stylesheets 拷贝进各自的文档目录
       - name: Sync Assets
         run: |
           cp -R assets/ docs/assets/
           cp -R assets/ docs_zh/assets/
-          cp -R stylesheets/ docs/stylesheets/
-          cp -R stylesheets/ docs_zh/stylesheets/
 
       # 关键修改：安装 requirements.txt 中列出的所有插件
       - run: pip install -r requirements.txt
