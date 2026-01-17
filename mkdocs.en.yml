@@ -9,7 +9,7 @@ site_dir: site
 
 theme:
   name: material
-  custom_dir: docs/overrides  
+  custom_dir: overrides  
   icon:
     # Change the language selector icon
     alternate: fashion/lang-switch
@@ -35,13 +35,13 @@ theme:
       primary: custom
       accent: custom
       toggle:
-        icon: fashion/light-mode
+        icon: fashion/dark-mode
         name: Switch to dark mode
     - scheme: slate
       primary: custom
       accent: custom
       toggle:
-        icon: fashion/dark-mode
+        icon: fashion/light-mode
         name: Switch to light mode
 
 extra:
