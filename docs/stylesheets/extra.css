@@ -1,6 +1,6 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V42.3
+Fashion Star Wiki - V42.5
 ==========================================================================
 - Design System: Variable-driven vertical rhythm (VS Code Inspired).
 - Header Strategy: H1 individual logic; H2-H4 unified (Top 1.5, Bottom 0.5).
@@ -72,7 +72,7 @@ nav.md-footer__inner[aria-label="页脚"] {
 li.md-nav__item--active > .md-nav__link,
 li.md-nav__item--active > label.md-nav__link {
   color: var(--fs-accent) !important;
-  font-weight: 700 !important;
+  font-weight: 600 !important;
   position: relative;
 }
 li.md-nav__item--active > .md-nav__link::after,
@@ -91,7 +91,7 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   font-size: 0 !important; color: transparent !important; margin-bottom: 0.4rem !important;
 }
 .md-sidebar--secondary .md-nav__title[for="__toc"]::after {
-  font-size: 12.8px !important; font-weight: 700 !important;
+  font-size: 12.8px !important; font-weight: 600 !important;
   color: var(--md-default-fg-color--light) !important; display: block;
 }
 [lang="en"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "On this page"; }
@@ -101,7 +101,7 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   padding: 0.15rem 0 !important; margin: 0 !important;
   line-height: 1.5 !important; font-size: 14.5px !important; 
 }
-.md-sidebar--secondary .md-nav__link--active { font-weight: 700 !important; color: var(--fs-accent) !important; }
+.md-sidebar--secondary .md-nav__link--active { font-weight: 600 !important; color: var(--fs-accent) !important; }
 .md-sidebar--secondary .md-nav__link::after { display: none !important; }
 
 /* 6. Content Typography - 核心垂直节奏控制 */
@@ -222,7 +222,7 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 
 .md-typeset table:not([class]) th {
   background-color: var(--fs-table-header-bg) !important;
-  font-weight: 700 !important;
+  font-weight: 600 !important;
   border-bottom: 1.5px solid var(--fs-divider) !important;
 }
 
