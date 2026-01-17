@@ -1,6 +1,6 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V42.9
+Fashion Star Wiki - V43.0
 ==========================================================================
 - Design System: Variable-driven vertical rhythm (VS Code Inspired).
 - Header Strategy: H1 individual logic; H2-H4 unified (Top 1.5, Bottom 0.5).
@@ -21,20 +21,21 @@ Fashion Star Wiki - V42.9
   --fs-table-header-bg: #F8F9FA; 
   
   /* 文字颜色定义 (浅色模式) */
-  --fs-content-fg: #333333;           /* 锁定为 #333333，避免纯黑 */
-  --fs-nav-inactive: var(--fs-content-fg); /* 链接：导航栏与正文保持绝对一致 */
+  --fs-content-fg: #333333;           
+  --fs-header-fg: #242424;            /* H1-H4 专用深色 */
+  --fs-nav-inactive: var(--fs-content-fg); 
 
-  /* Material Design 3 基础色彩覆盖：确保搜索框和全局 UI 文字同步 */
+  /* Material Design 3 基础色彩覆盖 */
   --md-primary-fg-color: var(--fs-accent);
   --md-accent-fg-color: var(--fs-accent);
   --md-default-fg-color: var(--fs-content-fg);
 
-  /* 垂直节奏刻度尺 (Vertical Rhythm Scale) */
-  --fs-space-zero: 0;            /* 0px */
-  --fs-space-small: 0.5rem;      /* 8px */
-  --fs-space-base: 1.0rem;       /* 16px */
-  --fs-space-medium: 1.5rem;     /* 24px */
-  --fs-space-large: 2.0rem;      /* 32px */
+  /* 垂直节奏刻度尺 */
+  --fs-space-zero: 0;            
+  --fs-space-small: 0.5rem;      
+  --fs-space-base: 1.0rem;       
+  --fs-space-medium: 1.5rem;     
+  --fs-space-large: 2.0rem;      
 }
 
 [data-md-color-scheme="slate"] {
@@ -45,7 +46,8 @@ Fashion Star Wiki - V42.9
   
   /* 文字颜色定义 (深色模式) */
   --fs-content-fg: #CCCCCC;      
-  --fs-nav-inactive: var(--fs-content-fg); /* 链接：深色模式也保持绝对一致 */
+  --fs-header-fg: #E3E3E3;            /* H1-H4 专用浅色 */
+  --fs-nav-inactive: var(--fs-content-fg); 
   --md-default-fg-color: var(--fs-content-fg);
 }
 
@@ -139,12 +141,11 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 .md-sidebar--secondary .md-nav__title[for="__toc"]::after {
   font-size: 12.8px !important; 
   font-weight: 600 !important;
-  color: var(--fs-content-fg) !important; 
+  color: var(--fs-header-fg) !important; 
   display: block !important;
-  /* --- 修复点：移除固定高度，增加不换行保护 --- */
   height: auto !important;          
   line-height: 1.2 !important;
-  white-space: nowrap !important;   /* 确保 On this page 完整显示在一行 */
+  white-space: nowrap !important;   
   text-transform: none !important;  
 }
 
@@ -152,15 +153,32 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 [lang="en"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "On this page" !important; }
 [lang="zh"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "本页目录" !important; }
 
-.md-sidebar--secondary .md-nav__link { 
+/* 关键修复：通过 nav.md-nav--secondary 强力锁定右侧目录字号 */
+.md-sidebar--secondary nav.md-nav--secondary .md-nav__link { 
   padding: 0.15rem 0 !important; 
   margin: 0 !important;
   line-height: 1.5 !important; 
-  font-size: 14.5px !important; 
+  font-size: 14.5px !important;      /* 强制回退到 14.5px */
   color: var(--fs-content-fg) !important;
+  opacity: 1 !important; 
 }
-.md-sidebar--secondary .md-nav__link--active { font-weight: 600 !important; color: var(--fs-accent) !important; }
-.md-sidebar--secondary .md-nav__link::after { display: none !important; }
+
+/* 激活态 */
+.md-sidebar--secondary nav.md-nav--secondary .md-nav__link--active { 
+  font-weight: 600 !important; 
+  color: var(--fs-accent) !important; 
+}
+
+/* 悬停态 */
+.md-sidebar--secondary nav.md-nav--secondary .md-nav__link:hover {
+  color: var(--fs-accent) !important;
+}
+
+/* 彻底屏蔽 TOC 内部可能产生的任何竖线或装饰 */
+.md-sidebar--secondary nav.md-nav--secondary .md-nav__link::after { 
+  display: none !important; 
+  content: none !important;
+}
 
 /* 6. Content Typography - 核心垂直节奏控制 */
 .md-typeset { 
@@ -171,7 +189,7 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 /* --- 全局加粗统一 --- */
 .md-typeset strong, 
 .md-typeset b {
-  font-weight: 600 !important; /* 确保列表和正文加粗不再是 700 */
+  font-weight: 600 !important; 
 }
 
 /* 统一 H2-H4: 上 1.5rem (24px) / 下 0.5rem (8px) */
@@ -179,7 +197,7 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 .md-typeset h3, 
 .md-typeset h4 {
   font-weight: 600 !important;
-  color: var(--fs-content-fg) !important;
+  color: var(--fs-header-fg) !important; /* 使用标题专用色 */
   margin-top: var(--fs-space-medium) !important;
   margin-bottom: var(--fs-space-small) !important;
 }
@@ -187,7 +205,7 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 /* H1 单独处理：顶部归零，底部 1.5rem (24px) */
 .md-typeset h1 {
   font-weight: 600 !important;
-  color: var(--fs-content-fg) !important;
+  color: var(--fs-header-fg) !important; /* 使用标题专用色 */
   margin-top: var(--fs-space-zero) !important;
   margin-bottom: var(--fs-space-medium) !important;
 }
@@ -203,15 +221,15 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 .md-typeset ol {
   margin-top: var(--fs-space-zero) !important;
   margin-bottom: var(--fs-space-small) !important;
-  padding-left: 1.2rem !important; /* 保持标准的缩进距离 */
+  padding-left: 1.2rem !important; 
 }
 
-/* 列表项内部微调：让列表看起来更紧凑 */
+/* 列表项内部微调 */
 .md-typeset li {
   margin-bottom: 0.1rem !important;
 }
 .md-typeset li p {
-  margin-bottom: 0 !important; /* 防止列表内的段落产生二次间距 */
+  margin-bottom: 0 !important; 
 }
 
 /* 处理文章开头第一个标题的顶距 */
