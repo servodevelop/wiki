@@ -1,8 +1,10 @@
 name: Deploy-Wiki
+
 on:
   push:
     branches:
       - main
+
 permissions:
   contents: read
   pages: write
@@ -15,28 +17,49 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      # 1. 检出代码
+      # 设置 fetch-depth: 0 以获取完整 Git 提交历史，否则 git-revision 插件会显示所有页面为“刚刚更新”
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # 2. 设置 Python 环境
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: 3.x    
-      # 在构建前，手动把根目录的 assets & stylesheets 拷贝进各自的文档目录
-      - name: Sync Assets
-        run: |
-          cp -R assets/ docs/assets/
-          cp -R assets/ docs_zh/assets/
 
-      # 关键修改：安装 requirements.txt 中列出的所有插件
-      - run: pip install -r requirements.txt
+      # 3. 同步全局资源到各语言文档目录
+      # mkdir -p 确保目标文件夹存在，避免因目录不存在导致的拷贝失败
+      - name: Sync Assets and Stylesheets
+        run: |
+          mkdir -p docs/assets/ docs_zh/assets/
+          cp -R assets/ docs/assets/ || true
+          cp -R assets/ docs_zh/assets/ || true
+
+      # 4. 安装依赖插件
+      # 自动安装 requirements.txt 中列出的所有 MkDocs 插件（如 git-revision-date-localized）
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+
+      # 5. 构建多语言版本
+      # 分别调用两个 YAML 配置文件进行静态站点构建
       - name: Build English Edition
         run: mkdocs build -f mkdocs.en.yml
+
       - name: Build Chinese Edition
         run: mkdocs build -f mkdocs.zh.yml
+
+      # 6. 部署到 GitHub Pages
       - name: Setup Pages
         uses: actions/configure-pages@v4
-      - name: Upload artifact
+
+      - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: site/
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
