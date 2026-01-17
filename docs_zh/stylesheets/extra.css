@@ -1,6 +1,6 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V42.7
+Fashion Star Wiki - V42.8
 ==========================================================================
 - Design System: Variable-driven vertical rhythm (VS Code Inspired).
 - Header Strategy: H1 individual logic; H2-H4 unified (Top 1.5, Bottom 0.5).
@@ -19,19 +19,22 @@ Fashion Star Wiki - V42.7
   --fs-accent: #8641A9;
   --fs-divider: rgba(0,0,0,0.15); 
   --fs-table-header-bg: #F8F9FA; 
-  --fs-content-fg: #333333;
-  --fs-nav-inactive: #444746;
+  
+  /* 文字颜色定义 (浅色模式) */
+  --fs-content-fg: #333333;           /* 锁定为 #333333，避免纯黑 */
+  --fs-nav-inactive: var(--fs-content-fg); /* 链接：导航栏与正文保持绝对一致 */
 
-  /* Material Design 3 基础色彩覆盖 */
+  /* Material Design 3 基础色彩覆盖：确保搜索框和全局 UI 文字同步 */
   --md-primary-fg-color: var(--fs-accent);
   --md-accent-fg-color: var(--fs-accent);
+  --md-default-fg-color: var(--fs-content-fg);
 
   /* 垂直节奏刻度尺 (Vertical Rhythm Scale) */
   --fs-space-zero: 0;            /* 0px */
-  --fs-space-small: 0.5rem;      /* 8px: 标题下方、正文下方 */
-  --fs-space-base: 1.0rem;       /* 16px: 标准间隔 */
-  --fs-space-medium: 1.5rem;     /* 24px: 核心块间距 (VS Code 节奏) */
-  --fs-space-large: 2.0rem;      /* 32px: 强力切割感 */
+  --fs-space-small: 0.5rem;      /* 8px */
+  --fs-space-base: 1.0rem;       /* 16px */
+  --fs-space-medium: 1.5rem;     /* 24px */
+  --fs-space-large: 2.0rem;      /* 32px */
 }
 
 [data-md-color-scheme="slate"] {
@@ -39,9 +42,11 @@ Fashion Star Wiki - V42.7
   --fs-table-header-bg: #202124;
   --md-default-bg-color: #181818;
   --md-default-bg-color--light: #1e1f20;
-  --md-default-fg-color: #CCCCCC; /* 修改这里：影响全局 UI 文字 */
-  --fs-content-fg: #CCCCCC;      /* 修改这里：影响正文文字 */
-  --fs-nav-inactive: #C4C7C5;
+  
+  /* 文字颜色定义 (深色模式) */
+  --fs-content-fg: #CCCCCC;      
+  --fs-nav-inactive: var(--fs-content-fg); /* 链接：深色模式也保持绝对一致 */
+  --md-default-fg-color: var(--fs-content-fg);
 }
 
 /* 2. Component Cleanup */
@@ -65,8 +70,7 @@ nav.md-footer__inner[aria-label="页脚"] {
 /* 4. Left Sidebar (Navigation) - Locked at 16px */
 .md-nav--primary .md-nav__link, 
 .md-nav--primary .md-nav__title {
-  color: var(--fs-nav-inactive);
-  transition: color 125ms, font-weight 125ms;
+  color: var(--fs-content-fg);
   font-size: 16px !important; 
 }
 li.md-nav__item--active > .md-nav__link,
@@ -88,18 +92,33 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 
 /* 5. Right Sidebar (TOC) - 14.5px */
 .md-sidebar--secondary .md-nav__title[for="__toc"] {
-  font-size: 0 !important; color: transparent !important; margin-bottom: 0.4rem !important;
+  font-size: 0 !important; 
+  color: transparent !important; 
+  margin-bottom: 0.8rem !important; /* 增加一点底部间距 */
+  display: block !important;       /* 强制容器块级化 */
+  height: auto !important;          /* 防止高度被塌陷 */
 }
+
 .md-sidebar--secondary .md-nav__title[for="__toc"]::after {
-  font-size: 12.8px !important; font-weight: 600 !important;
-  color: var(--md-default-fg-color--light) !important; display: block;
+  font-size: 12.8px !important; 
+  font-weight: 600 !important;
+  color: var(--fs-content-fg) !important; 
+  display: block !important;
+  height: 1.2rem !important;        /* 显式给高度 */
+  line-height: 1.2rem !important;
+  text-transform: none !important;  /* 防止被强制转大写 */
 }
-[lang="en"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "On this page"; }
-[lang="zh"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "本页目录"; }
+
+/* 重新注入内容 */
+[lang="en"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "On this page" !important; }
+[lang="zh"] .md-sidebar--secondary .md-nav__title[for="__toc"]::after { content: "本页目录" !important; }
 
 .md-sidebar--secondary .md-nav__link { 
-  padding: 0.15rem 0 !important; margin: 0 !important;
-  line-height: 1.5 !important; font-size: 14.5px !important; 
+  padding: 0.15rem 0 !important; 
+  margin: 0 !important;
+  line-height: 1.5 !important; 
+  font-size: 14.5px !important; 
+  color: var(--fs-content-fg) !important;
 }
 .md-sidebar--secondary .md-nav__link--active { font-weight: 600 !important; color: var(--fs-accent) !important; }
 .md-sidebar--secondary .md-nav__link::after { display: none !important; }
