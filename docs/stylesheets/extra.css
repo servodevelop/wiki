@@ -1,6 +1,6 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V42.2
+Fashion Star Wiki - V42.3
 ==========================================================================
 - Design System: Variable-driven vertical rhythm (VS Code Inspired).
 - Header Strategy: H1 individual logic; H2-H4 unified (Top 1.5, Bottom 0.5).
@@ -9,6 +9,9 @@ Fashion Star Wiki - V42.2
 - Border Spec: 0.5px ultra-fine borders for tables and dividers.
 ==========================================================================
 */
+
+/* 0. Font Injection - 必须在最顶部，补全缺失的 600 字重 */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap');
 
 /* 1. Core Variables - 中央调度站 */
 :root {
@@ -111,7 +114,7 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 .md-typeset h2, 
 .md-typeset h3, 
 .md-typeset h4 {
-  font-weight: 700 !important;
+  font-weight: 600 !important;
   color: var(--fs-content-fg) !important;
   margin-top: var(--fs-space-medium) !important;
   margin-bottom: var(--fs-space-small) !important;
@@ -119,7 +122,7 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 
 /* H1 单独处理：顶部归零，底部 1.5rem (24px) */
 .md-typeset h1 {
-  font-weight: 700 !important;
+  font-weight: 600 !important;
   color: var(--fs-content-fg) !important;
   margin-top: var(--fs-space-zero) !important;
   margin-bottom: var(--fs-space-medium) !important;
