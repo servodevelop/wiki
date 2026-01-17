@@ -93,6 +93,11 @@ hooks:
 plugins:
   - search:
       separator: '[\s\u200b\-]'
+  - git-revision-date-localized:
+      type: timeago
+      enable_creation_date: false
+      show_timezone: false
+      fallback_to_build_date: true
   - glightbox
   - include-markdown:
       rewrite_relative_urls: true
