@@ -104,7 +104,7 @@ plugins:
   - include-markdown:
       rewrite_relative_urls: true
       dedent: true
-          
+  - awesome-pages        
 
 # 中文的导航目录
 nav:
