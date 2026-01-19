@@ -81,6 +81,8 @@ extra_css:
 
 markdown_extensions:
   - admonition
+  - attr_list                # 必须保留，用于识别 { .class }
+  - md_in_html               # 关键：允许在 <div> 等 HTML 标签内解析 Markdown
   - pymdownx.details
   - pymdownx.superfences
   - pymdownx.emoji:

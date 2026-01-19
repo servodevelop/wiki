@@ -1,6 +1,6 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V43.1
+Fashion Star Wiki - V43.5
 ==========================================================================
 - Design System: Variable-driven vertical rhythm (VS Code Inspired).
 - Header Strategy: H1 individual logic; H2-H4 unified (Top 1.5, Bottom 0.5).
@@ -335,8 +335,85 @@ img.flag-icon {
   }
 }
 
+/* [1-10 部分保持不变] */
+
+/* 11. E-commerce Purchase Cards (V43.23 固定宽度版) */
+.fs-buy-grid {
+  display: flex !important;
+  flex-wrap: wrap !important;      /* 自动换行 */
+  justify-content: center !important; /* 核心：整体居中 */
+  gap: 20px !important;            /* 卡片间距 */
+  margin: 2.0rem auto !important;
+  width: 100% !important;
+  max-width: 860px;                /* 约等于 (260px * 3) + (20px * 2) */
+}
+
+.fs-buy-card {
+  /* 核心：锁定卡片固定宽度 */
+  width: 260px !important; 
+  flex: 0 0 260px !important;      /* 禁止拉伸或压缩 */
+  
+  border: 0.5px solid var(--fs-divider) !important;
+  border-radius: 8px !important;
+  padding: 20px 15px !important;
+  text-align: center !important;
+  background-color: var(--md-default-bg-color) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
+}
+
+/* 内部结构清理 */
+.fs-buy-card p { margin: 0 !important; display: contents !important; }
+
+/* 图片大小手工修订位 (你要求的 250px 起步) */
+.fs-buy-card img { 
+  width: 300px !important;        /* 设置为你需要的固定宽度 */
+  max-width: 100% !important;     /* 保证不超出卡片范围 */
+  height: auto !important; 
+  margin-bottom: 12px !important; 
+  border-radius: 6px;
+}
+
+.fs-product-name { 
+  font-size: 15px; 
+  font-weight: 600; 
+  color: var(--fs-header-fg); 
+  margin: 8px 0 4px 0 !important; 
+}
+
+.fs-product-price { 
+  font-size: 20px; 
+  font-weight: 700; 
+  color: var(--fs-accent); 
+  margin-bottom: 15px !important; 
+}
+
+/* 12. 按钮样式 (精致胶囊型) */
+.md-typeset .fs-download-btn {
+  background-color: var(--fs-accent) !important;
+  color: #FFFFFF !important;
+  border: 1px solid var(--fs-accent) !important;
+  border-radius: 8px !important;   /* 更圆润的按钮 */
+  padding: 4px 30px !important;    /* 左右撑开 */
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition: all 0.25s ease;
+  display: inline-block !important;
+  white-space: nowrap !important;  /* 禁止文字换行 */
+}
+
+.md-typeset .fs-download-btn:hover { 
+  opacity: 0.9; 
+  transform: translateY(-2px); 
+  box-shadow: 0 4px 10px rgba(134, 65, 169, 0.3) !important;
+  color: #FFFFFF !important; 
+}
+
 /* ==========================================================================
-   Fashion Star Wiki - Admonition Customization (V43.6)
+   Fashion Star Wiki - Admonition Customization
    ========================================================================== */
 
 /* [1] 通用样式：统一所有提示框的边框厚度为 1px */
