@@ -110,7 +110,9 @@ plugins:
       dedent: true
   - awesome-pages
 
-  
+extra_javascript:
+  - assets/javascripts/language-switch.js
+
 # 根导航定义（主要用于默认语言，即英文）
 nav:
   - Home: index.md
