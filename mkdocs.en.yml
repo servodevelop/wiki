@@ -50,10 +50,10 @@ theme:
 extra:
   alternate:
     - name: "<img src='/assets/flags/us.svg' class='flag-icon' /> English"
-      link: ""          # 重点：留空或写 ./，代表当前目录
+      link: /           # 强制指向根
       lang: en
     - name: "<img src='/assets/flags/cn.svg' class='flag-icon' /> 中文"
-      link: zh/         # 重点：不要写开头的斜杠，这会让它拼接在当前 URL 前面
+      link: /zh/        # 强制指向 /zh/ 子目录
       lang: zh
   social:
     - icon: fontawesome/brands/github

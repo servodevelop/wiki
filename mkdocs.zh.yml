@@ -52,10 +52,10 @@ theme:
 extra:
   alternate:
     - name: "<img src='/assets/flags/us.svg' class='flag-icon' /> English"
-      link: ../         # 重点：跳出 zh 目录，回到根目录
+      link: /           # 即使在中文目录下，也强制指向根
       lang: en
     - name: "<img src='/assets/flags/cn.svg' class='flag-icon' /> 中文"
-      link: ""          # 重点：留空
+      link: /zh/        # 强制指向 /zh/
       lang: zh
   social:
     - icon: fontawesome/brands/github
