@@ -116,7 +116,7 @@ nav:
   - Home: index.md
   - Uart Bus Servo:
     - uart-servo/index.md
-    - Protocol: uart-servo/protocols/uart_rs485_protocol.md
+    - Protocol: uart-servo/protocols/uart-rs485-protocol.md
     - Specifications:
       - RP6-U12H-M: uart-servo/specs/rp6-u12h-m.md
       - RX6-U12H-M: uart-servo/specs/rx6-u12h-m.md
