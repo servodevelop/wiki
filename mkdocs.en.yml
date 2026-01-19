@@ -115,51 +115,51 @@ plugins:
 nav:
   - Home: index.md
   - Uart Bus Servo:
-    - uart_servo/index.md
-    - Protocol: uart_servo/protocols/uart_rs485_protocol.md
+    - uart-servo/index.md
+    - Protocol: uart-servo/protocols/uart_rs485_protocol.md
     - Specifications:
-      - RP6-U12H-M: uart_servo/specs/rp6-u12h-m.md
-      - RX6-U12H-M: uart_servo/specs/rx6-u12h-m.md
-      - HP6/RP6-U15H-M: uart_servo/specs/hp-rp6-u15h-m.md
-      - RP6-U18H-M: uart_servo/specs/rp6-u18h-m.md
-      - HA8/RA8-U25-M: uart_servo/specs/ha-ra8-u25-m.md
-      - HA8/RA8-U25H-M: uart_servo/specs/ha-ra8-u25h-m.md
-      - HX8/RX8-U28H-M: uart_servo/specs/hx-rx8-u28h-m.md
-      - HX8/RX8-U29H-M: uart_servo/specs/hx-rx8-u29h-m.md
-      - HA8/RA8-U35-M: uart_servo/specs/ha-ra8-u35-m.md
-      - HA8/RA8-U35H-M: uart_servo/specs/ha-ra8-u35h-m.md
-      - HA8/RA8-U45-M: uart_servo/specs/ha-ra8-u45-m.md
-      - HA8/RA8-U45H-M: uart_servo/specs/ha-ra8-u45h-m.md
-      - HX8/RX8-U50H-M: uart_servo/specs/hx-rx8-u50h-m.md
-      - HX8/RX8-U51H-M: uart_servo/specs/hx-rx8-u51h-m.md
-      - RX18-U100H-M: uart_servo/specs/rx18-u100h-m.md
-      - RX18-U101H-M: uart_servo/specs/rx18-u101h-m.md
+      - RP6-U12H-M: uart-servo/specs/rp6-u12h-m.md
+      - RX6-U12H-M: uart-servo/specs/rx6-u12h-m.md
+      - HP6/RP6-U15H-M: uart-servo/specs/hp-rp6-u15h-m.md
+      - RP6-U18H-M: uart-servo/specs/rp6-u18h-m.md
+      - HA8/RA8-U25-M: uart-servo/specs/ha-ra8-u25-m.md
+      - HA8/RA8-U25H-M: uart-servo/specs/ha-ra8-u25h-m.md
+      - HX8/RX8-U28H-M: uart-servo/specs/hx-rx8-u28h-m.md
+      - HX8/RX8-U29H-M: uart-servo/specs/hx-rx8-u29h-m.md
+      - HA8/RA8-U35-M: uart-servo/specs/ha-ra8-u35-m.md
+      - HA8/RA8-U35H-M: uart-servo/specs/ha-ra8-u35h-m.md
+      - HA8/RA8-U45-M: uart-servo/specs/ha-ra8-u45-m.md
+      - HA8/RA8-U45H-M: uart-servo/specs/ha-ra8-u45h-m.md
+      - HX8/RX8-U50H-M: uart-servo/specs/hx-rx8-u50h-m.md
+      - HX8/RX8-U51H-M: uart-servo/specs/hx-rx8-u51h-m.md
+      - RX18-U100H-M: uart-servo/specs/rx18-u100h-m.md
+      - RX18-U101H-M: uart-servo/specs/rx18-u101h-m.md
     - CAD Files:
-      - RA8/RP8/RX8 Series: uart_servo/cad_files/ra8-rp8-rx8-series.md
-      - RP6/RX6-U12 Series: uart_servo/cad_files/rp6-rx6-u12-series.md
-      - RX6-U15 Series: uart_servo/cad_files/rx6-u15-series.md
-      - RP6-U18 Series: uart_servo/cad_files/rp6-u18-series.md
-      - RX18 Series: uart_servo/cad_files/rx18-series.md
+      - RA8/RP8/RX8 Series: uart-servo/cad_files/ra8-rp8-rx8-series.md
+      - RP6/RX6-U12 Series: uart-servo/cad_files/rp6-rx6-u12-series.md
+      - RX6-U15 Series: uart-servo/cad_files/rx6-u15-series.md
+      - RP6-U18 Series: uart-servo/cad_files/rp6-u18-series.md
+      - RX18 Series: uart-servo/cad_files/rx18-series.md
     - Software:
-      - PC Configuration Tool: uart_servo/software/pc_configuration_tool.md
-      - Web Configuration Tool: uart_servo/software/web_configuration_tool.md
+      - PC Configuration Tool: uart-servo/software/pc_configuration_tool.md
+      - Web Configuration Tool: uart-servo/software/web_configuration_tool.md
     - SDK:
       - PLC: 
-        - Sinamics: uart_servo/sdk/plc/sinamics_tia_portal_v19.md
-        - Codesys: uart_servo/sdk/plc/codesys.md
-        - Inovance: uart_servo/sdk/plc/inovance.md
-        - Inoproshop: uart_servo/sdk/plc/inovance_inoproshop.md
-        - GX Works: uart_servo/sdk/plc/mitsubishi_gx_works2.md
-        - Step7 MicroWin: uart_servo/sdk/plc/step7_microwin_smart.md
-      - Stm32f103: uart_servo/sdk/stm32f103_sdk.md
-      - Stm32f407: uart_servo/sdk/stm32f407_sdk.md
-      - Arduino: uart_servo/sdk/arduino_sdk.md
-      - Python: uart_servo/sdk/python_sdk.md
-      - Micro Python: uart_servo/sdk/micropython_sdk.md
-      - C++: "uart_servo/sdk/cpp_sdk.md"
-      - "C#": "uart_servo/sdk/csharp_sdk.md"
-      - Ros: uart_servo/sdk/ros_sdk.md
-    - Document: uart_servo/documents/uc01_instruction_manual.md
+        - Sinamics: uart-servo/sdk/plc/sinamics_tia_portal_v19.md
+        - Codesys: uart-servo/sdk/plc/codesys.md
+        - Inovance: uart-servo/sdk/plc/inovance.md
+        - Inoproshop: uart-servo/sdk/plc/inovance_inoproshop.md
+        - GX Works: uart-servo/sdk/plc/mitsubishi_gx_works2.md
+        - Step7 MicroWin: uart-servo/sdk/plc/step7_microwin_smart.md
+      - Stm32f103: uart-servo/sdk/stm32f103_sdk.md
+      - Stm32f407: uart-servo/sdk/stm32f407_sdk.md
+      - Arduino: uart-servo/sdk/arduino_sdk.md
+      - Python: uart-servo/sdk/python_sdk.md
+      - Micro Python: uart-servo/sdk/micropython_sdk.md
+      - C++: "uart-servo/sdk/cpp_sdk.md"
+      - "C#": "uart-servo/sdk/csharp_sdk.md"
+      - Ros: uart-servo/sdk/ros_sdk.md
+    - Document: uart-servo/documents/uc01_instruction_manual.md
   - RS485 Bus Servo:
     - rs485_servo/index.md
     - Protocol: rs485_servo/protocols/uart_rs485_protocol.md
