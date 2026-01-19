@@ -1,6 +1,6 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V43.5
+Fashion Star Wiki - V43.6
 ==========================================================================
 - Design System: Variable-driven vertical rhythm (VS Code Inspired).
 - Header Strategy: H1 individual logic; H2-H4 unified (Top 1.5, Bottom 0.5).
@@ -353,9 +353,9 @@ img.flag-icon {
   width: 260px !important; 
   flex: 0 0 260px !important;      /* 禁止拉伸或压缩 */
   
-  border: 0.5px solid var(--fs-divider) !important;
+  border: 1.5px solid var(--fs-divider) !important;
   border-radius: 8px !important;
-  padding: 20px 15px !important;
+  padding: 15px 15px !important;
   text-align: center !important;
   background-color: var(--md-default-bg-color) !important;
   display: flex !important;
