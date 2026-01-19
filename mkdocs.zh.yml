@@ -30,7 +30,7 @@ theme:
     - content.tabs.link
     - navigation.tabs
     - content.action.edit  # 必须开启，才会出现铅笔图标
-    - navigation.instant
+    # - navigation.instant
     - navigation.instant.progress
     - navigation.instant.prefetch
 
