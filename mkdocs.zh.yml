@@ -1,6 +1,6 @@
 
 site_name: 华馨京科技 Wiki
-site_url: https://wiki.fashionstar.com.hk/zh/
+site_url: https://wiki.fashionstar.com.hk/
 use_directory_urls: true
 repo_url: https://github.com/servodevelop/wiki
 edit_uri: edit/main/docs_zh/  # 根据你的分支和目录微调
