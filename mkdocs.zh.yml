@@ -104,10 +104,7 @@ plugins:
   - include-markdown:
       rewrite_relative_urls: true
       dedent: true
-  - awesome-pages        
 
-extra_javascript:
-  - assets/javascripts/language-switch.js
 
 # 中文的导航目录
 nav:
