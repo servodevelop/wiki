@@ -1,6 +1,6 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V43.6
+Fashion Star Wiki - V43.7
 ==========================================================================
 - Design System: Variable-driven vertical rhythm (VS Code Inspired).
 - Header Strategy: H1 individual logic; H2-H4 unified (Top 1.5, Bottom 0.5).
@@ -277,11 +277,10 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   border-radius: 4px !important;
 }
 
-/* 8. Table Optimization (0.5px Borders) */
+/* 8. Table Optimization (0.5px Borders & Vertical Alignment) */
 .md-typeset__table { 
   margin-top: var(--fs-space-zero) !important;      
   margin-bottom: var(--fs-space-small) !important;   
-  /* 强制容器撑开 */
   display: block !important;
   width: 100% !important;
   overflow-x: auto; 
@@ -300,15 +299,32 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   padding: 10px 16px !important; 
   border: 0.5px solid var(--fs-divider) !important;
   line-height: 1.4 !important;
+  /* --- 核心修改：确保文字、图片、按钮垂直居中 --- */
+  vertical-align: middle !important;
 }
 
 .md-typeset table:not([class]) th {
   background-color: var(--fs-table-header-bg) !important;
   font-weight: 600 !important;
   border-bottom: 1.5px solid var(--fs-divider) !important;
+  text-align: center !important; /* 表头强制居中 */
 }
 
-/* 仅解决奇偶显示问题：增加以下部分 */
+/* 确保表格内的图片不会有额外的间距干扰居中 */
+.md-typeset table:not([class]) td img {
+  margin: 0 auto !important;
+  display: inline-block !important; /* 改为 inline-block 以配合垂直居中 */
+  max-width: 100% !important;
+}
+
+/* 优化表格内按钮的尺寸 */
+.md-typeset table:not([class]) .fs-download-btn {
+  padding: 4px 15px !important;
+  font-size: 14px !important;
+  margin: 0 !important;
+}
+
+/* 仅解决奇偶显示问题 */
 .md-typeset table:not([class]) tr:nth-child(even) {
   background-color: rgba(0, 0, 0, 0.012) !important;
 }
