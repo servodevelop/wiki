@@ -334,3 +334,48 @@ img.flag-icon {
     width: 1px; background-color: var(--fs-divider); z-index: 1;
   }
 }
+
+/* ==========================================================================
+   Fashion Star Wiki - Admonition Customization (V43.6)
+   ========================================================================== */
+
+/* [1] 通用样式：统一所有提示框的边框厚度为 1px */
+.md-typeset .admonition, 
+.md-typeset details {
+  border-width: 1.0px !important;       /* 恢复为 1px */
+  border-left-width: 4px !important;  /* 左侧条稍微加粗以保持辨识度 */
+  border-radius: 4px;
+  box-shadow: none !important;
+  margin-bottom: var(--fs-space-small) !important;
+}
+
+/* [2] Note 样式：恢复原生 */
+/* 不写额外的 .admonition.note 覆盖代码，它将自动应用 Material 主题的默认蓝色和图标 */
+
+/* [3] Important 定制 (保持 1px 边框和品牌色) */
+.md-typeset .admonition.important,
+.md-typeset details.important {
+  border-color: var(--fs-accent) !important;
+}
+.md-typeset .important > .admonition-title::before,
+.md-typeset .important > summary::before {
+  background-color: var(--fs-accent) !important;
+  width: 1.1rem !important;
+  height: 1.1rem !important;
+  -webkit-mask-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,17.27L18.18,21L16.45,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.55,13.97L5.82,21L12,17.27Z"/></svg>') !important;
+  mask-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,17.27L18.18,21L16.45,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.55,13.97L5.82,21L12,17.27Z"/></svg>') !important;
+}
+
+/* [4] Tip 定制 (保持 1px 边框和青色) */
+.md-typeset .admonition.tip,
+.md-typeset details.tip {
+  border-color: #00BFA5 !important;
+}
+.md-typeset .tip > .admonition-title::before,
+.md-typeset .tip > summary::before {
+  background-color: #00BFA5 !important;
+  width: 1.1rem !important;
+  height: 1.1rem !important;
+  -webkit-mask-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A7,7 0 0,0 5,9C5,11.39 6.19,13.5 8,14.74V17A1,1 0 0,0 9,18H15A1,1 0 0,0 16,17V14.74C17.81,13.5 19,11.39 19,9A7,7 0 0,0 12,2M9,21A1,1 0 0,0 10,22H14A1,1 0 0,0 15,21V20H9V21M12,4A5,5 0 0,1 17,9C17,11.05 15,12.5 15,14H9C9,12.5 7,11.05 7,9A5,5 0 0,1 12,4Z"/></svg>') !important;
+  mask-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A7,7 0 0,0 5,9C5,11.39 6.19,13.5 8,14.74V17A1,1 0 0,0 9,18H15A1,1 0 0,0 16,17V14.74C17.81,13.5 19,11.39 19,9A7,7 0 0,0 12,2M9,21A1,1 0 0,0 10,22H14A1,1 0 0,0 15,21V20H9V21M12,4A5,5 0 0,1 17,9C17,11.05 15,12.5 15,14H9C9,12.5 7,11.05 7,9A5,5 0 0,1 12,4Z"/></svg>') !important;
+}  
