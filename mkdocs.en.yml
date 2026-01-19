@@ -48,12 +48,12 @@ theme:
         name: Switch to light mode
 
 extra:
-  alternate:            # 语言切换器，必须用绝对路径  [oai_citation:4‡squidfunk.github.io](https://squidfunk.github.io/mkdocs-material/setup/changing-the-language/)
+  alternate:
     - name: "<img src='/assets/flags/us.svg' class='flag-icon' /> English"
-      link: ./
+      link: ""          # 重点：留空或写 ./，代表当前目录
       lang: en
     - name: "<img src='/assets/flags/cn.svg' class='flag-icon' /> 中文"
-      link: zh/
+      link: zh/         # 重点：不要写开头的斜杠，这会让它拼接在当前 URL 前面
       lang: zh
   social:
     - icon: fontawesome/brands/github

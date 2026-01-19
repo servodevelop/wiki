@@ -50,12 +50,12 @@ theme:
         name: Switch to light mode
         
 extra:
-  alternate:            # 语言切换器，必须用绝对路径  [oai_citation:4‡squidfunk.github.io](https://squidfunk.github.io/mkdocs-material/setup/changing-the-language/)
+  alternate:
     - name: "<img src='/assets/flags/us.svg' class='flag-icon' /> English"
-      link: ../
+      link: ../         # 重点：跳出 zh 目录，回到根目录
       lang: en
     - name: "<img src='/assets/flags/cn.svg' class='flag-icon' /> 中文"
-      link: ./
+      link: ""          # 重点：留空
       lang: zh
   social:
     - icon: fontawesome/brands/github
