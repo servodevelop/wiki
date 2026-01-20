@@ -13,6 +13,7 @@
 <div class="fs-product-name">HA8-U25H-M</div>
 
 </div>
+</div>
 
 
 
