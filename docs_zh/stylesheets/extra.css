@@ -1,6 +1,6 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V43.7
+Fashion Star Wiki - V43.8
 ==========================================================================
 - Design System: Variable-driven vertical rhythm (VS Code Inspired).
 - Header Strategy: H1 individual logic; H2-H4 unified (Top 1.5, Bottom 0.5).
@@ -239,42 +239,40 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 }
 
 /* 7. Image Optimization */
+/* 全局普通图片：强制居中独立显示 */
 .md-typeset img { 
   display: block !important; 
-  /* 修改为：上 0，下 0.5rem (8px) */
   margin-top: var(--fs-space-zero) !important; 
   margin-bottom: var(--fs-space-small) !important; 
   margin-left: auto !important;
   margin-right: auto !important;
   max-width: 85% !important; 
   border-radius: 4px !important; 
+}
+
+/* --- 特殊修复：允许 Shields.io 徽章并排 --- */
+/* 只要图片路径包含 shields.io，就将其恢复为行内块 */
+.md-typeset img[src*="shields.io"] {
+  display: inline-block !important; /* 核心：允许并排 */
+  margin: 0 4px 5px 0 !important;   /* 移除居中，改为右间距 */
+  max-width: none !important;       /* 不限制大小 */
+  border-radius: 0 !important;      /* 保持徽章方正 */
+  vertical-align: middle;
+}
+
+/* 强制 H1 标题后的第一个段落左对齐（防止标签被整体居中） */
+.md-typeset h1 + p {
+  text-align: left !important;
 }
 
 /* 7.1 Video & Media Optimization */
-/* 针对原生 <video> 标签和 MkDocs 的视频容器 */
 .md-typeset video,
-.md-typeset .video-wrapper { 
+.md-typeset .video-wrapper,
+.md-typeset iframe { 
   display: block !important; 
-  /* 统一节奏：上 0，下 0.5rem (8px) */
-  margin-top: var(--fs-space-zero) !important; 
-  margin-bottom: var(--fs-space-small) !important; 
-  /* 核心：左右 auto 实现居中 */
-  margin-left: auto !important;
-  margin-right: auto !important;
+  margin: var(--fs-space-zero) auto var(--fs-space-small) auto !important;
   max-width: 85% !important; 
   border-radius: 4px !important; 
-}
-
-/* 针对外部嵌入视频 (如 YouTube/Bilibili iframe) */
-.md-typeset iframe {
-  display: block !important; /* 1. 必须转为 block 才能应用 margin auto */
-  margin-top: var(--fs-space-zero) !important;
-  margin-bottom: var(--fs-space-small) !important;
-  /* 2. 左右 auto 实现居中 */
-  margin-left: auto !important;
-  margin-right: auto !important;
-  width: 85% !important; 
-  border-radius: 4px !important;
 }
 
 /* 8. Table Optimization (0.5px Borders & Vertical Alignment) */
