@@ -110,6 +110,9 @@ plugins:
   - include-markdown:
       rewrite_relative_urls: true
       dedent: true
+  - git-committers:
+      repository: servodevelop/wiki
+      branch: main      
 
 
 # 根导航定义（主要用于默认语言，即英文）

@@ -6,4 +6,4 @@ mkdocs-minify-plugin
 mkdocs-git-revision-date-localized-plugin
 mkdocs-redirects
 jieba
-mkdocs-awesome-pages-plugin
+mkdocs-git-committers-plugin-2
