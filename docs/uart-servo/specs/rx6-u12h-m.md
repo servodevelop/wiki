@@ -1,11 +1,20 @@
 # HP6/RP6-U12H-M
 
-| 图片 | 型号 | SKU | 价格 | 购买链接 |
-| :---: | :---: | :---: | :---: | :---: |
-| <img src="https://store.fashionstar.com.hk/wp-content/uploads/2025/09/RA8-U25-M-1536x1536.webp" width="120"> | **RA8-U25H-M** | 02.06.00000226 | **$200.00** | [立即购买](https://store.fashionstar.com.hk/product/uart-bus-servo-ra8-u25-m/){ .md-button .fs-download-btn } |
-| <img src="https://store.fashionstar.com.hk/wp-content/uploads/2025/09/HA8-U25-M-1536x1536.webp" width="120"> | **HA8-U25H-M** | 02.06.00000227 | **$200.00** | [立即购买](https://store.fashionstar.com.hk/product/uart-bus-servo-ha8-u25-m/){ .md-button .fs-download-btn } |
+<div class="fs-buy-grid" markdown="1">
 
----
+<div class="fs-buy-card" markdown="1">
+<img src="https://store.fashionstar.com.hk/wp-content/uploads/2025/09/RA8-U25-M-1536x1536.webp" alt="RA8-U25H-M">
+<div class="fs-product-name">RA8-U25H-M</div>
+
+</div>
+
+<div class="fs-buy-card" markdown="1">
+<img src="https://store.fashionstar.com.hk/wp-content/uploads/2025/09/HA8-U25-M-1536x1536.webp" alt="HA8-U25H-M">
+<div class="fs-product-name">HA8-U25H-M</div>
+
+</div>
+
+
 
 Snippets Test Start/End
 
