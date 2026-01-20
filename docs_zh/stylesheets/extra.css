@@ -1,6 +1,6 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V43.8
+Fashion Star Wiki - V43.9
 ==========================================================================
 - Design System: Variable-driven vertical rhythm (VS Code Inspired).
 - Header Strategy: H1 individual logic; H2-H4 unified (Top 1.5, Bottom 0.5).
@@ -470,3 +470,47 @@ img.flag-icon {
   -webkit-mask-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A7,7 0 0,0 5,9C5,11.39 6.19,13.5 8,14.74V17A1,1 0 0,0 9,18H15A1,1 0 0,0 16,17V14.74C17.81,13.5 19,11.39 19,9A7,7 0 0,0 12,2M9,21A1,1 0 0,0 10,22H14A1,1 0 0,0 15,21V20H9V21M12,4A5,5 0 0,1 17,9C17,11.05 15,12.5 15,14H9C9,12.5 7,11.05 7,9A5,5 0 0,1 12,4Z"/></svg>') !important;
   mask-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A7,7 0 0,0 5,9C5,11.39 6.19,13.5 8,14.74V17A1,1 0 0,0 9,18H15A1,1 0 0,0 16,17V14.74C17.81,13.5 19,11.39 19,9A7,7 0 0,0 12,2M9,21A1,1 0 0,0 10,22H14A1,1 0 0,0 15,21V20H9V21M12,4A5,5 0 0,1 17,9C17,11.05 15,12.5 15,14H9C9,12.5 7,11.05 7,9A5,5 0 0,1 12,4Z"/></svg>') !important;
 }  
+
+/* --- 贡献者头像：行内圆形版 --- */
+
+/* 1. 确保列表项内容可以水平排列 */
+.md-typeset li {
+    display: list-item; /* 保持列表符号 */
+}
+
+/* 2. 行内头像容器 */
+.fs-contributors-inline {
+    display: inline-flex !important;
+    vertical-align: middle; /* 与文字对齐 */
+    margin-left: 10px;      /* 距离文字的间距 */
+    gap: 8px;
+}
+
+/* 3. 强制头像为圆形、无边框、不换行 */
+.md-typeset .fs-avatar {
+    display: inline-block !important; /* 覆盖全局 block */
+    width: 45px !important;           /* 稍微缩小以匹配行高 */
+    height: 45px !important;
+    
+    /* 核心形状：50% 确保正圆 */
+    border-radius: 50% !important; 
+    
+    /* 彻底去掉所有边框和阴影 */
+    border: none !important; 
+    outline: none !important;
+    box-shadow: none !important;
+    
+    /* 消除 Section 7 的 margin auto 居中影响 */
+    margin: 0 !important; 
+    
+    /* 确保图片填充且不拉伸 */
+    object-fit: cover !important;
+    max-width: none !important;
+    
+    transition: transform 0.2s ease !important;
+}
+
+/* 悬停微调 */
+.md-typeset .fs-avatar:hover {
+    transform: scale(1.2) !important;
+}

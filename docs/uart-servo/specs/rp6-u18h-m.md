@@ -229,3 +229,6 @@ ip link show can0
 - [Lerobot 框架](https://github.com/huggingface/lerobot)
 
 ---
+- **项目维护者**：<span class="fs-contributors-inline"><a href="https://github.com/Welt-liu" target="_blank"><img src="https://github.com/Welt-liu.png" class="fs-avatar" title="Welt-liu"></a></span>
+
+- **感谢**：PiPER Mate 和 Piper 团队的硬件支持
