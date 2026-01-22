@@ -2,17 +2,13 @@
 
 ## 1. 2D/3D 尺寸图预览 / Dimensions Preview
 
-<div class="cad-preview-container">
-    <iframe 
+<div class="cad-preview-wrapper">
+    <embed 
         src="/uart-servo/cad_files/OMY-F3M.pdf#navpanes=0&view=Fit" 
-        class="pc-pdf-viewer"
-        style="width: 100%; height: 100%; border: none !important; outline: none; display: block;">
-    </iframe>
-    
-    <a href="/uart-servo/cad_files/OMY-F3M.pdf" target="_blank" class="mobile-pdf-link">
-        <img src="/uart-servo/cad_files/OMY-F3M_preview.jpg" alt="Click to View PDF" class="mobile-preview-img">
-        <div class="mobile-hint">点击查看全幅 PDF / Click to View Full PDF</div>
-    </a>
+        type="application/pdf" 
+        width="100%" 
+        height="100%"
+        style="border: none;">
 </div>
 
 ---
@@ -34,60 +30,36 @@
 | **.DWG** | <span class="no-wrap">2025-09-26</span> | 2.8 MB | <a href="/uart-servo/cad_files/OMY-F3M.dwg" class="fs-download-btn">DOWNLOAD</a> |
 
 <style>
-/* 1. 预览容器基础样式 */
-.cad-preview-container {
+/* 1. 统一容器样式 */
+.cad-preview-wrapper {
     width: 100%; 
     aspect-ratio: 1.5 / 1; 
     margin: 0 auto;
     overflow: hidden;
-    border: 0.5px solid var(--fs-divider); /* 匹配全局细边框 */
+    border: 0.5px solid var(--fs-divider); /* 显式细边框 */
     border-radius: 4px;
-    background: #f8f9fa;
-    position: relative;
+    background: #525659; /* PDF 阅读器经典深灰背景，确保容器存在感 */
 }
 
-/* 2. 元素显示逻辑控制 */
-.mobile-pdf-link { display: none; } /* 默认隐藏手机版 */
+/* 2. 核心补丁：防止日期折行 */
+.no-wrap {
+    white-space: nowrap !important;
+}
 
-/* 日期不换行类 */
-.no-wrap { white-space: nowrap !important; }
-
-/* 3. 移动端媒体查询 (小于 768px) */
+/* 3. 移动端适配 */
 @media screen and (max-width: 768px) {
-    /* 切换显示：隐藏 PDF 框，显示图片预览 */
-    .pc-pdf-viewer { display: none !important; }
-    .mobile-pdf-link { 
-        display: block; 
-        width: 100%; 
-        height: 100%; 
-        text-decoration: none;
+    .cad-preview-wrapper {
+        aspect-ratio: 1.66 / 1; /* 手机端稍扁一些，适合横向图纸 */
+        border: 1px solid #ccc; /* 在手机端加深边框，防止看不见 */
     }
     
-    .cad-preview-container {
-        aspect-ratio: 1.66 / 1; 
-    }
-
-    .mobile-preview-img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain; /* 保证预览图在框内完整显示 */
-    }
-
-    .mobile-hint {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        background: rgba(0,0,0,0.6);
-        color: #fff;
-        font-size: 12px;
-        text-align: center;
-        padding: 4px 0;
-    }
-
-    /* 手机端表格字体微调 */
+    /* 手机端表格压缩，确保不产生横向滚动 */
     .md-typeset table td {
         font-size: 13px !important;
         padding: 8px 4px !important;
     }
 }
 </style>
+
+> [!TIP]
+> **操作提示：** 如果手机端预览框无法手动缩小，请点击下方的 **.PDF** 下载按钮直接在系统阅读器中查看全幅图纸。
