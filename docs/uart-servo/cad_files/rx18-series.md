@@ -8,7 +8,7 @@
         type="application/pdf" 
         width="100%" 
         height="100%"
-        style="border: none;">
+        style="border: none; display: block;">
 </div>
 
 ---
@@ -30,30 +30,33 @@
 | **.DWG** | <span class="no-wrap">2025-09-26</span> | 2.8 MB | <a href="/uart-servo/cad_files/OMY-F3M.dwg" class="fs-download-btn">DOWNLOAD</a> |
 
 <style>
-/* 1. 统一容器样式 */
+/* 1. 预览容器样式：遵循 85% 宽度规范 */
 .cad-preview-wrapper {
-    width: 100%; 
-    aspect-ratio: 1.5 / 1; 
-    margin: 0 auto;
+    width: 85% !important; /* 桌面端强制 85% */
+    aspect-ratio: 1.28 / 1; 
+    margin: 20px auto;     /* 居中并增加上下间距 */
     overflow: hidden;
-    border: 0.5px solid var(--fs-divider); /* 显式细边框 */
+    border: 0.5px solid var(--fs-divider);
     border-radius: 4px;
-    background: #525659; /* PDF 阅读器经典深灰背景，确保容器存在感 */
+    background: #525659;   /* PDF 阅读器背景色 */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* 增加微弱阴影提升层级感 */
 }
 
-/* 2. 核心补丁：防止日期折行 */
+/* 2. 强制日期不换行 */
 .no-wrap {
     white-space: nowrap !important;
 }
 
-/* 3. 移动端适配 */
+/* 3. 移动端自适应补丁 */
 @media screen and (max-width: 768px) {
     .cad-preview-wrapper {
-        aspect-ratio: 1.66 / 1; /* 手机端稍扁一些，适合横向图纸 */
-        border: 1px solid #ccc; /* 在手机端加深边框，防止看不见 */
+        width: 100% !important; /* 手机端恢复 100% 以获得最大可视面积 */
+        aspect-ratio: 1.56 / 1; 
+        border: 1px solid #999; 
+        margin: 10px 0;
     }
     
-    /* 手机端表格压缩，确保不产生横向滚动 */
+    /* 压缩表格边距防止溢出 */
     .md-typeset table td {
         font-size: 13px !important;
         padding: 8px 4px !important;
