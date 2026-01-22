@@ -1,11 +1,11 @@
-# Servo CAD 资料库
+# HA8 / HP8 / HX8 系列
 
 ---
 
-### 尺寸图预览
+### 尺寸预览
 <div class="cad-preview-wrapper">
     <embed 
-        src="/uart-servo/cad_files/OMY-F3M.pdf#navpanes=0&view=Fit" 
+        src="/uart-servo/cad_files/data/OMY-F3M.pdf#navpanes=0&view=Fit" 
         type="application/pdf" 
         width="100%" 
         height="100%"
@@ -18,12 +18,12 @@
 > &bull; [**HA8-U25H-M**](../OMY-F3M/) &emsp; &emsp; &bull; [**HA8-U35H-M**](../OMY-F3M/)<br>
 > &bull; [**HX8-U28H-M**](../OMY-F3M/) &emsp; &emsp; &bull; [**HX8-U40H-M**](../OMY-F3M/)
 
-### 资源下载
+### 数据下载
 | 格式 | 更新日期 | 大小 | 操作 |
 | :---: | :---: | :---: | :---: |
-| **.PDF** | <span class="no-wrap">2025-09-26</span> | 1.2 MB | <a href="/uart-servo/cad_files/OMY-F3M.pdf" class="fs-download-btn">立即下载</a> |
-| **.STEP** | <span class="no-wrap">2025-09-26</span> | 4.5 MB | <a href="/uart-servo/cad_files/OMY-F3M.step" class="fs-download-btn">立即下载</a> |
-| **.DWG** | <span class="no-wrap">2025-09-26</span> | 2.8 MB | <a href="/uart-servo/cad_files/OMY-F3M.dwg" class="fs-download-btn">立即下载</a> |
+| **.PDF** | <span class="no-wrap">2025-09-26</span> | 1.2 MB | <a href="/uart-servo/cad_files/data/OMY-F3M.pdf" class="fs-download-btn">立即下载</a> |
+| **.STEP** | <span class="no-wrap">2025-09-26</span> | 4.5 MB | <a href="/uart-servo/cad_files/data/OMY-F3M.step" class="fs-download-btn">立即下载</a> |
+| **.DWG** | <span class="no-wrap">2025-09-26</span> | 2.8 MB | <a href="/uart-servo/cad_files/data/OMY-F3M.dwg" class="fs-download-btn">立即下载</a> |
 
 ---
 
