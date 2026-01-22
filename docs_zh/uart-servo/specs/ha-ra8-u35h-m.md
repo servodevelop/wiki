@@ -10,6 +10,8 @@
 <div class="fs-product-name">HA8-U35H-M</div>
 </div>
 
+---
+
 ## 产品特点
 
 - 有刷电机、减速器、位置编码器与控制器一体化设计
