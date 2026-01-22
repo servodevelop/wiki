@@ -27,8 +27,8 @@ Snippets Test Start/End
 
 
 {% include-markdown "snippets/uart_servo/definition.md"
-   start="<!--start:model_intro-->"
-   end="<!--end:model_intro-->" %}
+   start="<!--start:HA8-U25-M-->"
+   end="<!--end:HA8-U25-M-->" %}
 
 点击下方按钮开始下载：
 
