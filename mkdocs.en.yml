@@ -54,12 +54,12 @@ extra:
     feedback:
       title: Was this page helpful? # 這是顯示在頁面底部的文字
       ratings:
-        - icon: material/emoticon-happy-outline
+        - icon: material/thumb-up-outline
           name: This page was helpful
           data: 1
           note: >-
             Thanks for your feedback!
-        - icon: material/emoticon-sad-outline
+        - icon: material/thumb-down-outline
           name: This page could be improved
           data: 0
           note: >-
