@@ -1,12 +1,21 @@
-# U25(H) 串行总线舵机规格书t
+# U25 串行总线舵机规格书
 
 > **版本：** V1.2.03  
-> **状态：** 最新版
 
-![U25产品图片](image/U25产品图片.png)
----
+<div class="fs-buy-grid" markdown="1">
+
+<div class="fs-buy-card" markdown="1">
+<img src="https://store.fashionstar.com.hk/wp-content/uploads/2025/09/RA8-U25-M-1536x1536.webp" alt="RA8-U25-M">
+<div class="fs-product-name">RA8-U25-M</div>
+</div>
+
+<div class="fs-buy-card" markdown="1">
+<img src="https://store.fashionstar.com.hk/wp-content/uploads/2025/09/HA8-U25-M-1536x1536.webp" alt="HA8-U25-M">
+<div class="fs-product-name">HA8-U25-M</div>
+</div>
 
 ## 1. 产品概述 { #overview }
+
 U25(H) 是一款高性能串行总线舵机，支持大扭矩输出与精准的位置、速度及温控反馈。适用于机器人关节、自动化设备等高精度控制场景。
 
 ## 2. 规格参数 (Specifications) { #specs }

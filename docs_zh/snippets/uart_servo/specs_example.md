@@ -1,5 +1,11 @@
 # UART总线伺服舵机35KG系列
 
+<!--start:version_intro-->
+
+> **版本：** V1.2.04
+
+<!--end:version_intro-->
+
 ![U35产品图片](image/U35产品图片.png)
 
 ## 产品特点
