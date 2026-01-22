@@ -1,53 +1,48 @@
-# CAD 图纸预览测试5
+# OMY-F3M CAD 资料库 / CAD Resources
+
+## 1. 2D/3D 尺寸图预览 / Dimensions Preview
+
+<div class="cad-preview-container">
+    <iframe 
+        src="/uart-servo/cad_files/OMY-F3M.pdf#navpanes=0&view=Fit" 
+        style="width: 100%; height: 100%; border: none !important; outline: none; display: block;">
+    </iframe>
+</div>
 
 ---
 
-### 1. 2D/3D 尺寸图预览 (OMY-F3M)
+## 2. 资源下载 / Resource Download
 
-> **当前路径：** `uart-servo/cad_files/OMY-F3M.pdf`
+### 中文版资源 (CN)
+| 格式 | 更新日期 | 大小 | 操作 |
+| :---: | :---: | :---: | :---: |
+| **.PDF** | <span class="no-wrap">2025-09-26</span> | 1.2 MB | <a href="/uart-servo/cad_files/OMY-F3M.pdf" class="fs-download-btn">立即下载</a> |
+| **.STEP** | <span class="no-wrap">2025-09-26</span> | 4.5 MB | <a href="/uart-servo/cad_files/OMY-F3M.step" class="fs-download-btn">立即下载</a> |
+| **.DWG** | <span class="no-wrap">2025-09-26</span> | 2.8 MB | <a href="/uart-servo/cad_files/OMY-F3M.dwg" class="fs-download-btn">立即下载</a> |
 
+### English Version (EN)
+| Format | Update Date | Size | Action |
+| :---: | :---: | :---: | :---: |
+| **.PDF** | <span class="no-wrap">2025-09-26</span> | 1.2 MB | <a href="/uart-servo/cad_files/OMY-F3M.pdf" class="fs-download-btn">DOWNLOAD</a> |
 
+<style>
+/* 1. 预览容器：保持比例 */
+.cad-preview-container {
+    width: 100%; 
+    aspect-ratio: 1.5 / 1; 
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 4px;
+}
 
-## 3. CAD 图纸预览 / Drawing Preview
+/* 2. 核心补丁：仅强制日期不换行 */
+.no-wrap {
+    white-space: nowrap !important;
+}
 
-<iframe 
-    src="/uart-servo/cad_files/OMY-F3M.pdf#navpanes=0&view=FitH" 
-    style="width: 85%; height: 565px; display: block; margin: 0 auto; border: none !important; outline: none;">
-</iframe>
-
-
----
-
-> [!NOTE]
-> 预览窗口已针对 **A4 横向图纸** 优化比例。若需全屏查看或打印，请点击右上方工具栏按钮。
-
----
-
-### 2. 备选预览方案 (如果上方显示 404)
-
-如果上方窗口无法加载，请尝试点击下方链接直接在浏览器新标签页打开。若链接能打开但预览框不行，说明您的 Wiki 系统限制了 HTML 嵌入功能。
-
-* 👉 [点击此处：直接打开 OMY-F3M.pdf 预览](./OMY-F3M.pdf)
-
----
-
-### 3. 详细参数表 (统一列宽版)
-
-<table>
-  <tr>
-    <th width="180" align="left">项目 (Items)</th>
-    <th width="420" align="left">内容 (Details)</th>
-  </tr>
-  <tr>
-    <td>文件名称</td>
-    <td>OMY-F3M.pdf</td>
-  </tr>
-  <tr>
-    <td>文件类型</td>
-    <td>CAD / 2D Technical Drawing</td>
-  </tr>
-  <tr>
-    <td>适配型号</td>
-    <td>F3M 系列总线舵机</td>
-  </tr>
-</table>
+@media screen and (max-width: 768px) {
+    .cad-preview-container {
+        aspect-ratio: 1.66 / 1; 
+    }
+}
+</style>
