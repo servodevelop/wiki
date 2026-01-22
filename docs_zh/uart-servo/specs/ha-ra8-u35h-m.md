@@ -1,5 +1,7 @@
 # UART总线伺服舵机35KG系列
 
+<div class="fs-buy-grid" markdown="1">
+
 <div class="fs-buy-card" markdown="1">
 <img src="https://store.fashionstar.com.hk/wp-content/uploads/2025/09/RA8-U35H-M-1536x1536.webp" alt="RA8-U35H-M">
 <div class="fs-product-name">RA8-U35H-M</div>
