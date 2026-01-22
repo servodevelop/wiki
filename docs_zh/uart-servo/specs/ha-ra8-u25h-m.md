@@ -1,6 +1,6 @@
-# U25(H) 串行总线舵机规格书
+# U25H 串行总线舵机规格书
 
-> **版本：** V1.2.03  
+{% include-markdown "snippets/uart_servo/specs_example.md" start="<!--start:version_intro-->"  end="<!--end:version_intro-->" %}
 
 <div class="fs-buy-grid" markdown="1">
 

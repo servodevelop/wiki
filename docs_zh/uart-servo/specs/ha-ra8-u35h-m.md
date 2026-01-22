@@ -1,4 +1,4 @@
-# UART总线伺服舵机35KG系列
+# U35H 串行总线舵机规格书
 
 <div class="fs-buy-grid" markdown="1">
 
