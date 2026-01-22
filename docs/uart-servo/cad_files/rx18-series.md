@@ -15,8 +15,8 @@
 ### 适用机型
 > 以下舵机型号共用此尺寸图纸：
 >
- * [**OMY-F3M**](../OMY-F3M/)
- * [**OMY-F5M**](../OMY-F5M/)
+> &bull; [**HA8-U25H-M**](../OMY-F3M/) &emsp; &emsp; &bull; [**HA8-U35H-M**](../OMY-F3M/)<br>
+> &bull; [**HX8-U28H-M**](../OMY-F3M/) &emsp; &emsp; &bull; [**HX8-U40H-M**](../OMY-F3M/)
 
 ### 资源下载
 | 格式 | 更新日期 | 大小 | 操作 |
