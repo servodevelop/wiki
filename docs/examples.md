@@ -3,6 +3,42 @@
 
 ---
 
+<div class="fs-buy-grid" markdown="1">
+
+<div class="fs-buy-card" markdown="1">
+<img src="https://store.fashionstar.com.hk/wp-content/uploads/2025/09/RA8-U25-M-1536x1536.webp" alt="RA8-U25H-M">
+<div class="fs-product-name">RA8-U25H-M</div>
+
+</div>
+
+<div class="fs-buy-card" markdown="1">
+<img src="https://store.fashionstar.com.hk/wp-content/uploads/2025/09/HA8-U25-M-1536x1536.webp" alt="HA8-U25H-M">
+<div class="fs-product-name">HA8-U25H-M</div>
+
+</div>
+</div>
+
+<div class="fs-buy-grid" markdown="1">
+
+<div class="fs-buy-card" markdown="1">
+<img src="https://store.fashionstar.com.hk/wp-content/uploads/2025/09/RA8-U25-M-1536x1536.webp" alt="RA8-U25H-M">
+<div class="fs-product-name">RA8-U25H-M</div>
+<div class="fs-product-price">$200.00</div>
+
+[点击购买](https://store.fashionstar.com.hk/product/uart-bus-servo-ra8-u25-m/){ .md-button .fs-download-btn target="_blank" }
+</div>
+
+<div class="fs-buy-card" markdown="1">
+<img src="https://store.fashionstar.com.hk/wp-content/uploads/2025/09/HA8-U25-M-1536x1536.webp" alt="HA8-U25H-M">
+<div class="fs-product-name">HA8-U25H-M</div>
+<div class="fs-product-price">$200.00</div>
+
+[点击购买](https://store.fashionstar.com.hk/product/uart-bus-servo-ha8-u25-m/){ .md-button .fs-download-btn target="_blank" }
+</div></div>
+
+
+
+
 ## 📖 项目简介
 
 PiPER-Mate 是一个机械臂遥操作控制项目，支持通过 **PiPER Mate 机械臂** 实时远程控制 **Piper 机械臂**。项目提供三种控制方式，适用于机器人研究、遥操作教学、AI训练数据采集等多种场景。
@@ -123,7 +159,7 @@ PiPER-Mate/
                                                   │
 ┌─────────────────┐         CAN          ┌────────┴────────┐
 │                 │◄────────────────────►│                 │
-│      Piper      │                      │  CAN转USB适配器  │
+│      Piper      │                      │  CAN->USB适配器  │
 │      机械臂      │                      │                 │
 └─────────────────┘                      └─────────────────┘
 ```
