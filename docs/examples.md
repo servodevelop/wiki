@@ -270,13 +270,11 @@ ip link show can0
 - **感谢**：PiPER Mate 和 Piper 团队的硬件支持
 
 
-# OMY-F3M CAD 资料库 / CAD Resources
+# Servo CAD 资料库
 
 ---
 
-## [CN] 中文版说明
-
-### 1. 2D/3D 尺寸图预览
+### 尺寸图预览
 <div class="cad-preview-wrapper">
     <embed 
         src="/uart-servo/cad_files/OMY-F3M.pdf#navpanes=0&view=Fit" 
@@ -286,10 +284,13 @@ ip link show can0
         style="border: none; display: block;">
 </div>
 
-### 2. 适用机型
-> 以下舵机型号共用此尺寸图纸： [**OMY-F3M**](../OMY-F3M/) 、 [**OMY-F5M**](../OMY-F5M/)
+### 适用机型
+> 以下舵机型号共用此尺寸图纸：
+>
+ * [**OMY-F3M**](../OMY-F3M/)
+ * [**OMY-F5M**](../OMY-F5M/)
 
-### 3. 资源下载
+### 资源下载
 | 格式 | 更新日期 | 大小 | 操作 |
 | :---: | :---: | :---: | :---: |
 | **.PDF** | <span class="no-wrap">2025-09-26</span> | 1.2 MB | <a href="/uart-servo/cad_files/OMY-F3M.pdf" class="fs-download-btn">立即下载</a> |
@@ -298,30 +299,8 @@ ip link show can0
 
 ---
 
-## [EN] English Version
-
-### 1. Dimensions Preview
-<div class="cad-preview-wrapper">
-    <embed 
-        src="/uart-servo/cad_files/OMY-F3M.pdf#navpanes=0&view=Fit" 
-        type="application/pdf" 
-        width="100%" 
-        height="100%"
-        style="border: none; display: block;">
-</div>
-
-### 2. Compatibility
-> The following models share this drawing: [**OMY-F3M**](../OMY-F3M/) , [**OMY-F5M**](../OMY-F5M/)
-
-### 3. Resource Download
-| Format | Update Date | Size | Action |
-| :---: | :---: | :---: | :---: |
-| **.PDF** | <span class="no-wrap">2025-09-26</span> | 1.2 MB | <a href="/uart-servo/cad_files/OMY-F3M.pdf" class="fs-download-btn">DOWNLOAD</a> |
-| **.STEP** | <span class="no-wrap">2025-09-26</span> | 4.5 MB | <a href="/uart-servo/cad_files/OMY-F3M.step" class="fs-download-btn">DOWNLOAD</a> |
-| **.DWG** | <span class="no-wrap">2025-09-26</span> | 2.8 MB | <a href="/uart-servo/cad_files/OMY-F3M.dwg" class="fs-download-btn">DOWNLOAD</a> |
-
 <style>
-/* 1. 预览容器样式：桌面端 85% */
+/* 1. 预览容器样式 */
 .cad-preview-wrapper {
     width: 85% !important;
     aspect-ratio: 1.28 / 1; 
@@ -333,14 +312,24 @@ ip link show can0
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
-/* 2. 文本补丁 */
+/* 2. 修复引用块内列表缩进过大的问题 */
+.md-typeset blockquote ul {
+    margin-left: -1.5em !important; /* 向左拉回缩进 */
+    padding-left: 1.5em !important;
+}
+
+.md-typeset blockquote li {
+    margin-bottom: 4px; /* 让机型之间稍微紧凑点 */
+}
+
+/* 3. 基础补丁 */
 .no-wrap { white-space: nowrap !important; }
 
-/* 3. 移动端自适应 */
+/* 4. 移动端适配 */
 @media screen and (max-width: 768px) {
     .cad-preview-wrapper {
         width: 100% !important;
-        aspect-ratio: 1.45 / 1; 
+        aspect-ratio: 1.38 / 1; 
         border: 1px solid #999; 
         margin: 10px 0;
     }
