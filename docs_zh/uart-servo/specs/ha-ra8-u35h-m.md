@@ -1,12 +1,23 @@
 # UART总线伺服舵机35KG系列
 
-![U35产品图片](image/U35产品图片.png)
+<div class="fs-buy-card" markdown="1">
+<img src="https://store.fashionstar.com.hk/wp-content/uploads/2025/09/RA8-U35H-M-1536x1536.webp" alt="RA8-U35H-M">
+<div class="fs-product-name">RA8-U35H-M</div>
+</div>
+
+<div class="fs-buy-card" markdown="1">
+<img src="https://store.fashionstar.com.hk/wp-content/uploads/2025/09/HA8-U35H-M-1536x1536.webp" alt="HA8-U35H-M">
+<div class="fs-product-name">HA8-U35H-M</div>
+</div>
+</div>
+
+---
 
 ## 产品特点
 
 - 有刷电机、减速器、位置编码器与控制器一体化设计
 - UART 通讯协议，波特率最高支持 1 Mbps
-- 12-bit 绝对值位置编码器，支持任意角度设定为原点
+- 12-bit 绝对值位置编码器，支持任意角度设定为原
 - 支持 ±368,640° 范围内任意角度控制
 - 具备断电角度记忆功能，断电后角度数据可保持
 - 内置梯形加减速控制算法，实现平滑动作曲线
