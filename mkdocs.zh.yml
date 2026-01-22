@@ -50,6 +50,22 @@ theme:
         name: Switch to light mode
         
 extra:
+  analytics:
+    provider: google
+    property: G-ZF3HFQMQ3L  # 請替換成你在 GA 申請到的 ID
+    feedback:
+      title: 本页内容对您有帮助吗？
+      ratings:
+        - icon: material/emoticon-happy-outline
+          name: 有帮助
+          data: 1
+          note: >-
+            感谢您的反馈！
+        - icon: material/emoticon-sad-outline
+          name: 有待改进
+          data: 0
+          note: >-
+            感谢您的反馈！
   alternate:
     - name: "<img src='/assets/flags/us.svg' class='flag-icon' /> English"
       link: /           # 即使在中文目录下，也强制指向根
