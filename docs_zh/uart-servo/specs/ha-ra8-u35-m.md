@@ -13,6 +13,7 @@
 <img src="https://store.fashionstar.com.hk/wp-content/uploads/2025/09/HA8-U35-M-1536x1536.webp" alt="HA8-U35H-M">
 <div class="fs-product-name">HA8-U35H-M</div>
 </div>
+</div>
 
 ---
 
