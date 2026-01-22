@@ -68,7 +68,7 @@
 @media screen and (max-width: 768px) {
     .cad-preview-wrapper {
         width: 100% !important;
-        aspect-ratio: 1.45 / 1; 
+        aspect-ratio: 1.42 / 1; 
         border: 1px solid #999; 
         margin: 10px 0;
     }
