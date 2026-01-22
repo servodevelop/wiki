@@ -51,7 +51,7 @@
 @media screen and (max-width: 768px) {
     .cad-preview-wrapper {
         width: 100% !important; /* 手机端恢复 100% 以获得最大可视面积 */
-        aspect-ratio: 1.56 / 1; 
+        aspect-ratio: 1.5 / 1; 
         border: 1px solid #999; 
         margin: 10px 0;
     }
