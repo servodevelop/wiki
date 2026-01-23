@@ -44,12 +44,12 @@
     <tr>
       <td style="text-align: center;"><strong>.STEP</strong></td>
       <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="./data/ra8-rp8-rx8-series-3D.step" download class="fs-download-btn">立即下载</a></td>
+      <td style="text-align: center;"><a href="../data/ra8-rp8-rx8-series-3D.step" download class="fs-download-btn">立即下载</a></td>
     </tr>
     <tr>
       <td style="text-align: center;"><strong>.DWG</strong></td>
       <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="./data/ra8-rp8-rx8-series.dwg" download class="fs-download-btn">立即下载</a></td>
+      <td style="text-align: center;"><a href="./data/ra8-rp8-rx8-series-dimension.dwg" download class="fs-download-btn">立即下载</a></td>
     </tr>
   </tbody>
 </table>
