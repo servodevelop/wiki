@@ -200,8 +200,11 @@ nav:
       - RX18-R100H-M: rs485-servo/specs/rx18-r100h-m.md
       - RX18-R101H-M: rs485-servo/specs/rx18-r101h-m.md
     - 图纸与模型下载:
-      - HX8/RX8 R Series: rs485-servo/cad-files/hx8-rx8-r-series.md
-      - HX18 R Series: rs485-servo/cad-files/hx18-r-series.md
+      - HX8 Series: rs485-servo/cad-files/hx8-series.md
+      - HX8 D-shaft Series: rs485-servo/cad-files/hx8-dshaft-series.md
+      - HX8 D-shaft Circular Connector Series: rs485-servo/cad-files/hx8-dshaft-circular-connector-series.md
+      - HX8 Main Horn: rs485-servo/cad-files/hx8-main-horn.md
+      - HX8 Mounting Spacer: rs485-servo/cad-files/hx8-mounting-spacer.md
     - 软件与工具:
       - PC Configuration Tool: rs485-servo/software/pc-configuration-tool.md
       - Web Configuration Tool: rs485-servo/software/web-configuration-tool.md
@@ -226,8 +229,11 @@ nav:
     - can-servo/index.md
     - 通讯协议: can-servo/protocols/can-protocol.md
     - 规格参数:
-      - HX8-C100H-M: can-servo/specs/hx8-c100h-m.md
-      - HX8-C100W-M: can-servo/specs/hx8-c100w-m.md
+      - HX8 Series: can-servo/cad-files/hx8-series.md
+      - HX8 D-shaft Series: can-servo/cad-files/hx8-dshaft-series.md
+      - HX8 D-shaft Circular Connector Series: can-servo/cad-files/hx8-dshaft-circular-connector-series.md
+      - HX8 Main Horn: can-servo/cad-files/hx8-main-horn.md
+      - HX8 Mounting Spacer: can-servo/cad-files/hx8-mounting-spacer.md
     - 图纸与模型下载:
       - HX8/RX8 C Series: can-servo/cad-files/hx8-rx8-c-series.md
       - HX18 C Series: can-servo/cad-files/hx18-c-series.md
