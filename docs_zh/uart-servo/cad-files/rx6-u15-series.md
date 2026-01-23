@@ -16,13 +16,13 @@
 ### 适用机型
 > 以下舵机型号适用此尺寸图纸：
 >
-> &bull; [**HA8-U25H-M**](https://wiki.fashionstar.com.hk/zh/uart-servo/specs/hp-rp6-u15h-m/)&emsp; &emsp; 
+> &bull; [**HP6-U15H-M**](https://wiki.fashionstar.com.hk/zh/uart-servo/specs/hp-rp6-u15h-m/)&emsp; &emsp; 
 
 ### 数据下载
 | 格式 | 更新日期 | 大小 | 操作 |
 | :---: | :---: | :---: | :---: |
 | **.PDF** | <span class="no-wrap">2025-03-04</span> | 1.2 MB | <a href="../data/rx6-u15-dimension.pdf" class="fs-download-btn">  立即下载</a> |
-| **.STEP** | <span class="no-wrap">2024-08-07</span> | 4.5 MB | <a href="../data/rx6-u15-3D.step" class="fs-download-btn">  立即下载</a> |
+| **.STEP** | <span class="no-wrap">2024-08-07</span> | 4.5 MB | <a href="../data/rx6-u15-3D.STEP" class="fs-download-btn">  立即下载</a> |
 | **.DWG** | <span class="no-wrap">2025-03-04</span> | 2.8 MB | <a href="../data/rx6-u15-dimension.dwg" class="fs-download-btn">  立即下载</a> |
 
 ---
