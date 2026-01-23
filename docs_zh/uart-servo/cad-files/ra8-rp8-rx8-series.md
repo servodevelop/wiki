@@ -39,7 +39,7 @@
       </td>
       <td style="text-align: center;"><strong>.PDF</strong></td>
       <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="/uart-servo/cad-files/data/ra8-rp8-rx8-series.pdf" download class="fs-download-btn">立即下载</a></td>
+      <td style="text-align: center;"><a href="../data/ra8-rp8-rx8-series-dimension.pdf" download class="fs-download-btn">立即下载</a></td>
     </tr>
     <tr>
       <td style="text-align: center;"><strong>.STEP</strong></td>
