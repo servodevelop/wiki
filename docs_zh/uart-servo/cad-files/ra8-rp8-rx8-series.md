@@ -31,25 +31,25 @@
     <tr>
       <td rowspan="3" class="no-wrap-cell" style="vertical-align: middle; background: var(--fs-bg-active); padding: 0 15px;">
         <ul style="margin: 0; padding: 0 0 0 1.2em; list-style-type: disc; font-size: 14.5px; line-height: 1.8;">
-          <li><a href="../../../specs/ha-ra8-u25h-m/"><strong>RA8-U25H-M</strong></a></li>
-          <li><a href="../../../specs/ha-ra8-u35h-m/"><strong>RA8-U35H-M</strong></a></li>
-          <li><a href="../../../specs/hp-rp8-u45h-m/"><strong>RP8-U45H-M</strong></a></li>
-          <li><a href="../../../specs/hx-rx8-u25h-m/"><strong>RX8-U50H-M</strong></a></li>
+          <li><a href="https://wiki.fashionstar.com.hk/zh/uart-servo/specs/ha-ra8-u25h-m/"><strong>RA8-U25H-M</strong></a></li>
+          <li><a href="https://wiki.fashionstar.com.hk/zh/uart-servo/specs/ha-ra8-u35h-m/"><strong>RA8-U35H-M</strong></a></li>
+          <li><a href="https://wiki.fashionstar.com.hk/zh/uart-servo/specs/hp-rp8-u45h-m/"><strong>RP8-U45H-M</strong></a></li>
+          <li><a href="https://wiki.fashionstar.com.hk/zh/uart-servo/specs/hx-rx8-u50h-m/"><strong>RX8-U50H-M</strong></a></li>
         </ul>
       </td>
       <td style="text-align: center;"><strong>.PDF</strong></td>
       <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="../data/ra8-rp8-rx8-series.pdf" download class="fs-download-btn">立即下载</a></td>
+      <td style="text-align: center;"><a href="./data/ra8-rp8-rx8-series.pdf" download class="fs-download-btn">立即下载</a></td>
     </tr>
     <tr>
       <td style="text-align: center;"><strong>.STEP</strong></td>
       <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="../data/ra8-rp8-rx8-series-3D.step" download class="fs-download-btn">立即下载</a></td>
+      <td style="text-align: center;"><a href="./data/ra8-rp8-rx8-series-3D.step" download class="fs-download-btn">立即下载</a></td>
     </tr>
     <tr>
       <td style="text-align: center;"><strong>.DWG</strong></td>
       <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="../data/ra8-rp8-rx8-series.dwg" download class="fs-download-btn">立即下载</a></td>
+      <td style="text-align: center;"><a href="./data/ra8-rp8-rx8-series.dwg" download class="fs-download-btn">立即下载</a></td>
     </tr>
   </tbody>
 </table>
