@@ -4,12 +4,12 @@
 
 ### 尺寸预览
 <div class="cad-preview-wrapper">
-    <embed 
-        src="/uart-servo/cad_files/data/FashionStar-rx6-u15-dimension.pdf#navpanes=0&view=Fit"
-        type="application/pdf" 
-        width="100%" 
-        height="100%"
-        style="border: none; display: block;">
+  <embed
+    src="../data/OMY-F3M.pdf#navpanes=0&view=Fit"
+    type="application/pdf"
+    width="100%"
+    height="100%"
+    style="border: none; display: block;">
 </div>
 
 

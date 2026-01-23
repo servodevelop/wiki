@@ -4,8 +4,8 @@
 
 ### 尺寸预览
 <div class="cad-preview-wrapper">
-  <embed 
-    src="cad-files/data/OMY-F3M.pdf#navpanes=0&view=Fit"
+  <embed
+    src="../data/OMY-F3M.pdf#navpanes=0&view=Fit"
     type="application/pdf"
     width="100%"
     height="100%"
