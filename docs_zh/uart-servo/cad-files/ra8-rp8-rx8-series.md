@@ -1,4 +1,4 @@
-# HA8 / HP8 / HX8 系列
+# RA8 / RP8 / RX8 系列
 
 ---
 
@@ -31,12 +31,14 @@
     <tr>
       <td rowspan="3" class="no-wrap-cell" style="vertical-align: middle; background: var(--fs-bg-active); padding: 0 15px;">
         <ul style="margin: 0; padding: 0 0 0 1.2em; list-style-type: disc; font-size: 14.5px; line-height: 1.8;">
-          <li><a href="../OMY-F3M/"><strong>HA8-U25H-M</strong></a></li>
-          <li><a href="../OMY-F3M/"><strong>HA8-U25H-M</strong></a></li>
-          <li><a href="../OMY-F3M/"><strong>HA8-U25H-M</strong></a></li>
-          <li><a href="../OMY-F3M/"><strong>HA8-U25H-M</strong></a></li>
-          <li><a href="../OMY-F3M/"><strong>HA8-U25H-M</strong></a></li>
-          <li><a href="../OMY-F3M/"><strong>HA8-U25H-M</strong></a></li>
+          <li><a href="./ha-ra8-u25-m/"><strong>RA8-U25-M</strong></a></li>
+          <li><a href="./ha-ra8-u25h-m/"><strong>RA8-U25H-M</strong></a></li>
+          <li><a href="../OMY-F3M/"><strong>RA8-U35-M</strong></a></li>
+          <li><a href="../OMY-F3M/"><strong>RA8-U35H-M</strong></a></li>
+          <li><a href="../OMY-F3M/"><strong>RP8-U45-M</strong></a></li>
+          <li><a href="../OMY-F3M/"><strong>RP8-U45H-M</strong></a></li>
+          <li><a href="../OMY-F3M/"><strong>RX8-U50-M</strong></a></li>
+          <li><a href="../OMY-F3M/"><strong>RX8-U50H-M</strong></a></li>
         </ul>
       </td>
       <td style="text-align: center;"><strong>.PDF</strong></td>
@@ -56,6 +58,7 @@
   </tbody>
 </table>
 </div>
+
 
 
 ---
