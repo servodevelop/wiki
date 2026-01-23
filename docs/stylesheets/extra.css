@@ -1,6 +1,6 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V43.9
+Fashion Star Wiki - V45.0
 ==========================================================================
 - Design System: Variable-driven vertical rhythm (VS Code Inspired).
 - Header Strategy: H1 individual logic; H2-H4 unified (Top 1.5, Bottom 0.5).
@@ -197,7 +197,7 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 .md-typeset h3, 
 .md-typeset h4 {
   font-weight: 600 !important;
-  color: var(--fs-header-fg) !important; /* 使用标题专用色 */
+  color: var(--fs-header-fg) !important; 
   margin-top: var(--fs-space-medium) !important;
   margin-bottom: var(--fs-space-small) !important;
 }
@@ -205,7 +205,7 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 /* H1 单独处理：顶部归零，底部 1.5rem (24px) */
 .md-typeset h1 {
   font-weight: 600 !important;
-  color: var(--fs-header-fg) !important; /* 使用标题专用色 */
+  color: var(--fs-header-fg) !important; 
   margin-top: var(--fs-space-zero) !important;
   margin-bottom: var(--fs-space-medium) !important;
 }
@@ -216,7 +216,7 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   margin-bottom: var(--fs-space-small) !important;
 }
 
-/* 列表间距: 上 0 / 下 0.5rem (8px) */
+/* [核心修正] 列表间距：基础缩进 1.2rem */
 .md-typeset ul, 
 .md-typeset ol {
   margin-top: var(--fs-space-zero) !important;
@@ -224,10 +224,23 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   padding-left: 1.2rem !important; 
 }
 
+/* [核心修正] 特别针对 Tip/Note 等提示框内的列表进行缩进优化 */
+.md-typeset .admonition ul, 
+.md-typeset .admonition ol {
+  margin-left: 0 !important;
+  padding-left: 1.8em !important; /* 强制消除 Tip 容器导致的多余空白 */
+}
+
 /* 列表项内部微调 */
 .md-typeset li {
   margin-bottom: 0.1rem !important;
 }
+
+/* [核心修正] 提升 Tip 内列表的条目间距，增加专业感 */
+.md-typeset .admonition li {
+  margin-bottom: 4px !important; 
+}
+
 .md-typeset li p {
   margin-bottom: 0 !important; 
 }

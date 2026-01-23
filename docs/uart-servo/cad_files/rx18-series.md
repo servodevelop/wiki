@@ -101,7 +101,7 @@
 .md-typeset .admonition ul, 
 .md-typeset .admonition ol {
     margin-left: 0 !important;
-    padding-left: 1.2em !important; /* 控制圆点距离左边线的距离 */
+    padding-left: 1.8em !important; /* 控制圆点距离左边线的距离 */
 }
 
 .md-typeset .admonition ul li {

@@ -80,7 +80,7 @@
 /* 2. 核心修正：让 Tip 内部列表紧贴边框且垂直间距适中 */
 .md-typeset .admonition ul {
     margin-left: 0 !important;
-    padding-left: 1.2em !important;
+    padding-left: 1.8em !important;
 }
 
 .md-typeset .admonition ul li {
