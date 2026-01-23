@@ -4,14 +4,15 @@
 
 ### 尺寸预览
 
-<div class="cad-preview-wrapper" style="background-image: url('../data/ra8-rp8-rx8-series-dimension.jpg');">
+<div class="cad-preview-wrapper" style="background-image: url('../data/ra8-rp8-rx8-series/ra8-rp8-rx8-series-dimension.jpg');">
     <embed 
         class="desktop-pdf-embed"
-        src="../data/ra8-rp8-rx8-series-dimension.pdf#navpanes=0&view=Fit" 
+        src="../data/ra8-rp8-rx8-series/ra8-rp8-rx8-series-dimension.pdf#navpanes=0&view=Fit" 
         type="application/pdf" 
         width="100%" 
         height="100%">
 </div>
+
 
 
 
@@ -39,17 +40,17 @@
       </td>
       <td style="text-align: center;"><strong>.PDF</strong></td>
       <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="../data/ra8-rp8-rx8-series-dimension.pdf" download class="fs-download-btn">立即下载</a></td>
+      <td style="text-align: center;"><a href="../data/ra8-rp8-rx8-series/ra8-rp8-rx8-series-dimension.pdf" download class="fs-download-btn">立即下载</a></td>
     </tr>
     <tr>
       <td style="text-align: center;"><strong>.STEP</strong></td>
       <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="../data/rx6-u15-3D.STEP" download class="fs-download-btn">立即下载</a></td>
+      <td style="text-align: center;"><a href="../data/ra8-rp8-rx8-series/ra8-rp8-rx8-3D.STEP" download class="fs-download-btn">立即下载</a></td>
     </tr>
     <tr>
       <td style="text-align: center;"><strong>.DWG</strong></td>
       <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="../data/ra8-rp8-rx8-series-dimension.dwg" download class="fs-download-btn">立即下载</a></td>
+      <td style="text-align: center;"><a href="../data/ra8-rp8-rx8/ra8-rp8-rx8-series-dimension.dwg" download class="fs-download-btn">立即下载</a></td>
     </tr>
   </tbody>
 </table>
