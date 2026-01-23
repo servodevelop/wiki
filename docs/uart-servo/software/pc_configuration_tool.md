@@ -7,8 +7,7 @@
 <table>
   <thead>
     <tr>
-      <th style="text-align: center;">软件名称</th>
-      <th style="text-align: center;">适用系列 (协议)</th>
+      <th style="text-align: center;">适配协议</th>
       <th style="text-align: center;">当前版本</th>
       <th style="text-align: center;">更新日期</th>
       <th style="text-align: center;">操作</th>
@@ -16,8 +15,7 @@
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: center;"><strong>Develop-US 配置工具</strong></td>
-      <td style="text-align: center;"><strong>HA / HP / HX / RX 全系列</strong><br><small>(Fashion Star 异步串行协议)</small></td>
+      <td style="text-align: center;"><strong>UART / RS-485 全系列</strong><br></td>
       <td style="text-align: center;"><span class="no-wrap">v1.1.9.286</span></td>
       <td style="text-align: center;"><span class="no-wrap">2026-01-23</span></td>
       <td style="text-align: center;">
@@ -84,7 +82,7 @@
 }
 
 .md-typeset .admonition ul li {
-    margin-bottom: 4px !important; /* 增加项之间的行间距 */
+    margin-bottom: 4px !important; 
 }
 
 /* 3. 按钮样式 */
