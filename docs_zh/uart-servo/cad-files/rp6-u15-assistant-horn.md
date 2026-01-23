@@ -6,7 +6,7 @@
 <div class="cad-preview-wrapper" style="background-image: url('../data/rp6-u15-assistant-horn/rp6-u15-assistant-horn-dimension.jpg');">
     <embed 
         class="desktop-pdf-embed"
-        src="../data/rp6-u15-assistant-horn/rp6-u15-assistant-horn-dimension#navpanes=0&view=Fit" 
+        src="../data/rp6-u15-assistant-horn/rp6-u15-assistant-horn-dimension.pdf#navpanes=0&view=Fit" 
         type="application/pdf" 
         width="100%" 
         height="100%">
