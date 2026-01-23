@@ -31,12 +31,10 @@
     <tr>
       <td rowspan="3" class="no-wrap-cell">
         <ul>
-          <li><a href="../OMY-F3M/"><strong>HA8-U25H-M</strong></a></li>
-          <li><a href="../OMY-F3M/"><strong>HA8-U25H-M</strong></a></li>
-          <li><a href="../OMY-F3M/"><strong>HA8-U25H-M</strong></a></li>
-          <li><a href="../OMY-F3M/"><strong>HA8-U25H-M</strong></a></li>
-          <li><a href="../OMY-F3M/"><strong>HA8-U25H-M</strong></a></li>
-          <li><a href="../OMY-F3M/"><strong>HA8-U25H-M</strong></a></li>
+          <li><a href="https://wiki.fashionstar.com.hk/uart-servo/specs/ha-ra8-u45h-m/"><strong>HA8-U25H-M</strong></a></li>
+          <li><a href="https://wiki.fashionstar.com.hk/uart-servo/specs/ha-ra8-u35h-m/"><strong>HA8-U35H-M</strong></a></li>
+          <li><a href="https://wiki.fashionstar.com.hk/uart-servo/specs/ha-ra8-u25h-m/"><strong>HA8-U45H-M</strong></a></li>
+          <li><a href="https://wiki.fashionstar.com.hk/uart-servo/specs/ha-ra8-u50h-m/"><strong>HA8-U50H-M</strong></a></li>
         </ul>
       </td>
       <td style="text-align: center;"><strong>.PDF</strong></td>
