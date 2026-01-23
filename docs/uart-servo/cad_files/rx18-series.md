@@ -3,13 +3,17 @@
 ---
 
 ### 尺寸预览
-<div class="cad-preview-wrapper" style="background-image: url('/uart-servo/cad_files/data/OMY-F3M.jpg');">
+<div class="cad-preview-wrapper">
     <embed 
         class="desktop-pdf-embed"
         src="/uart-servo/cad_files/data/OMY-F3M.pdf#navpanes=0&view=Fit" 
         type="application/pdf" 
         width="100%" 
         height="100%">
+    
+    <a href="/uart-servo/cad_files/data/OMY-F3M.jpg" class="mobile-image-link">
+        <img src="/uart-servo/cad_files/data/OMY-F3M.jpg" alt="尺寸预览" class="mobile-preview-img">
+    </a>
 </div>
 
 ### 数据下载
@@ -25,8 +29,8 @@
   </thead>
   <tbody>
     <tr>
-      <td rowspan="3" class="no-wrap-cell" style="vertical-align: middle; background: var(--fs-bg-active); padding: 0 15px;">
-        <ul style="margin: 0; padding: 0 0 0 1.2em; list-style-type: disc; font-size: 14.5px; line-height: 1.8;">
+      <td rowspan="3" class="no-wrap-cell">
+        <ul>
           <li><a href="../OMY-F3M/"><strong>HA8-U25H-M</strong></a></li>
           <li><a href="../OMY-F3M/"><strong>HA8-U25H-M</strong></a></li>
           <li><a href="../OMY-F3M/"><strong>HA8-U25H-M</strong></a></li>
@@ -56,63 +60,73 @@
 ---
 
 <style>
-/* 1. 预览容器样式 */
+/* 1. 预览容器样式：确保图片与框完全吻合 */
 .cad-preview-wrapper {
     width: 85% !important;
-    aspect-ratio: 1.28 / 1; 
     margin: 20px auto;
     overflow: hidden;
     border: 0.5px solid var(--fs-divider);
     border-radius: 4px;
     background-color: #f8f9fa;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain; 
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    line-height: 0; 
 }
 
-/* 2. 表格与滚动条控制 */
+.desktop-pdf-embed {
+    aspect-ratio: 1.28 / 1;
+    display: block;
+}
+
+.mobile-image-link {
+    display: none; 
+    width: 100%;
+}
+
+.mobile-preview-img {
+    width: 100%;
+    height: auto; 
+    display: block;
+    cursor: zoom-in;
+}
+
+/* 2. 表格间距精调 */
+.no-wrap-cell {
+    vertical-align: middle !important;
+    background: var(--fs-bg-active) !important;
+    /* 缩小单元格本身的左边距 */
+    padding: 0 10px 0 5px !important; 
+}
+
+.no-wrap-cell ul {
+    margin: 0 !important; 
+    /* 核心：0.8em 是圆点到左边的距离。数值越小越靠左 */
+    padding: 0 0 0 0.8em !important; 
+    list-style-type: disc; 
+    font-size: 14.5px; 
+    line-height: 1.8;
+}
+
 .table-container {
     width: 100%;
     overflow-x: auto; 
-    -webkit-overflow-scrolling: touch; /* 优化 iOS 滑动体验 */
+    -webkit-overflow-scrolling: touch;
 }
 
-/* 隐藏所有浏览器的滚动条视觉条，但保留滑动功能 */
-.hide-scrollbar::-webkit-scrollbar {
-    display: none; /* Chrome, Safari */
-}
-.hide-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-}
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-wrap-cell, .no-wrap-cell ul li { white-space: nowrap !important; }
 
-.no-wrap-cell, .no-wrap-cell ul li {
-    white-space: nowrap !important; /* 强制不换行 */
-}
-
-.no-wrap { white-space: nowrap !important; }
-
-/* 3. 移动端与平板适配 */
+/* 3. 移动端适配 */
 @media screen and (max-width: 1024px) {
-    .cad-preview-wrapper {
-        width: 100% !important;
-        aspect-ratio: 1.38 / 1; 
-        margin: 10px 0;
-    }
-    .desktop-pdf-embed {
-        display: none !important;
-    }
-    .md-typeset table td {
-        padding: 8px 10px !important;
-        font-size: 13px !important;
-    }
+    .cad-preview-wrapper { width: 100% !important; margin: 10px 0; }
+    .desktop-pdf-embed { display: none !important; }
+    .mobile-image-link { display: block !important; }
+    .md-typeset table td { padding: 8px 5px !important; } /* 移动端进一步收紧边距 */
+    .no-wrap-cell ul { padding-left: 0.7em !important; }
 }
 </style>
 
 > [!TIP]
-> **操作提示：** 如果需要查阅 PDF 详情，请通过下方表格中的 **“立即下载”** 按钮获取文件。
+> * 请使用 **Solidworks 2021** 或更高版本打开模型。<br>
+> * 图中尺寸仅供工程参考，最终请以收到的实物为准。如尺寸差异影响安装，请及时联系我们确认。
