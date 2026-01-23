@@ -148,6 +148,7 @@ nav:
       - RX18-U100H-M: uart-servo/specs/rx18-u100h-m.md
       - RX18-U101H-M: uart-servo/specs/rx18-u101h-m.md
     - 图纸与模型下载:
+      - HA8/HP8/HX8 Series: uart-servo/cad-files/ha8-hp8-hx8-series.md
       - RA8/RP8/RX8 Series: uart-servo/cad-files/ra8-rp8-rx8-series.md
       - RP6/RX6-U12 Series: uart-servo/cad-files/rp6-rx6-u12-series.md
       - RX6-U15 Series: uart-servo/cad-files/rx6-u15-series.md
