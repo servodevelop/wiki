@@ -4,10 +4,6 @@
 
 ### 尺寸预览
 <div class="cad-preview-wrapper" style="background-image: url('/uart-servo/cad_files/data/OMY-F3M.jpg');">
-    <div class="mobile-preview-hint">
-        <a href="/uart-servo/cad_files/data/OMY-F3M.pdf" target="_blank" class="fs-download-btn" style="text-decoration: none;">全屏打开 PDF 图纸</a>
-    </div>
-
     <embed 
         class="desktop-pdf-embed"
         src="/uart-servo/cad_files/data/OMY-F3M.pdf#navpanes=0&view=Fit" 
@@ -17,7 +13,7 @@
 </div>
 
 ### 数据下载
-<div class="table-container">
+<div class="table-container hide-scrollbar">
 <table>
   <thead>
     <tr>
@@ -79,39 +75,38 @@
     justify-content: center;
 }
 
-/* 2. 移动端引导按钮 */
-.mobile-preview-hint {
-    display: none;
-    position: absolute;
-    z-index: 10;
-}
-
-/* 3. 表格强制不换行控制 */
+/* 2. 表格与滚动条控制 */
 .table-container {
     width: 100%;
-    overflow-x: auto; /* 手机端如果太宽可以左右滑动，但文字绝不换行 */
+    overflow-x: auto; 
+    -webkit-overflow-scrolling: touch; /* 优化 iOS 滑动体验 */
+}
+
+/* 隐藏所有浏览器的滚动条视觉条，但保留滑动功能 */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+.hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
 .no-wrap-cell, .no-wrap-cell ul li {
-    white-space: nowrap !important;
+    white-space: nowrap !important; /* 强制不换行 */
 }
 
 .no-wrap { white-space: nowrap !important; }
 
-/* 4. 移动端与平板适配 (强制显示 JPG) */
+/* 3. 移动端与平板适配 */
 @media screen and (max-width: 1024px) {
     .cad-preview-wrapper {
         width: 100% !important;
         aspect-ratio: 1.38 / 1; 
+        margin: 10px 0;
     }
     .desktop-pdf-embed {
         display: none !important;
     }
-    .mobile-preview-hint {
-        display: block !important;
-    }
-    
-    /* 针对手机端表格文字缩放微调，确保不换行时依然美观 */
     .md-typeset table td {
         padding: 8px 10px !important;
         font-size: 13px !important;
@@ -120,4 +115,4 @@
 </style>
 
 > [!TIP]
-> **操作提示：** 手机或 iPad 用户请点击预览框中间按钮查看 PDF 详情。
+> **操作提示：** 如果需要查阅 PDF 详情，请通过下方表格中的 **“立即下载”** 按钮获取文件。
