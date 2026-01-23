@@ -10,7 +10,7 @@ Authoring note:
 
 **HA8/RA8-U25(H)-M** is a high‑torque UART/RS‑485 bus servo with metal gears and absolute position feedback.
 
-![Torque / Speed curve](image/torque_speed_curve.png)
+![Torque / Speed curve](images/torque_speed_curve.png)
 
 Key points:
 

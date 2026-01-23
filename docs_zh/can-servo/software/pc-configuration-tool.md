@@ -8,14 +8,14 @@ This software is a bus servo PC configuration tool used for ID configuration, Pa
 
 ## 2. Download and Run
 
-[📥 下载调试软件 (v1.0.9.266)](Develop-US_1.0.9.266.rar){ .md-button .md-button--primary }
+[📥 下载调试软件 (v1.0.9.266)](Develop-US-1.0.9.266.rar){ .md-button .md-button--primary }
     
 -   Extract it to any directory, no installation required, simply double-click `Develop.exe` to start the software.
     
 - If blocked by the system or an error occurs, refer to the [Startup Troubleshooting Guide](https://wiki.fashionrobo.com/dbsppc/software-install/#2).
 
 
-![](img/上位机布局.png)
+![](images/上位机布局.png)
 
 
 

@@ -6,7 +6,7 @@
 
 <!--end:version_intro-->
 
-![U35产品图片](image/U35产品图片.png)
+![U35产品图片](images/U35产品图片.png)
 
 ## 产品特点
 
@@ -25,7 +25,7 @@
 
 ## 型号定义
 
-![产品命名-型号规则](./image/产品命名-型号规则.png)
+![产品命名-型号规则](./images/产品命名-型号规则.png)
 
 | 外观    | 马达类型  | 尺寸              | 通讯协议               | 电压      | 位置传感器                    |
 | ------- | --------- | ----------------- | ---------------------- | --------- | ----------------------------- |
@@ -84,38 +84,38 @@
 
 ### 特性曲线
 
-![U35特性曲线](./image/U35特性曲线.png)
+![U35特性曲线](./images/U35特性曲线.png)
 
 ### 过载曲线
-![U35过载曲线](./image/U35过载曲线.png)
+![U35过载曲线](./images/U35过载曲线.png)
 
 <!--start:CAD_intro-->
 
 ## 图纸及安装说明
 
 ### 尺寸图
-![U35_3D图](./image/U35_3D图.png)
+![U35_3D图](./images/U35_3D图.png)
 
 ### 接口定义
-![U35](./image/U35.png)
+![U35](./images/U35.png)
 
 ### 连线说明 
 **串联**
 
-![U35串联](./image/U35串联.png)
+![U35串联](./images/U35串联.png)
 
 **并联**
 
-![U35并联](./image/U35并联.png)
+![U35并联](./images/U35并联.png)
 
 ### 安装说明
 
 - **单轴**
 
-  ![U35单轴安装](./image/U35单轴安装.png)
+  ![U35单轴安装](./images/U35单轴安装.png)
 
 - **双轴**
-![U35双轴安装](./image/U35双轴安装.png)
+![U35双轴安装](./images/U35双轴安装.png)
 
 <!--end:CAD_intro-->
 
@@ -131,14 +131,14 @@
 
 欢迎访问官方网站 www.fashionrobo.com 获取更多技术资料。
 
-![development environment](./image/development environment.png)
+![development environment](./images/development environment.png)
 
 ## 保护功能
 
 - 所有保护参数都可以通过上位机设定修改。
 - 状态标志位定义如下：1为进入保护，0为工作正常。
 
-![protection](./image/protection.png)
+![protection](./images/protection.png)
 
 > [!WARNING]
 > 任何参数的修改都可能对产品造成损害或影响其正常运行。请谨慎操作，并在更改前确保已充分评估可能的风险。
@@ -230,7 +230,7 @@
 
 示例：ID2舵机 以最大功率，500ms时间旋转到90度的位置
 
-![transmit_command](./image/transmit_command.png)
+![transmit_command](./images/transmit_command.png)
 
 - **响应协议格式**
 
@@ -240,7 +240,7 @@
 
 *解包：0x86 0x03是当前的舵机角度，解包后是902，转换为角度制就是90.2度。*
 
-![respond_command](./image/respond_command.png)
+![respond_command](./images/respond_command.png)
 
 ### 指令间隔建议
 
@@ -270,7 +270,7 @@
 | 高级单圈角度控制  (基于时间) [11] | 目标角度、运动时间、加速时间、减速时间、运行功率 |
 | 高级单圈角度控制  (基于速度) [12] | 目标角度、运动速度、加速时间、减速时间、运行功率 |
 
-![Velocity Profile](./image/Velocity Profile.png)
+![Velocity Profile](./images/Velocity Profile.png)
 
 **角度回读**[10]:向指定ID的伺服舵机发送单圈角度读取指令，可以收到当前位置的角度数据。
 
@@ -288,7 +288,7 @@
 | 高级多圈角度控制  (基于时间) [14] | 目标角度、运动时间、加速时间、减速时间、运行功率 |
 | 高级多圈角度控制  (基于速度) [15] | 目标角度、运动速度、加速时间、减速时间、运行功率 |
 
-![Velocity Profile](./image/Velocity Profile.png)
+![Velocity Profile](./images/Velocity Profile.png)
 
 **多圈角度读取**[16]:向指定ID的伺服舵机发送多圈角度读取指令，可以收到当前位置的角度数据。
 
@@ -300,7 +300,7 @@
 
   例如：如图所示，A1 点当前角度为 6,880°，重设后的角度为 θ1。A2 点当前角度为 6,800°，重设后的角度为 -θ2。
 
-![多圈重置](./image/多圈重置.png)
+![多圈重置](./images/多圈重置.png)
 
 **断电角度记忆**
 
@@ -314,7 +314,7 @@
 
   例如：如图所示，A 点为断电前的角度 6,800°。若断电期间舵机被外力转动，最终停在 B1 点，则上电后读取角度为 6,920°；若停在 B2 点，则读取角度为 6,680°。
 
-![掉电记忆](./image/掉电记忆.png)
+![掉电记忆](./images/掉电记忆.png)
 
 ### 阻尼模式[9]
 
@@ -403,7 +403,7 @@
 
 - **舵机状态**
 
-  ![protection](./image/protection.png)
+  ![protection](./images/protection.png)
 
 ### 任意原点设定[23]
 

@@ -15,7 +15,7 @@ This software is a bus servo PC configuration tool used for ID configuration, Pa
 - If blocked by the system or an error occurs, refer to the [Startup Troubleshooting Guide](https://wiki.fashionrobo.com/dbsppc/software-install/#2).
 
 
-![](img/上位机布局.png)
+![](images/上位机布局.png)
 
 
 
