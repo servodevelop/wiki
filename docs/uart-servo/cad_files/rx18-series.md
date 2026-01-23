@@ -97,16 +97,7 @@
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 .no-wrap-cell, .no-wrap-cell ul li { white-space: nowrap !important; }
 
-/* 3. 核心修正：解决 Tip 缩进过宽的问题 */
-.md-typeset .admonition ul, 
-.md-typeset .admonition ol {
-    margin-left: 0 !important;
-    padding-left: 1.8em !important; /* 控制圆点距离左边线的距离 */
-}
-
-.md-typeset .admonition ul li {
-    margin-bottom: 4px !important; /* 增加行间距，更美观 */
-}
+/* --- 此处已删除原来的 Tip 列表 CSS 约束，由全局 CSS Section 6 接管 --- */
 
 /* 4. 移动端适配 */
 @media screen and (max-width: 1024px) {
