@@ -5,7 +5,7 @@
 ### 尺寸预览
 <div class="cad-preview-wrapper">
     <embed 
-        src="/uart-servo/cad_files/data/OMY-F3M.pdf#navpanes=0&view=Fit" 
+        src="/uart-servo/cad_files/data/FashionStar-rx6-u15-dimension.pdf#navpanes=0&view=Fit" 
         type="application/pdf" 
         width="100%" 
         height="100%"
@@ -39,7 +39,6 @@
     background: #525659;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
-
 /* 2. 修复引用块内列表缩进过大的问题 */
 .md-typeset blockquote ul {
     margin-left: -1.5em !important; /* 向左拉回缩进 */
