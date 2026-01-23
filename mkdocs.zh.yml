@@ -151,12 +151,22 @@ nav:
       - RP6/RX6-U12 Series: uart-servo/cad-files/rp6-rx6-u12-series.md
       - HP6-U15 Series: uart-servo/cad-files/hp6-u15-series.md
       - RP6-U15 Series: uart-servo/cad-files/rp6-u15-series.md
-      - RP6-U15 Bracket: uart-servo/cad-files/rp6-u15-bracket.md
+      - HP6/RP6-U15 Main Horn: uart-servo/cad-files/hp6-rp6-u15-main-horn.md
       - RP6-U15 Assistant Horn: uart-servo/cad-files/rp6-u15-assistant-horn.md
+      - RP6-U15 Bracket: uart-servo/cad-files/rp6-u15-bracket.md
       - RP6-U18 Series: uart-servo/cad-files/rp6-u18-series.md
       - HA8/HP8/HX8 Series: uart-servo/cad-files/ha8-hp8-hx8-series.md
       - RA8/RP8/RX8 Series: uart-servo/cad-files/ra8-rp8-rx8-series.md
+      - HA8/HP8/HX8 Mounting Spacer: uart-servo/cad-files/ha8-hp8-hx8-mounting-spacer.md
+      - RA8/RP8/RX8 U-Shape Body Bracket: uart-servo/cad-files/ra8-rp8-rx8-body-bracket.md
+      - RA8/RP8/RX8 U-Shape Horn Bracket: uart-servo/cad-files/ra8-rp8-rx8-ushape-horn-bracket.md
+      - HA8/HP8/HX8 D-shaft Series: uart-servo/cad-files/ha8-hp8-hx8-dshaft-series.md
+      - RA8/RP8/RX8 D-shaft Series: uart-servo/cad-files/ra8-rp8-rx8-dshaft-series.md
       - RX18 Series: uart-servo/cad-files/rx18-series.md
+      - RX18 Main Horn: uart-servo/cad-files/rx18-main-horn.md
+      - RX18 Assistant Horn: uart-servo/cad-files/rx18-assistant-horn.md
+      - RX18 Body Bracket: uart-servo/cad-files/rx18-body-bracket.md
+      - RX18 U-Shape Horn Bracket: uart-servo/cad-files/rx18-ushape-horn-bracket.md
     - 软件与工具:
       - PC Configuration Tool: uart-servo/software/pc-configuration-tool.md
       - Web Configuration Tool: uart-servo/software/web-configuration-tool.md
