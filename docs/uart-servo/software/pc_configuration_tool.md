@@ -1,216 +1,105 @@
-# Bus Servo PC configuration tool User Manual
+# 串行总线舵机通用配置软件 (PC Configuration Tool)
 
-## 1. Software Introduction
+---
 
-This software is a bus servo PC configuration tool used for ID configuration, Parameter setting, real-time motion control, and other functions. It is suitable for development, debugging, and teaching demonstration scenarios.
+### 软件下载与规格
+<div class="table-container hide-scrollbar">
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center;">软件名称</th>
+      <th style="text-align: center;">适用系列 (协议)</th>
+      <th style="text-align: center;">当前版本</th>
+      <th style="text-align: center;">更新日期</th>
+      <th style="text-align: center;">操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center;"><strong>Develop-US 配置工具</strong></td>
+      <td style="text-align: center;"><strong>HA / HP / HX / RX 全系列</strong><br><small>(Fashion Star 异步串行协议)</small></td>
+      <td style="text-align: center;"><span class="no-wrap">v1.1.9.286</span></td>
+      <td style="text-align: center;"><span class="no-wrap">2026-01-23</span></td>
+      <td style="text-align: center;">
+        <a href="./data/Develop-US_1.1.9.286.zip" download class="fs-download-btn">立即下载</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
+> [!TIP]
+> - **运行环境**：支持 Windows 7/10/11 (x64) 系统，**免安装**解压即用。
+> - **硬件依赖**：需配合 **USB 转 UART 转接板**使用，请确保驱动（CH340/CP2102）已正确安装。
+> - **固件匹配**：建议舵机固件版本与软件版本保持一致，以获得最佳的控制精度与参数兼容性。
+> - **快速启动**：解压压缩包后，直接运行目录下的 `Develop.exe` 即可进入控制界面。
 
+---
 
-## 2. Download and Run
-
-[📥 下载调试软件 (v1.0.9.266)](Develop-US_1.0.9.266.rar){ .md-button .md-button--primary }
-    
--   Extract it to any directory, no installation required, simply double-click `Develop.exe` to start the software.
-    
-- If blocked by the system or an error occurs, refer to the [Startup Troubleshooting Guide](https://wiki.fashionrobo.com/dbsppc/software-install/#2).
-
+## 1. 核心功能概览
+本工具为总线舵机全生命周期开发提供支持：
+* **拓扑扫描**：自动识别总线上的所有舵机节点，支持波特率自适应搜索。
+* **实时监控**：图形化实时反馈舵机坐标、电流、电压及温度数据。
+* **控制模式**：支持单圈/多圈位置模式、恒速模式及阻尼模式切换。
+* **底层调试**：集成 UART 指令监视器，支持原始十六进制数据包的截获与下发。
 
 ![](img/上位机布局.png)
 
-
-
-## 3. Servo Connection and Identification
-
-### 3.1 Physical Wiring Instructions
-
-Connection order:
-
-1.  Connect the servo to the adapter board (any port is fine);
-2.  Turn on the external power supply (voltage range as per servo
-    specifications);
-3.  Connect the adapter board to the computer via USB cable.
-
-> [!NOTE]
->
-> - For first-time use, it is recommended to connect only one servo (default ID is 0);
-> - If connecting multiple servos in series, ensure each servo is assigned a unique ID to avoid conflicts.
-
-![](./assets_EN/物理连线.png)
-
-### 3.2 UART Connection
-
--   After opening the software, click the **Refresh **button in the upper left corner to refresh the COM port list;
--   Select the automatically detected adapter board port (e.g., COM10);
--   Click the **Toggle** button and configure serial communication parameters;
--   Click **OK** to create the connection.
-
-> [!NOTE]
->
-> If the COM port is not shown, it may be due to Driver issues. Please install the [CH340 Driver](https://www.wch.cn/downloads/CH341SER_EXE.html).
-
-![](./assets_EN/串口连接.png)
-
-### 3.3 Servo Scanning
-
--   Manually set the baud rate or select **Auto Scanning**;
-
--   After scanning, the detected number of servos will be displayed;
-
-    ![](./assets_EN/扫描.png)
-
--   To increase scan speed, go to "Tools \> Program Settings >ServoPanel" and reduce the Maximum Scan Number (default is 254).
-    
-    ![](./assets_EN/提高扫描.png)
-
-#### Common Troubleshooting:
-
-| Issue                         | Possible Cause                                               |
-| ----------------------------- | ------------------------------------------------------------ |
-| Servo not detected            | Power not connected, insufficient voltage, low battery       |
-| Software freeze / no response | Duplicate servo IDs, connect servos one by one and set unique IDs |
-
-
-
-## 4. Basic Servo Operations
-
-### 4.1 Change Servo ID
-
--   Select the target servo from the list;
--   Click the **Write ID** icon;
--   Enter the new ID, click **OK**, and the ID will be updated in
-    real-time.
-
-![](./assets_EN/修改舵机ID.png)
-
-### 4.2 Change Baud Rate
-
--   Select the servo, click the **Write Baud** icon;
--   Choose the new baud rate, click **OK**;
--   The servo will immediately apply the new communication speed.
-
-![](./assets_EN/修改波特率.png)
-
-### 4.3 Set Origin
-
--   Select the target servo, click the **Set Origin Point** icon;
--   Choose to set the current angle as Origin Position or restore factory default;
--   Re-scan the servo to confirm Origin Position setup success.
-
-> [!NOTE]
->
-> **Only magnetic encoder series support this feature** (model number includes `-M`).
-
-![](./assets_EN/原点设置.png)
-
-
-
-## 5. Parameter Adjustment
-
-### 5.1 Parameter Modification Process
-
--   Switch to the 【**Parameters** 】tab, current parameters are shown on the left, modification area on the right;
--   Select the target servo from the list;
--   Adjust values via dropdown or slider;
--   Changed Parameters appear in orange, click **Write Parameters** to turn green (indicating successful write).
-
-![](./assets_EN/修改参数.png)
-
-### 5.2 Basic Parameter Description
-
-| Parameter        | Description                                                  |
-| ---------------- | ------------------------------------------------------------ |
-| Command Response | Default **No**: new commands interrupt current commands. **Yes**: new commands execute only after current command completes |
-| Stall Protection | Releases torque when power exceeds threshold                 |
-| Power Protection | When stall protection is off, power exceeding threshold runs at stall power limit |
-
-### 5.3 Internal Parameter Description
-
-| Parameter       | Description                                                  |
-| --------------- | ------------------------------------------------------------ |
-| Servo Direction | Default clockwise forward, counterclockwise reverse (top view) |
-| PID Adjustment  | Refer to [PID Adjustment Guide](https://fashionrobo.com/pid/28072/) |
-
-
-
-## 6. Real-Time Motion Control
-
-### 6.1 Single-Turn Position Control Mode
-
--   Set target angle (default range -180° \~ +180°);
--   Set motion by time interval or speed (min acceleration/deceleration 20ms);
--   Power default **0** (max power), adjustable as needed;
--   Enable "**Real-Time**" to dynamically adjust angle with slider;
--   Stop modes: Free Mode, Lock Mode, damping; set **Power** and
-    click **Stop** to send.
-
-> [!NOTE]
->
-> Consider servo's mechanical and physical limits when setting angles.
-
-![](./assets_EN/单圈角度控制.png)
-
-### 6.2 Multi-Turn Position Control Mode
-
--   Control range up to ±1024 turns (\~368,640°);
--   **Update Turns** to view current accumulated turns;
--   **Reset Turns** sets current turns to zero (Origin Position unchanged);
--   Control method same as single-turn mode.
-
-> [!NOTE]
->
-> Only supported on servos with magnetic encoders.
-
-![](./assets_EN/多圈角度控制.png)
-
-### 6.3 Damping Mode
-
--   Set power to adjust damping strength (e.g., set to 500 to feel increased resistance when rotating manually).
-
-![](./assets_EN/阻尼模式.png)
-
-------------------------------------------------------------------------
-
-## 7. UART Monitor
-
-### 7.1 Enable Monitor
-
--   Switch to the **Serial Monitor** tab;
--   If missing, click the gear icon, enable "**Auto Star**",restart software.
-
-![](./assets_EN/打开串行端口监视器.png)
-
-### 7.2 Data Send Example
-
-Example: send single-turn command to servo ID 2 from 0° to 90°:
-
-``` text
-0x12 0x4c 0x08 0x07 0x02 0x84 0x03 0xf4 0x01 0x00 0x00 0xeb
-```
-
-For details, see [Bus Servo Communication Protocol](https://wiki.fashionrobo.com/uartbasic/uart-protocol/).
-
-![](./assets_EN/发送数据包.png)
-
-### 7.3 Data Monitoring Example
-
-Example: equivalent single-turn command sent from control panel to servo ID 2 from 0° to 90°:
-
-![](./assets_EN/等效.png)
-
-
-
-## 8. Appendix & FAQ
-
-### 8.1 FAQ
-
-| Issue                 | Suggested Solution                           |
-| --------------------- | -------------------------------------------- |
-| COM port not detected | Check CH340 Driver, change USB port or cable |
-| Servo no response     | Check power, voltage, COM connection         |
-| Software crash/freeze | Ensure unique servo IDs                      |
-
-### 8.2 Resources
-
--   [PC configuration tool software Download](https://fashionrobo.com/wp-content/uploads/download/Develop-US_1.0.9.266.rar)
--   [CH340 Driver Download](https://www.wch.cn/downloads/CH341SER_EXE.html)
--   [Bus Servo Communication Protocol](https://wiki.fashionstar.com.hk/protocols)
+## 2. 快速入门
+### 2.1 物理链路拓扑
+1. **电源注入**：接入满足舵机规格的外部直流电源（注意正负极防止烧毁）。
+2. **串联规范**：若进行多机通讯，请务必在通电前完成 ID 唯一性配置，避免总线冲突。
+3. **接口识别**：点击 **Refresh**，选择对应的 COM 端口。若无端口显示，请下载 [CH340 驱动](https://www.wch.cn/downloads/CH341SER_EXE.html)。
+
+### 2.2 参数配置流程
+- 切换至 **Parameters** 选项卡。
+- 修改参数后，数值颜色由橙变绿代表**成功写入 EEPROM**，断电可保存。
+
+---
+
+## 3. 技术参数与 FAQ
+| 维度 | 说明 |
+| :--- | :--- |
+| **通讯协议** | 半双工异步串行通讯 (UART) |
+| **波特率支持** | 9600 - 1000000 bps |
+| **最大负载** | 理论支持 254 个节点 (受限于总线物理带宽) |
+| **常见错误** | **超时错误**：请检查转接板 TX/RX 线序是否反接；**扫描失败**：请确认供电功率是否满足峰值电流需求。 |
+
+---
+
+<style>
+/* 1. 表格容器样式 (保持与 CAD 预览页高度一致) */
+.table-container { width: 100%; overflow-x: auto; margin: 20px 0; }
+.table-container table { border-collapse: collapse !important; border: 0.8px solid var(--fs-divider) !important; }
+.table-container th, .table-container td { border: 0.8px solid var(--fs-divider) !important; vertical-align: middle !important; padding: 12px 15px !important; }
+.table-container th { background-color: var(--fs-table-header-bg) !important; font-weight: 600 !important; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-wrap { white-space: nowrap !important; }
+
+/* 2. 核心修正：让 Tip 内部列表紧贴边框且垂直间距适中 */
+.md-typeset .admonition ul {
+    margin-left: 0 !important;
+    padding-left: 1.2em !important;
+}
+
+.md-typeset .admonition ul li {
+    margin-bottom: 4px !important; /* 增加项之间的行间距 */
+}
+
+/* 3. 按钮样式 */
+.md-typeset .fs-download-btn {
+    background-color: var(--fs-accent) !important;
+    color: #FFFFFF !important;
+    border-radius: 6px !important;
+    padding: 6px 20px !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    transition: all 0.2s ease;
+}
+.md-typeset .fs-download-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
+
+/* 4. 辅助样式 */
+small { font-weight: normal; color: #666; font-size: 12px; }
+</style>

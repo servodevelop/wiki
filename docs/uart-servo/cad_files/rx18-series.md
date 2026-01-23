@@ -58,7 +58,7 @@
 ---
 
 <style>
-/* 1. 预览容器样式：确保图片与框完全吻合 */
+/* 1. 预览容器样式 */
 .cad-preview-wrapper {
     width: 85% !important;
     margin: 20px auto;
@@ -71,60 +71,59 @@
     line-height: 0; 
 }
 
-.desktop-pdf-embed {
-    aspect-ratio: 1.28 / 1;
-    display: block;
-}
+.desktop-pdf-embed { aspect-ratio: 1.28 / 1; display: block; }
+.mobile-image-link { display: none; width: 100%; }
+.mobile-preview-img { width: 100%; height: auto; display: block; cursor: zoom-in; }
 
-.mobile-image-link {
-    display: none; 
-    width: 100%;
-}
+/* 2. 表格样式 (补全了 0.8px 边框以确保清晰) */
+.table-container table { border-collapse: collapse !important; border: 0.8px solid var(--fs-divider) !important; }
+.table-container th, .table-container td { border: 0.8px solid var(--fs-divider) !important; vertical-align: middle !important; }
 
-.mobile-preview-img {
-    width: 100%;
-    height: auto; 
-    display: block;
-    cursor: zoom-in;
-}
-
-/* 2. 表格间距精调 */
 .no-wrap-cell {
-    vertical-align: middle !important;
     background: var(--fs-bg-active) !important;
-    /* 缩小单元格本身的左边距 */
     padding: 0 10px 0 5px !important; 
 }
 
 .no-wrap-cell ul {
     margin: 0 !important; 
-    /* 核心：0.8em 是圆点到左边的距离。数值越小越靠左 */
     padding: 0 0 0 0.8em !important; 
     list-style-type: disc; 
     font-size: 14.5px; 
     line-height: 1.8;
 }
 
-.table-container {
-    width: 100%;
-    overflow-x: auto; 
-    -webkit-overflow-scrolling: touch;
-}
-
+.table-container { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 .no-wrap-cell, .no-wrap-cell ul li { white-space: nowrap !important; }
 
-/* 3. 移动端适配 */
+/* 3. 核心修正：解决 Tip 缩进过宽的问题 */
+.md-typeset .admonition ul, 
+.md-typeset .admonition ol {
+    margin-left: 0 !important;
+    padding-left: 1.2em !important; /* 控制圆点距离左边线的距离 */
+}
+
+.md-typeset .admonition ul li {
+    margin-bottom: 4px !important; /* 增加行间距，更美观 */
+}
+
+/* 4. 移动端适配 */
 @media screen and (max-width: 1024px) {
     .cad-preview-wrapper { width: 100% !important; margin: 10px 0; }
     .desktop-pdf-embed { display: none !important; }
     .mobile-image-link { display: block !important; }
-    .md-typeset table td { padding: 8px 5px !important; } /* 移动端进一步收紧边距 */
+    .md-typeset table td { padding: 8px 5px !important; }
     .no-wrap-cell ul { padding-left: 0.7em !important; }
 }
 </style>
 
 > [!TIP]
-> * 请使用 **Solidworks 2021** 或更高版本打开模型。<br>
-> * 图中尺寸仅供工程参考，最终请以收到的实物为准。如尺寸差异影响安装，请及时联系我们确认。
+> - 请使用 **Solidworks 2021** 或更高版本打开模型。
+> - 图中尺寸仅供工程参考，最终请以收到的实物为准。如尺寸差异影响安装，请及时联系我们确认。
+
+> [!TIP]
+> - **运行环境**：支持 Windows 7/10/11 (x64) 系统，**免安装**解压即用。
+> - **硬件依赖**：需配合 **USB 转 UART 转接板**使用，请确保驱动（CH340/CP2102）已正确安装。
+> - **固件匹配**：建议舵机固件版本与软件版本保持一致。
+> - **快速启动**：解压压缩包后，直接运行目录下的 `Develop.exe` 即可进入控制界面。
