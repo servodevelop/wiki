@@ -5,13 +5,12 @@
 ### 尺寸预览
 <div class="cad-preview-wrapper">
     <embed 
-        src="/uart-servo/cad_files/data/rx6-u15-series/华馨京 10-15kg系列双轴舵机外观尺寸图-PDF.pdf#navpanes=0&view=Fit" 
+        src="/uart-servo/cad_files/data/rx6-u15-series/FashionStar-rx6-u15-dimension.pdf#navpanes=0&view=Fit" 
         type="application/pdf" 
         width="100%" 
         height="100%"
         style="border: none; display: block;">
 </div>
-
 
 ### 适用机型
 > 以下舵机型号适用此尺寸图纸：
@@ -21,7 +20,7 @@
 ### 数据下载
 | 格式 | 更新日期 | 大小 | 操作 |
 | :---: | :---: | :---: | :---: |
-| **.PDF** | <span class="no-wrap">2025-03-04</span> | 1.2 MB | <a href="/uart-servo/cad_files/data/rx6-u15-series/Fashion Star rx6-u15 dimension.pdf" class="fs-download-btn">立即下载</a> |
+| **.PDF** | <span class="no-wrap">2025-03-04</span> | 1.2 MB | <a href="/uart-servo/cad_files/data/rx6-u15-series/FashionStar-rx6-u15-dimension.pdf" class="fs-download-btn">立即下载</a> |
 | **.STEP** | <span class="no-wrap">2024-08-07</span> | 4.5 MB | <a href="/uart-servo/cad_files/data/rx6-u15-series/华馨京 10-15kg系列双轴舵机-3D.step" class="fs-download-btn">立即下载</a> |
 | **.DWG** | <span class="no-wrap">2025-03-04</span> | 2.8 MB | <a href="/uart-servo/cad_files/data/rx6-u15-series/华馨京 10-15kg系列双轴舵机外观尺寸图.dwg" class="fs-download-btn">立即下载</a> |
 
