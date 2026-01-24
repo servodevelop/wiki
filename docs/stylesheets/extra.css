@@ -301,14 +301,14 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   width: 100% !important; 
   display: table !important; 
   border-collapse: collapse !important;
-  border: 0.8px solid var(--fs-divider) !important;
+  border: 0.6px solid var(--fs-divider) !important;
   font-size: 14.5px !important;
 }
 
 .md-typeset table:not([class]) th, 
 .md-typeset table:not([class]) td {
   padding: 10px 16px !important; 
-  border: 0.8px solid var(--fs-divider) !important;
+  border: 0.6px solid var(--fs-divider) !important;
   line-height: 1.4 !important;
   /* --- 核心修改：确保文字、图片、按钮垂直居中 --- */
   vertical-align: middle !important;
