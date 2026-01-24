@@ -118,3 +118,47 @@
 > - **硬件依赖**：需配合 **USB 转 UART 转接板**使用，请确保驱动（CH340/CP2102）已正确安装。
 > - **固件匹配**：建议舵机固件版本与软件版本保持一致。
 > - **快速启动**：解压压缩包后，直接运行目录下的 `Develop.exe` 即可进入控制界面。
+
+
+### 尺寸预览
+![尺寸预览](/uart-servo/cad_files/data/OMY-F3M.jpg)
+
+### 数据下载
+<div class="table-container hide-scrollbar">
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center;">外形参考</th>
+      <th style="text-align: center;">格式</th>
+      <th style="text-align: center;">更新日期</th>
+      <th style="text-align: center;">操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="3" style="text-align: center; background: var(--fs-bg-active);">
+        <img src="/uart-servo/cad_files/data/OMY-F3MA.jpg" alt="型号预览" style="width: 250px; border-radius: 4px; display: block; margin: 0 auto;">
+      </td>
+      <td style="text-align: center;"><strong>.PDF</strong></td>
+      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
+      <td style="text-align: center;"><a href="/uart-servo/cad_files/data/OMY-F3M.pdf" download class="fs-download-btn">立即下载</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><strong>.STEP</strong></td>
+      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
+      <td style="text-align: center;"><a href="/uart-servo/cad_files/data/OMY-F3M.step" download class="fs-download-btn">立即下载</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><strong>.DWG</strong></td>
+      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
+      <td style="text-align: center;"><a href="/uart-servo/cad_files/data/OMY-F3M.dwg" download class="fs-download-btn">立即下载</a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+> [!TIP]
+> - **运行环境**：支持 Windows 7/10/11 (x64) 系统，**免安装**解压即用。
+> - **硬件依赖**：需配合 **USB 转 UART 转接板**使用，请确保驱动（CH340/CP2102）已正确安装。
+> - **固件匹配**：建议舵机固件版本与软件版本保持一致。
+> - **快速启动**：解压压缩包后，直接运行目录下的 `Develop.exe` 即可进入控制界面。

@@ -17,12 +17,12 @@ Fashion Star Wiki - V45.1
 :root {
   /* 品牌色 */
   --fs-accent: #8641A9;
-  --fs-divider: rgba(0,0,0,0.15); 
+  --fs-divider: rgba(0,0,0,0.25); /* 透明度从 0.15 提升至 0.25 */
   --fs-table-header-bg: #F8F9FA; 
   
   /* 文字颜色定义 (浅色模式) */
   --fs-content-fg: #333333;           
-  --fs-header-fg: #242424;            /* H1-H4 专用深色 */
+  --fs-header-fg: #242424;            
   --fs-nav-inactive: var(--fs-content-fg); 
 
   /* Material Design 3 基础色彩覆盖 */
@@ -39,14 +39,14 @@ Fashion Star Wiki - V45.1
 }
 
 [data-md-color-scheme="slate"] {
-  --fs-divider: rgba(255,255,255,0.15);
+  --fs-divider: rgba(255,255,255,0.25); /* 深色模式同步提升至 0.25 */
   --fs-table-header-bg: #202124;
   --md-default-bg-color: #181818;
   --md-default-bg-color--light: #1e1f20;
   
   /* 文字颜色定义 (深色模式) */
   --fs-content-fg: #CCCCCC;      
-  --fs-header-fg: #F1F1F1;            /* H1-H4 专用浅色 */
+  --fs-header-fg: #F1F1F1;            
   --fs-nav-inactive: var(--fs-content-fg); 
   --md-default-fg-color: var(--fs-content-fg);
 }
@@ -288,7 +288,7 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   border-radius: 4px !important; 
 }
 
-/* 8. Table Optimization (0.5px Borders & Vertical Alignment) */
+/* 8. Table Optimization (1px Borders & Vertical Alignment) */
 .md-typeset__table { 
   margin-top: var(--fs-space-zero) !important;      
   margin-bottom: var(--fs-space-small) !important;   
@@ -301,41 +301,26 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   width: 100% !important; 
   display: table !important; 
   border-collapse: collapse !important;
-  border: 0.5px solid var(--fs-divider) !important;
+  border: 1px solid var(--fs-divider) !important; /* 从 0.5px 修改为 1px */
   font-size: 14.5px !important;
 }
 
 .md-typeset table:not([class]) th, 
 .md-typeset table:not([class]) td {
   padding: 10px 16px !important; 
-  border: 0.5px solid var(--fs-divider) !important;
+  border: 1px solid var(--fs-divider) !important; /* 从 0.5px 修改为 1px */
   line-height: 1.4 !important;
-  /* --- 核心修改：确保文字、图片、按钮垂直居中 --- */
   vertical-align: middle !important;
 }
 
 .md-typeset table:not([class]) th {
   background-color: var(--fs-table-header-bg) !important;
   font-weight: 600 !important;
-  border-bottom: 1.5px solid var(--fs-divider) !important;
-  text-align: center !important; /* 表头强制居中 */
+  border-bottom: 1.5px solid var(--fs-divider) !important; /* 保持 1.5px 强调色 */
+  text-align: center !important; 
 }
 
-/* 确保表格内的图片不会有额外的间距干扰居中 */
-.md-typeset table:not([class]) td img {
-  margin: 0 auto !important;
-  display: inline-block !important; /* 改为 inline-block 以配合垂直居中 */
-  max-width: 100% !important;
-}
-
-/* 优化表格内按钮的尺寸 */
-.md-typeset table:not([class]) .fs-download-btn {
-  padding: 4px 15px !important;
-  font-size: 14px !important;
-  margin: 0 !important;
-}
-
-/* 仅解决奇偶显示问题 */
+/* 保持奇偶行变色逻辑不变 */
 .md-typeset table:not([class]) tr:nth-child(even) {
   background-color: rgba(0, 0, 0, 0.012) !important;
 }
