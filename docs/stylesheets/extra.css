@@ -301,14 +301,14 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   width: 100% !important; 
   display: table !important; 
   border-collapse: collapse !important;
-  border: 0.6px solid var(--fs-divider) !important; /* 从 0.5px 修改为 1px */
+  border: 0.7px solid var(--fs-divider) !important; /* 从 0.5px 修改为 1px */
   font-size: 14.5px !important;
 }
 
 .md-typeset table:not([class]) th, 
 .md-typeset table:not([class]) td {
   padding: 10px 16px !important; 
-  border: 0.6px solid var(--fs-divider) !important; /* 从 0.5px 修改为 1px */
+  border: 0.7px solid var(--fs-divider) !important; /* 从 0.5px 修改为 1px */
   line-height: 1.4 !important;
   vertical-align: middle !important;
 }
