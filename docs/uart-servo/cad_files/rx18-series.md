@@ -3,18 +3,7 @@
 ---
 
 ### 尺寸预览
-<div class="cad-preview-wrapper">
-    <embed 
-        class="desktop-pdf-embed"
-        src="/uart-servo/cad_files/data/OMY-F3M.pdf#navpanes=0&view=Fit" 
-        type="application/pdf" 
-        width="100%" 
-        height="100%">
-    
-    <a href="/uart-servo/cad_files/data/OMY-F3M.jpg" class="mobile-image-link">
-        <img src="/uart-servo/cad_files/data/OMY-F3M.jpg" alt="尺寸预览" class="mobile-preview-img">
-    </a>
-</div>
+![尺寸预览](/uart-servo/cad_files/data/OMY-F3M.jpg)
 
 ### 数据下载
 <div class="table-container hide-scrollbar">
@@ -58,30 +47,38 @@
 ---
 
 <style>
-/* 1. 预览容器样式 */
+/* 1. 预览容器样式 - 仅保留布局，移除装饰，由内部 img 的全局 Section 7 提供相框效果 */
 .cad-preview-wrapper {
     width: 85% !important;
     margin: 20px auto;
-    overflow: hidden;
-    border: 0.5px solid var(--fs-divider);
-    border-radius: 4px;
-    background-color: #f8f9fa;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     position: relative;
     line-height: 0; 
 }
 
-.desktop-pdf-embed { aspect-ratio: 1.28 / 1; display: block; }
-.mobile-image-link { display: none; width: 100%; }
-.mobile-preview-img { width: 100%; height: auto; display: block; cursor: zoom-in; }
+/* PDF 的比例和独立边框 */
+.desktop-pdf-embed { 
+    aspect-ratio: 1.28 / 1; 
+    display: block; 
+    border: 0.5px solid var(--fs-divider);
+    border-radius: 4px;
+}
 
-/* 2. 表格样式 (补全了 0.8px 边框以确保清晰) */
+.mobile-image-link { display: none; width: 100%; }
+/* 重点：移动端图片样式由 Section 7 接管 */
+.mobile-image-link img { 
+    max-width: 100% !important; 
+    margin: 0 auto !important; 
+}
+
+/* 2. 表格与不换行深度锁定 */
 .table-container table { border-collapse: collapse !important; border: 0.8px solid var(--fs-divider) !important; }
 .table-container th, .table-container td { border: 0.8px solid var(--fs-divider) !important; vertical-align: middle !important; }
 
+/* 强制列表不换行逻辑 */
 .no-wrap-cell {
     background: var(--fs-bg-active) !important;
     padding: 0 10px 0 5px !important; 
+    white-space: nowrap !important;
 }
 
 .no-wrap-cell ul {
@@ -92,12 +89,13 @@
     line-height: 1.8;
 }
 
+.no-wrap-cell ul li, .no-wrap-cell ul li a, .no-wrap-cell strong {
+    white-space: nowrap !important; /* 确保移动端不挤压换行 */
+}
+
 .table-container { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-.no-wrap-cell, .no-wrap-cell ul li { white-space: nowrap !important; }
-
-/* --- 此处已删除原来的 Tip 列表 CSS 约束，由全局 CSS Section 6 接管 --- */
 
 /* 4. 移动端适配 */
 @media screen and (max-width: 1024px) {
@@ -113,22 +111,18 @@
 > - 请使用 **Solidworks 2021** 或更高版本打开模型。
 > - 图中尺寸仅供工程参考，最终请以收到的实物为准。如尺寸差异影响安装，请及时联系我们确认。
 
-> [!TIP]
-> - **运行环境**：支持 Windows 7/10/11 (x64) 系统，**免安装**解压即用。
-> - **硬件依赖**：需配合 **USB 转 UART 转接板**使用，请确保驱动（CH340/CP2102）已正确安装。
-> - **固件匹配**：建议舵机固件版本与软件版本保持一致。
-> - **快速启动**：解压压缩包后，直接运行目录下的 `Develop.exe` 即可进入控制界面。
 
 
-### 尺寸预览
-![尺寸预览](/uart-servo/cad_files/data/OMY-F3M.jpg)
+---
 
-### 数据下载
+
+
+### 配套零配件图纸
 <div class="table-container hide-scrollbar">
 <table>
   <thead>
     <tr>
-      <th style="text-align: center;">外形参考</th>
+      <th style="text-align: center;">8孔主舵盘</th>
       <th style="text-align: center;">格式</th>
       <th style="text-align: center;">更新日期</th>
       <th style="text-align: center;">操作</th>
@@ -137,7 +131,7 @@
   <tbody>
     <tr>
       <td rowspan="3" style="text-align: center; background: var(--fs-bg-active);">
-        <img src="/uart-servo/cad_files/data/OMY-F3MA.jpg" alt="型号预览" style="width: 250px; border-radius: 4px; display: block; margin: 0 auto;">
+        <img src="/uart-servo/cad_files/data/OMY-F3MA.jpg" alt="型号预览">
       </td>
       <td style="text-align: center;"><strong>.PDF</strong></td>
       <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
@@ -156,9 +150,3 @@
   </tbody>
 </table>
 </div>
-
-> [!TIP]
-> - **运行环境**：支持 Windows 7/10/11 (x64) 系统，**免安装**解压即用。
-> - **硬件依赖**：需配合 **USB 转 UART 转接板**使用，请确保驱动（CH340/CP2102）已正确安装。
-> - **固件匹配**：建议舵机固件版本与软件版本保持一致。
-> - **快速启动**：解压压缩包后，直接运行目录下的 `Develop.exe` 即可进入控制界面。

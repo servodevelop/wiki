@@ -1,6 +1,6 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V45.2
+Fashion Star Wiki - V45.3
 ==========================================================================
 - Design System: Variable-driven vertical rhythm (VS Code Inspired).
 - Header Strategy: H1 individual logic; H2-H4 unified (Top 1.5, Bottom 0.5).
@@ -251,10 +251,10 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   margin-top: 0 !important;
 }
 
-/* 7. Image Optimization - 全局图片相框化 (V47.0 深色 Hover 修正版) */
+/* 7. Image Optimization - 全局图片相框化 (V47.2 增加表格隔离) */
 
-/* [A] 全局普通图片：基础样式 */
-.md-typeset img { 
+/* [A] 全局普通图片：基础样式 (排除表格内的图片) */
+.md-typeset img:not(td img) { 
   display: block !important; 
   margin: var(--fs-space-base) auto !important; 
   max-width: 85% !important; 
@@ -272,27 +272,26 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   transition: all 0.25s ease;
 }
 
-/* [B] 悬停态：浅色模式使用品牌色，深色模式使用标题色 */
-.md-typeset img:hover {
-  border-color: var(--fs-accent) !important; /* 默认品牌色 */
+/* [B] 悬停态：浅色模式品牌色，深色模式标题色 (同样排除表格) */
+.md-typeset img:not(td img):hover {
+  border-color: var(--fs-accent) !important; 
   box-shadow: 0 6px 15px rgba(0,0,0,0.08) !important;
-  transform: translateY(-2px); /* 增加轻微上浮感 */
+  transform: translateY(-2px); 
 }
 
-/* --- 深色模式适配 (重点修改位) --- */
-[data-md-color-scheme="slate"] .md-typeset img {
-  background-color: rgba(255, 255, 255, 0.05) !important; /* 深色底色 */
+/* --- 深色模式适配 --- */
+[data-md-color-scheme="slate"] .md-typeset img:not(td img) {
+  background-color: rgba(255, 255, 255, 0.05) !important; 
   border-color: rgba(255, 255, 255, 0.1) !important;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
 }
 
-/* 深色模式下鼠标悬停：将边框颜色改为标题色 */
-[data-md-color-scheme="slate"] .md-typeset img:hover {
-  border-color: var(--fs-header-fg) !important; /* 使用深色模式标题颜色 #F1F1F1 */
+[data-md-color-scheme="slate"] .md-typeset img:not(td img):hover {
+  border-color: var(--fs-header-fg) !important; 
   box-shadow: 0 6px 15px rgba(0,0,0,0.4) !important;
 }
 
-/* [C] 特殊修复：屏蔽徽章和国旗图标的装饰 */
+/* [C] 特殊修复：屏蔽徽章、国旗、头像装饰 */
 .md-typeset img[src*="shields.io"],
 .md-typeset img.flag-icon,
 .md-typeset .fs-avatar {
@@ -307,15 +306,13 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   vertical-align: middle;
 }
 
-/* 处理贡献者头像单独的圆角需求（如有） */
 .md-typeset .fs-avatar { border-radius: 50% !important; }
 
 /* [D] 兼容性补丁 */
-.md-typeset h1 + p {
-  text-align: left !important;
-}
+.md-typeset h1 + p { text-align: left !important; }
 
-/* 8. Table Optimization (0.5px Borders & Vertical Alignment) */
+
+/* 8. Table Optimization (V47.3 精准间距优化版) */
 .md-typeset__table { 
   margin-top: var(--fs-space-zero) !important;      
   margin-bottom: var(--fs-space-small) !important;   
@@ -337,36 +334,55 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   padding: 10px 16px !important; 
   border: 0.5px solid var(--fs-divider) !important;
   line-height: 1.4 !important;
-  /* --- 核心修改：确保文字、图片、按钮垂直居中 --- */
   vertical-align: middle !important;
+}
+
+/* --- [修正] 针对含有图片的单元格，减小内边距 --- */
+.md-typeset table:not([class]) td:has(img) {
+  padding: 5px !important; /* 将默认的 10px/16px 大幅缩小 */
 }
 
 .md-typeset table:not([class]) th {
   background-color: var(--fs-table-header-bg) !important;
   font-weight: 600 !important;
   border-bottom: 1.5px solid var(--fs-divider) !important;
-  text-align: center !important; /* 表头强制居中 */
+  text-align: center !important;
 }
 
-/* 确保表格内的图片不会有额外的间距干扰居中 */
+/* --- [修正] 优化表格内图片的尺寸逻辑 --- */
 .md-typeset table:not([class]) td img {
+  display: inline-block !important;
   margin: 0 auto !important;
-  display: inline-block !important; /* 改为 inline-block 以配合垂直居中 */
-  max-width: 100% !important;
+  padding: 0 !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 2px !important;
+  
+  /* 响应式高度：桌面端适当放大，移动端保持紧凑 */
+  max-height: 120px !important; /* 桌面端从 85px 提升至 120px */
+  width: auto !important;
+  object-fit: contain !important;
 }
 
-/* 优化表格内按钮的尺寸 */
+/* 移动端特殊处理：维持 85px 以防撑开屏幕 */
+@media screen and (max-width: 768px) {
+  .md-typeset table:not([class]) td img {
+    max-height: 85px !important;
+  }
+}
+
+/* 优化表格内按钮 */
 .md-typeset table:not([class]) .fs-download-btn {
   padding: 4px 15px !important;
   font-size: 14px !important;
   margin: 0 !important;
 }
 
-/* 仅解决奇偶显示问题 */
+/* 奇偶行处理 */
 .md-typeset table:not([class]) tr:nth-child(even) {
   background-color: rgba(0, 0, 0, 0.012) !important;
 }
-
 [data-md-color-scheme="slate"] .md-typeset table:not([class]) tr:nth-child(even) {
   background-color: rgba(255, 255, 255, 0.02) !important;
 }
