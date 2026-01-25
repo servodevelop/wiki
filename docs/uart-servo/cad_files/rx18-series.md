@@ -45,6 +45,50 @@
 </div>
 
 
+> [!TIP]
+> - 请使用 **Solidworks 2021** 或更高版本打开模型。
+> - 图中尺寸仅供工程参考，最终请以收到的实物为准。如尺寸差异影响安装，请及时联系我们确认。
+
+
+
+
+### 关联零配件图纸
+<div class="table-container hide-scrollbar">
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center;">8孔主舵盘</th>
+      <th style="text-align: center;">格式</th>
+      <th style="text-align: center;">更新日期</th>
+      <th style="text-align: center;">操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="3" style="text-align: center; background: var(--fs-bg-active);">
+        <img src="/uart-servo/cad_files/data/OMY-F3MA.jpg" alt="型号预览">
+      </td>
+      <td style="text-align: center;"><strong>.PDF</strong></td>
+      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
+      <td style="text-align: center;"><a href="/uart-servo/cad_files/data/OMY-F3M.pdf" download class="fs-download-btn">立即下载</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><strong>.STEP</strong></td>
+      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
+      <td style="text-align: center;"><a href="/uart-servo/cad_files/data/OMY-F3M.step" download class="fs-download-btn">立即下载</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><strong>.DWG</strong></td>
+      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
+      <td style="text-align: center;"><a href="/uart-servo/cad_files/data/OMY-F3M.dwg" download class="fs-download-btn">立即下载</a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+> [!TIP]
+> - 此舵盘出厂已预装配，并执行零点校正。
+
 <style>
 /* 1. 预览容器样式 - 仅保留布局，移除装饰，由内部 img 的全局 Section 7 提供相框效果 */
 .cad-preview-wrapper {
@@ -105,49 +149,3 @@
     .no-wrap-cell ul { padding-left: 0.7em !important; }
 }
 </style>
-
-> [!TIP]
-> - 请使用 **Solidworks 2021** 或更高版本打开模型。
-> - 图中尺寸仅供工程参考，最终请以收到的实物为准。如尺寸差异影响安装，请及时联系我们确认。
-
-
-
-
-
-
-### 配套零配件图纸
-<div class="table-container hide-scrollbar">
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center;">8孔主舵盘</th>
-      <th style="text-align: center;">格式</th>
-      <th style="text-align: center;">更新日期</th>
-      <th style="text-align: center;">操作</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td rowspan="3" style="text-align: center; background: var(--fs-bg-active);">
-        <img src="/uart-servo/cad_files/data/OMY-F3MA.jpg" alt="型号预览">
-      </td>
-      <td style="text-align: center;"><strong>.PDF</strong></td>
-      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="/uart-servo/cad_files/data/OMY-F3M.pdf" download class="fs-download-btn">立即下载</a></td>
-    </tr>
-    <tr>
-      <td style="text-align: center;"><strong>.STEP</strong></td>
-      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="/uart-servo/cad_files/data/OMY-F3M.step" download class="fs-download-btn">立即下载</a></td>
-    </tr>
-    <tr>
-      <td style="text-align: center;"><strong>.DWG</strong></td>
-      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="/uart-servo/cad_files/data/OMY-F3M.dwg" download class="fs-download-btn">立即下载</a></td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-> [!TIP]
-> - 此舵盘出厂已预装配，并执行零点校正。
