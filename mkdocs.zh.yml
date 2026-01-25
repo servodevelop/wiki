@@ -31,7 +31,7 @@ theme:
     - navigation.tabs
     - content.action.edit  # 必须开启，才会出现铅笔图标
     - navigation.footer
-    # - navigation.instant
+    - navigation.instant
     - navigation.instant.progress
     - navigation.instant.prefetch
 
