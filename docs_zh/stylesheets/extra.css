@@ -1,6 +1,6 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V45.5
+Fashion Star Wiki - V45.6
 ==========================================================================
 - Design System: Variable-driven vertical rhythm (VS Code Inspired).
 - Header Strategy: H1 individual logic; H2-H4 unified (Top 1.5, Bottom 0.5).
@@ -254,7 +254,7 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 /* 7. Image Optimization - 全局图片相框化 (V47.5 响应式宽度与表格隔离) */
 
 /* [A] 全局普通图片：基础样式 (排除表格内的图片) */
-.md-typeset img:not(td img) { 
+.md-typeset img:not(td img):not(pre img){ 
   display: block !important; 
   margin: var(--fs-space-base) auto !important; 
   
@@ -475,6 +475,96 @@ img.flag-icon {
   transform: translateY(-2px); 
   box-shadow: 0 4px 10px rgba(134, 65, 169, 0.3) !important;
   color: #FFFFFF !important; 
+}
+
+/* ==========================================================================
+13. Code Blocks - VS Code 官方一体化方案 (V52.1.1 加固版)
+==========================================================================
+*/
+
+/* [A] 最外层容器：唯一的边框和 8px 圆角承载者 */
+.md-typeset div.highlight {
+  position: relative !important;
+  margin: var(--fs-space-base) 0 !important;
+  background-color: #f8f8f8 !important; /* 浅色模式底色 */
+  border: 1px solid var(--fs-divider) !important;
+  border-radius: 8px !important;        /* 统一改为 8px */
+  padding: 0 !important;                /* 彻底消除外层自带的 padding */
+  /* 细节修正 1：防止标题栏背景溢出圆角 */
+  overflow: hidden !important;          
+}
+
+/* [B] 标题栏：占据容器顶部 34px 高度 */
+.md-typeset div.highlight::before {
+  content: "CODE"; 
+  display: block !important;
+  height: 34px !important;
+  line-height: 34px !important;
+  padding: 0 16px !important;
+  background-color: rgba(0, 0, 0, 0.04) !important; /* VS Code 式浅灰标题栏 */
+  color: var(--fs-header-fg) !important;
+  font-family: var(--md-code-font-family);
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--fs-divider) !important;
+  /* 确保标题栏顶部的圆角与外层一致 */
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+/* 语言自动识别 */
+.md-typeset div.highlight[class*="language-json"]::before { content: "JSON" !important; }
+.md-typeset div.highlight[class*="language-python"]::before { content: "PYTHON" !important; }
+.md-typeset div.highlight[class*="language-bash"]::before { content: "BASH" !important; }
+.md-typeset div.highlight[class*="language-cpp"]::before { content: "C++" !important; }
+
+/* [C] 正文区域：去除所有嵌套背景 */
+.md-typeset div.highlight pre {
+  margin: 0 !important;
+  padding: 12px 16px !important; 
+  background-color: transparent !important; /* 透明以露出外层底色 */
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  overflow: auto !important;
+  /* 细节修正 2：确保滚动条不遮挡按钮 */
+  scrollbar-gutter: stable;
+}
+
+.md-typeset div.highlight pre code {
+  background-color: transparent !important;
+  padding: 0 !important;
+}
+
+/* [D] 复制按钮：精准移动至标题栏内部 (34px 高度) */
+.md-typeset .md-clipboard {
+  position: absolute !important;
+  top: 5px !important;      /* 调整至标题栏垂直居中 (34-24)/2 */
+  right: 10px !important;   /* 距离右边框 10px */
+  z-index: 10 !important;
+  background-color: transparent !important;
+  color: var(--fs-header-fg) !important;
+  transition: opacity 0.2s;
+  opacity: 0.4;
+}
+
+/* 细节修正 3：彻底干掉按钮自带的背景圈（MkDocs 默认会有个灰色圆圈） */
+.md-typeset .md-clipboard::after {
+  background-color: transparent !important;
+}
+
+.md-typeset .md-clipboard:hover {
+  opacity: 1;
+}
+
+/* [E] 深色模式适配 */
+[data-md-color-scheme="slate"] .md-typeset div.highlight {
+  background-color: #1e1e1e !important;
+}
+[data-md-color-scheme="slate"] .md-typeset div.highlight::before {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
 }
 
 /* ==========================================================================
