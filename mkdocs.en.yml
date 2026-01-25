@@ -17,7 +17,7 @@ theme:
   font:
     text: Roboto
     code: Roboto Mono
-  logo: false
+  logo: assets/favicon.png
   features:
     - navigation.path
     - navigation.indexes

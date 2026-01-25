@@ -19,7 +19,7 @@ theme:
   font:
     text: Microsoft YaHei
     code: Roboto Mono  
-  logo: false
+  logo: assets/favicon.png
   features:
     - navigation.path
     - navigation.indexes
