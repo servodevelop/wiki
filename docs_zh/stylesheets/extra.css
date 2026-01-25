@@ -1,6 +1,6 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V45.1
+Fashion Star Wiki - V45.2
 ==========================================================================
 - Design System: Variable-driven vertical rhythm (VS Code Inspired).
 - Header Strategy: H1 individual logic; H2-H4 unified (Top 1.5, Bottom 0.5).
@@ -251,41 +251,68 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   margin-top: 0 !important;
 }
 
-/* 7. Image Optimization */
-/* 全局普通图片：强制居中独立显示 */
+/* 7. Image Optimization - 全局图片相框化 (V47.0 深色 Hover 修正版) */
+
+/* [A] 全局普通图片：基础样式 */
 .md-typeset img { 
   display: block !important; 
-  margin-top: var(--fs-space-zero) !important; 
-  margin-bottom: var(--fs-space-small) !important; 
-  margin-left: auto !important;
-  margin-right: auto !important;
+  margin: var(--fs-space-base) auto !important; 
   max-width: 85% !important; 
-  border-radius: 4px !important; 
+  
+  /* 核心边框逻辑 */
+  background-color: #f8f9fa !important; 
+  padding: 10px !important;              
+  border: 1px solid var(--fs-divider) !important; 
+  border-radius: 8px !important;         
+  
+  /* 微阴影 */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+  
+  box-sizing: border-box !important;
+  transition: all 0.25s ease;
 }
 
-/* --- 特殊修复：允许 Shields.io 徽章并排 --- */
-/* 只要图片路径包含 shields.io，就将其恢复为行内块 */
-.md-typeset img[src*="shields.io"] {
-  display: inline-block !important; /* 核心：允许并排 */
-  margin: 0 4px 5px 0 !important;   /* 移除居中，改为右间距 */
-  max-width: none !important;       /* 不限制大小 */
-  border-radius: 0 !important;      /* 保持徽章方正 */
+/* [B] 悬停态：浅色模式使用品牌色，深色模式使用标题色 */
+.md-typeset img:hover {
+  border-color: var(--fs-accent) !important; /* 默认品牌色 */
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08) !important;
+  transform: translateY(-2px); /* 增加轻微上浮感 */
+}
+
+/* --- 深色模式适配 (重点修改位) --- */
+[data-md-color-scheme="slate"] .md-typeset img {
+  background-color: rgba(255, 255, 255, 0.05) !important; /* 深色底色 */
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+}
+
+/* 深色模式下鼠标悬停：将边框颜色改为标题色 */
+[data-md-color-scheme="slate"] .md-typeset img:hover {
+  border-color: var(--fs-header-fg) !important; /* 使用深色模式标题颜色 #F1F1F1 */
+  box-shadow: 0 6px 15px rgba(0,0,0,0.4) !important;
+}
+
+/* [C] 特殊修复：屏蔽徽章和国旗图标的装饰 */
+.md-typeset img[src*="shields.io"],
+.md-typeset img.flag-icon,
+.md-typeset .fs-avatar {
+  display: inline-block !important; 
+  margin: 0 4px !important;   
+  max-width: none !important;       
+  padding: 0 !important;             
+  background-color: transparent !important; 
+  border: none !important;           
+  box-shadow: none !important;       
+  border-radius: 0 !important;      
   vertical-align: middle;
 }
 
-/* 强制 H1 标题后的第一个段落左对齐（防止标签被整体居中） */
+/* 处理贡献者头像单独的圆角需求（如有） */
+.md-typeset .fs-avatar { border-radius: 50% !important; }
+
+/* [D] 兼容性补丁 */
 .md-typeset h1 + p {
   text-align: left !important;
-}
-
-/* 7.1 Video & Media Optimization */
-.md-typeset video,
-.md-typeset .video-wrapper,
-.md-typeset iframe { 
-  display: block !important; 
-  margin: var(--fs-space-zero) auto var(--fs-space-small) auto !important;
-  max-width: 85% !important; 
-  border-radius: 4px !important; 
 }
 
 /* 8. Table Optimization (0.5px Borders & Vertical Alignment) */
@@ -370,57 +397,33 @@ img.flag-icon {
 
 /* [1-10 部分保持不变] */
 
-/* 11. E-commerce Purchase Cards (V43.23 固定宽度版) */
+/* 11. E-commerce Purchase Cards (V46.9 布局专用) */
 .fs-buy-grid {
   display: flex !important;
-  flex-wrap: wrap !important;      /* 自动换行 */
-  justify-content: center !important; /* 核心：整体居中 */
-  gap: 20px !important;            /* 卡片间距 */
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 20px !important;
   margin: 2.0rem auto !important;
-  width: 100% !important;
-  max-width: 860px;                /* 约等于 (260px * 3) + (20px * 2) */
 }
 
-.fs-buy-card {
-  /* 核心：锁定卡片固定宽度 */
+.md-typeset .fs-buy-card {
   width: 260px !important; 
-  flex: 0 0 260px !important;      /* 禁止拉伸或压缩 */
-  
-  border: 1.5px solid var(--fs-divider) !important;
-  border-radius: 8px !important;
-  padding: 15px 15px !important;
-  text-align: center !important;
+  flex: 0 0 260px !important;
+  border: 1px solid var(--fs-divider) !important; /* 卡片外大框 */
+  border-radius: 12px !important;
+  padding: 12px !important;
   background-color: var(--md-default-bg-color) !important;
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
 }
 
-/* 内部结构清理 */
-.fs-buy-card p { margin: 0 !important; display: contents !important; }
+.fs-buy-card p { margin: 0 !important; display: block !important; width: 100% !important; }
 
-/* 图片大小手工修订位 (你要求的 250px 起步) */
+/* 重点：Section 11 里的图片宽度跟随卡片，样式继承 Section 7 */
 .fs-buy-card img { 
-  width: 300px !important;        /* 设置为你需要的固定宽度 */
-  max-width: 100% !important;     /* 保证不超出卡片范围 */
-  height: auto !important; 
-  margin-bottom: 12px !important; 
-  border-radius: 6px;
-}
-
-.fs-product-name { 
-  font-size: 15px; 
-  font-weight: 600; 
-  color: var(--fs-header-fg); 
-  margin: 8px 0 4px 0 !important; 
-}
-
-.fs-product-price { 
-  font-size: 20px; 
-  font-weight: 700; 
-  color: var(--fs-accent); 
-  margin-bottom: 15px !important; 
+  width: 100% !important; 
+  max-width: 100% !important;
 }
 
 /* 12. 按钮样式 (精致胶囊型) */
