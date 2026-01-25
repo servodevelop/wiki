@@ -1,6 +1,6 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V45.3
+Fashion Star Wiki - V45.5
 ==========================================================================
 - Design System: Variable-driven vertical rhythm (VS Code Inspired).
 - Header Strategy: H1 individual logic; H2-H4 unified (Top 1.5, Bottom 0.5).
@@ -251,19 +251,22 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   margin-top: 0 !important;
 }
 
-/* 7. Image Optimization - 全局图片相框化 (V47.2 增加表格隔离) */
+/* 7. Image Optimization - 全局图片相框化 (V47.5 响应式宽度与表格隔离) */
 
 /* [A] 全局普通图片：基础样式 (排除表格内的图片) */
 .md-typeset img:not(td img) { 
   display: block !important; 
   margin: var(--fs-space-base) auto !important; 
-  max-width: 85% !important; 
+  
+  /* 响应式宽度：桌面端/iPad 保持精致留白感 */
+  width: 85% !important;
+  max-width: 85% !important;
   
   /* 核心边框逻辑 */
-  background-color: #f8f9fa !important; 
-  padding: 10px !important;              
-  border: 1px solid var(--fs-divider) !important; 
-  border-radius: 8px !important;         
+  background-color: #f8f9fa !important;
+  padding: 10px !important;
+  border: 1px solid var(--fs-divider) !important;
+  border-radius: 8px !important;
   
   /* 微阴影 */
   box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
@@ -274,35 +277,46 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 
 /* [B] 悬停态：浅色模式品牌色，深色模式标题色 (同样排除表格) */
 .md-typeset img:not(td img):hover {
-  border-color: var(--fs-accent) !important; 
+  border-color: var(--fs-accent) !important;
   box-shadow: 0 6px 15px rgba(0,0,0,0.08) !important;
-  transform: translateY(-2px); 
+  transform: translateY(-2px);
 }
 
 /* --- 深色模式适配 --- */
 [data-md-color-scheme="slate"] .md-typeset img:not(td img) {
-  background-color: rgba(255, 255, 255, 0.05) !important; 
+  background-color: rgba(255, 255, 255, 0.05) !important;
   border-color: rgba(255, 255, 255, 0.1) !important;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
 }
 
 [data-md-color-scheme="slate"] .md-typeset img:not(td img):hover {
-  border-color: var(--fs-header-fg) !important; 
+  border-color: var(--fs-header-fg) !important;
   box-shadow: 0 6px 15px rgba(0,0,0,0.4) !important;
 }
 
-/* [C] 特殊修复：屏蔽徽章、国旗、头像装饰 */
+/* --- [修正] 移动端/iPad 响应式增强：图片自动等宽 --- */
+@media screen and (max-width: 1024px) {
+  .md-typeset img:not(td img) {
+    width: 100% !important; /* 在窄屏设备上利用全部宽度 */
+    max-width: 100% !important;
+    margin: var(--fs-space-small) auto !important; 
+    padding: 6px !important; /* 缩小内衬以增加图片展示面积 */
+  }
+}
+
+/* [C] 特殊修复：屏蔽徽章、国旗、头像装饰 (追加 width: auto 以防被拉伸) */
 .md-typeset img[src*="shields.io"],
 .md-typeset img.flag-icon,
 .md-typeset .fs-avatar {
-  display: inline-block !important; 
-  margin: 0 4px !important;   
-  max-width: none !important;       
-  padding: 0 !important;             
-  background-color: transparent !important; 
-  border: none !important;           
-  box-shadow: none !important;       
-  border-radius: 0 !important;      
+  display: inline-block !important;
+  margin: 0 4px !important;
+  max-width: none !important;
+  width: auto !important; /* 确保小图标不继承 85%/100% 的宽度 */
+  padding: 0 !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
   vertical-align: middle;
 }
 
@@ -310,7 +324,6 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 
 /* [D] 兼容性补丁 */
 .md-typeset h1 + p { text-align: left !important; }
-
 
 /* 8. Table Optimization (V47.3 精准间距优化版) */
 .md-typeset__table { 
