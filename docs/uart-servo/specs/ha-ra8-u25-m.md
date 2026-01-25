@@ -1,31 +1,17 @@
-# UART Bus Servo 25KG 1111
+# HA8/RA8-U25-M
+---
+{% include-markdown "snippets/shop-info/product-primary-simple.md"
+   start="<!--start:HA8/RA8-U25-M-->"
+   end="<!--end:HA8/RA8-U25-M-->" %}
+## 1. 型号定义
 
-![U25产品图片](image/U25产品图片.png)
+![产品命名-型号规则](image/产品命名-型号规则a.jpeg)
 
-## 1. Features
-
-- Integrated design: brushed motor, reducer, 12‑bit magnetic absolute encoder, and controller
-- UART/TTL half‑duplex protocol up to **1 Mbps**
-- Resolution **4096 counts/360° (0.088°)**; min control step **0.1°**
-- Control range: **±180°** (single‑turn) or **±368,640° / ±1024 turns** (multi‑turn)
-- Power‑off position retention
-- Trapezoidal accel/decel trajectory for smooth motion
-- Auto power threshold detection with adaptive reduction
-- Three stop modes: **Free / Lock / Damping**
-- Five protections: **temperature / voltage / stall / power / current**
-- PC configuration tool; firmware upgradable
-
-## 2. Model definition
-
-![产品命名-型号规则](image/产品命名-型号规则.png)
-
-| Appearance | R：Dual-shaft | H：Single-shaft | |
-| :--- | :--- | :--- | :--- |
-| Motor type | X：Brushless | P：Coreless | A/L：Cored |
-| Dimension | 6：31.5×21×27.6mm | 8：40×40×20mm | 18：63×34×47mm |
-| Protocols | U：UART/TTL | R：RS-485 | C：CAN |
-| Voltage | [-]：7.4V | H：12V | W：24V |
-| Position Sensor | [-]：Potentiometer | M:12-bit magnetic absolute encoder | |
+| Appearance | Motor Type | Dimension | Protocols | Voltage | Position Sensor |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **R**: Dual-shaft | **X**: Brushless | **6**: 31.5×21×27.6mm | **U**: UART/TTL | **[-]**: 7.4V | **[-]**: Potentiometer |
+| **H**: Single-shaft | **P**: Coreless | **8**: 40×40×20mm | **R**: RS-485 | **H**: 12V | **M**: 12-bit Encoder |
+| | **A/L**: Cored | **18**: 63×34×47mm | **C**: CAN | **W**: 24V | |
 
 **Models available for order**
 - **RA8-U25(H)-M|HA8-U25(H)-M**

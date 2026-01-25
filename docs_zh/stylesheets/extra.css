@@ -1,6 +1,6 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V45.9
+Fashion Star Wiki - V46.0
 ==========================================================================
 - Design System: Variable-driven vertical rhythm (VS Code Inspired).
 - Header Strategy: H1 individual logic; H2-H4 unified (Top 1.5, Bottom 0.5).
@@ -263,8 +263,8 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   max-width: 85% !important;
   
   /* 核心边框逻辑 */
-  background-color: #f8f9fa !important;
-  padding: 10px !important;
+  background-color: transparent !important;
+  padding: 5px !important;
   border: 1px solid var(--fs-divider) !important;
   border-radius: 8px !important; /* 与代码框 8px 对齐 */
   
@@ -283,7 +283,7 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 
 /* --- 深色模式适配 --- */
 [data-md-color-scheme="slate"] .md-typeset img:not(td img):not(pre img) {
-  background-color: rgba(255, 255, 255, 0.05) !important;
+  background-color: transparent !important;
   border-color: rgba(255, 255, 255, 0.1) !important;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
 }
@@ -300,7 +300,7 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
     width: 100% !important; 
     max-width: 100% !important;
     margin: var(--fs-space-small) auto !important; 
-    padding: 6px !important; /* 缩小内衬增加可视面积 */
+    padding: 5px !important; /* 缩小内衬增加可视面积 */
   }
 }
 
