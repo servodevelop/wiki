@@ -1,6 +1,6 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V45.7
+Fashion Star Wiki - V45.9
 ==========================================================================
 - Design System: Variable-driven vertical rhythm (VS Code Inspired).
 - Header Strategy: H1 individual logic; H2-H4 unified (Top 1.5, Bottom 0.5).
@@ -655,4 +655,75 @@ img.flag-icon {
 /* 悬停微调 */
 .md-typeset .fs-avatar:hover {
     transform: scale(1.2) !important;
+}
+
+/* 16. Market Content - 产品购物卡片专属 (V1.2) */
+
+/* [A] 栅格容器 */
+.fs-buy-grid {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 20px !important;
+  justify-content: center !important;
+  margin: 1.5rem 0 !important;
+}
+
+/* [B] 卡片主体 */
+.fs-buy-card {
+  flex: 0 1 280px !important;
+  max-width: 300px !important;
+  text-align: center !important;
+  padding: 16px !important;
+  border: 1px solid var(--fs-divider) !important;
+  border-radius: 8px !important;
+  background-color: transparent !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+/* [C] 图片：彻底“素颜”化，强力覆盖 Section 7 的紫框 */
+/* 使用三级连写提升权重，确保彻底剥离边框、背景、阴影和位移 */
+.md-typeset .fs-buy-card img,
+.md-typeset .fs-buy-card img:hover {
+  width: auto !important;
+  max-width: 100% !important;
+  height: auto !important;
+  /* 强力重置边框样式 */
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+  margin: 0 auto 12px auto !important;
+  /* 彻底禁用任何悬停位移或动画 */
+  transform: none !important;
+  transition: none !important;
+}
+
+/* [D] 型号文字：16px, 600字重 */
+.fs-product-name {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: var(--fs-header-fg) !important;
+  margin-bottom: 8px !important;
+  line-height: 1.4 !important;
+  text-align: center !important;
+}
+
+/* [E] 价格文字：Logo色, 16px, 600字重 */
+.fs-product-price {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  color: var(--fs-accent) !important; 
+  margin-bottom: 15px !important;
+  text-align: center !important;
+}
+
+/* [F] 按钮：居中并微调 */
+.fs-buy-card .md-button {
+  margin: 0 auto !important;
+  display: inline-block !important;
+  font-size: 14px !important; /* 按钮文字略小一点更有层次感 */
 }

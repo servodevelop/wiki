@@ -6,7 +6,10 @@
    start="<!--start:HA8/RA8-U25-M-->"
    end="<!--end:HA8/RA8-U25-M-->" %}
 
-
+### HA8/RA8-U25-M-taobao
+{% include-markdown "snippets/shop-info/product-primary-taobao.md"
+   start="<!--start:HA8/RA8-U25-M-tb-->"
+   end="<!--end:HA8/RA8-U25-M-tb-->" %}
 
 ### HA8/RA8-U25H-M
 

@@ -1,34 +1,14 @@
 # HP6/RP6-U12H-M
 
-<div class="fs-buy-grid" markdown="1">
+### HA8/RA8-U25-M
+{% include-markdown "snippets/shop-info/product-primary-simple.md"
+   start="<!--start:HA8/RA8-U25-M-->"
+   end="<!--end:HA8/RA8-U25-M-->" %}
 
-<div class="fs-buy-card" markdown="1">
-<img src="https://store.fashionstar.com.hk/wp-content/uploads/2025/09/RA8-U25-M-1536x1536.webp" alt="RA8-U25H-M">
-<div class="fs-product-name">RA8-U25H-M</div>
-<div class="fs-product-price">$200.00</div>
-
-[点击购买](https://store.fashionstar.com.hk/product/uart-bus-servo-ra8-u25-m/){ .md-button .fs-download-btn target="_blank" }
-</div>
-
-<div class="fs-buy-card" markdown="1">
-<img src="https://store.fashionstar.com.hk/wp-content/uploads/2025/09/HA8-U25-M-1536x1536.webp" alt="HA8-U25H-M">
-<div class="fs-product-name">HA8-U25H-M</div>
-<div class="fs-product-price">$200.00</div>
-
-[点击购买](https://store.fashionstar.com.hk/product/uart-bus-servo-ha8-u25-m/){ .md-button .fs-download-btn target="_blank" }
-</div>
-
-
-</div>
-
-Snippets Test Start/End
-
-
-
-
-{% include-markdown "snippets/uart_servo/definition.md"
-   start="<!--start:HA8-U25-M-->"
-   end="<!--end:HA8-U25-M-->" %}
+### HA8/RA8-U25-M-taobao
+{% include-markdown "snippets/shop-info/product-primary-taobao.md"
+   start="<!--start:HA8/RA8-U25-M-tb-->"
+   end="<!--end:HA8/RA8-U25-M-tb-->" %}
 
 点击下方按钮开始下载：
 
