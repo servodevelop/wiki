@@ -3,7 +3,7 @@
 ---
 
 ### 尺寸预览
-![尺寸预览](/uart-servo/cad_files/data/OMY-F3M.jpg)
+![尺寸预览](/uart-servo/cad-files/data/OMY-F3M.jpg)
 
 ### 数据下载
 <div class="table-container hide-scrollbar">
@@ -28,17 +28,17 @@
       </td>
       <td style="text-align: center;"><strong>.PDF</strong></td>
       <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="/uart-servo/cad_files/data/OMY-F3M.pdf" download class="fs-download-btn">立即下载</a></td>
+      <td style="text-align: center;"><a href="/uart-servo/cad-files/data/OMY-F3M.pdf" download class="fs-download-btn">立即下载</a></td>
     </tr>
     <tr>
       <td style="text-align: center;"><strong>.STEP</strong></td>
       <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="/uart-servo/cad_files/data/OMY-F3M.step" download class="fs-download-btn">立即下载</a></td>
+      <td style="text-align: center;"><a href="/uart-servo/cad-files/data/OMY-F3M.step" download class="fs-download-btn">立即下载</a></td>
     </tr>
     <tr>
       <td style="text-align: center;"><strong>.DWG</strong></td>
       <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="/uart-servo/cad_files/data/OMY-F3M.dwg" download class="fs-download-btn">立即下载</a></td>
+      <td style="text-align: center;"><a href="/uart-servo/cad-files/data/OMY-F3M.dwg" download class="fs-download-btn">立即下载</a></td>
     </tr>
   </tbody>
 </table>
@@ -66,21 +66,21 @@
   <tbody>
     <tr>
       <td rowspan="3" style="text-align: center; background: var(--fs-bg-active);">
-        <img src="/uart-servo/cad_files/data/OMY-F3MA.jpg" alt="型号预览">
+        <img src="/uart-servo/cad-files/data/OMY-F3MA.jpg" alt="型号预览">
       </td>
       <td style="text-align: center;"><strong>.PDF</strong></td>
       <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="/uart-servo/cad_files/data/OMY-F3M.pdf" download class="fs-download-btn">立即下载</a></td>
+      <td style="text-align: center;"><a href="/uart-servo/cad-files/data/OMY-F3M.pdf" download class="fs-download-btn">立即下载</a></td>
     </tr>
     <tr>
       <td style="text-align: center;"><strong>.STEP</strong></td>
       <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="/uart-servo/cad_files/data/OMY-F3M.step" download class="fs-download-btn">立即下载</a></td>
+      <td style="text-align: center;"><a href="/uart-servo/cad-files/data/OMY-F3M.step" download class="fs-download-btn">立即下载</a></td>
     </tr>
     <tr>
       <td style="text-align: center;"><strong>.DWG</strong></td>
       <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="/uart-servo/cad_files/data/OMY-F3M.dwg" download class="fs-download-btn">立即下载</a></td>
+      <td style="text-align: center;"><a href="/uart-servo/cad-files/data/OMY-F3M.dwg" download class="fs-download-btn">立即下载</a></td>
     </tr>
   </tbody>
 </table>

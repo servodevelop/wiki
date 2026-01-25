@@ -154,11 +154,11 @@ nav:
       - RX18-U100H-M: uart-servo/specs/rx18-u100h-m.md
       - RX18-U101H-M: uart-servo/specs/rx18-u101h-m.md
     - CAD Files:
-      - RA8/RP8/RX8 Series: uart-servo/cad_files/ra8-rp8-rx8-series.md
-      - RP6/RX6-U12 Series: uart-servo/cad_files/rp6-rx6-u12-series.md
-      - RX6-U15 Series: uart-servo/cad_files/rx6-u15-series.md
-      - RP6-U18 Series: uart-servo/cad_files/rp6-u18-series.md
-      - RX18 Series: uart-servo/cad_files/rx18-series.md
+      - RA8/RP8/RX8 Series: uart-servo/cad-files/ra8-rp8-rx8-series.md
+      - RP6/RX6-U12 Series: uart-servo/cad-files/rp6-rx6-u12-series.md
+      - RX6-U15 Series: uart-servo/cad-files/rx6-u15-series.md
+      - RP6-U18 Series: uart-servo/cad-files/rp6-u18-series.md
+      - RX18 Series: uart-servo/cad-files/rx18-series.md
     - Software:
       - PC Configuration Tool: uart-servo/software/pc_configuration_tool.md
       - Web Configuration Tool: uart-servo/software/web_configuration_tool.md
@@ -190,8 +190,8 @@ nav:
       - RX18-R100H-M: rs485_servo/specs/rx18-r100h-m.md
       - RX18-R101H-M: rs485_servo/specs/rx18-r101h-m.md
     - CAD Files:
-      - HX8/RX8 R Series: rs485_servo/cad_files/hx8-rx8-r-series.md
-      - HX18 R Series: rs485_servo/cad_files/hx18-r-series.md
+      - HX8/RX8 R Series: rs485_servo/cad-files/hx8-rx8-r-series.md
+      - HX18 R Series: rs485_servo/cad-files/hx18-r-series.md
     - Software:
       - PC Configuration Tool: rs485_servo/software/pc_configuration_tool.md
       - Web Configuration Tool: rs485_servo/software/web_configuration_tool.md
@@ -218,8 +218,8 @@ nav:
       - HX8-C100H-M: can_servo/specs/hx8-c100h-m.md
       - HX8-C100W-M: can_servo/specs/hx8-c100w-m.md
     - CAD Files:
-      - HX8/RX8 C Series: can_servo/cad_files/hx8-rx8-c-series.md
-      - HX18 C Series: can_servo/cad_files/hx18-c-series.md
+      - HX8/RX8 C Series: can_servo/cad-files/hx8-rx8-c-series.md
+      - HX18 C Series: can_servo/cad-files/hx18-c-series.md
     - Software:
       - PC Configuration Tool: can_servo/software/pc_configuration_tool.md
       - Web Configuration Tool: can_servo/software/web_configuration_tool.md
