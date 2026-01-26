@@ -3,14 +3,9 @@
 ---
 
 ### 尺寸预览
-<div class="cad-preview-wrapper">
-  <embed
-    src="../data/rp6-u15/rp6-u15-dimension.pdf#navpanes=0&view=Fit"
-    type="application/pdf"
-    width="100%"
-    height="100%"
-    style="border: none; display: block;">
-</div>
+![rp6-u15-dimension](./data/rp6-u15/rp6-u15-dimension.jpg)
+
+
 
 ### 数据下载
 
@@ -28,7 +23,7 @@
     <tr>
       <td rowspan="3" class="no-wrap-cell" style="vertical-align: middle; background: var(--fs-bg-active); padding: 0 15px;">
         <ul style="margin: 0; padding: 0 0 0 1.2em; list-style-type: disc; font-size: 14.5px; line-height: 1.8;">
-          <li><a href="https://wiki.fashionstar.com.hk/zh/uart-servo/specs/hp-rp6-u15h-m/"><strong>RP6-U15H-M</strong></a></li>
+          <li><a href="https://wiki.fashionstar.com.hk/zh/uart-servo/specs/rp-rp6-u15h-m/"><strong>RP6-U15H-M</strong></a></li>
         </ul>
       </td>
       <td style="text-align: center;"><strong>.PDF</strong></td>
@@ -49,48 +44,165 @@
 </table>
 </div>
 
----
+> [!TIP]
+>
+> - 请使用 **Solidworks 2021** 或更高版本打开模型。
+> - 图中尺寸仅供工程参考，最终请以收到的实物为准。如尺寸差异影响安装，请及时联系我们确认。
 
-<style>
-/* 1. 预览容器样式 */
-.cad-preview-wrapper {
-    width: 85% !important;
-    aspect-ratio: 1.28 / 1; 
-    margin: 20px auto;
-    overflow: hidden;
-    border: 0.5px solid var(--fs-divider);
-    border-radius: 4px;
-    background: #525659;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-/* 2. 修复引用块内列表缩进过大的问题 */
-.md-typeset blockquote ul {
-    margin-left: -1.5em !important; /* 向左拉回缩进 */
-    padding-left: 1.5em !important;
-}
 
-.md-typeset blockquote li {
-    margin-bottom: 4px; /* 让机型之间稍微紧凑点 */
-}
 
-/* 3. 基础补丁 */
-.no-wrap { white-space: nowrap !important; }
+### 关联零配件图纸
 
-/* 4. 移动端适配 */
-@media screen and (max-width: 768px) {
-    .cad-preview-wrapper {
-        width: 100% !important;
-        aspect-ratio: 1.38 / 1; 
-        border: 1px solid #999; 
-        margin: 10px 0;
-    }
-    .md-typeset table td {
-        font-size: 13px !important;
-        padding: 8px 4px !important;
-    }
-}
-</style>
+<div class="table-container hide-scrollbar">
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center;">4孔主舵盘</th>
+      <th style="text-align: center;">格式</th>
+      <th style="text-align: center;">更新日期</th>
+      <th style="text-align: center;">操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="3" style="text-align: center; background: var(--fs-bg-active);">
+        <img src="../data/rp6-u15/u15-main-horn.png" alt="型号预览">
+      </td>
+      <td style="text-align: center;"><strong>.PDF</strong></td>
+      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
+      <td style="text-align: center;"><a href="../data/rp6-u15/u15-main-horn-dimension.pdf" download class="fs-download-btn">立即下载</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><strong>.STEP</strong></td>
+      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
+      <td style="text-align: center;"><a href="../data/rp6-u15/u15-main-horn-3D.STEP" download class="fs-download-btn">立即下载</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><strong>.DWG</strong></td>
+      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
+      <td style="text-align: center;"><a href="../data/rp6-u15/u15-main-horn-dimension.dwg" download class="fs-download-btn">立即下载</a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
 
 > [!TIP]
-> **CN:** 如果手机端预览框无法手动缩小，请点击下方的 **.PDF** 下载按钮直接查看。
-> **EN:** If the preview cannot be scaled on mobile, please click the **.PDF** download button to view.
+>
+> - 主舵盘出厂已预装配，并执行零点校正。
+
+<div class="table-container hide-scrollbar">
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center;">4孔副舵盘</th>
+      <th style="text-align: center;">格式</th>
+      <th style="text-align: center;">更新日期</th>
+      <th style="text-align: center;">操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="3" style="text-align: center; background: var(--fs-bg-active);">
+        <img src="../data/rp6-u15/rp6-u15-assistant-horn.png" alt="型号预览">
+      </td>
+      <td style="text-align: center;"><strong>.PDF</strong></td>
+      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
+      <td style="text-align: center;"><a href="../data/rp6-u15/rp6-u15-assistant-horn-dimension.pdf" download class="fs-download-btn">立即下载</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><strong>.STEP</strong></td>
+      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
+      <td style="text-align: center;"><a href="../data/rp6-u15/rp6-u15-assistant-horn-3D.STEP" download class="fs-download-btn">立即下载</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><strong>.DWG</strong></td>
+      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
+      <td style="text-align: center;"><a href="../data/rp6-u15/rp6-u15-assistant-horn-dimension.dwg" download class="fs-download-btn">立即下载</a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+> [!TIP]
+>
+> - 副舵盘出厂未装配，需要自行安装。
+
+<div class="table-container hide-scrollbar">
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center;">U型机身支架(31mm)</th>
+      <th style="text-align: center;">格式</th>
+      <th style="text-align: center;">更新日期</th>
+      <th style="text-align: center;">操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="3" style="text-align: center; background: var(--fs-bg-active);">
+        <img src="../data/rp6-u15/rp6-u15-body-bracket.png" alt="型号预览">
+      </td>
+      <td style="text-align: center;"><strong>.PDF</strong></td>
+      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
+      <td style="text-align: center;"><a href="../data/rp6-u15/rp6-u15-body-bracket-dimension.pdf" download class="fs-download-btn">立即下载</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><strong>.STEP</strong></td>
+      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
+      <td style="text-align: center;"><a href="../data/rp6-u15/rp6-u15-body-bracket-3D.STEP" download class="fs-download-btn">立即下载</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><strong>.DWG</strong></td>
+      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
+      <td style="text-align: center;"><a href="../data/rp6-u15/rp6-u15-body-bracket-dimension.dwg" download class="fs-download-btn">立即下载</a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+> [!TIP]
+>
+> - U型机身支架(31mm) 出厂默认不配送，需要另外加购。
+
+<div class="table-container hide-scrollbar">
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center;">U形舵盘支架(38mm)</th>
+      <th style="text-align: center;">格式</th>
+      <th style="text-align: center;">更新日期</th>
+      <th style="text-align: center;">操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowspan="3" style="text-align: center; background: var(--fs-bg-active);">
+        <img src="../data/rp6-u15/rp6-u15-horn-bracket.png" alt="型号预览">
+      </td>
+      <td style="text-align: center;"><strong>.PDF</strong></td>
+      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
+      <td style="text-align: center;"><a href="../data/rp6-u15/rp6-u15-horn-bracket-dimension.pdf" download class="fs-download-btn">立即下载</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><strong>.STEP</strong></td>
+      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
+      <td style="text-align: center;"><a href="../data/rp6-u15/rp6-u15-horn-bracket-3D.STEP" download class="fs-download-btn">立即下载</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center;"><strong>.DWG</strong></td>
+      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
+      <td style="text-align: center;"><a href="../data/rp6-u15/rp6-u15-horn-bracket-dimension.dwg" download class="fs-download-btn">立即下载</a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+> [!TIP]
+>
+> - U形舵盘支架(38mm)出厂默认不配送，需要另外加购。
+
+{% include-markdown "snippets/cad-files-example.md" %}
+
