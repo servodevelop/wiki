@@ -1,4 +1,4 @@
-# HP6-U15 系列
+# RP6-U15 系列
 
 ---
 
@@ -132,7 +132,7 @@
 <table>
   <thead>
     <tr>
-      <th style="text-align: center;">机身支架</th>
+      <th style="text-align: center;">U型机身支架(31mm)</th>
       <th style="text-align: center;">格式</th>
       <th style="text-align: center;">更新日期</th>
       <th style="text-align: center;">操作</th>
@@ -161,15 +161,16 @@
 </table>
 </div>
 
+
 > [!TIP]
 >
-> - 机身支架出厂默认不配送，需要另外加购。
+> - U型机身支架(31mm) 出厂默认不配送，需要另外加购。
 
 <div class="table-container hide-scrollbar">
 <table>
   <thead>
     <tr>
-      <th style="text-align: center;">舵盘支架</th>
+      <th style="text-align: center;">U形舵盘支架(38mm)</th>
       <th style="text-align: center;">格式</th>
       <th style="text-align: center;">更新日期</th>
       <th style="text-align: center;">操作</th>
@@ -198,9 +199,10 @@
 </table>
 </div>
 
+
 > [!TIP]
 >
-> - 舵盘支架出厂默认不配送，需要另外加购。
+> - U形舵盘支架(38mm)出厂默认不配送，需要另外加购。
 
 {% include-markdown "snippets/cad-files-example.md" %}
 
