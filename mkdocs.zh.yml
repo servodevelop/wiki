@@ -149,27 +149,15 @@ nav:
       - RX18-U100H-M: uart-servo/specs/rx18-u100h-m.md
       - RX18-U101H-M: uart-servo/specs/rx18-u101h-m.md
     - 图纸与模型下载:
-      - RP6/RX6-U12 Series: uart-servo/cad-files/rp6-rx6-u12-series.md
-      - HP6-U15 Series: uart-servo/cad-files/hp6-u15-series.md
-      - RP6-U15 Series: uart-servo/cad-files/rp6-u15-series.md
-      - HP6/RP6-U15 Main Horn: uart-servo/cad-files/hp6-rp6-u15-main-horn.md
-      - RP6-U15 Assistant Horn: uart-servo/cad-files/rp6-u15-assistant-horn.md
-      - RP6-U15 Bracket: uart-servo/cad-files/rp6-u15-bracket.md
-      - RP6-U18 Series: uart-servo/cad-files/rp6-u18-series.md
-      - HA8/HP8/HX8 Series: uart-servo/cad-files/ha8-hp8-hx8-series.md
-      - RA8/RP8/RX8 Series: uart-servo/cad-files/ra8-rp8-rx8-series.md
-      - HA8/HP8/HX8/RA8/RP8/RX8 Main Horn: uart-servo/cad-files/ha8-hp8-hx8-ra8-rp8-rx8-main-horn.md
-      - RA8/RP8/RX8 Assistant Horn: uart-servo/cad-files/ra8-rp8-rx8-assistant-horn.md
-      - HA8/HP8/HX8 Mounting Spacer: uart-servo/cad-files/ha8-hp8-hx8-mounting-spacer.md
-      - RA8/RP8/RX8 U-Shape Body Bracket: uart-servo/cad-files/ra8-rp8-rx8-body-bracket.md
-      - RA8/RP8/RX8 U-Shape Horn Bracket: uart-servo/cad-files/ra8-rp8-rx8-ushape-horn-bracket.md
-      - HA8/HP8/HX8 D-shaft Series: uart-servo/cad-files/ha8-hp8-hx8-dshaft-series.md
-      - RA8/RP8/RX8 D-shaft Series: uart-servo/cad-files/ra8-rp8-rx8-dshaft-series.md
-      - RX18 Series: uart-servo/cad-files/rx18-series.md
-      - RX18 Main Horn: uart-servo/cad-files/rx18-main-horn.md
-      - RX18 Assistant Horn: uart-servo/cad-files/rx18-assistant-horn.md
-      - RX18 Body Bracket: uart-servo/cad-files/rx18-body-bracket.md
-      - RX18 U-Shape Horn Bracket: uart-servo/cad-files/rx18-ushape-horn-bracket.md
+      - RP6/RX6-U12系列: uart-servo/cad-files/rp6-rx6-u12-series.md
+      - HP6-U15系列: uart-servo/cad-files/hp6-u15-series.md
+      - RP6-U15系列: uart-servo/cad-files/rp6-u15-series.md
+      - RP6-U18系列: uart-servo/cad-files/rp6-u18-series.md
+      - HA8/HP8/HX8系列: uart-servo/cad-files/ha8-hp8-hx8-series.md
+      - RA8/RP8/RX8系列: uart-servo/cad-files/ra8-rp8-rx8-series.md
+      - HA8/HP8/HX8 D轴系列: uart-servo/cad-files/ha8-hp8-hx8-dshaft-series.md
+      - RA8/RP8/RX8 D轴系列: uart-servo/cad-files/ra8-rp8-rx8-dshaft-series.md
+      - RX18系列: uart-servo/cad-files/rx18-series.md
     - 软件与工具:
       - PC Configuration Tool: uart-servo/software/pc-configuration-tool.md
       - Web Configuration Tool: uart-servo/software/web-configuration-tool.md
@@ -201,11 +189,9 @@ nav:
       - RX18-R100H-M: rs485-servo/specs/rx18-r100h-m.md
       - RX18-R101H-M: rs485-servo/specs/rx18-r101h-m.md
     - 图纸与模型下载:
-      - HX8 Series: rs485-servo/cad-files/hx8-series.md
-      - HX8 D-shaft Series: rs485-servo/cad-files/hx8-dshaft-series.md
-      - HX8 D-shaft Circular Connector Series: rs485-servo/cad-files/hx8-dshaft-circular-connector-series.md
-      - HX8 Main Horn: rs485-servo/cad-files/hx8-main-horn.md
-      - HX8 Mounting Spacer: rs485-servo/cad-files/hx8-mounting-spacer.md
+      - HX8系列: rs485-servo/cad-files/hx8-series.md
+      - HX8 D轴系列: rs485-servo/cad-files/hx8-dshaft-series.md
+      - HX8 D轴航插系列: rs485-servo/cad-files/hx8-dshaft-circular-connector-series.md
     - 软件与工具:
       - PC Configuration Tool: rs485-servo/software/pc-configuration-tool.md
       - Web Configuration Tool: rs485-servo/software/web-configuration-tool.md
@@ -230,17 +216,11 @@ nav:
     - can-servo/index.md
     - 通讯协议: can-servo/protocols/can-protocol.md
     - 规格参数:
-      - HX8 Series: can-servo/cad-files/hx8-series.md
-      - HX8 D-shaft Series: can-servo/cad-files/hx8-dshaft-series.md
-      - HX8 D-shaft Circular Connector Series: can-servo/cad-files/hx8-dshaft-circular-connector-series.md
-      - HX8 Main Horn: can-servo/cad-files/hx8-main-horn.md
-      - HX8 Mounting Spacer: can-servo/cad-files/hx8-mounting-spacer.md
+      - HX18-C100H-M: can-servo/specs/hx8-c100h-m.md
     - 图纸与模型下载:
-      - HX8 Series: can-servo/cad-files/hx8-series.md
-      - HX8 D-shaft Series: can-servo/cad-files/hx8-dshaft-series.md
-      - HX8 D-shaft Circular Connector Series: can-servo/cad-files/hx8-dshaft-circular-connector-series.md
-      - HX8 Main Horn: can-servo/cad-files/hx8-main-horn.md
-      - HX8 Mounting Spacer: can-servo/cad-files/hx8-mounting-spacer.md
+      - HX8系列: can-servo/cad-files/hx8-series.md
+      - HX8 D轴系列: can-servo/cad-files/hx8-dshaft-series.md
+      - HX8 D轴航插系列: can-servo/cad-files/hx8-dshaft-circular-connector-series.md
     - 软件与工具:
       - PC Configuration Tool: can-servo/software/pc-configuration-tool.md
       - Web Configuration Tool: can-servo/software/web-configuration-tool.md
