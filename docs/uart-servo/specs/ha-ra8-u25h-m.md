@@ -1,106 +1,192 @@
-# UART Bus Servo 25KG 1111
+# HA8/RA8-U25-M
 ---
 {% include-markdown "snippets/shop-info/product-primary-simple.md"
    start="<!--start:HA8/RA8-U25H-M-->"
    end="<!--end:HA8/RA8-U25H-M-->" %}
+## 1. 型号定义
 
-## 1. Features
+![产品命名-型号规则](image/产品命名-型号规则a.jpeg)
 
-<div class="cards" markdown>
 
--   __🔁 Two-Way Bus Communication__
-    
-    Bi-directional UART protocol with baud rates up to 1 Mbps, supporting fast control commands and feedback data such as position and other operating status.
+## 2. 规格参数
+### 2.1. 基础电气与控制参数
+<table>
+  <tr>
+    <th width="200" align="left">参数项目</th>
+    <th width="400" align="left">技术规格</th>
+  </tr>
+  <tr>
+    <td>工作电压</td>
+    <td>9.0 ～ 12.6 V</td>
+  </tr>
+  <tr>
+    <td>处理器</td>
+    <td>32-bit MCU</td>
+  </tr>
+  <tr>
+    <td>通信类型</td>
+    <td>UART / TTL 半双工</td>
+  </tr>
+  <tr>
+    <td>波特率</td>
+    <td>9,600 bps ～ 1 Mbps</td>
+  </tr>
+  <tr>
+    <td>ID 范围</td>
+    <td>0 ～ 254</td>
+  </tr>
+  <tr>
+    <td>接口类型</td>
+    <td>PH2.0 – 3Pin</td>
+  </tr>
+  <tr>
+    <td>电流参数</td>
+    <td>待机 ＜30 mA / 空载 ＜300 mA / 峰值 6 A</td>
+  </tr>
+</table>
 
--   __🛡️ Complete Protection & Smart Power Limiting__
+### 2.2. 运动控制与反馈精度
+<table>
+  <tr>
+    <th width="200" align="left">参数项目</th>
+    <th width="400" align="left">技术规格</th>
+  </tr>
+  <tr>
+    <td>马达类型</td>
+    <td>高性能空心杯马达</td>
+  </tr>
+  <tr>
+    <td>位置传感器</td>
+    <td>12-bit 非接触式绝对值磁编码器</td>
+  </tr>
+  <tr>
+    <td>分辨率</td>
+    <td>4096 阶 / 360°（0.088°）</td>
+  </tr>
+  <tr>
+    <td>有效角度</td>
+    <td>±180°（单圈） / ±368,640°（多圈）</td>
+  </tr>
+  <tr>
+    <td>工作模式</td>
+    <td>单圈角度 / 多圈角度 / 阻尼模式</td>
+  </tr>
+  <tr>
+    <td>减速比</td>
+    <td>273 : 1</td>
+  </tr>
+</table>
 
-    Built-in safeguards for temperature, voltage, stall, power, and current, with automatic power limiting to keep operation within a safe range.
+### 2.3. 动力性能参数 (@12V)
+<table>
+  <tr>
+    <th width="200" align="left">参数项目</th>
+    <th width="400" align="left">规格内容</th>
+  </tr>
+  <tr>
+    <td>最大静态扭矩（堵转）</td>
+    <td>4.41 N·m（45 kg·cm）</td>
+  </tr>
+  <tr>
+    <td>最大动态扭矩</td>
+    <td>1.67 N·m（17 kg·cm）</td>
+  </tr>
+  <tr>
+    <td>额定扭矩</td>
+    <td>0.54 N·m（5.5 kg·cm）</td>
+  </tr>
+  <tr>
+    <td>额定转速</td>
+    <td>64 rpm（0.156 s / 60°）</td>
+  </tr>
+  <tr>
+    <td>空载转速</td>
+    <td>90 rpm（0.110 s / 60°）</td>
+  </tr>
+</table>
 
--   __🧭 Advanced Modes & Stop Behaviors__
-    
-    - Single-Turn: ±180° range for standard rotary joints
-    - Multi-Turn: ±368,640° (1,024turns) range, with multi-turn count saved after power-off.
-    - Damping Mode: controlled resistance for smooth, compliant motion
-    - 3 Stop Modes: Free, Lock, and Damp for different holding/release needs
+<img src="/uart-servo/specs/image/U25特性曲线.png" style="width: 500px !important; height: auto !important;">
 
--   __🎛️ Rich Motion Commands & Profiles__
-    
-    Configure speed, time, and power per application, with sync/async command options and built-in trapezoidal accel/decel profiles for smooth motion and customizable ramp intervals.
+### 2.4. 机械与环境特性
+<table>
+  <tr>
+    <th width="200" align="left">参数项目</th>
+    <th width="400" align="left">技术规格</th>
+  </tr>
+  <tr>
+    <td>输出轴规格</td>
+    <td>不锈钢 / Ø6 mm / 25T</td>
+  </tr>
+  <tr>
+    <td>齿轮材料</td>
+    <td>全金属不锈钢组合</td>
+  </tr>
+  <tr>
+    <td>机械负载</td>
+    <td>轴向 20 N / 径向 40 N</td>
+  </tr>
+  <tr>
+    <td>外壳材料</td>
+    <td>铝合金中段 / 上下壳工程塑胶</td>
+  </tr>
+  <tr>
+    <td>尺寸与重量</td>
+    <td>40 × 20 × 40 mm / 73 g</td>
+  </tr>
+  <tr>
+    <td>工作温度</td>
+    <td>-10 ～ 60 ℃</td>
+  </tr>
+</table>
 
--   __📍 Custom Home Position__
-    
-    A 12-bit absolute position encoder (4,096 steps) lets you define any point as the home position, simplifying assembly, reducing software offset adjustments, and improving position control accuracy.
+<img src="/uart-servo/specs/image/U25过载曲线.png" style="width: 500px !important; height: auto !important;">
 
--   __🔗 Unified Ecosystem & Daisy-Chain Ready__
+## 3. 接口引脚定义
 
-    All servos share the same protocol for high compatibility, allowing different models to be daisy-chained on the same bus. Within each series, the housing and mounting hole patterns are standardized for easy swaps and consistent mechanical integration.
+<img src="/uart-servo/specs/image/U25接口图.png" style="width: 500px !important; height: auto !important;">
 
-</div>
 
-## 2. Model definition
-
-![产品命名-型号规则](image/产品命名-型号规则.png)
-
-| Appearance | R：Dual-shaft | H：Single-shaft | |
-| :--- | :--- | :--- | :--- |
-| Motor type | X：Brushless | P：Coreless | A/L：Cored |
-| Dimension | 6：31.5×21×27.6mm | 8：40×40×20mm | 18：63×34×47mm |
-| Protocols | U：UART/TTL | R：RS-485 | C：CAN |
-| Voltage | [-]：7.4V | H：12V | W：24V |
-| Position Sensor | [-]：Potentiometer | M:12-bit magnetic absolute encoder | |
-
-**Models available for order**
-- **RA8-U25(H)-M|HA8-U25(H)-M**
-
-## 3. Specifications
-
-### 3.1 Basic Specifications
-| Item | Specification |
-| :--- | :--- |
-| Input Voltage | 6.0-8.4V \| 9.0–12.6 V |
-| Resolution | 2048/360° (0.176°) |
-| Baud Rate | 9,600 bps–1 Mbps |
-| Gear Material | All-metal copper-aluminum composite |
-
-### 3.2 Characteristics
-| Item | **Specifications（7.4V\|12V）** |
-| :--- | :--- |
-| Max Stall Torque | 2.54 N·m (25 kg·cm) |
-| Max Continuous Torque | 0.88 N·m (9 kg·cm) |
-| No‑load Speed | 51 rpm (0.198 sec@60°) |
-| Peak Current | 3 A |
-
-### 3.3 Performance Graph
-![U25特性曲线](image/U25特性曲线.png)
-
-### 3.4 Overload Graph
-![U25过载曲线](image/U25过载曲线.png)
 
 ## 4. Drawings and Installation Instructions
 
 ### 4.1 CAD Dimensional Drawing
-![U25_3D图](image/U25_3D图.png)
+
+<img src="/uart-servo/specs/image/U25_3D图.png" style="width: 500px !important; height: auto !important;">
 
 ### 4.2 Interface Definition
-![U25接口图](image/U25接口图.png)
+
+<img src="/uart-servo/specs/image/U25接口图.png" style="width: 500px !important; height: auto !important;">
 
 ### 4.3 Wiring Diagram 
 - **Series Connection**
-![U25串联](image/U25串联.png)
+
+<img src="/uart-servo/specs/image/U25串联.png" style="width: 500px !important; height: auto !important;">
+
 
 - **Parallel Connection**
-![U25并联](image/U25并联.png)
+
+<img src="/uart-servo/specs/image/U25并联.png" style="width: 500px !important; height: auto !important;">
 
 ### 4.4 Installation Instruction
 - **Single-shaft**
-![U25单轴安装](image/U25单轴安装.png)
+
+<img src="/uart-servo/specs/image/U25单轴安装.png" style="width: 500px !important; height: auto !important;">
 
 - **Dual-shaft**
-![U25双轴安装](image/U25双轴安装.png)
+
+<img src="/uart-servo/specs/image/U25双轴安装.png" style="width: 500px !important; height: auto !important;">
+
+### 4. 开发支持矩阵
+
+| 💻 硬件平台 | 🛠️ 开发语言 | 🤖 机器人框架 |
+| :--- | :--- | :--- |
+| **MCU:** STM32, ESP32, Arduino | **High-level:** Python, C# | **ROS:** ROS 1 / ROS 2 |
+| **SBC:** Raspberry Pi 4B/5 | **Embedded:** C / C++ | **Industrial:** PLC (Modbus) |
+| **PC:** Windows, Ubuntu | **Script:** MicroPython | **Driver:** SDK, API |
 
 ## 5. Development & Compatibility
 The bus servo series adopts a unified hardware platform.
-![development environment](image/development environment.png)
+
 
 ## 6. Protections
 - All protection parameters can be set and modified by our PC configuration tool.
