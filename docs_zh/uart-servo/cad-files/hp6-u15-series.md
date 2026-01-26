@@ -65,25 +65,26 @@
   <tbody>
     <tr>
       <td rowspan="3" style="text-align: center; background: var(--fs-bg-active);">
-        <img src="../data/hp6-u15/u15-main-horn.png" alt="型号预览">
+        <img src="../data/hp6-u15/hp6-rp6-main-horn.png" alt="型号预览">
       </td>
       <td style="text-align: center;"><strong>.PDF</strong></td>
       <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="../data/hp6-u15/u15-main-horn-dimension.pdf" download class="fs-download-btn">立即下载</a></td>
+      <td style="text-align: center;"><a href="../data/hp6-u15/hp6-rp6-main-horn-dimension.pdf" download class="fs-download-btn">立即下载</a></td>
     </tr>
     <tr>
       <td style="text-align: center;"><strong>.STEP</strong></td>
       <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="../data/hp6-u15/u15-main-horn-3D.STEP" download class="fs-download-btn">立即下载</a></td>
+      <td style="text-align: center;"><a href="../data/hp6-u15/hp6-rp6-main-horn-3D.STEP" download class="fs-download-btn">立即下载</a></td>
     </tr>
     <tr>
       <td style="text-align: center;"><strong>.DWG</strong></td>
       <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="../data/hp6-u15/u15-main-horn-dimension.dwg" download class="fs-download-btn">立即下载</a></td>
+      <td style="text-align: center;"><a href="../data/hp6-u15/hp6-rp6-main-horn-dimension.dwg" download class="fs-download-btn">立即下载</a></td>
     </tr>
   </tbody>
 </table>
 </div>
+
 
 > [!TIP]
 >
