@@ -6,6 +6,18 @@ import sys
 STATE_FILE = os.path.join(os.path.dirname(__file__), '../../../../.agent/translation_state.json')
 SOURCE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../../docs_zh'))
 TARGET_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../../docs'))
+EXCLUSION_FILE = os.path.join(os.path.dirname(__file__), '../../../../.agent/exclusion.json')
+
+def load_exclusion_list():
+    try:
+        if os.path.exists(EXCLUSION_FILE):
+            with open(EXCLUSION_FILE, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                # Parse excludes as relative paths, assuming base_path context
+                return [p.replace('\\', '/') for p in data.get('excludes', [])]
+    except Exception as e:
+        print(f"Warning: Failed to load exclusion list: {e}")
+    return []
 
 def load_state():
     if os.path.exists(STATE_FILE):
@@ -50,6 +62,7 @@ def scan_files(root_dir):
 def get_files_to_translate(target_path=None, force=False):
     """Returns a list of tuples: (source_path, target_path, reason)"""
     state = load_state()
+    exclusion_list = load_exclusion_list()
     files_to_translate = []
     
     source_files = scan_files(SOURCE_ROOT)
@@ -70,12 +83,20 @@ def get_files_to_translate(target_path=None, force=False):
 
     for source_path in source_files:
         rel_path = get_relative_path(source_path, SOURCE_ROOT)
+        normalized_rel = rel_path.replace('\\', '/')
+        
+        # Check exclusion list
+        is_excluded = False
+        for exclude in exclusion_list:
+            if normalized_rel == exclude or normalized_rel.startswith(exclude + '/'):
+                is_excluded = True
+                break
+        
+        if is_excluded:
+            continue
         
         # Filter by path if provided
         if target_rel_prefix:
-            # Check if rel_path starts with the prefix (directory) or matches exactly (file)
-            # Use forward slashes for comparison
-            normalized_rel = rel_path.replace('\\', '/')
             if not (normalized_rel == target_rel_prefix or normalized_rel.startswith(target_rel_prefix + '/')):
                 continue
 

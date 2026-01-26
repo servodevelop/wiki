@@ -16,8 +16,41 @@
 *   **Skill 定義**: `.agent/skills/translate_docs/SKILL.md`
 *   **狀態管理腳本**: `.agent/skills/translate_docs/scripts/state_manager.py`
 *   **狀態記錄檔**: `.agent/translation_state.json` (自動生成，請勿手動修改)
+*   **翻譯術語表**: `.agent/glossary.csv` (定義強制翻譯詞彙)
+*   **排除名單**: `.agent/exclusion.json` (定義排除翻譯的檔案或目錄)
 
-## 3. 與 Agent 互動 (Interaction)
+## 3. 設定控制 (Configuration)
+
+### 3.1 術語一致性 (Glossary)
+
+為了確保專有名詞的一致性，系統會強制套用 `.agent/glossary.csv` 中的翻譯規則。
+
+*   **格式**: CSV (`中文詞彙, 英文翻譯`)
+*   **範例**:
+    ```csv
+    舵機, Servo
+    串口, Serial Port
+    ```
+
+### 3.2 排除名單 (Exclusion List)
+
+若有特定檔案或目錄不想被翻譯，可加入 `.agent/exclusion.json`。
+
+*   **格式**: JSON
+*   **Base Path**: 預設為 `docs_zh`。
+*   **Excludes**: 填寫相對於 Base Path 的檔案或目錄路徑。
+
+    ```json
+    {
+      "base_path": "docs_zh",
+      "excludes": [
+        "archive/old_file.md",
+        "private_docs/"
+      ]
+    }
+    ```
+
+## 4. 與 Agent 互動 (Interaction)
 
 您可以使用自然語言直接指揮 Agent 執行翻譯任務。Agent 會透過 Skills 自動判斷需執行的指令。
 
@@ -30,7 +63,7 @@
 | **翻譯特定檔案** | "重新翻譯 `index.md`。" | 若檔案未變更，Agent 會詢問是否強制執行。 |
 | **強制重譯** | "把 `index.md` 強制重翻一次。" | Agent 會忽略 Hash 狀態，強制覆寫目標檔案。 |
 
-## 4. 手動/進階操作 (Manual CLI)
+## 5. 手動/進階操作 (Manual CLI)
 
 若需除錯或手動檢查狀態，可直接在終端機執行 Python 腳本：
 
@@ -45,7 +78,7 @@ python .agent/skills/translate_docs/scripts/state_manager.py scan --path "docs_z
 python .agent/skills/translate_docs/scripts/state_manager.py scan --path "docs_zh/index.md" --force
 ```
 
-## 5. 注意事項
+## 6. 注意事項
 
 *   **翻譯品質**: Agent 會保留 Markdown 語法、HTML 標籤與程式碼區塊邏輯，僅翻譯可讀文字。
 *   **連結修正**: 由於結構直接鏡像，大部分相對連結 (`../assets/...`) 應能直接沿用。若有圖片無法顯示，請檢查 `docs_zh` 中的原始連結是否正確。

@@ -26,9 +26,11 @@ python .agent/skills/translate_docs/scripts/state_manager.py scan --path "docs_z
 ### 2. Translate a File
 For each file in the list (or a specific file requested by the user), follow these steps:
 
-1.  **Read Source**: Read the content of the `source` file.
-2.  **Translate**: Translate the content from Simplified Chinese to English.
+1.  **Read Glossary**: Read `.agent/glossary.csv` to load the forced translation terms (Format: `Chinese, English`).
+2.  **Read Source**: Read the content of the `source` file.
+3.  **Translate**: Translate the content from Simplified Chinese to English.
     *   **Rules**:
+        *   **Enforce Glossary**: You MUST use the English terms defined in the glossary for their corresponding Chinese terms.
         *   Maintain all Markdown formatting (headers, lists, bold, italic, links, images).
         *   Keep HTML tags exactly as is.
         *   Translate comments in code blocks if they explain the logic; keep code logic unchanged.
