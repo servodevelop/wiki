@@ -1,0 +1,13 @@
+# Translation Glossary (翻譯術語表)
+# Format: Chinese Term, English Translation
+# Lines starting with '#' are comments.
+# Example:
+# 舵機, Servo
+# 串口, Serial Port
+
+舵機, Servo
+串口, Serial Port
+总线, Bus
+位元組, Byte
+数据包, Packet
+上位机, Master / PC Software
