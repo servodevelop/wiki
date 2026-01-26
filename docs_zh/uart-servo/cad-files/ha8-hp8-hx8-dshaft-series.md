@@ -4,7 +4,15 @@
 
 ### 尺寸预览
 
-![ha8-hp8-hx8-series-dimension](./data/ha8-hp8-hx8-series/ha8-hp8-hx8-series-dimension.jpg)
+<div class="cad-preview-wrapper" style="background-image: url('../data/ha8-hp8-hx8-series/ha8-hp8-hx8-series-dimension.jpg');">
+    <embed 
+        class="desktop-pdf-embed"
+        src="../data/ha8-hp8-hx8-series/ha8-hp8-hx8-series-dimension.pdf#navpanes=0&view=Fit" 
+        type="application/pdf" 
+        width="100%" 
+        height="100%">
+</div>
+
 
 
 
@@ -48,123 +56,70 @@
   </tbody>
 </table>
 </div>
-> [!TIP]
-> - 请使用 **Solidworks 2021** 或更高版本打开模型。
-> - 图中尺寸仅供工程参考，最终请以收到的实物为准。如尺寸差异影响安装，请及时联系我们确认。
 
 
 
-### 关联零配件图纸
 
-<div class="table-container hide-scrollbar">
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center;">8孔主舵盘</th>
-      <th style="text-align: center;">格式</th>
-      <th style="text-align: center;">更新日期</th>
-      <th style="text-align: center;">操作</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td rowspan="3" style="text-align: center; background: var(--fs-bg-active);">
-        <img src="../data/ha8-hp8-hx8-series/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn.png" alt="型号预览">
-      </td>
-      <td style="text-align: center;"><strong>.PDF</strong></td>
-      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="../data/ha8-hp8-hx8-series/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn-dimension.pdf" download class="fs-download-btn">立即下载</a></td>
-    </tr>
-    <tr>
-      <td style="text-align: center;"><strong>.STEP</strong></td>
-      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="../data/ha8-hp8-hx8-series/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn-3D.STEP" download class="fs-download-btn">立即下载</a></td>
-    </tr>
-    <tr>
-      <td style="text-align: center;"><strong>.DWG</strong></td>
-      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="../data/ha8-hp8-hx8-series/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn-dimension.dwg" download class="fs-download-btn">立即下载</a></td>
-    </tr>
-  </tbody>
-</table>
-</div>
+---
 
-> [!TIP]
->
-> - 此舵盘出厂已预装配，并执行零点校正。
+<style>
+/* 1. 预览容器样式 */
+.cad-preview-wrapper {
+    width: 85% !important;
+    aspect-ratio: 1.28 / 1; 
+    margin: 20px auto;
+    overflow: hidden;
+    border: 0.5px solid var(--fs-divider);
+    border-radius: 4px;
+    background-color: #f8f9fa;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain; 
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-<div class="table-container hide-scrollbar">
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center;">4孔主舵盘</th>
-      <th style="text-align: center;">格式</th>
-      <th style="text-align: center;">更新日期</th>
-      <th style="text-align: center;">操作</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td rowspan="3" style="text-align: center; background: var(--fs-bg-active);">
-        <img src="../data/ha8-hp8-hx8-series/ha8-hp8-hx8-ra8-rp8-rx8-4holes-main-horn.png" alt="型号预览">
-      </td>
-      <td style="text-align: center;"><strong>.PDF</strong></td>
-      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="../data/ha8-hp8-hx8-series/ha8-hp8-hx8-ra8-rp8-rx8-4holes-main-horn-dimension.pdf" download class="fs-download-btn">立即下载</a></td>
-    </tr>
-    <tr>
-      <td style="text-align: center;"><strong>.STEP</strong></td>
-      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="../data/ha8-hp8-hx8-series/ha8-hp8-hx8-ra8-rp8-rx8-4holes-main-horn-3D.STEP" download class="fs-download-btn">立即下载</a></td>
-    </tr>
-    <tr>
-      <td style="text-align: center;"><strong>.DWG</strong></td>
-      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="../data/ha8-hp8-hx8-series/ha8-hp8-hx8-ra8-rp8-rx8-4holes-main-horn-dimension.dwg" download class="fs-download-btn">立即下载</a></td>
-    </tr>
-  </tbody>
-</table>
-</div>
+/* 2. 表格与滚动条控制 */
+.table-container {
+    width: 100%;
+    overflow-x: auto; 
+    -webkit-overflow-scrolling: touch; /* 优化 iOS 滑动体验 */
+}
+
+/* 隐藏所有浏览器的滚动条视觉条，但保留滑动功能 */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+.hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.no-wrap-cell, .no-wrap-cell ul li {
+    white-space: nowrap !important; /* 强制不换行 */
+}
+
+.no-wrap { white-space: nowrap !important; }
+
+/* 3. 移动端与平板适配 */
+@media screen and (max-width: 1024px) {
+    .cad-preview-wrapper {
+        width: 100% !important;
+        aspect-ratio: 1.38 / 1; 
+        margin: 10px 0;
+    }
+    .desktop-pdf-embed {
+        display: none !important;
+    }
+    .md-typeset table td {
+        padding: 8px 10px !important;
+        font-size: 13px !important;
+    }
+}
+</style>
 
 > [!TIP]
->
-> - 默认出厂为8孔主舵盘，需要4孔主舵盘请另外加购。
-
-<div class="table-container hide-scrollbar">
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center;">垫块</th>
-      <th style="text-align: center;">格式</th>
-      <th style="text-align: center;">更新日期</th>
-      <th style="text-align: center;">操作</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td rowspan="3" style="text-align: center; background: var(--fs-bg-active);">
-        <img src="../data/ha8-hp8-hx8-series/ha8-hp8-hx8-series-mounting-spacer.jpg" alt="型号预览">
-      </td>
-      <td style="text-align: center;"><strong>.PDF</strong></td>
-      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="../data/ha8-hp8-hx8-series/ha8-hp8-hx8-mounting-spacer-dimension.pdf" download class="fs-download-btn">立即下载</a></td>
-    </tr>
-    <tr>
-      <td style="text-align: center;"><strong>.STEP</strong></td>
-      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="../data/ha8-hp8-hx8-series/ha8-hp8-hx8-mounting-spacer-3D.STEP" download class="fs-download-btn">立即下载</a></td>
-    </tr>
-    <tr>
-      <td style="text-align: center;"><strong>.DWG</strong></td>
-      <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="../data/ha8-hp8-hx8-series/ha8-hp8-hx8-mounting-spacer-dimension.dwg" download class="fs-download-btn">立即下载</a></td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-> [!TIP]
->
-> - 垫块出厂未装配，需要自行安装。
-
-{% include-markdown "snippets/cad-files-example.md" %}
+> **操作提示：** 如果需要查阅 PDF 详情，请通过下方表格中的 **“立即下载”** 按钮获取文件。
