@@ -104,3 +104,13 @@
 
 <!--end:TIP5_intro-->
 
+
+
+<!--start:TIP6_intro-->
+
+> [!TIP]
+>
+> 垫块出厂**未装配**，需要自行安装。
+
+<!--end:TIP6_intro-->
+

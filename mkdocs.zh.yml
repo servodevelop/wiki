@@ -191,7 +191,6 @@ nav:
     - 图纸与模型下载:
       - HX8系列: rs485-servo/cad-files/hx8-series.md
       - HX8 D轴系列: rs485-servo/cad-files/hx8-dshaft-series.md
-      - HX8 D轴航插系列: rs485-servo/cad-files/hx8-dshaft-circular-connector-series.md
     - 软件与工具:
       - PC Configuration Tool: rs485-servo/software/pc-configuration-tool.md
       - Web Configuration Tool: rs485-servo/software/web-configuration-tool.md
@@ -220,7 +219,6 @@ nav:
     - 图纸与模型下载:
       - HX8系列: can-servo/cad-files/hx8-series.md
       - HX8 D轴系列: can-servo/cad-files/hx8-dshaft-series.md
-      - HX8 D轴航插系列: can-servo/cad-files/hx8-dshaft-circular-connector-series.md
     - 软件与工具:
       - PC Configuration Tool: can-servo/software/pc-configuration-tool.md
       - Web Configuration Tool: can-servo/software/web-configuration-tool.md
