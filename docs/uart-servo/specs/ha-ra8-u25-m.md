@@ -160,7 +160,7 @@
   <img src="/uart-servo/specs/image/U25单轴安装.png" 
        style="width: 500px !important; height: auto !important; display: inline-block;">
   <div style="margin-top: 10px; font-weight: bold; font-size: 14px;">
-    U单轴安装说明
+    单轴安装说明
   </div>
 </div>
 
@@ -169,7 +169,7 @@
   <img src="/uart-servo/specs/image/U25双轴安装.png" 
        style="width: 500px !important; height: auto !important; display: inline-block;">
   <div style="margin-top: 10px; font-weight: bold; font-size: 14px;">
-    U双轴安装说明图
+    双轴安装说明
   </div>
 </div>
 
