@@ -1,4 +1,4 @@
-# HA8 / HP8 / HX8 系列
+# RA8 / RP8 / RX8 系列
 
 ---
 
@@ -48,10 +48,7 @@
   </tbody>
 </table>
 </div>
-
-> [!TIP]
-> - 请使用 **Solidworks 2021** 或更高版本打开模型。
-> - 图中尺寸仅供工程参考，最终请以收到的实物为准。如尺寸差异影响安装，请及时联系我们确认。
+{% include-markdown "snippets/cad-files-example.md" start="<!--start:TIP1_intro-->"  end="<!--end:TIP1_intro-->" %}
 
 
 
@@ -89,9 +86,7 @@
   </tbody>
 </table>
 </div>
-> [!TIP]
->
-> - 8孔主舵盘出厂已预装配，并执行零点校正。
+{% include-markdown "snippets/cad-files-example.md" start="<!--start:TIP2_intro-->"  end="<!--end:TIP2_intro-->" %}
 
 <div class="table-container hide-scrollbar">
 <table>
@@ -125,9 +120,7 @@
   </tbody>
 </table>
 </div>
-> [!TIP]
->
-> - 默认出厂为8孔主舵盘，需要4孔主舵盘请另外加购。
+{% include-markdown "snippets/cad-files-example.md" start="<!--start:TIP3_intro-->"  end="<!--end:TIP3_intro-->" %}
 
 <div class="table-container hide-scrollbar">
 <table>
@@ -161,10 +154,7 @@
   </tbody>
 </table>
 </div>
-
-> [!TIP]
->
-> - 8孔副舵盘出厂未装配，需要自行安装。
+{% include-markdown "snippets/cad-files-example.md" start="<!--start:TIP4_intro-->"  end="<!--end:TIP4_intro-->" %}
 
 <div class="table-container hide-scrollbar">
 <table>
@@ -198,10 +188,7 @@
   </tbody>
 </table>
 </div>
-
-> [!TIP]
->
-> - 默认出厂为8孔副舵盘，需要4孔副舵盘请另外加购。
+{% include-markdown "snippets/cad-files-example.md" start="<!--start:TIP3_intro-->"  end="<!--end:TIP3_intro-->" %}
 
 <div class="table-container hide-scrollbar">
 <table>
@@ -235,10 +222,7 @@
   </tbody>
 </table>
 </div>
-
-> [!TIP]
->
-> U型机身支架(标准) 出厂默认不配送，需要另外加购。
+{% include-markdown "snippets/cad-files-example.md" start="<!--start:TIP3_intro-->"  end="<!--end:TIP3_intro-->" %}
 
 <div class="table-container hide-scrollbar">
 <table>
@@ -272,7 +256,7 @@
   </tbody>
 </table>
 </div>
-
+{% include-markdown "snippets/cad-files-example.md" start="<!--start:TIP3_intro-->"  end="<!--end:TIP3_intro-->" %}
 
 
 <div class="table-container hide-scrollbar">
@@ -307,7 +291,7 @@
   </tbody>
 </table>
 </div>
+{% include-markdown "snippets/cad-files-example.md" start="<!--start:TIP3_intro-->"  end="<!--end:TIP3_intro-->" %}
 
 
-
-{% include-markdown "snippets/cad-files-example.md" %}
+{% include-markdown "snippets/cad-files-example.md" start="<!--start:TIP5_intro-->"  end="<!--end:TIP5_intro-->" %}

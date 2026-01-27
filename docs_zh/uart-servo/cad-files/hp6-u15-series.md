@@ -43,10 +43,7 @@
   </tbody>
 </table>
 </div>
-> [!TIP]
->
-> - 请使用 **Solidworks 2021** 或更高版本打开模型。
-> - 图中尺寸仅供工程参考，最终请以收到的实物为准。如尺寸差异影响安装，请及时联系我们确认。
+{% include-markdown "snippets/cad-files-example.md" start="<!--start:TIP1_intro-->"  end="<!--end:TIP1_intro-->" %}
 
 
 
@@ -84,11 +81,4 @@
   </tbody>
 </table>
 </div>
-
-
-> [!TIP]
->
-> - 此舵盘出厂已预装配，并执行零点校正。
-
-{% include-markdown "snippets/cad-files-example.md" %}
-
+{% include-markdown "snippets/cad-files-example.md" start="!--start:TIP2_intro--"  end="!--end:TIP2_intro--" %}

@@ -43,11 +43,7 @@
   </tbody>
 </table>
 </div>
-
-> [!TIP]
->
-> - 请使用 **Solidworks 2021** 或更高版本打开模型。
-> - 图中尺寸仅供工程参考，最终请以收到的实物为准。如尺寸差异影响安装，请及时联系我们确认。
+{% include-markdown "snippets/cad-files-example.md" start="<!--start:TIP1_intro-->"  end="<!--end:TIP1_intro-->" %}
 
 
 
@@ -85,10 +81,7 @@
   </tbody>
 </table>
 </div>
-
-> [!TIP]
->
-> - 主舵盘出厂已预装配，并执行零点校正。
+{% include-markdown "snippets/cad-files-example.md" start="<!--start:TIP2_intro-->"  end="<!--end:TIP2_intro-->" %}
 
 <div class="table-container hide-scrollbar">
 <table>
@@ -122,10 +115,7 @@
   </tbody>
 </table>
 </div>
-
-> [!TIP]
->
-> - 副舵盘出厂未装配，需要自行安装。
+{% include-markdown "snippets/cad-files-example.md" start="<!--start:TIP4_intro-->"  end="<!--end:TIP4_intro-->" %}
 
 <div class="table-container hide-scrollbar">
 <table>
@@ -159,11 +149,7 @@
   </tbody>
 </table>
 </div>
-
-
-> [!TIP]
->
-> - U型机身支架(31mm) 出厂默认不配送，需要另外加购。
+{% include-markdown "snippets/cad-files-example.md" start="<!--start:TIP3_intro-->"  end="<!--end:TIP3_intro-->" %}
 
 <div class="table-container hide-scrollbar">
 <table>
@@ -197,11 +183,6 @@
   </tbody>
 </table>
 </div>
+{% include-markdown "snippets/cad-files-example.md" start="<!--start:TIP3_intro-->"  end="<!--end:TIP3_intro-->" %}
 
-
-> [!TIP]
->
-> - U形舵盘支架(38mm)出厂默认不配送，需要另外加购。
-
-{% include-markdown "snippets/cad-files-example.md" %}
-
+{% include-markdown "snippets/cad-files-example.md" start="<!--start:TIP5_intro-->"  end="<!--end:TIP5_intro-->" %}
