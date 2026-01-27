@@ -153,8 +153,7 @@
 
 ## 3. 外观尺寸与安装
 
-<img src="/uart-servo/specs/image/U25_3D图.png" style="width: 500px !important; height: auto !important;">
-
+![ra8-rp8-rx8-series-dimension](/uart-servo/cad-files/data/ra8-rp8-rx8-series-dimension.jpg)
 
 <div style="text-align: center; margin-bottom: 20px;">
   <img src="/uart-servo/specs/image/U25单轴安装.png" 
@@ -177,7 +176,8 @@
 
 ## 4. 接口与连线
 
-<img src="/uart-servo/specs/image/U25接口图.png" style="width: 500px !important; height: auto !important;">
+
+![尺寸预览](/uart-servo/cad-files/data/OMY-F3M.jpg)
 
 <div style="text-align: center; margin-bottom: 20px;">
   <img src="/uart-servo/specs/image/U25串联.png" 
