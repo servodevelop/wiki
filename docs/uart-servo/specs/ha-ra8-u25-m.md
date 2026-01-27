@@ -9,7 +9,7 @@
 
 
 ## 2. 规格参数
-### 2.1. 基础电气与控制参数
+### 2.1. 基础参数
 <table>
   <tr>
     <th width="200" align="left">参数项目</th>
@@ -18,6 +18,22 @@
   <tr>
     <td>工作电压</td>
     <td>9.0 ～ 12.6 V</td>
+  </tr>
+  <tr>
+    <td>马达类型</td>
+    <td>空心杯马达</td>
+  </tr>
+  <tr>
+    <td>位置传感器</td>
+    <td>12-bit 非接触式绝对值磁编码器</td>
+  </tr>
+  <tr>
+    <td>分辨率</td>
+    <td>4096 阶 / 360°（0.088°）</td>
+  </tr>
+  <tr>
+    <td>有效角度</td>
+    <td>±180°（单圈） / ±368,640°（多圈）</td>
   </tr>
   <tr>
     <td>处理器</td>
@@ -36,48 +52,40 @@
     <td>0 ～ 254</td>
   </tr>
   <tr>
+    <td>减速比</td>
+    <td>273 : 1</td>
+  </tr>
+  <tr>
+    <td>齿轮材料</td>
+    <td>全金属不锈钢组合</td>
+  </tr>
+  <tr>
+    <td>输出轴规格</td>
+    <td>不锈钢 / Ø6 mm / 25T</td>
+  </tr>
+  <tr>
+    <td>外壳材料</td>
+    <td>铝合金中段 / 上下壳工程塑胶</td>
+  </tr>
+  <tr>
     <td>接口类型</td>
     <td>PH2.0 – 3Pin</td>
+  </tr>
+  <tr>
+    <td>尺寸重量</td>
+    <td>40 × 20 × 40 mm / 73 g</td>
   </tr>
   <tr>
     <td>工作温度</td>
     <td>-10 ～ 60 ℃</td>
   </tr>
-</table>
-
-### 2.2. 运动控制与反馈精度
-<table>
-  <tr>
-    <th width="200" align="left">参数项目</th>
-    <th width="400" align="left">技术规格</th>
-  </tr>
-  <tr>
-    <td>马达类型</td>
-    <td>高性能空心杯马达</td>
-  </tr>
-  <tr>
-    <td>位置传感器</td>
-    <td>12-bit 非接触式绝对值磁编码器</td>
-  </tr>
-  <tr>
-    <td>分辨率</td>
-    <td>4096 阶 / 360°（0.088°）</td>
-  </tr>
-  <tr>
-    <td>有效角度</td>
-    <td>±180°（单圈） / ±368,640°（多圈）</td>
-  </tr>
   <tr>
     <td>工作模式</td>
-    <td>单圈角度 / 多圈角度 / 阻尼模式</td>
-  </tr>
-  <tr>
-    <td>减速比</td>
-    <td>273 : 1</td>
+    <td>单圈角度&emsp;|&emsp;多圈角度&emsp;|&emsp;阻尼模式</td>
   </tr>
 </table>
 
-### 2.3. 动力性能参数 (@12V)
+### 2.2. 特性参数 (@12V)
 <table>
   <tr>
     <th width="200" align="left">参数项目</th>
@@ -103,40 +111,37 @@
     <td>空载转速</td>
     <td>90 rpm（0.110 s / 60°）</td>
   </tr>
-   <tr>
-    <td>电流参数</td>
-    <td>待机 ＜30 mA / 空载 ＜300 mA / 峰值 6 A</td>
+  <tr>
+    <td>峰值电流</td>
+    <td>6 A</td>
+  </tr>
+  <tr>
+    <td>空载电流</td>
+    <td>＜300 mA</td>
+  </tr>
+  <tr>
+    <td>静态电流</td>
+    <td>＜30 mA</td>
   </tr>
 </table>
 
 <img src="/uart-servo/specs/image/U25特性曲线.png" style="width: 500px !important; height: auto !important;">
 
-### 2.4. 机械与环境特性
+### 2.3. 机械负载
 <table>
   <tr>
     <th width="200" align="left">参数项目</th>
     <th width="400" align="left">技术规格</th>
   </tr>
   <tr>
-    <td>输出轴规格</td>
-    <td>不锈钢 / Ø6 mm / 25T</td>
+    <td>轴向</td>
+    <td>20 N</td>
   </tr>
-  <tr>
-    <td>齿轮材料</td>
-    <td>全金属不锈钢组合</td>
+   <tr>
+    <td>径向</td>
+    <td>40 N</td>
   </tr>
-  <tr>
-    <td>机械负载</td>
-    <td>轴向 20 N / 径向 40 N</td>
-  </tr>
-  <tr>
-    <td>外壳材料</td>
-    <td>铝合金中段 / 上下壳工程塑胶</td>
-  </tr>
-  <tr>
-    <td>尺寸与重量</td>
-    <td>40 × 20 × 40 mm / 73 g</td>
-  </tr>
+
 
 </table>
 
