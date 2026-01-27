@@ -168,15 +168,19 @@ def get_files_to_translate(target_path=None, force=False, show_all=False):
 
 def mark_as_translated(rel_path, source_hash, target_hash=None):
     state = load_state()
-    
+
     # If target_hash is not provided (legacy call tests?), calculate it from target file
     if target_hash is None:
         target_path_abs = os.path.join(TARGET_ROOT, rel_path)
         target_hash = get_file_hash(target_path_abs)
-    
+
+    # Normalize hashes to lowercase to avoid case-sensitive mismatch (e.g., PowerShell Get-FileHash -> uppercase)
+    norm_source_hash = source_hash.lower() if isinstance(source_hash, str) else source_hash
+    norm_target_hash = target_hash.lower() if isinstance(target_hash, str) else target_hash
+
     state[rel_path] = {
-        "source_hash": source_hash,
-        "target_hash": target_hash
+        "source_hash": norm_source_hash,
+        "target_hash": norm_target_hash
     }
     save_state(state)
     print(f"Updated state for {rel_path}")

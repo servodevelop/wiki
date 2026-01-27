@@ -1,6 +1,6 @@
 # 翻譯狀態報告
 
-產生時間: 2026-01-27 15:39:59
+產生時間: 2026-01-27 17:08:30
 
 | | 狀態 | 檔案路徑 | 備註 |
 | :---: | :--- | :--- | :--- |
@@ -73,7 +73,6 @@
 | 🔴 | **新增** | `uart-servo/cad-files/ha8-hp8-hx8-series.md` [📄](docs_zh/uart-servo/cad-files/ha8-hp8-hx8-series.md) |  |
 | 🔴 | **新增** | `uart-servo/cad-files/hp6-u15-series.md` [📄](docs_zh/uart-servo/cad-files/hp6-u15-series.md) |  |
 | 🔴 | **新增** | `uart-servo/cad-files/hx8-dshaft-series.md` [📄](docs_zh/uart-servo/cad-files/hx8-dshaft-series.md) |  |
-| 🔴 | **新增** | `uart-servo/cad-files/ra8-rp8-rx8-series.md` [📄](docs_zh/uart-servo/cad-files/ra8-rp8-rx8-series.md) [🎯](docs/uart-servo/cad-files/ra8-rp8-rx8-series.md) | ⚠️ 目標檔已存在 |
 | 🔴 | **新增** | `uart-servo/cad-files/rp6-rx6-u12-series.md` [📄](docs_zh/uart-servo/cad-files/rp6-rx6-u12-series.md) [🎯](docs/uart-servo/cad-files/rp6-rx6-u12-series.md) | ⚠️ 目標檔已存在 |
 | 🔴 | **新增** | `uart-servo/cad-files/rp6-u15-series.md` [📄](docs_zh/uart-servo/cad-files/rp6-u15-series.md) |  |
 | 🔴 | **新增** | `uart-servo/cad-files/rp6-u18-series.md` [📄](docs_zh/uart-servo/cad-files/rp6-u18-series.md) [🎯](docs/uart-servo/cad-files/rp6-u18-series.md) | ⚠️ 目標檔已存在 |
@@ -116,5 +115,6 @@
 | 🔴 | **新增** | `uart-servo/specs/rx6-u12h-m.es.md` [📄](docs_zh/uart-servo/specs/rx6-u12h-m.es.md) |  |
 | 🔴 | **新增** | `uart-servo/specs/rx6-u12h-m.ja.md` [📄](docs_zh/uart-servo/specs/rx6-u12h-m.ja.md) |  |
 | 🔴 | **新增** | `uart-servo/specs/rx6-u12h-m.md` [📄](docs_zh/uart-servo/specs/rx6-u12h-m.md) [🎯](docs/uart-servo/specs/rx6-u12h-m.md) | ⚠️ 目標檔已存在 |
+| 🟢 | **已翻譯** | `uart-servo/cad-files/ra8-rp8-rx8-series.md` [📄](docs_zh/uart-servo/cad-files/ra8-rp8-rx8-series.md) [🎯](docs/uart-servo/cad-files/ra8-rp8-rx8-series.md) |  |
 
-**摘要**: 總計 112 個檔案。 0 個已翻譯， 112 個待翻譯， 0 個已忽略。
+**摘要**: 總計 112 個檔案。 1 個已翻譯， 111 個待翻譯， 0 個已忽略。
