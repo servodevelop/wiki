@@ -63,8 +63,20 @@
 | **翻譯特定目錄** | "翻譯 `docs_zh/rs485-servo` 這個目錄。" | Agent 會鎖定該目錄範圍進行掃描與翻譯。 |
 | **翻譯特定檔案** | "重新翻譯 `index.md`。" | 若檔案未變更，Agent 會詢問是否強制執行。 |
 | **強制重譯** | "把 `index.md` 強制重翻一次。" | Agent 會忽略 Hash 狀態，強制覆寫目標檔案。 |
+| **強制重譯** | "把 `index.md` 強制重翻一次。" | Agent 會忽略 Hash 狀態，強制覆寫目標檔案。 |
 
-## 5. 手動/進階操作 (Manual CLI)
+## 5. VS Code 任務整合 (Tasks)
+
+專案已預定義 `.vscode/tasks.json`，您可透過 `Ctrl+Shift+P` -> `Run Task` 快速執行以下任務，適合不習慣使用終端機的使用者：
+
+| 任務名稱 | 功能說明 | 參數輸入 |
+| :--- | :--- | :--- |
+| **翻譯：掃描全部 (docs_zh)** | 掃描 `docs_zh` 下所有檔案的翻譯狀態。 | 無 |
+| **翻譯：掃描指定路徑** | 掃描特定的子目錄或檔案。 | 需輸入**相對於 `docs_zh`** 的路徑 (例如 `uart-servo/index.md`，請勿包含 `docs_zh/`) |
+| **翻譯：強制掃描指定路徑** | 強制列出指定路徑下的所有檔案 (忽略 Hash 狀態)。常用於強制重翻。 | 需輸入**相對於 `docs_zh`** 的路徑 |
+| **翻譯：產生狀態報告** | 產生 `TRANSLATION_STATUS.md` 報告檔。 | 無 |
+
+## 6. 手動/進階操作 (Manual CLI)
 
 若需除錯或手動檢查狀態，可直接在終端機執行 Python 腳本：
 
@@ -80,6 +92,11 @@ python .agent/skills/translate_docs/scripts/state_manager.py scan --path "docs_z
 
 # 4. 產生翻譯狀態報告 (MD 格式)
 python .agent/skills/translate_docs/scripts/state_manager.py report
+
+這將在根目錄產生 `TRANSLATION_STATUS.md`，列出所有檔案的翻譯狀態。
+報告中每行檔案路徑後方提供快速連結：
+* [📄]: 開啟原始中文檔案 (Source)
+* [🎯]: 開啟目標英文檔案 (Target，僅在檔案存在時顯示)
 ```
 
 (或在 Codex/Antigravity 對話框執行 /generate_translation_report)
@@ -92,7 +109,7 @@ python .agent/skills/translate_docs/scripts/state_manager.py report
 * 🟠 **遺失目標**
 * ⚪ **已忽略**
 
-## 6. 注意事項
+## 7. 注意事項
 
 * **翻譯品質**: Agent 會保留 Markdown 語法、HTML 標籤與程式碼區塊邏輯，僅翻譯可讀文字。
 * **連結修正**: 由於結構直接鏡像，大部分相對連結 (`../assets/...`) 應能直接沿用。若有圖片無法顯示，請檢查 `docs_zh` 中的原始連結是否正確。
