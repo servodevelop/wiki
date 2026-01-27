@@ -1,0 +1,74 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "翻譯：掃描全部 (docs_zh)",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        ".agent/skills/translate_docs/scripts/state_manager.py",
+        "scan"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "翻譯：掃描指定路徑",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        ".agent/skills/translate_docs/scripts/state_manager.py",
+        "scan",
+        "--path",
+        "${input:translatePath}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "翻譯：強制掃描指定路徑",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        ".agent/skills/translate_docs/scripts/state_manager.py",
+        "scan",
+        "--path",
+        "${input:translatePath}",
+        "--force"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "翻譯：產生狀態報告",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        ".agent/skills/translate_docs/scripts/state_manager.py",
+        "report",
+        "--output",
+        "TRANSLATION_STATUS.md"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "translatePath",
+      "type": "promptString",
+      "description": "輸入 docs_zh 相對路徑（檔案或目錄）",
+      "default": "docs_zh"
+    }
+  ]
+}
