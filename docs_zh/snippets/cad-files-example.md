@@ -1,4 +1,47 @@
- <style>
+<!--start:TIP1_intro-->
+
+> [!TIP]
+>
+> - 请使用 **Solidworks 2021** 或更高版本打开模型。
+> - 图中尺寸仅供工程参考，最终请以收到的实物为准。如尺寸差异影响安装，请及时联系我们确认。
+
+<!--end:TIP1_intro-->
+
+
+
+<!--start:TIP2_intro-->
+
+> [!TIP]
+>
+> - 主舵盘出厂**已预装配**，并执行零点校正。
+
+<!--end:TIP2_intro-->
+
+
+
+<!--start:TIP3_intro-->
+
+> [!TIP]
+>
+> - 此零件为**选配件**。
+
+<!--end:TIP3_intro-->
+
+
+
+<!--start:TIP4_intro-->
+
+> [!TIP]
+>
+> - 副舵盘出厂**未装配**，需要自行安装。
+
+<!--end:TIP4_intro-->
+
+
+
+<!--start:TIP5_intro-->
+
+<style>
 /* 1. 预览容器样式 - 仅保留布局，移除装饰，由内部 img 的全局 Section 7 提供相框效果 */
 .cad-preview-wrapper {
     width: 85% !important;
@@ -58,3 +101,6 @@
     .no-wrap-cell ul { padding-left: 0.7em !important; }
 }
 </style>
+
+<!--end:TIP5_intro-->
+
