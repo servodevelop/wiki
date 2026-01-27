@@ -155,8 +155,8 @@ nav:
       - RP6-U18系列: uart-servo/cad-files/rp6-u18-series.md
       - HA8/HP8/HX8系列: uart-servo/cad-files/ha8-hp8-hx8-series.md
       - RA8/RP8/RX8系列: uart-servo/cad-files/ra8-rp8-rx8-series.md
-      - HA8/HP8/HX8 D轴系列: uart-servo/cad-files/ha8-hp8-hx8-dshaft-series.md
-      - RA8/RP8/RX8 D轴系列: uart-servo/cad-files/ra8-rp8-rx8-dshaft-series.md
+      - HX8 D轴系列: uart-servo/cad-files/hx8-dshaft-series.md
+      - RX8 D轴系列: uart-servo/cad-files/rx8-dshaft-series.md
       - RX18系列: uart-servo/cad-files/rx18-series.md
     - 软件与工具:
       - PC Configuration Tool: uart-servo/software/pc-configuration-tool.md
