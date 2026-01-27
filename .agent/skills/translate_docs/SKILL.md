@@ -43,6 +43,10 @@ For each file in the list (or a specific file requested by the user), follow the
     python .agent/skills/translate_docs/scripts/state_manager.py update --file "relative/path/to/file.md" --hash "md5_hash_of_source"
     ```
 
+    > [!IMPORTANT]
+    > **State Consistency Rule**: You **MUST** run the update command **IMMEDIATELY** after writing the target file.
+    > DO NOT batch writes and then batch updates. This ensures that if the process is interrupted, progress is saved.
+
 ## Example Usage
 
 **User**: "Translate all updated files."
