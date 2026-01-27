@@ -630,20 +630,20 @@
 
 ### RX18-R100H-M
 
-<!--start:RX8-R100H-M-->
+<!--start:RX18-R100H-M-->
 
 
 
 <div class="fs-buy-grid" markdown="1">
-
 <div class="fs-buy-card" markdown="1">
-![RX8-R100H-M](images/rx8-r100h-m-primary.webp)
-<div class="fs-product-name">RX8-R100H-M</div>
+![RX18-R100H-M](images/rx18-r100h-m-primary.webp)
+<div class="fs-product-name">RX18-R100H-M</div>
 </div>
+
 
 </div>
 
-<!--end:RX8-R100H-M-->
+<!--end:RX18-R100H-M-->
 
 
 
@@ -661,7 +661,6 @@
 ![RX8-R55H-M](images/rx8-r55h-m-primary.webp)
 <div class="fs-product-name">RX8-R55H-M</div>
 </div>
-
 </div>
 
 <!--end:RX8-R55H-M-->
