@@ -4,7 +4,7 @@
 
 ### 尺寸预览
 
-![ha8-hp8-hx8-series-dimension](./data/ha8-hp8-hx8-series/ha8-hp8-hx8-series-dimension.jpg)
+![ha8-hp8-hx8-series-dimension](./data/ha8-hp8-hx8-series/ha8-hp8-hx8-series-dimension.png)
 
 
 
