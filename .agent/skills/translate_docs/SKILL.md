@@ -47,6 +47,15 @@ For each file in the list (or a specific file requested by the user), follow the
     > **State Consistency Rule**: You **MUST** run the update command **IMMEDIATELY** after writing the target file.
     > DO NOT batch writes and then batch updates. This ensures that if the process is interrupted, progress is saved.
 
+### 3. Finalize (Post-Translation)
+After completing the translation task(s):
+
+1.  **Check for Updates**: Did you modify or create any target files?
+2.  **Generate Report**: If yes, you **MUST** regenerate the status report to reflect the latest changes.
+    ```powershell
+    python .agent/skills/translate_docs/scripts/state_manager.py report
+    ```
+
 ## Example Usage
 
 **User**: "Translate all updated files."

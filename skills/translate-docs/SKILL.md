@@ -37,3 +37,5 @@ description: 在此 workspace 執行翻譯工作流（scan/force/report）以同
 - 翻譯狀態寫入 `.agent/translation_state.json`；勿手動修改。
 - 翻譯後的檔案寫入 `docs/`，路徑鏡像 `docs_zh/`。
 - 報告輸出在專案根目錄的 `TRANSLATION_STATUS.md`。
+- **完成翻譯後必做**：若有任何目標檔案新增或被修改，務必重新產生報告：  
+  `python .agent/skills/translate_docs/scripts/state_manager.py report --output TRANSLATION_STATUS.md`

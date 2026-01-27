@@ -30,3 +30,6 @@ description: 在本專案透過 VS Code 工作任務或終端命令執行翻譯�
 ## 注意
 - `translation_state.json` 為自動狀態檔，請勿手動編輯。
 - 翻譯結果會寫入對應的 `docs/` 路徑，結構鏡像 `docs_zh/`。
+- **收尾要求**：如果這次翻譯有新增或修改目標檔，務必再跑一次報告  
+  `python .agent/skills/translate_docs/scripts/state_manager.py report --output TRANSLATION_STATUS.md`  
+  （或在 VS Code 透過「翻譯：產生狀態報告」任務執行）
