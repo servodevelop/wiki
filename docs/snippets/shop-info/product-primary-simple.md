@@ -257,7 +257,7 @@
 
 ### RX18-U100H-M
 
-<!--start:XRX18-U100H-M-->
+<!--start:RX18-U100H-M-->
 
 
 
@@ -267,7 +267,6 @@
 ![RX18-U100H-M](images/rx18-u100h-m-primary.webp)
 <div class="fs-product-name">RX18-U100H-M</div>
 </div>
-
 </div>
 
 <!--end:RX18-U100H-M-->
@@ -316,7 +315,6 @@
 ![RP6-U12H-M](images/rp6-u12h-m-primary.webp)
 <div class="fs-product-name">RP6-U12H-M</div>
 </div>
-
 </div>
 
 <!--end:RP6-U12H-M-->
