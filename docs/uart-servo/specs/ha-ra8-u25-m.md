@@ -40,8 +40,8 @@
     <td>PH2.0 – 3Pin</td>
   </tr>
   <tr>
-    <td>电流参数</td>
-    <td>待机 ＜30 mA / 空载 ＜300 mA / 峰值 6 A</td>
+    <td>工作温度</td>
+    <td>-10 ～ 60 ℃</td>
   </tr>
 </table>
 
@@ -103,6 +103,10 @@
     <td>空载转速</td>
     <td>90 rpm（0.110 s / 60°）</td>
   </tr>
+   <tr>
+    <td>电流参数</td>
+    <td>待机 ＜30 mA / 空载 ＜300 mA / 峰值 6 A</td>
+  </tr>
 </table>
 
 <img src="/uart-servo/specs/image/U25特性曲线.png" style="width: 500px !important; height: auto !important;">
@@ -133,10 +137,7 @@
     <td>尺寸与重量</td>
     <td>40 × 20 × 40 mm / 73 g</td>
   </tr>
-  <tr>
-    <td>工作温度</td>
-    <td>-10 ～ 60 ℃</td>
-  </tr>
+
 </table>
 
 <img src="/uart-servo/specs/image/U25过载曲线.png" style="width: 500px !important; height: auto !important;">
