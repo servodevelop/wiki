@@ -349,6 +349,11 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
   border: 0.5px solid var(--fs-divider) !important;
   line-height: 1.4 !important;
   vertical-align: middle !important;
+  /* 兼容 Safari 0.5px border 不渲染的情况 */
+  box-shadow:
+    inset 0 -1px 0 var(--fs-divider),
+    inset -1px 0 0 var(--fs-divider);
+  position: relative;
 }
 
 /* --- [修正] 针对含有图片的单元格，减小内边距 --- */

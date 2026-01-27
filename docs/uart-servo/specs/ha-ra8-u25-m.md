@@ -215,28 +215,33 @@
 
 ### 5.2. 控制指令
 
-| 指令ID | 指令名称                    | 功能描述                                 |
-| :---: | --------------------------- | ---------------------------------------- |
-| 01     | 通讯检测                    | 检查指定 ID 间伺服舵机是否在线           |
-| 08     | 简易单圈角度控制            | 运动时间、执行功率可设置                 |
-| 11     | 高级单圈角度控制 (基于时间) | 运动时间、加减速时间、执行功率可设置     |
-| 12     | 高级单圈角度控制 (基于速度) | 运动速度、加减速时间、执行功率可设置     |
-| 10     | 单圈角度读取                | ±180°范围内                              |
-| 13     | 简易多圈角度控制            | 运动时间、执行功率可设置                 |
-| 14     | 高级多圈角度控制 (基于时间) | 运动时间、加减速时间、执行功率可设置     |
-| 15     | 高级多圈角度控制 (基于速度) | 运动速度、加减速时间、执行功率可设置     |
-| 16     | 多圈角度读取                | ±368,640°范围内                          |
-| 17     | 清除当前圈数                |                                          |
-| 09     | 阻尼模式                    |                                          |
-| 24     | 停止指令                    | 停止后可选择进入锁定、失锁、阻尼三种状态 |
-| 25     | 同步指令                    |                                          |
-| 18     | 异步写入指令                |                                          |
-| 19     | 异步执行指令                |                                          |
-| 02     | 自定义参数重置              | 恢复到出厂默认参数设置                   |
-| 03     | 参数&状态数据读取           | 单个读取参数和工作状态数据               |
-| 04     | 自定义参数写入              | 单个写入舵机参数                         |
-| 22     | 数据监控                    | 批量读取工作状态数据                     |
-| 23     | 原点设置                    | 设置当前角度位置为原点（0°）             |
+> **建议**：完整封包格式与字段定义请参考 `docs/uart-servo/protocols/uart-rs485-protocol.md`。  
+> **指令间隔**：建议 5–10 ms。
+
+| 指令 ID | 指令名称 | 回应类型 |
+| :---: | :----------------------------------------- | :---: |
+| 01 (0x01) | [通讯检测<wbr>（Ping）](../protocols/uart-rs485-protocol.md#5-ping) | 固定 |
+| 08 (0x08) | [简易单圈角度控制](../protocols/uart-rs485-protocol.md#6-single-turn-position-control-basic) | 可选 |
+| 11 (0x0B) | [高级单圈角度控制<wbr>（基于时间）](../protocols/uart-rs485-protocol.md#7-single-turn-position-control-advanced-time-based) | 可选 |
+| 12 (0x0C) | [高级单圈角度控制<wbr>（基于速度）](../protocols/uart-rs485-protocol.md#8-single-turn-position-control-advanced-speed-based) | 可选 |
+| 10 (0x0A) | [单圈角度读取](../protocols/uart-rs485-protocol.md#9-read-single-turn-current-position) | 固定 |
+| 13 (0x0D) | [简易多圈角度控制](../protocols/uart-rs485-protocol.md#10-multi-turn-position-control-basic) | 可选 |
+| 14 (0x0E) | [高级多圈角度控制<wbr>（基于时间）](../protocols/uart-rs485-protocol.md#11-multi-turn-position-control-advanced-time-based) | 可选 |
+| 15 (0x0F) | [高级多圈角度控制<wbr>（基于速度）](../protocols/uart-rs485-protocol.md#12-multi-turn-position-control-advanced-speed-based) | 可选 |
+| 16 (0x10) | [多圈角度读取](../protocols/uart-rs485-protocol.md#13-read-multi-turn-current-position) | 固定 |
+| 17 (0x11) | [清除当前圈数<wbr>（Reset Loop）](../protocols/uart-rs485-protocol.md#15-reset-loop) | 可选 |
+| 09 (0x09) | [阻尼模式](../protocols/uart-rs485-protocol.md#16-damping-control) | 可选 |
+| 24 (0x18) | [停止指令](../protocols/uart-rs485-protocol.md#14-stop-instructions) | 可选 |
+| 25 (0x19) | [同步指令](../protocols/uart-rs485-protocol.md#18-synchronous-instruction) | 无 |
+| 18 (0x12) | [异步写入指令](../protocols/uart-rs485-protocol.md#19-asynchronous-write-instruction) | 可选 |
+| 19 (0x13) | [异步执行指令](../protocols/uart-rs485-protocol.md#20-asynchronous-activate-instruction) | 无 |
+| 03 (0x03) | [参数与状态数据读取](../protocols/uart-rs485-protocol.md#21-read-data) | 固定 |
+| 22 (0x16) | [数据监控](../protocols/uart-rs485-protocol.md#22-data-monitor) | 固定 |
+| 04 (0x04) | [自定义参数写入](../protocols/uart-rs485-protocol.md#23-customize-configuration-parameters) | 可选 |
+| 23 (0x17) | [原点设置](../protocols/uart-rs485-protocol.md#17-set-origin-point) | 可选 |
+
+> **回应类型说明**：  
+> **固定**＝一定回传；**可选**＝是否回传取决于 PC 端设置“动作后回应”；**无**＝不回传。
 
 ## 6. 保护功能
 
