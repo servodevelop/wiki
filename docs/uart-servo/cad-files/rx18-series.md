@@ -117,6 +117,42 @@
 .table-container table { border-collapse: collapse !important; border: 0.5px solid var(--fs-divider) !important; }
 .table-container th, .table-container td { border: 0.5px solid var(--fs-divider) !important; vertical-align: middle !important; }
 
+/* iOS Safari：使用阴影绘制细线，避免合并单元格处线条加粗 */
+@supports (-webkit-touch-callout: none) {
+    .table-container table { border: none !important; }
+    .table-container th,
+    .table-container td {
+        border: none !important;
+        position: relative;
+        box-shadow:
+            inset -0.5px 0 0 var(--fs-divider),
+            inset 0 -0.5px 0 var(--fs-divider);
+    }
+    .table-container tr:first-child > th,
+    .table-container tr:first-child > td {
+        box-shadow:
+            inset -0.5px 0 0 var(--fs-divider),
+            inset 0 -0.5px 0 var(--fs-divider),
+            inset 0 0.5px 0 var(--fs-divider);
+    }
+    .table-container tr > th:first-child,
+    .table-container tr > td:first-child {
+        box-shadow:
+            inset -0.5px 0 0 var(--fs-divider),
+            inset 0 -0.5px 0 var(--fs-divider),
+            inset 0.5px 0 0 var(--fs-divider);
+    }
+    .table-container tr:first-child > th:first-child,
+    .table-container tr:first-child > td:first-child {
+        box-shadow:
+            inset -0.5px 0 0 var(--fs-divider),
+            inset 0 -0.5px 0 var(--fs-divider),
+            inset 0.5px 0 0 var(--fs-divider),
+            inset 0 0.5px 0 var(--fs-divider);
+    }
+}
+
+
 /* 强制列表不换行逻辑 */
 .no-wrap-cell {
     background: var(--fs-bg-active) !important;
