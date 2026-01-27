@@ -23,7 +23,7 @@
     <tr>
       <td rowspan="3" class="no-wrap-cell" style="vertical-align: middle; background: var(--fs-bg-active); padding: 0 15px;">
         <ul style="margin: 0; padding: 0 0 0 1.2em; list-style-type: disc; font-size: 14.5px; line-height: 1.8;">
-          <li><a href="https://wiki.fashionstar.com.hk/zh/uart-servo/specs/rp-rp6-u15h-m/"><strong>RP6-U15H-M</strong></a></li>
+          <li><a href="https://wiki.fashionstar.com.hk/zh/uart-servo/specs/hp-rp6-u15h-m/"><strong>RP6-U15H-M</strong></a></li>
         </ul>
       </td>
       <td style="text-align: center;"><strong>.PDF</strong></td>
@@ -186,3 +186,4 @@
 {% include-markdown "snippets/cad-files-example.md" start="<!--start:TIP3_intro-->"  end="<!--end:TIP3_intro-->" %}
 
 {% include-markdown "snippets/cad-files-example.md" start="<!--start:TIP5_intro-->"  end="<!--end:TIP5_intro-->" %}
+
