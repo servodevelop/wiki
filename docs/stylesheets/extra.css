@@ -374,33 +374,33 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
     border: none !important;
     position: relative;
     box-shadow:
-      inset -1px 0 0 var(--fs-divider),
-      inset 0 -1px 0 var(--fs-divider);
+      inset -0.5px 0 0 var(--fs-divider),
+      inset 0 -0.5px 0 var(--fs-divider);
   }
 
   .md-typeset table:not([class]) tr:first-child > th,
   .md-typeset table:not([class]) tr:first-child > td {
     box-shadow:
-      inset -1px 0 0 var(--fs-divider),
-      inset 0 -1px 0 var(--fs-divider),
-      inset 0 1px 0 var(--fs-divider);
+      inset -0.5px 0 0 var(--fs-divider),
+      inset 0 -0.5px 0 var(--fs-divider),
+      inset 0 0.5px 0 var(--fs-divider);
   }
 
   .md-typeset table:not([class]) tr > th:first-child,
   .md-typeset table:not([class]) tr > td:first-child {
     box-shadow:
-      inset -1px 0 0 var(--fs-divider),
-      inset 0 -1px 0 var(--fs-divider),
-      inset 1px 0 0 var(--fs-divider);
+      inset -0.5px 0 0 var(--fs-divider),
+      inset 0 -0.5px 0 var(--fs-divider),
+      inset 0.5px 0 0 var(--fs-divider);
   }
 
   .md-typeset table:not([class]) tr:first-child > th:first-child,
   .md-typeset table:not([class]) tr:first-child > td:first-child {
     box-shadow:
-      inset -1px 0 0 var(--fs-divider),
-      inset 0 -1px 0 var(--fs-divider),
-      inset 1px 0 0 var(--fs-divider),
-      inset 0 1px 0 var(--fs-divider);
+      inset -0.5px 0 0 var(--fs-divider),
+      inset 0 -0.5px 0 var(--fs-divider),
+      inset 0.5px 0 0 var(--fs-divider),
+      inset 0 0.5px 0 var(--fs-divider);
   }
 
   .md-typeset table:not([class]) th {

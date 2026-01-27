@@ -115,8 +115,8 @@
 }
 
 /* 2. 表格与不换行深度锁定 */
-.table-container table { border-collapse: collapse !important; border: 0.8px solid var(--fs-divider) !important; }
-.table-container th, .table-container td { border: 0.8px solid var(--fs-divider) !important; vertical-align: middle !important; }
+.table-container table { border-collapse: collapse !important; border: 0.5px solid var(--fs-divider) !important; }
+.table-container th, .table-container td { border: 0.5px solid var(--fs-divider) !important; vertical-align: middle !important; }
 
 /* 强制列表不换行逻辑 */
 .no-wrap-cell {
