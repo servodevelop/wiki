@@ -10,6 +10,7 @@
 
 ## 2. 规格参数
 ### 2.1. 基础参数
+<div class="md-typeset__table">
 <table>
   <tr>
     <th width="200" align="left">参数项目</th>
@@ -84,8 +85,10 @@
     <td>单圈角度&emsp;|&emsp;多圈角度&emsp;|&emsp;阻尼模式</td>
   </tr>
 </table>
+</div>
 
 ### 2.2. 特性参数 (@12V)
+<div class="md-typeset__table">
 <table>
   <tr>
     <th width="200" align="left">参数项目</th>
@@ -133,6 +136,7 @@
   </tr>
 
 </table>
+</div>
 
 
 <div style="text-align: center; margin-bottom: 20px;">
