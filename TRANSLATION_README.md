@@ -76,7 +76,19 @@ python .agent/skills/translate_docs/scripts/state_manager.py scan --path "docs_z
 
 # 3. 強制列出特定檔案 (即使已同步)
 python .agent/skills/translate_docs/scripts/state_manager.py scan --path "docs_zh/index.md" --force
+
+# 4. 產生翻譯狀態報告 (MD 格式)
+python .agent/skills/translate_docs/scripts/state_manager.py report
 ```
+(或對話框執行工作流 /generate_translation_report)
+
+這將在根目錄產生 `TRANSLATION_STATUS.md`，列出所有檔案的翻譯狀態：
+*   🔴 **新增** (若目標檔已存在，將提示 `⚠️ 目標檔已存在`)
+*   🟡 **來源已改**
+*   🟣 **目標已改**
+*   🟢 **已翻譯**
+*   🟠 **遺失目標**
+*   ⚪ **已忽略**
 
 ## 6. 注意事項
 
