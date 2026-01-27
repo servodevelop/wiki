@@ -264,13 +264,17 @@ def generate_report(output_file):
             icon, text = val
             
             rel_path = item['relative']
-            rel_path = rel_path.replace("|", "\|")
+            rel_path = rel_path.replace("|", "\\|")
             
             remark = ""
             if reason_key == "Untracked":
                 remark = "⚠️ 目標檔已存在"
             
-            f.write(f"| {icon} | {text} | `{rel_path}` | {remark} |\n")
+            links = f"[📄](docs_zh/{rel_path})"
+            if item.get('target_exists', False):
+                links += f" [🎯](docs/{rel_path})"
+            
+            f.write(f"| {icon} | {text} | `{rel_path}` {links} | {remark} |\n")
             
             if reason_key == "Translated":
                 stats["Translated"] += 1

@@ -68,7 +68,7 @@
       "id": "translatePath",
       "type": "promptString",
       "description": "輸入 docs_zh 相對路徑（檔案或目錄）",
-      "default": "docs_zh"
+      "default": ""
     }
   ]
 }
