@@ -142,6 +142,11 @@
             inset 0 -0.5px 0 var(--fs-divider),
             inset 0.5px 0 0 var(--fs-divider);
     }
+    .table-container tr:not(:first-child) > td:first-child {
+        box-shadow:
+            inset -0.5px 0 0 var(--fs-divider),
+            inset 0 -0.5px 0 var(--fs-divider);
+    }
     .table-container tr:first-child > th:first-child,
     .table-container tr:first-child > td:first-child {
         box-shadow:
