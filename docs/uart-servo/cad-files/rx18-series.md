@@ -1,11 +1,11 @@
-# RX18-U100H-M CAD 图纸与 3D 模型下载
+# RX18-U100H-M - CAD 图纸与 3D 模型下载
 
 ---
 
-### 尺寸图预览
+## 尺寸图预览
 ![rx18-series](./data/rx18-series/rx18.png)
 
-### CAD 下载（PDF/STEP/DWG）
+## CAD 文件下载（2D/3D）
 <div class="table-container hide-scrollbar">
 <table>
   <thead>
@@ -43,7 +43,7 @@
 
 {% include-markdown "snippets/cad-files-example.md" start="<!--start:TIP1_intro-->"  end="<!--end:TIP1_intro-->" %}
 
-### 相关配件图纸
+## 相关配件图纸
 <div class="table-container hide-scrollbar">
 <table>
   <thead>
