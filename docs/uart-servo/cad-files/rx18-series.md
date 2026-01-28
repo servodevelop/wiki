@@ -115,46 +115,14 @@
 
 /* 2. 表格与不换行深度锁定 */
 .table-container table { border-collapse: collapse !important; border: 0.5px solid var(--fs-divider) !important; }
-.table-container th, .table-container td { border: 0.5px solid var(--fs-divider) !important; vertical-align: middle !important; }
-
-/* iOS Safari：使用阴影绘制细线，避免合并单元格处线条加粗 */
-@supports (-webkit-touch-callout: none) {
-    .table-container table { border: none !important; }
-    .table-container th,
-    .table-container td {
-        border: none !important;
-        position: relative;
-        box-shadow:
-            inset -0.5px 0 0 var(--fs-divider),
-            inset 0 -0.5px 0 var(--fs-divider);
-    }
-    .table-container tr:first-child > th,
-    .table-container tr:first-child > td {
-        box-shadow:
-            inset -0.5px 0 0 var(--fs-divider),
-            inset 0 -0.5px 0 var(--fs-divider),
-            inset 0 0.5px 0 var(--fs-divider);
-    }
-    .table-container tr > th:first-child,
-    .table-container tr > td:first-child {
-        box-shadow:
-            inset -0.5px 0 0 var(--fs-divider),
-            inset 0 -0.5px 0 var(--fs-divider),
-            inset 0.5px 0 0 var(--fs-divider);
-    }
-    .table-container tr:not(:first-child) > td:first-child {
-        box-shadow:
-            inset -0.5px 0 0 var(--fs-divider),
-            inset 0 -0.5px 0 var(--fs-divider);
-    }
-    .table-container tr:first-child > th:first-child,
-    .table-container tr:first-child > td:first-child {
-        box-shadow:
-            inset -0.5px 0 0 var(--fs-divider),
-            inset 0 -0.5px 0 var(--fs-divider),
-            inset 0.5px 0 0 var(--fs-divider),
-            inset 0 0.5px 0 var(--fs-divider);
-    }
+.table-container th, .table-container td {
+    border: 0.5px solid var(--fs-divider) !important;
+    border-left: none !important;
+    vertical-align: middle !important;
+}
+.table-container tr > th:first-child,
+.table-container tr > td:first-child {
+    border-left: 0.5px solid var(--fs-divider) !important;
 }
 
 
