@@ -466,6 +466,17 @@ img.flag-icon {
     word-break: keep-all !important;
 }
 
+/* 表格合并单元格不换行（cad-files 用） */
+.no-wrap-cell {
+  white-space: nowrap !important;
+}
+
+.no-wrap-cell ul li,
+.no-wrap-cell ul li a,
+.no-wrap-cell strong {
+  white-space: nowrap !important;
+}
+
 /* [1-10 部分保持不变] */
 
 /* 11. E-commerce Purchase Cards (V46.9 布局专用) */
