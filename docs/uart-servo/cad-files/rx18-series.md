@@ -117,12 +117,7 @@
 .table-container table { border-collapse: collapse !important; border: 0.5px solid var(--fs-divider) !important; }
 .table-container th, .table-container td {
     border: 0.5px solid var(--fs-divider) !important;
-    border-left: none !important;
     vertical-align: middle !important;
-}
-.table-container tr > th:first-child,
-.table-container tr > td:first-child {
-    border-left: 0.5px solid var(--fs-divider) !important;
 }
 
 
