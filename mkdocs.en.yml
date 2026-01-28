@@ -15,8 +15,8 @@ theme:
     alternate: fashion/lang-switch
   favicon: assets/favicon.png
   font:
-    text: Roboto
-    code: Roboto Mono
+    text: false
+    code: false
   logo: assets/favicon.png
   features:
     - navigation.path

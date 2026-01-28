@@ -3,13 +3,24 @@
 {% include-markdown "snippets/shop-info/product-primary-simple.md"
    start="<!--start:HA8/RA8-U25-M-->"
    end="<!--end:HA8/RA8-U25-M-->" %}
-## 1. 型号定义
+
+## 1. 特色
+
+- **UART 双向通信**，最高波特率 1 Mbps，支持位置与状态回读
+- 12-bit 绝对值位置编码器（4,096 阶分辨率），可任意设定原点
+- 最大控制范围 ±368,640°（1,024 圈），具备**断电角度记忆功能**
+- 内置梯形加减速算法，实现平滑运动控制
+- 提供**三种停止模式**：锁力保持 / 失锁释放 / 阻尼控制
+- 集成温度、电压、堵转、功率、电流多重保护机制，具备智能功率限制功能
+- 配套可视化上位机调试软件，支持**固件升级**
+
+## 2. 型号定义
 
 ![产品命名-型号规则](image/model-definition.png)
 
 
-## 2. 规格参数
-### 2.1. 基础参数
+## 3. 规格参数
+### 3.1. 基础参数
 <table>
   <tr>
     <th width="200" align="left">参数项目</th>
@@ -85,7 +96,7 @@
   </tr>
 </table>
 
-### 2.2. 特性参数 (@12V)
+### 3.2. 特性参数 (@12V)
 <table>
   <tr>
     <th width="200" align="left">参数项目</th>
@@ -151,7 +162,7 @@
   </div>
 </div>
 
-## 3. 外观尺寸与安装
+## 4. 外观尺寸与安装
 
 ![ra8-rp8-rx8-series-dimension](/uart-servo/cad-files/data/ra8-rp8-rx8-series-dimension.jpg)
 
@@ -174,7 +185,7 @@
 
 
 
-## 4. 接口与连线
+## 5. 接口与连线
 
 
 ![尺寸预览](/uart-servo/cad-files/data/OMY-F3M.jpg)

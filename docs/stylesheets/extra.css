@@ -1,6 +1,6 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V46.3
+Fashion Star Wiki - V46.5
 ==========================================================================
 - Design System: Variable-driven vertical rhythm (VS Code Inspired).
 - Header Strategy: H1 individual logic; H2-H4 unified (Top 1.5, Bottom 0.5).
@@ -19,6 +19,12 @@ Fashion Star Wiki - V46.3
   --fs-accent: #8641A9;
   --fs-divider: rgba(0,0,0,0.15); 
   --fs-table-header-bg: #F8F9FA; 
+
+  /* 字体栈（方案 B：由 CSS 统一控制） */
+  --md-text-font: "Roboto", "Noto Sans SC", "Source Han Sans SC",
+                  "PingFang SC", "Microsoft YaHei",
+                  "Noto Sans CJK SC", sans-serif;
+  --md-code-font: "Roboto Mono", "SFMono-Regular", "Menlo", "Consolas", monospace;
   
   /* 文字颜色定义 (浅色模式) */
   --fs-content-fg: #333333;           
