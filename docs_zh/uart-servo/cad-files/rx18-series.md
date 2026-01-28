@@ -124,7 +124,7 @@
 <table>
   <thead>
     <tr>
-      <th style="text-align: center;">U型机身支架</th>
+      <th style="text-align: center;">U型机身支架(51.6mm)</th>
       <th style="text-align: center;">格式</th>
       <th style="text-align: center;">更新日期</th>
       <th style="text-align: center;">操作</th>
@@ -153,13 +153,14 @@
 </table>
 </div>
 
+
 {% include-markdown "snippets/cad-files-example.md" start="<!--start:TIP3_intro-->"  end="<!--end:TIP3_intro-->" %}
 
 <div class="table-container hide-scrollbar">
 <table>
   <thead>
     <tr>
-      <th style="text-align: center;">U形舵盘支架</th>
+      <th style="text-align: center;">U形舵盘支架(59.6mm)</th>
       <th style="text-align: center;">格式</th>
       <th style="text-align: center;">更新日期</th>
       <th style="text-align: center;">操作</th>
