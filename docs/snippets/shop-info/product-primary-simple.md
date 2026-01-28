@@ -639,8 +639,6 @@
 ![RX18-R100H-M](images/rx18-r100h-m-primary.webp)
 <div class="fs-product-name">RX18-R100H-M</div>
 </div>
-
-
 </div>
 
 <!--end:RX18-R100H-M-->

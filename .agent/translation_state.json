@@ -2,5 +2,9 @@
     "uart-servo/cad-files/ra8-rp8-rx8-series.md": {
         "source_hash": "1e307bee5e2771d86a4523015cd8472e",
         "target_hash": "6f8ab7f16a77fae413d0f431cd12b7f6"
+    },
+    "uart-servo/specs/ha-ra8-u35h-m.md": {
+        "source_hash": "a4d2f54afd29a4ce26f182a4a8c65725",
+        "target_hash": "ec89a754afcbd7538d70cbcc43b60e4c"
     }
 }

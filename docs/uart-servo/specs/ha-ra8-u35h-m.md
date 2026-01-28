@@ -32,7 +32,7 @@
 
 ## Model Definition
 
-![Product naming - model rules](./images/產品命名-型號規則.png)
+![Product naming - model rules](./images/产品命名-型号规则.png)
 
 | Appearance   | Motor Type  | Size              | Communication Protocol  | Voltage   | Position Sensor                         |
 | ------------ | ----------- | ----------------- | ----------------------- | --------- | --------------------------------------- |
@@ -89,17 +89,17 @@
 
 ### Performance Curves
 
-![U35 performance curve](./images/U35特性曲線.png)
+![U35 performance curve](./images/U35特性曲线.png)
 
 ### Overload Curve
 
-![U35 overload curve](./images/U35過載曲線.png)
+![U35 overload curve](./images/U35过载曲线.png)
 
 ## Drawings and Installation
 
 ### Dimensions
 
-![U35 3D drawing](./images/U35_3D圖.png)
+![U35 3D drawing](./images/U35_3D图.png)
 
 ### Connector Definition
 
@@ -109,21 +109,21 @@
 
 **Series**
 
-![U35 series wiring](./images/U35串聯.png)
+![U35 series wiring](./images/U35串联.png)
 
 **Parallel**
 
-![U35 parallel wiring](./images/U35並聯.png)
+![U35 parallel wiring](./images/U35并联.png)
 
 ### Installation
 
 - **Single-shaft**
 
-  ![U35 single-shaft installation](./images/U35單軸安裝.png)
+  ![U35 single-shaft installation](./images/U35单轴安装.png)
 
 - **Dual-shaft**
 
-![U35 dual-shaft installation](./images/U35雙軸安裝.png)
+![U35 dual-shaft installation](./images/U35双轴安装.png)
 
 ## Development and Compatibility
 
@@ -309,7 +309,7 @@ Example: Servo ID2 rotates to the 90° position at maximum power in 500 ms.
 
   Example: As shown, point A is at 6,800° before power loss. If the Servo is rotated by external force during power loss and ends at point B1, the angle read after power-on is 6,920°. If it ends at point B2, the angle read is 6,680°.
 
-![Power-off memory](./images/掉電記憶.png)
+![Power-off memory](./images/掉电记忆.png)
 
 ### Damping Mode [9]
 
