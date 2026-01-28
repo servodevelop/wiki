@@ -1,6 +1,6 @@
 /*
 ==========================================================================
-Fashion Star Wiki - V46.0
+Fashion Star Wiki - V46.2
 ==========================================================================
 - Design System: Variable-driven vertical rhythm (VS Code Inspired).
 - Header Strategy: H1 individual logic; H2-H4 unified (Top 1.5, Bottom 0.5).
@@ -359,8 +359,49 @@ nav[data-md-level="0"] > .md-nav__list > .md-nav__item:first-child > .md-nav__li
 .md-typeset table:not([class]) th {
   background-color: var(--fs-table-header-bg) !important;
   font-weight: 600 !important;
-  border-bottom: 1.5px solid var(--fs-divider) !important;
+  border-bottom: 0.5px solid var(--fs-divider) !important;
   text-align: center !important;
+}
+
+/* --- [iOS Safari] 0.5px 边框可能不显示：用阴影补线 --- */
+@supports (-webkit-touch-callout: none) {
+  .md-typeset table:not([class]) {
+    border: none !important;
+    box-shadow:
+      inset 0.5px 0 0 var(--fs-divider),
+      inset 0 0.5px 0 var(--fs-divider);
+  }
+
+  .md-typeset table:not([class]) th,
+  .md-typeset table:not([class]) td {
+    border: none !important;
+    position: relative;
+    box-shadow:
+      inset -0.5px 0 0 var(--fs-divider),
+      inset 0 -0.5px 0 var(--fs-divider);
+  }
+
+  /* iOS：补齐表头顶部与左右外框 */
+  .md-typeset table:not([class]) thead th,
+  .md-typeset table:not([class]) thead td {
+    box-shadow:
+      inset -0.5px 0 0 var(--fs-divider),
+      inset 0 -0.5px 0 var(--fs-divider),
+      inset 0 0.5px 0 var(--fs-divider);
+  }
+
+  .md-typeset table:not([class]) thead tr > th:first-child,
+  .md-typeset table:not([class]) thead tr > td:first-child {
+    box-shadow:
+      inset -0.5px 0 0 var(--fs-divider),
+      inset 0 -0.5px 0 var(--fs-divider),
+      inset 0 0.5px 0 var(--fs-divider),
+      inset 0.5px 0 0 var(--fs-divider);
+  }
+
+  .md-typeset table:not([class]) th {
+    border-bottom: none !important;
+  }
 }
 
 /* --- [修正] 优化表格内图片的尺寸逻辑 --- */
