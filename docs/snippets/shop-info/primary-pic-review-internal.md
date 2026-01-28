@@ -1,4 +1,4 @@
-# Primary pictures review （internal）
+# Primary pictures review （internal）simple
 
 ## UART Servo Simple
 ### HA8/RA8-U25-M
@@ -269,7 +269,7 @@
 
 {% include-markdown "snippets/shop-info/product-primary-simple.md"
    start="<!--start:RX18-R100H-M-->"
-   end="<!--end:RX8-R100H-M-->" %}
+   end="<!--end:RX18-R100H-M-->" %}
 
 
 
