@@ -5,10 +5,7 @@
 ### 尺寸预览
 ![rx18-series](./data/rx18-series/rx18.png)
 
-
-
 ### 数据下载
-
 <div class="table-container hide-scrollbar">
 <table>
   <thead>
@@ -21,8 +18,8 @@
   </thead>
   <tbody>
     <tr>
-      <td rowspan="3" class="no-wrap-cell" style="vertical-align: middle; background: var(--fs-bg-active); padding: 0 15px;">
-        <ul style="margin: 0; padding: 0 0 0 1.2em; list-style-type: disc; font-size: 14.5px; line-height: 1.8;">
+      <td rowspan="3" class="no-wrap-cell">
+        <ul>
           <li><a href="https://wiki.fashionstar.com.hk/zh/uart-servo/specs/rx18-u100h-m/"><strong>RX18-U100H-M</strong></a></li>
         </ul>
       </td>
@@ -46,10 +43,7 @@
 
 {% include-markdown "snippets/cad-files-example.md" start="<!--start:TIP1_intro-->"  end="<!--end:TIP1_intro-->" %}
 
-
-
 ### 关联零配件图纸
-
 <div class="table-container hide-scrollbar">
 <table>
   <thead>
@@ -153,7 +147,6 @@
 </table>
 </div>
 
-
 {% include-markdown "snippets/cad-files-example.md" start="<!--start:TIP3_intro-->"  end="<!--end:TIP3_intro-->" %}
 
 <div class="table-container hide-scrollbar">
@@ -193,3 +186,60 @@
 
 {% include-markdown "snippets/cad-files-example.md" start="<!--start:TIP5_intro-->"  end="<!--end:TIP5_intro-->" %}
 
+<style>
+.cad-preview-wrapper {
+    width: 85% !important;
+    margin: 20px auto;
+    position: relative;
+    line-height: 0;
+}
+
+.desktop-pdf-embed {
+    aspect-ratio: 1.28 / 1;
+    display: block;
+    border: 0.5px solid var(--fs-divider);
+    border-radius: 4px;
+}
+
+.mobile-image-link { display: none; width: 100%; }
+.mobile-image-link img {
+    max-width: 100% !important;
+    margin: 0 auto !important;
+}
+
+.table-container table { border-collapse: collapse !important; border: 0.5px solid var(--fs-divider) !important; }
+.table-container th, .table-container td {
+    border: 0.5px solid var(--fs-divider) !important;
+    vertical-align: middle !important;
+}
+
+.no-wrap-cell {
+    background: var(--fs-bg-active) !important;
+    padding: 0 10px 0 5px !important;
+    white-space: nowrap !important;
+}
+
+.no-wrap-cell ul {
+    margin: 0 !important;
+    padding: 0 0 0 0.8em !important;
+    list-style-type: disc;
+    font-size: 14.5px;
+    line-height: 1.8;
+}
+
+.no-wrap-cell ul li, .no-wrap-cell ul li a, .no-wrap-cell strong {
+    white-space: nowrap !important;
+}
+
+.table-container { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+@media screen and (max-width: 1024px) {
+    .cad-preview-wrapper { width: 100% !important; margin: 10px 0; }
+    .desktop-pdf-embed { display: none !important; }
+    .mobile-image-link { display: block !important; }
+    .md-typeset table td { padding: 8px 5px !important; }
+    .no-wrap-cell ul { padding-left: 0.7em !important; }
+}
+</style>
