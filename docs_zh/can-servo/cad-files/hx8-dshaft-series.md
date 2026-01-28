@@ -47,7 +47,7 @@
 
 
 
-{% include-markdown "snippets/cad-files-example.md" start="<!--start:TIP1_intro-->"  end="<!--end:TIP1_intro-->" %}
+
 
 
 
@@ -85,7 +85,7 @@
   </tbody>
 </table>
 </div>
-{% include-markdown "snippets/cad-files-example.md" start="!--start:TIP2_intro--"  end="!--end:TIP2_intro--" %}
+
 
 <div class="table-container hide-scrollbar">
 <table>
@@ -119,4 +119,3 @@
   </tbody>
 </table>
 </div>
-{% include-markdown "snippets/cad-files-example.md" start="!--start:TIP6_intro--"  end="!--end:TIP6_intro--" %}
