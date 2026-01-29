@@ -6,6 +6,10 @@
 
 
 
+
+
+
+
 <!--start:8holes-main-horn_intro-->
 
 <div class="table-container hide-scrollbar">
@@ -40,8 +44,6 @@
   </tbody>
 </table>
 </div>
-
-
 {% include-markdown "snippets/cad-files/tips.md" start="<!--start:TIP2_intro-->"  end="<!--end:TIP2_intro-->" %}
 
 <!--end:8holes-main-horn_intro-->
