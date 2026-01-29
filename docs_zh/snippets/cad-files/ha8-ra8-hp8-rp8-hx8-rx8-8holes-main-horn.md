@@ -25,12 +25,12 @@
   <tbody>
     <tr>
       <td rowspan="3" style="text-align: center; background: var(--fs-bg-active);">
-        <img src="{{ 'snippets/cad-files/data/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn.png' | url }}"
+        <img src="docs_zh/snippets/cad-files/data/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn.png"
      alt="型号预览">
       </td>
       <td style="text-align: center;"><strong>.PDF</strong></td>
       <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="{{ base_url }}/snippets/cad-files/data/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn-dimension.pdf" download class="fs-download-btn">立即下载</a></td>
+      <td style="text-align: center;"><a href="docs_zh/snippets/cad-files/data/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn-dimension.pdf" download class="fs-download-btn">立即下载</a></td>
     </tr>
     <tr>
       <td style="text-align: center;"><strong>.STEP</strong></td>
