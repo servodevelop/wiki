@@ -34,8 +34,17 @@
     ```
 
 ### 3.2 排除名單 (Exclusion List)
+若有特定檔案或目錄不想被翻譯，可使用以下兩種方式加入排除清單。
 
-若有特定檔案或目錄不想被翻譯，可加入 `.agent/exclusion.json`。
+#### 方式 1：互動式排除 (推薦)
+1. 產生或開啟 `TRANSLATION_STATUS.md`。
+2. 找到想排除的檔案，將左側的 `[ ]` 勾選為 `[x]` (編輯檔案並儲存)。
+3. 執行指令或 Task：
+    * **指令**: `python .agent/skills/translate_docs/scripts/state_manager.py process_exclusions`
+    * **VS Code**: 執行 Task `翻譯：處理排除清單`
+
+#### 方式 2：手動編輯 (進階)
+直接編輯 `.agent/exclusion.json` 檔案。
 
 * **格式**: JSON
 * **Base Path**: 預設為 `docs_zh`。
@@ -75,6 +84,7 @@
 | **翻譯：掃描指定路徑** | 掃描特定的子目錄或檔案。 | 需輸入**相對於 `docs_zh`** 的路徑 (例如 `uart-servo/index.md`，請勿包含 `docs_zh/`) |
 | **翻譯：強制掃描指定路徑** | 強制列出指定路徑下的所有檔案 (忽略 Hash 狀態)。常用於強制重翻。 | 需輸入**相對於 `docs_zh`** 的路徑 |
 | **翻譯：產生狀態報告** | 產生 `TRANSLATION_STATUS.md` 報告檔。 | 無 |
+| **翻譯：處理排除清單** | 讀取報告中勾選 `[x]` 的項目並加入排除名單，隨後更新報告。 | 無 |
 
 ## 6. 手動/進階操作 (Manual CLI)
 
@@ -84,13 +94,16 @@
 # 1. 掃描全站狀態 (列出需翻譯檔案)
 python .agent/skills/translate_docs/scripts/state_manager.py scan
 
-# 2. 掃描特定目錄
+# 2. 處理排除清單 (讀取報告中的 [x] 並更新)
+python .agent/skills/translate_docs/scripts/state_manager.py process_exclusions
+
+# 3. 掃描特定目錄
 python .agent/skills/translate_docs/scripts/state_manager.py scan --path "docs_zh/uart-servo"
 
-# 3. 強制列出特定檔案 (即使已同步)
+# 4. 強制列出特定檔案 (即使已同步)
 python .agent/skills/translate_docs/scripts/state_manager.py scan --path "docs_zh/index.md" --force
 
-# 4. 產生翻譯狀態報告 (MD 格式)
+# 5. 產生翻譯狀態報告 (MD 格式)
 python .agent/skills/translate_docs/scripts/state_manager.py report
 
 這將在根目錄產生 `TRANSLATION_STATUS.md`，列出所有檔案的翻譯狀態。

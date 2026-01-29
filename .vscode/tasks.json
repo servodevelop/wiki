@@ -61,7 +61,22 @@
       },
       "group": "build",
       "problemMatcher": []
-    }
+    },
+    {
+      "label": "翻譯：處理排除清單",
+      "type": "shell",
+      "command": "python",
+      "args": [
+        ".agent/skills/translate_docs/scripts/state_manager.py",
+        "process_exclusions",
+        "--output",
+        "TRANSLATION_STATUS.md"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
   ],
   "inputs": [
     {
