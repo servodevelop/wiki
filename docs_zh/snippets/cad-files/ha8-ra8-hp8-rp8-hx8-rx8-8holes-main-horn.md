@@ -25,22 +25,22 @@
   <tbody>
     <tr>
       <td rowspan="3" style="text-align: center; background: var(--fs-bg-active);">
-        <img src="docs_zh/snippets/cad-files/data/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn.png"
+        <img src="/snippets/cad-files/data/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn.png"
      alt="型号预览">
       </td>
       <td style="text-align: center;"><strong>.PDF</strong></td>
       <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="docs_zh/snippets/cad-files/data/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn-dimension.pdf" download class="fs-download-btn">立即下载</a></td>
+      <td style="text-align: center;"><a href="/snippets/cad-files/data/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn-dimension.pdf" download class="fs-download-btn">立即下载</a></td>
     </tr>
     <tr>
       <td style="text-align: center;"><strong>.STEP</strong></td>
       <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="{{ base_url }}/snippets/cad-files/data/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn-3D.STEP" download class="fs-download-btn">立即下载</a></td>
+      <td style="text-align: center;"><a href="/snippets/cad-files/data/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn-3D.STEP" download class="fs-download-btn">立即下载</a></td>
     </tr>
     <tr>
       <td style="text-align: center;"><strong>.DWG</strong></td>
       <td style="text-align: center;"><span class="no-wrap">2025-09-26</span></td>
-      <td style="text-align: center;"><a href="{{ base_url }}/snippets/cad-files/data/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn-dimension.dwg" download class="fs-download-btn">立即下载</a></td>
+      <td style="text-align: center;"><a href="/snippets/cad-files/data/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn/ha8-hp8-hx8-ra8-rp8-rx8-8holes-main-horn-dimension.dwg" download class="fs-download-btn">立即下载</a></td>
     </tr>
   </tbody>
 </table>
