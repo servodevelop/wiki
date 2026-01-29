@@ -54,7 +54,7 @@
 
 ### 关联零配件图纸
 
-{% include-markdown "snippets/cad-files/ha8-ra8-hp8-rp8-hx8-rx8-8holes-main-horn.md"start= <!--start:8holes-main-horn_intro-->"  end="<!--end:8holes-main-horn_intro-->" %}
+{% include-markdown "snippets/cad-files/ha8-ra8-hp8-rp8-hx8-rx8-8holes-main-horn.md" start="<!--start:8holes-main-horn_intro-->" end="<!--end:8holes-main-horn_intro-->" %}
 
 <div class="table-container hide-scrollbar">
 <table>
