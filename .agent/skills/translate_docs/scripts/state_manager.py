@@ -1,5 +1,6 @@
 import os
 import json
+import re
 import hashlib
 import sys
 import argparse
@@ -185,6 +186,8 @@ def mark_as_translated(rel_path, source_hash, target_hash=None):
     save_state(state)
     print(f"Updated state for {rel_path}")
 
+
+
 def clean_stale_records():
     state = load_state()
     keys_to_remove = []
@@ -202,18 +205,62 @@ def clean_stale_records():
     for rel_path in keys_to_remove:
         # Remove from state
         del state[rel_path]
-        print(f"Removing stale record: {rel_path}", file=sys.stderr)
+        print(f"移除過時記錄: {rel_path}", file=sys.stderr)
         
         # Remove target file if exists
         target_path = os.path.join(TARGET_ROOT, rel_path)
         if os.path.exists(target_path):
             try:
                 os.remove(target_path)
-                print(f"Deleted orphan target file: {target_path}", file=sys.stderr)
+                print(f"已刪除孤立目標檔: {target_path}", file=sys.stderr)
             except Exception as e:
-                print(f"Failed to delete target {target_path}: {e}", file=sys.stderr)
+                print(f"刪除目標檔失敗 {target_path}: {e}", file=sys.stderr)
                 
     save_state(state)
+
+def process_exclusions_from_report(report_file):
+    if not os.path.exists(report_file):
+        print(f"錯誤: 找不到報告檔案 {report_file}")
+        return
+
+    exclusion_list = load_exclusion_list()
+    new_exclusions = []
+    
+    with open(report_file, 'r', encoding='utf-8') as f:
+        for line in f:
+            # Match Table rows starting with | [x] or | [X]
+            if re.match(r'^\|\s*\[[xX]\]\s*\|', line):
+                # Extract path from code block `path`
+                match = re.search(r'`([^`]+)`', line)
+                if match:
+                    path = match.group(1)
+                    if path not in exclusion_list and path not in new_exclusions:
+                        new_exclusions.append(path)
+
+    if new_exclusions:
+        exclusion_list.extend(new_exclusions)
+        
+        # Sort and save
+        exclusion_list.sort()
+        
+        # Preserve original structure if possible, but minimal valid JSON is fine
+        output_data = {
+            "base_path": "docs_zh",
+            "excludes": exclusion_list
+        }
+        
+        try:
+            with open(EXCLUSION_FILE, 'w', encoding='utf-8') as f:
+                json.dump(output_data, f, indent=4, ensure_ascii=False)
+            print(f"成功將 {len(new_exclusions)} 個檔案加入排除清單。")
+            
+            # Regenerate report to reflect changes
+            generate_report(report_file)
+            
+        except Exception as e:
+            print(f"儲存排除清單時發生錯誤: {e}")
+    else:
+        print("未發現任何勾選 [x] 的新增排除項目。")
 
 def generate_report(output_file):
     # Ensure cleanup runs before report
@@ -239,8 +286,9 @@ def generate_report(output_file):
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write("# 翻譯狀態報告\n\n")
         f.write(f"產生時間: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
-        f.write("| | 狀態 | 檔案路徑 | 備註 |\n")
-        f.write("| :---: | :--- | :--- | :--- |\n")
+        f.write("> 💡 **提示**: 在「排除」欄位打勾 `[x]` (將 `[ ]` 改為 `[x]`)，然後執行指令即可自動將該檔案加入排除名單。\n\n")
+        f.write("| 排除 | 狀態 | 說明 | 檔案路徑 | 備註 |\n")
+        f.write("| :---: | :---: | :--- | :--- | :--- |\n")
         
         stats = {"Total": len(files), "Translated": 0, "Pending": 0, "Ignored": 0}
         
@@ -278,7 +326,7 @@ def generate_report(output_file):
             if item.get('target_exists', False):
                 links += f" [🎯](docs/{rel_path})"
             
-            f.write(f"| {icon} | {text} | `{rel_path}` {links} | {remark} |\n")
+            f.write(f"| [ ] | {icon} | {text} | `{rel_path}` {links} | {remark} |\n")
             
             if reason_key == "Translated":
                 stats["Translated"] += 1
@@ -289,18 +337,18 @@ def generate_report(output_file):
                 
         f.write(f"\n**摘要**: 總計 {stats['Total']} 個檔案。 {stats['Translated']} 個已翻譯， {stats['Pending']} 個待翻譯， {stats['Ignored']} 個已忽略。\n")
     
-    print(f"Report generated: {output_file}")
+    print(f"報告已產生: {output_file}")
 
 if __name__ == "__main__": 
     parser = argparse.ArgumentParser()
-    parser.add_argument('action', choices=['scan', 'update', 'report'])
-    parser.add_argument('--file', help='Relative path of the file to update (for update action)', required=False)
-    parser.add_argument('--hash', help='Source Hash value to set (for update action)', required=False)
-    parser.add_argument('--target_hash', help='Target Hash value (for update action)', required=False) # New argument
-    parser.add_argument('--path', help='Specific path (file or dir) to scan', required=False)
-    parser.add_argument('--force', action='store_true', help='Force include all files in scan')
-    parser.add_argument('--all', action='store_true', help='Result includes Translated files (for reporting)')
-    parser.add_argument('--output', help='Output file for report', default='TRANSLATION_STATUS.md')
+    parser.add_argument('action', choices=['scan', 'update', 'report', 'process_exclusions'], help='執行動作')
+    parser.add_argument('--file', help='要更新的檔案相對路徑 (用於 update)', required=False)
+    parser.add_argument('--hash', help='來源 Hash 值 (用於 update)', required=False)
+    parser.add_argument('--target_hash', help='目標 Hash 值 (用於 update)', required=False)
+    parser.add_argument('--path', help='指定掃描路徑 (檔案或目錄)', required=False)
+    parser.add_argument('--force', action='store_true', help='強制包含所有檔案')
+    parser.add_argument('--all', action='store_true', help='結果包含已翻譯檔案 (用於報告)')
+    parser.add_argument('--output', help='報告輸出檔名', default='TRANSLATION_STATUS.md')
     
     args = parser.parse_args()
     
@@ -320,3 +368,6 @@ if __name__ == "__main__":
         
     elif args.action == 'report':
         generate_report(args.output)
+        
+    elif args.action == 'process_exclusions':
+        process_exclusions_from_report(args.output)
